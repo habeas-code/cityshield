@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 44" role="img" aria-label="CityShield">
+  <path d="M20 2 4 8v12c0 11 7 19 16 22 9-3 16-11 16-22V8L20 2Z" fill="#16263C"/>
+  <path d="M9 17c4-3 8-3 11-1s7 2 11-1" fill="none" stroke="#7BD6A0" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M9 23.5c4-3 8-3 11-1s7 2 11-1" fill="none" stroke="#7BD6A0" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
+  <path d="M10 30c3.5-2.6 7-2.6 10-.9s6.5 1.7 10-.9" fill="none" stroke="#6CB6E8" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

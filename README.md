@@ -1,3 +1,5 @@
+<img src="docs/logo.svg" alt="" width="56">
+
 # CityShield
 
 **Onde Sorocaba alaga e onde soluções verdes podem segurar essa água.**
