@@ -4,132 +4,182 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CityShield · Enchentes e soluções verdes em Sorocaba</title>
-<meta name="description" content="Mapa que mostra onde Sorocaba alaga e onde soluções verdes podem segurar essa água. Projeto do time Habeas Code no Hack Brasil 2026.">
+<meta name="description" content="Onde Sorocaba alaga e onde soluções verdes podem segurar essa água. Projeto do time Habeas Code no Hack Brasil 2026.">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <style>
 :root{
-  --paper:#F2F5F4; --card:#FFFFFF; --ink:#11252C; --muted:#56696D; --line:#D3DDDB;
-  --rain:#1D6BAE; --rain-soft:#DCEAF6; --green:#2B8452; --green-soft:#DDF0E4;
-  --risk:#C8701F; --risk-soft:#F8E8D6;
-  --display:"Arial Narrow", "Segoe UI", Arial, sans-serif;
-  --body:"Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-  --mono:Consolas, "SF Mono", monospace;
-  color-scheme: light dark;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --paper:#0E1A1E; --card:#152429; --ink:#E4EDEB; --muted:#9DB0B2; --line:#2A3D42;
-    --rain:#5EA6E6; --rain-soft:#173247; --green:#5CC489; --green-soft:#16362A;
-    --risk:#E99A4F; --risk-soft:#3A2818;
-  }
+  --bg:#FBFAF7; --ink:#1B1F22; --muted:#5E666B; --line:#E2DED6;
+  --water:#1F5F99; --water-2:#7FA8CC; --green:#2F6B45;
+  --serif:Georgia, "Times New Roman", serif;
+  --sans:"Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--body)}
-.wrap{max-width:960px;margin:0 auto;padding:48px 20px 72px;display:grid;gap:64px}
-h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
-h1{font-size:clamp(40px,8vw,76px);font-weight:800;letter-spacing:-.01em}
-h2{font-size:clamp(26px,4vw,36px);font-weight:700}
-h3{font-size:20px}
-p{margin:0;max-width:64ch}
-.kicker{font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--rain)}
-header{display:grid;gap:20px}
-.lead{font-size:clamp(20px,2.6vw,24px);color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:600 14px/1 var(--body);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
-.chip.g{background:var(--green-soft);border-color:transparent;color:var(--green)}
-section{display:grid;gap:20px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:4px}
-.stat b{font:800 44px/1 var(--display);color:var(--rain);font-variant-numeric:tabular-nums}
-.stat span{color:var(--muted);font-size:16px}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;counter-reset:s}
-.step{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--rain);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start}
-.step.v{border-top-color:var(--green)}
-.step::before{counter-increment:s;content:counter(s);font:700 13px/1 var(--mono);color:var(--muted)}
-.step p{font-size:16px;color:var(--muted)}
-.sols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.sol{background:var(--green-soft);border-radius:10px;padding:16px;display:grid;gap:4px}
-.sol b{color:var(--green)}
-.sol span{font-size:15px}
-.note{background:var(--risk-soft);border-left:5px solid var(--risk);border-radius:8px;padding:16px 18px;font-size:16px}
-.team{display:flex;flex-wrap:wrap;gap:10px}
-.team span{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;font-weight:600}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--ink);color:var(--paper)}
-.btn.o{background:transparent;color:var(--ink);border:2px solid var(--ink)}
-.btn:focus-visible,a:focus-visible{outline:3px solid var(--rain);outline-offset:3px}
-footer{border-top:1px solid var(--line);padding-top:20px;font-size:15px;color:var(--muted);display:grid;gap:6px}
-a{color:var(--rain)}
+html{background:var(--bg)}
+body{margin:0;color:var(--ink);font:400 18px/1.65 var(--sans)}
+a{color:var(--water)}
+a:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+
+.top{max-width:1120px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:15px;border-bottom:1px solid var(--line)}
+.top strong{font-size:17px;letter-spacing:.01em}
+.top span{color:var(--muted)}
+
+.hero{max-width:1120px;margin:0 auto;padding:56px 24px 28px;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:end}
+h1{font:400 clamp(38px,5.4vw,64px)/1.05 var(--serif);margin:0;letter-spacing:-.01em}
+.hero p{margin:0;font-size:19px;color:var(--muted);max-width:44ch}
+
+.mapbox{max-width:1120px;margin:0 auto;padding:0 24px}
+#mapa{height:min(68vh,620px);border:1px solid var(--line);background:#E9ECEE}
+.legenda{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding:10px 0 0;font-size:14px;color:var(--muted)}
+.legenda .bolas{display:flex;align-items:center;gap:10px}
+.legenda i{display:inline-block;border-radius:50%;background:var(--water);opacity:.75}
+
+.texto{max-width:720px;margin:0 auto;padding:72px 24px 0}
+.texto + .texto{padding-top:56px}
+h2{font:400 32px/1.2 var(--serif);margin:0 0 18px}
+.texto p{margin:0 0 16px}
+ol.passos{margin:8px 0 0;padding:0;list-style:none;counter-reset:p;border-top:1px solid var(--line)}
+ol.passos li{counter-increment:p;display:grid;grid-template-columns:40px 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--line)}
+ol.passos li::before{content:counter(p);font:400 24px/1.2 var(--serif);color:var(--water)}
+ol.passos b{display:block}
+ol.passos span{color:var(--muted);font-size:16.5px}
+
+table{width:100%;border-collapse:collapse;font-size:16px;margin-top:6px}
+th,td{text-align:left;padding:9px 0;border-bottom:1px solid var(--line)}
+th{font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.fonte{font-size:14px;color:var(--muted);margin-top:10px}
+
+.solucoes{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin-top:4px}
+.solucoes div{padding:14px 0;border-top:2px solid var(--green)}
+.solucoes b{color:var(--green)}
+.solucoes p{margin:4px 0 0;font-size:16.5px;color:var(--muted)}
+
+.aviso{border-left:3px solid var(--ink);padding:2px 0 2px 16px;font-size:16.5px;margin-top:20px}
+
+footer{max-width:720px;margin:80px auto 0;padding:24px 24px 56px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+footer p{margin:0 0 6px}
+
+.popup b{display:block;font-size:14px}
+.popup{font:13px/1.45 var(--sans);color:var(--ink)}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;gap:18px;padding-top:36px}
+  .solucoes{grid-template-columns:1fr}
+  #mapa{height:60vh}
+}
 </style>
 </head>
 <body>
-<main class="wrap">
 
-<header>
-  <div class="kicker">Hack Brasil 2026 · Trilha Meio ambiente</div>
-  <h1>CityShield</h1>
-  <p class="lead">Onde Sorocaba alaga, e onde soluções verdes podem segurar essa água.</p>
-  <div class="chips">
-    <span class="chip">Sorocaba/SP</span>
-    <span class="chip">Piloto: zona Norte</span>
-    <span class="chip g">Soluções baseadas na natureza</span>
-    <span class="chip">🚧 Em construção</span>
-  </div>
-  <div class="cta">
-    <a class="btn" href="https://github.com/habeas-code/cityshield">Ver o código no GitHub</a>
-  </div>
+<div class="top">
+  <strong>CityShield</strong>
+  <span>Habeas Code · Hack Brasil 2026 · <a href="https://github.com/habeas-code/cityshield">código</a></span>
+</div>
+
+<header class="hero">
+  <h1>A água volta sempre para as mesmas ruas de Sorocaba.</h1>
+  <p>Juntamos os registros de alagamento da Defesa Civil com o relevo da cidade para mostrar onde a água se acumula e quais terrenos próximos poderiam ajudar a segurá-la.</p>
 </header>
 
-<section>
-  <div class="kicker">O problema</div>
-  <h2>A cidade alaga nos mesmos lugares, todo ano</h2>
-  <p>Os relatórios da Defesa Civil de Sorocaba de 2022 e 2023 mostram que as enchentes se repetem. Algumas ruas aparecem em quase todos os relatórios. A água que não infiltra no asfalto desce para os pontos baixos perto dos rios e córregos.</p>
-  <div class="stats">
-    <div class="stat"><b>250+</b><span>ocorrências de alagamento e inundação em 2022–2023</span></div>
-    <div class="stat"><b>89</b><span>ruas diferentes com registro</span></div>
-    <div class="stat"><b>10 de 15</b><span>relatórios citam a Rua XV de Agosto</span></div>
+<div class="mapbox">
+  <div id="mapa" role="img" aria-label="Mapa de Sorocaba com as ruas que tiveram registros de alagamento ou inundação em 2022 e 2023"></div>
+  <div class="legenda">
+    <span class="bolas">
+      <i style="width:8px;height:8px"></i> 1 registro
+      <i style="width:18px;height:18px"></i> 10
+      <i style="width:26px;height:26px"></i> 23
+    </span>
+    <span>Um círculo por rua, em posição aproximada. Clique para ver o nome.</span>
   </div>
-  <p class="muted" style="font-size:15px;color:var(--muted)">Fonte: Relatórios COMPDEC 2022–2023 (Defesa Civil de Sorocaba), contagem agregada por rua.</p>
+</div>
+
+<section class="texto">
+  <h2>O que os relatórios mostram</h2>
+  <p>Em 2022 e 2023 a Defesa Civil de Sorocaba anotou 253 ocorrências de alagamento e inundação, espalhadas por 89 ruas. A maioria se concentra perto do Rio Sorocaba e dos córregos que descem para ele. Algumas ruas aparecem em quase todo relatório.</p>
+  <table>
+    <thead><tr><th>Rua</th><th class="n">Registros</th><th class="n">Relatórios em que aparece</th></tr></thead>
+    <tbody>
+      <tr><td>Avenida Dom Aguirre</td><td class="n">23</td><td class="n">8 de 15</td></tr>
+      <tr><td>Rua Jorge Bacelli</td><td class="n">12</td><td class="n">5 de 15</td></tr>
+      <tr><td>Avenida XV de Agosto</td><td class="n">11</td><td class="n">10 de 15</td></tr>
+      <tr><td>Rua João Gabriel Mendes</td><td class="n">9</td><td class="n">8 de 15</td></tr>
+      <tr><td>Avenida Afonso Vergueiro</td><td class="n">8</td><td class="n">3 de 15</td></tr>
+    </tbody>
+  </table>
+  <p class="fonte">Fonte: relatórios COMPDEC de 2022 e 2023, anexos ao TCC de M. C. Vargem (Unesp, 2024). Contagem por rua feita pelo time; nenhum endereço individual é publicado.</p>
 </section>
 
-<section>
-  <div class="kicker">A solução</div>
-  <h2>Um mapa que responde: onde estudar qual solução primeiro?</h2>
-  <div class="steps">
-    <div class="step"><h3>Risco pelo relevo</h3><p>Calculamos a altura de cada ponto em relação ao rio mais próximo (método HAND).</p></div>
-    <div class="step"><h3>Histórico real</h3><p>Cruzamos com as ocorrências da Defesa Civil, agrupadas por rua.</p></div>
-    <div class="step v"><h3>Áreas candidatas</h3><p>Praças, estacionamentos, terrenos e telhados perto dos pontos críticos.</p></div>
-    <div class="step v"><h3>Antes e depois</h3><p>Para cada área, uma solução verde, uma nota de prioridade e quanto de água ela pode reter.</p></div>
+<section class="texto">
+  <h2>O que o CityShield vai fazer</h2>
+  <ol class="passos">
+    <li><div><b>Calcular o risco pelo relevo</b><span>A altura de cada ponto em relação ao rio mais próximo diz para onde a água corre e onde ela para.</span></div></li>
+    <li><div><b>Conferir com o que já aconteceu</b><span>Medir quantos dos registros reais caem nas faixas de risco alto e médio. Se o método não bater com a realidade, a gente mostra.</span></div></li>
+    <li><div><b>Achar terrenos candidatos</b><span>Praças, estacionamentos, terrenos vazios e telhados grandes perto dos pontos críticos, a partir do OpenStreetMap.</span></div></li>
+    <li><div><b>Sugerir uma solução e fazer a conta</b><span>Para cada área: qual solução verde faz sentido, uma nota de prioridade e quantos litros ela poderia reter numa chuva escolhida, com a fonte de cada número.</span></div></li>
+  </ol>
+</section>
+
+<section class="texto">
+  <h2>Soluções que o mapa considera</h2>
+  <div class="solucoes">
+    <div><b>Jardim de chuva</b><p>Canteiro mais baixo que a rua, que recebe a enxurrada e deixa infiltrar.</p></div>
+    <div><b>Piso permeável</b><p>Estacionamento que absorve a chuva em vez de mandar tudo para o bueiro.</p></div>
+    <div><b>Telhado verde</b><p>Segura parte da água no telhado e solta devagar.</p></div>
+    <div><b>Parque alagável</b><p>Área verde feita para encher na chuva forte e esvaziar depois.</p></div>
   </div>
+  <p class="aviso">Os terrenos que aparecerem no mapa são candidatos a estudo, não obras decididas. A ideia é ajudar a Defesa Civil e a prefeitura a escolher por onde começar.</p>
 </section>
 
-<section>
-  <div class="kicker">Soluções verdes</div>
-  <h2>O que o mapa recomenda</h2>
-  <div class="sols">
-    <div class="sol"><b>Jardim de chuva</b><span>Canteiro rebaixado que recebe a água da rua.</span></div>
-    <div class="sol"><b>Piso permeável</b><span>Estacionamento que deixa a água infiltrar.</span></div>
-    <div class="sol"><b>Telhado verde</b><span>Segura parte da chuva antes de chegar ao chão.</span></div>
-    <div class="sol"><b>Parque alagável</b><span>Área verde feita para encher na chuva forte e esvaziar depois.</span></div>
-  </div>
-  <p class="note">As áreas são <strong>candidatas a estudo</strong>, não obras aprovadas. Cada número de retenção mostra a fonte técnica de onde veio.</p>
-</section>
-
-<section>
-  <div class="kicker">Para quem</div>
-  <h2>Defesa Civil, prefeitura e moradores</h2>
-  <p>Começamos pelo núcleo Norte (Parque das Águas, Jd. Maria do Carmo e Abaeté), que concentra muitos registros num raio de 800 m. Depois, o Centro.</p>
-</section>
-
-<section>
-  <div class="kicker">Time Habeas Code</div>
-  <div class="team"><span>Lucas</span><span>Enzo</span><span>Rafael</span><span>Nicollas</span></div>
+<section class="texto">
+  <h2>Onde estamos</h2>
+  <p>Começamos pelo núcleo Norte (Parque das Águas, Jardim Maria do Carmo e Abaeté), que reúne 41 registros num raio de 800 metros. O Centro vem em seguida. O protótipo fica pronto até 30 de novembro de 2026.</p>
 </section>
 
 <footer>
-  <span>CityShield · Projeto open source (licença MIT) do time Habeas Code para o <a href="https://hackbrasil.com">Hack Brasil 2026</a>.</span>
-  <span>Nenhum dado pessoal é publicado: as ocorrências aparecem só agregadas por rua.</span>
+  <p>Feito por Lucas, Enzo, Rafael e Nicollas, de Sorocaba, para o <a href="https://hackbrasil.com">Hack Brasil 2026</a>.</p>
+  <p>Código aberto (MIT) em <a href="https://github.com/habeas-code/cityshield">github.com/habeas-code/cityshield</a>. Mapa: © OpenStreetMap, OpenFreeMap.</p>
 </footer>
 
-</main>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('mapa');
+  if (!window.maplibregl) { el.textContent = 'Não foi possível carregar o mapa.'; return; }
+  var map = new maplibregl.Map({
+    container: 'mapa',
+    style: 'https://tiles.openfreemap.org/styles/positron',
+    center: [-47.455, -23.48],
+    zoom: 11.6,
+    cooperativeGestures: true,
+    attributionControl: { compact: true }
+  });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+  map.on('load', function () {
+    map.addSource('ruas', { type: 'geojson', data: 'dados/ruas.geojson' });
+    map.addLayer({
+      id: 'ruas', type: 'circle', source: 'ruas',
+      paint: {
+        'circle-radius': ['interpolate', ['linear'], ['sqrt', ['get', 'registros']], 1, 4, 4.8, 13],
+        'circle-color': '#1F5F99',
+        'circle-opacity': 0.6,
+        'circle-stroke-color': '#ffffff',
+        'circle-stroke-width': 1
+      }
+    });
+    map.on('click', 'ruas', function (e) {
+      var p = e.features[0].properties;
+      new maplibregl.Popup({ closeButton: false })
+        .setLngLat(e.features[0].geometry.coordinates)
+        .setHTML('<div class="popup"><b></b><span></span></div>')
+        .addTo(map)
+        .getElement().querySelector('b').textContent = p.rua;
+      var s = document.querySelector('.maplibregl-popup .popup span');
+      s.textContent = p.registros + (p.registros == 1 ? ' registro' : ' registros') + ' em ' + p.relatorios + ' de 15 relatórios';
+    });
+    map.on('mouseenter', 'ruas', function () { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'ruas', function () { map.getCanvas().style.cursor = ''; });
+  });
+})();
+</script>
 </body>
 </html>
