@@ -8,67 +8,153 @@
 <link rel="stylesheet" href="estilo.css">
 <style>
 html,body{height:100%}
-body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
-.barra{display:flex;align-items:center;gap:16px;padding:10px 18px;border-bottom:1px solid var(--line);background:var(--bg)}
-.barra .tag{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:5px 9px}
-.barra .voltar{margin-left:auto;font-size:14px;color:var(--ink-2)}
-.app{display:grid;grid-template-columns:340px 1fr;min-height:0}
-.lado{border-right:1px solid var(--line);background:var(--bg-2);display:grid;grid-template-rows:auto auto 1fr auto;min-height:0}
-.sec{padding:16px 18px;border-bottom:1px solid var(--line);display:grid;gap:10px}
-.sec-titulo{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.camada{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-2)}
+body{display:grid;grid-template-rows:auto 1fr;overflow:hidden;background:var(--bg)}
+
+/* Cabeçalho */
+.barra{display:grid;grid-template-columns:320px 1fr auto;align-items:center;gap:16px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg)}
+.marca-bloco{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.marca-bloco:hover{text-decoration:none}
+.marca-bloco .escudo{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--green-soft);border:1px solid rgba(61,213,152,.35)}
+.marca-bloco b{display:block;font:700 15px/1.1 var(--sans);letter-spacing:.12em}
+.marca-bloco small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.abas{display:flex;gap:4px;justify-self:center;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:4px}
+.abas a,.abas span{font-size:14px;color:var(--ink-2);padding:7px 14px;border-radius:7px}
+.abas a:hover{text-decoration:none;color:var(--ink);background:var(--surface)}
+.abas .ativa{background:var(--green-soft);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,213,152,.4)}
+.abas .breve{color:var(--muted);cursor:default}
+.abas .breve::after{content:"em breve";font:500 9.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-left:6px;color:var(--muted);vertical-align:2px}
+.local{font-size:13.5px;color:var(--ink-2);border:1px solid var(--line-2);border-radius:8px;padding:7px 12px}
+
+/* Layout de 3 colunas */
+.app{display:grid;grid-template-columns:320px minmax(0,1fr) 340px;min-height:0}
+.lado{background:var(--bg-2);overflow-y:auto;min-height:0;padding:12px;display:grid;gap:12px;align-content:start}
+.esq{border-right:1px solid var(--line)}
+.dir{border-left:1px solid var(--line)}
+.caixa{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:10px}
+.caixa-titulo{display:flex;align-items:center;gap:8px;font:600 14px/1 var(--sans);color:var(--ink)}
+.caixa-titulo small{margin-left:auto;font:500 11px/1 var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+.camada{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-2);padding:3px 0}
 .camada input{accent-color:var(--geo);width:15px;height:15px;margin:0}
 .camada .ponto{width:10px;height:10px;border-radius:50%;flex:none}
-.camada.off{opacity:.45}
-.camada small{margin-left:auto;font:500 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);border:1px solid var(--line-2);border-radius:8px;padding:3px;gap:3px}
-.seg button{background:none;border:0;color:var(--ink-2);font:500 13px/1 var(--sans);padding:8px 4px;border-radius:6px;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--surface-2);color:var(--ink)}
-.faixa{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;font-size:14px;color:var(--ink-2)}
-.faixa input{grid-column:1/-1;accent-color:var(--geo);width:100%}
-.faixa output{font-variant-numeric:tabular-nums;color:var(--ink)}
-.resumo{font-size:13px;color:var(--muted)}
+.camada.off{color:var(--muted)}
+.camada.off input{opacity:.35}
+.camada .pilula{margin-left:auto;font:500 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--bg-2);border:1px dashed var(--line-2);border-radius:999px;padding:4px 7px}
+
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px}
+.seg button{background:none;border:0;color:var(--ink-2);font:500 13px/1 var(--sans);padding:8px 4px;border-radius:7px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--green-soft);color:var(--green);box-shadow:inset 0 0 0 1px rgba(61,213,152,.4)}
+.campo{display:grid;gap:6px;font-size:12.5px;color:var(--muted)}
+.campo input[type=search],.campo select{background:var(--bg-2);border:1px solid var(--line-2);border-radius:8px;color:var(--ink);font:14px var(--sans);padding:8px 10px;width:100%}
+.faixa{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.faixa input{grid-column:1/-1;accent-color:var(--geo);width:100%;margin:0}
+.faixa output{font-variant-numeric:tabular-nums;color:var(--ink);font-size:13.5px}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stats div{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:10px 8px;text-align:center}
+.stats b{display:block;font:600 22px/1.1 var(--sans);font-variant-numeric:tabular-nums}
+.stats b.verde{color:var(--green)}
+.stats span{display:block;font-size:11px;color:var(--muted);margin-top:3px;line-height:1.25}
+.resumo{font-size:12.5px;color:var(--muted)}
 .resumo b{color:var(--ink);font-weight:600}
-.lista{overflow-y:auto;list-style:none;margin:0;padding:6px 8px}
-.lista li{margin:0}
-.lista button{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;background:none;border:0;border-radius:8px;padding:9px 10px;color:var(--ink-2);font:14px/1.3 var(--sans);cursor:pointer}
-.lista button:hover,.lista button:focus-visible{background:var(--surface)}
+
+.lista{list-style:none;margin:0 -6px;padding:0;display:grid;gap:2px}
+.lista button{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;background:none;border:0;border-radius:8px;padding:8px 8px;color:var(--ink-2);font:13.5px/1.3 var(--sans);cursor:pointer}
+.lista button:hover,.lista button:focus-visible,.lista button.sel{background:var(--surface-2)}
 .lista .nome{color:var(--ink)}
 .lista .n{font-variant-numeric:tabular-nums;color:var(--geo);font-weight:600}
-.lista .det{grid-column:1/-1;font-size:12px;color:var(--muted)}
-.rodape-lado{padding:12px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-#mapa{height:100%;min-height:0}
-@media (max-width:760px){
+.lista .det{grid-column:1/-1;font-size:11.5px;color:var(--muted)}
+.vazio{font-size:13px;color:var(--muted);padding:6px 2px}
+
+/* Mapa e barra de baixo */
+.centro{position:relative;min-height:0}
+#mapa{position:absolute;inset:0}
+.info{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(11,22,38,.94);backdrop-filter:blur(8px);border:1px solid var(--line-2);border-radius:12px;display:grid;grid-template-columns:1.1fr 1.2fr 1.2fr auto;align-items:center;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+.info > div{padding:14px 16px;display:grid;gap:4px;border-right:1px solid var(--line)}
+.info > div:nth-child(3){border-right:0}
+.info .rot{font:500 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.info .tit{font-weight:600;font-size:15.5px;color:var(--ink)}
+.info p{font-size:13px;color:var(--ink-2);line-height:1.45}
+.info .acao{padding:0 16px;border:0;display:grid;gap:6px}
+.btn-verde{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--green);color:#04150E;border:0;border-radius:9px;padding:10px 14px;font:600 13.5px var(--sans);cursor:pointer;white-space:nowrap}
+.btn-verde:hover{text-decoration:none;filter:brightness(1.08)}
+.btn-linha{background:none;border:1px solid var(--line-2);color:var(--ink-2);border-radius:9px;padding:8px 12px;font:500 12.5px var(--sans);cursor:pointer}
+.btn-linha[hidden]{display:none}
+
+/* Painel direito: soluções */
+.sols{display:grid;gap:8px}
+.sol{display:grid;grid-template-columns:84px 1fr;gap:10px;align-items:center;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:6px;cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%}
+.sol:hover{border-color:var(--line-2)}
+.sol[aria-pressed="true"]{border-color:rgba(61,213,152,.6);box-shadow:inset 0 0 0 1px rgba(61,213,152,.35)}
+.sol svg{width:84px;height:48px;display:block;background:linear-gradient(180deg,var(--bg),var(--surface-2));border-radius:6px}
+.sol b{display:block;font-size:14px;color:var(--ink)}
+.sol span{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:2px}
+.sol .onde{display:inline-block;margin-top:5px;font:500 10px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--green);background:var(--green-soft);border-radius:999px;padding:4px 7px}
+.sol .onde.outro{color:var(--muted);background:var(--surface-2)}
+
+.calc{display:grid;gap:12px}
+.calc .leg{display:flex;gap:14px;font-size:12px;color:var(--ink-2)}
+.calc .leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.par{display:grid;gap:7px}
+.lin{display:grid;grid-template-columns:96px 1fr 62px;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.lin .trilho{height:12px;background:var(--bg-2);border-radius:0 4px 4px 0}
+.lin .bar{display:block;height:100%;border-radius:0 4px 4px 0;min-width:3px;transition:width .25s}
+.lin .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.premissa{font-size:12px;color:var(--muted);line-height:1.5;border-top:1px solid var(--line);padding-top:10px}
+.premissa b{color:var(--ink-2);font-weight:600}
+.aviso-calc{font-size:11.5px;color:var(--muted);background:var(--bg-2);border:1px dashed var(--line-2);border-radius:8px;padding:8px 10px;line-height:1.45}
+
+@media (max-width:1180px){
+  .app{grid-template-columns:300px minmax(0,1fr)}
+  .dir{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);grid-template-columns:1fr 1fr}
   body{overflow:auto;grid-template-rows:auto auto}
-  .app{grid-template-columns:1fr}
-  #mapa{height:60vh;order:-1}
-  .lado{border-right:0}
-  .lista{max-height:50vh}
+  .app{grid-auto-rows:minmax(640px,auto) auto}
+  .barra{grid-template-columns:auto 1fr auto}
+}
+@media (max-width:760px){
+  .barra{grid-template-columns:1fr auto}
+  .abas{grid-column:1/-1;grid-row:2;justify-self:stretch;overflow-x:auto}
+  .local{display:none}
+  .app{grid-template-columns:1fr;grid-auto-rows:auto}
+  .centro{height:72vh;order:-1}
+  .esq{border-right:0}
+  .dir{grid-template-columns:1fr}
+  .info{grid-template-columns:1fr;left:8px;right:8px;bottom:8px}
+  .info > div{border-right:0;border-bottom:1px solid var(--line);padding:10px 12px}
+  .info > div:nth-child(2){display:none}
+  .info .acao{padding:10px 12px}
 }
 </style>
 </head>
 <body>
 
 <header class="barra">
-  <a class="marca" href="index.html" aria-label="CityShield, voltar ao início">
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="var(--geo)" stroke-width="1.8" stroke-linecap="round"/></svg>
-    CITYSHIELD
+  <a class="marca-bloco" href="index.html" aria-label="CityShield, sobre o projeto">
+    <span class="escudo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="#3DD598" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="#6CB6FF" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+    <span><b>CITYSHIELD</b><small>Inteligência Ambiental Urbana</small></span>
   </a>
-  <span class="tag">Protótipo · Sorocaba</span>
-  <a class="voltar" href="index.html">Sobre o projeto</a>
+  <nav class="abas" aria-label="Seções">
+    <a class="ativa" href="mapa.html" aria-current="page">Mapa</a>
+    <a href="index.html#solucoes">Soluções Verdes</a>
+    <span class="breve">Relatório</span>
+    <a href="index.html">Sobre</a>
+  </nav>
+  <span class="local">Sorocaba · SP</span>
 </header>
 
 <div class="app">
-  <aside class="lado">
-    <div class="sec">
-      <p class="sec-titulo">Camadas</p>
-      <label class="camada"><input type="checkbox" id="c-ruas" checked><span class="ponto" style="background:var(--geo)"></span>Registros por rua (2022–2023)</label>
-      <label class="camada"><input type="checkbox" id="c-piloto" checked><span class="ponto" style="border:1.5px dashed var(--green)"></span>Área-piloto Norte (800 m)</label>
-      <label class="camada off"><input type="checkbox" disabled><span class="ponto" style="background:#C8701F"></span>Risco pelo relevo (HAND)<small>em breve</small></label>
-      <label class="camada off"><input type="checkbox" disabled><span class="ponto" style="background:var(--green)"></span>Áreas candidatas<small>em breve</small></label>
-    </div>
-    <div class="sec">
-      <p class="sec-titulo">Filtros</p>
+
+  <aside class="lado esq" aria-label="Camadas e filtros">
+    <section class="caixa">
+      <p class="caixa-titulo">Camadas</p>
+      <label class="camada"><input type="checkbox" id="c-ruas" checked><span class="ponto" style="background:var(--geo)"></span>Registros históricos</label>
+      <label class="camada"><input type="checkbox" id="c-piloto" checked><span class="ponto" style="border:1.5px dashed var(--green)"></span>Área-piloto Norte</label>
+      <label class="camada off" title="Será calculada pelo pipeline a partir do relevo ANADEM"><input type="checkbox" disabled><span class="ponto" style="background:#C8701F;opacity:.5"></span>Risco pelo relevo (HAND)<span class="pilula">em breve</span></label>
+      <label class="camada off" title="Será gerada pelo pipeline a partir do OpenStreetMap"><input type="checkbox" disabled><span class="ponto" style="background:var(--green);opacity:.5"></span>Áreas candidatas<span class="pilula">em breve</span></label>
+    </section>
+
+    <section class="caixa">
+      <p class="caixa-titulo">Filtros</p>
       <div class="seg" role="group" aria-label="Tipo de registro">
         <button type="button" data-tipo="todos" aria-pressed="true">Todos</button>
         <button type="button" data-tipo="alagamentos" aria-pressed="false">Alagamento</button>
@@ -78,33 +164,124 @@ body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
         <input type="range" id="min" min="1" max="10" value="1">
       </label>
       <p class="resumo" id="resumo">Carregando…</p>
-    </div>
-    <ul class="lista" id="lista" aria-label="Ruas com registros"></ul>
-    <p class="rodape-lado">Um círculo por rua, em posição aproximada; não representa endereços. Fonte: relatórios COMPDEC 2022–2023 (Defesa Civil de Sorocaba).</p>
+    </section>
+
+    <section class="caixa">
+      <p class="caixa-titulo">Estatísticas <small>2022–2023</small></p>
+      <div class="stats">
+        <div><b>253</b><span>registros</span></div>
+        <div><b>89</b><span>ruas</span></div>
+        <div><b class="verde">41</b><span>no Núcleo Norte</span></div>
+      </div>
+    </section>
+
+    <section class="caixa">
+      <p class="caixa-titulo">Ruas</p>
+      <label class="campo">Buscar rua<input type="search" id="busca" placeholder="Ex.: Dom Aguirre" autocomplete="off"></label>
+      <label class="campo">Ordenar por
+        <select id="ordem">
+          <option value="registros">Mais registros</option>
+          <option value="relatorios">Aparece em mais relatórios</option>
+          <option value="piloto">Mais perto do piloto</option>
+          <option value="nome">Nome (A–Z)</option>
+        </select>
+      </label>
+      <ul class="lista" id="lista" aria-label="Ruas com registros"></ul>
+    </section>
+    <p class="resumo" style="padding:0 4px 8px">Um círculo por rua, em posição aproximada; não representa endereços. Fonte: relatórios COMPDEC 2022–2023, Defesa Civil de Sorocaba.</p>
   </aside>
-  <div id="mapa" role="region" aria-label="Mapa de Sorocaba"></div>
+
+  <main class="centro">
+    <div id="mapa" role="region" aria-label="Mapa de Sorocaba"></div>
+    <div class="info" aria-live="polite">
+      <div>
+        <span class="rot">Área selecionada</span>
+        <span class="tit" id="i-tit">Núcleo Norte</span>
+        <p id="i-sub">Parque das Águas · Jd. Maria do Carmo · Jd. Abaeté</p>
+      </div>
+      <div>
+        <span class="rot">Por que esta região?</span>
+        <p id="i-porque">41 registros num raio de 800 m, perto do Rio Sorocaba. Os relatórios citam o Parque das Águas alagado por completo.</p>
+      </div>
+      <div>
+        <span class="rot">O que estudar?</span>
+        <p id="i-estudar">Parque alagável no próprio Parque das Águas, jardins de chuva nas ruas com registro e telhados verdes em prédios grandes.</p>
+      </div>
+      <div class="acao">
+        <a class="btn-verde" href="index.html#metodologia">Ver metodologia →</a>
+        <button type="button" class="btn-linha" id="voltar" hidden>Voltar ao Núcleo Norte</button>
+      </div>
+    </div>
+  </main>
+
+  <aside class="lado dir" aria-label="Soluções recomendadas">
+    <section class="caixa">
+      <p class="caixa-titulo">Soluções para estudar <small>Núcleo Norte</small></p>
+      <div class="sols" id="sols">
+        <button type="button" class="sol" data-sol="parque" aria-pressed="false">
+          <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true"><path d="M0 50c40 0 50 30 90 30h60c40 0 50-30 90-30v70H0Z" class="solo"/><path d="M70 66c20 18 80 18 100 0Z" class="agua-cheia"/><path d="M0 50c40 0 50 30 90 30h60c40 0 50-30 90-30" class="linha"/><path d="M58 66h124" class="nivel"/><path d="M24 50V34m194 16V34" class="tronco"/><circle cx="24" cy="28" r="11" class="copa"/><circle cx="218" cy="28" r="11" class="copa"/></svg>
+          <span><b>Parque alagável</b><span>Guarda água temporariamente na chuva forte.</span><em class="onde">Prioridade no Norte</em></span>
+        </button>
+        <button type="button" class="sol" data-sol="jardim" aria-pressed="true">
+          <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true"><path d="M0 52h70l18 22h64l18-22h70v68H0Z" class="solo"/><path d="M0 52h70l18 22h64l18-22h70" class="linha"/><path d="M90 74h60" class="agua"/><path d="M28 42c14 0 24 3 38 9M212 42c-14 0-24 3-38 9" class="seta"/><path d="M104 74v-14m6 14v-20m6 20v-12m14 12v-18m6 18v-12" class="planta"/><path d="M110 84v14m20-14v14m-10-10v18" class="infiltra"/></svg>
+          <span><b>Jardim de chuva</b><span>Recebe e infiltra a água que escorre da rua.</span><em class="onde">Ruas com registro</em></span>
+        </button>
+        <button type="button" class="sol" data-sol="telhado" aria-pressed="false">
+          <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true"><path d="M60 6v10m40-12v10m40-2v10m40-10v10" class="chuva"/><path d="M50 44h140v76H50Z" class="predio"/><path d="M46 36h148v8H46Z" class="telhado"/><path d="M60 36v-8m8 8v-12m8 12v-7m30 7v-10m8 10v-6m30 6v-11m8 11v-7m20 7v-9" class="planta"/><path d="M70 60h20v14H70Zm40 0h20v14h-20Zm40 0h20v14h-20ZM70 88h20v14H70Zm40 0h20v14h-20Zm40 0h20v14h-20Z" class="janela"/></svg>
+          <span><b>Telhado verde</b><span>Retém parte da chuva na cobertura.</span><em class="onde">Prédios grandes</em></span>
+        </button>
+        <button type="button" class="sol" data-sol="piso" aria-pressed="false">
+          <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true"><path d="M30 18v10m30-16v10m40-4v10m40-14v10m40 2v10m30-16v10" class="chuva"/><path d="M0 62h240v58H0Z" class="solo"/><path d="M14 50h40m8 0h40m8 0h40m8 0h40m8 0h40" class="bloco-piso"/><path d="M58 54v26m48-26v26m48-26v26m48-26v26" class="infiltra"/></svg>
+          <span><b>Piso permeável</b><span>Estacionamentos que deixam a água infiltrar.</span><em class="onde outro">Indicado para o Centro</em></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="caixa calc">
+      <p class="caixa-titulo">Estimativa com premissas <small id="c-nome">Jardim de chuva</small></p>
+      <label class="faixa">Chuva de referência <output id="chuva-val">50 mm</output>
+        <input type="range" id="chuva" min="10" max="120" step="5" value="50">
+      </label>
+      <div class="leg"><span><i style="background:var(--geo)"></i>Chuva que cai</span><span><i style="background:var(--green)"></i>Pode ser retido</span></div>
+      <div class="par" id="barras-calc"></div>
+      <p class="premissa" id="premissa"></p>
+      <p class="aviso-calc">Conta simples com valores da literatura, não modelagem hidráulica. Os números finais por área virão do pipeline, com o relevo real de cada terreno.</p>
+    </section>
+  </aside>
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="comum.js"></script>
 <script>
 (function () {
-  var dados = null, tipo = 'todos', minimo = 1;
+  var PIL = CityShield.PILOTO;
+  var dados = null, tipo = 'todos', minimo = 1, busca = '', ordem = 'registros', selecionada = null;
   var lista = document.getElementById('lista');
   var resumo = document.getElementById('resumo');
 
+  function distM(a, b) {
+    var R = 6371000, r = Math.PI / 180;
+    var dLat = (b[1] - a[1]) * r, dLon = (b[0] - a[0]) * r;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[1] * r) * Math.cos(b[1] * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function semAcento(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
   var map = CityShield.criarMapa('mapa', {
-    center: [-47.46, -23.478], zoom: 11.8, interativo: true,
+    center: [-47.455, -23.478], zoom: 12, interativo: true,
     aoCarregar: function () {
       fetch('dados/ruas.geojson').then(function (r) { return r.json(); }).then(function (g) {
+        g.features.forEach(function (f) { f.properties.dist = distM(f.geometry.coordinates, PIL.centro); });
         dados = g; aplicar();
       }).catch(function () { resumo.textContent = 'Não foi possível carregar os dados.'; });
+      map.on('click', 'ruas', function (e) { selecionar(e.features[0].properties.rua, false); });
     }
   });
 
   function passa(p) {
     if (p.registros < minimo) return false;
     if (tipo !== 'todos' && !(p[tipo] > 0)) return false;
+    if (busca && semAcento(p.rua).indexOf(busca) === -1) return false;
     return true;
   }
 
@@ -113,29 +290,65 @@ body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
     if (tipo !== 'todos') filtro.push(['>', ['get', tipo], 0]);
     ['ruas', 'ruas-halo'].forEach(function (id) { map.setFilter(id, filtro); });
 
-    var visiveis = dados.features.filter(function (f) { return passa(f.properties); });
-    var total = visiveis.reduce(function (s, f) { return s + f.properties.registros; }, 0);
-    resumo.innerHTML = '<b></b> ruas · <b></b> registros no mapa';
-    var bs = resumo.querySelectorAll('b'); bs[0].textContent = visiveis.length; bs[1].textContent = total;
+    var vis = dados.features.filter(function (f) { return passa(f.properties); });
+    vis.sort(function (a, b) {
+      var p = a.properties, q = b.properties;
+      if (ordem === 'nome') return p.rua.localeCompare(q.rua, 'pt-BR');
+      if (ordem === 'piloto') return p.dist - q.dist;
+      return (q[ordem] - p[ordem]) || (q.registros - p.registros);
+    });
+    var total = vis.reduce(function (s, f) { return s + f.properties.registros; }, 0);
+    resumo.innerHTML = 'No mapa: <b></b> ruas · <b></b> registros';
+    var bs = resumo.querySelectorAll('b'); bs[0].textContent = vis.length; bs[1].textContent = total;
 
     lista.innerHTML = '';
-    visiveis.forEach(function (f) {
+    if (!vis.length) { var v = document.createElement('li'); v.className = 'vazio'; v.textContent = 'Nenhuma rua com esses filtros.'; lista.appendChild(v); }
+    vis.forEach(function (f) {
       var p = f.properties;
       var li = document.createElement('li');
       var bt = document.createElement('button'); bt.type = 'button';
+      if (selecionada === p.rua) bt.className = 'sel';
       var nome = document.createElement('span'); nome.className = 'nome'; nome.textContent = p.rua;
       var n = document.createElement('span'); n.className = 'n'; n.textContent = p.registros;
       var det = document.createElement('span'); det.className = 'det';
-      det.textContent = p.alagamentos + ' alag. · ' + p.inundacoes + ' inund. · ' + p.relatorios + ' de 15 relatórios';
+      det.textContent = p.relatorios + ' de 15 relatórios · ' + (p.dist <= PIL.raioM ? 'no piloto Norte' : (p.dist / 1000).toFixed(1).replace('.', ',') + ' km do piloto');
       bt.appendChild(nome); bt.appendChild(n); bt.appendChild(det);
-      bt.addEventListener('click', function () {
-        map.flyTo({ center: f.geometry.coordinates, zoom: 15, speed: 1.4 });
-        CityShield.abrirPopup(map, f.geometry.coordinates, p);
-      });
+      bt.addEventListener('click', function () { selecionar(p.rua, true); });
       li.appendChild(bt); lista.appendChild(li);
     });
   }
 
+  // Barra de baixo: rua selecionada ou área-piloto
+  var iTit = document.getElementById('i-tit'), iSub = document.getElementById('i-sub');
+  var iPorque = document.getElementById('i-porque'), iEstudar = document.getElementById('i-estudar');
+  var btVoltar = document.getElementById('voltar');
+  var padrao = { tit: iTit.textContent, sub: iSub.textContent, porque: iPorque.textContent, estudar: iEstudar.textContent };
+
+  function selecionar(rua, voar) {
+    var f = dados.features.filter(function (x) { return x.properties.rua === rua; })[0];
+    if (!f) return;
+    var p = f.properties; selecionada = rua;
+    if (voar) map.flyTo({ center: f.geometry.coordinates, zoom: 15, speed: 1.4 });
+    CityShield.abrirPopup(map, f.geometry.coordinates, p);
+    var dentro = p.dist <= PIL.raioM;
+    iTit.textContent = p.rua;
+    iSub.textContent = dentro ? 'Dentro da área-piloto Norte' : 'A ' + (p.dist / 1000).toFixed(1).replace('.', ',') + ' km da área-piloto Norte';
+    iPorque.textContent = p.registros + (p.registros == 1 ? ' registro' : ' registros') + ' (' + p.alagamentos + ' alagamentos, ' + p.inundacoes + ' inundações), em ' + p.relatorios + ' de 15 relatórios da Defesa Civil.';
+    iEstudar.textContent = dentro
+      ? 'Jardins de chuva nas calçadas desta rua e o parque alagável do Parque das Águas.'
+      : 'Fica fora do piloto. As áreas candidatas perto desta rua entram nas próximas etapas (Centro e cidade inteira).';
+    btVoltar.hidden = false;
+    aplicar();
+  }
+  btVoltar.addEventListener('click', function () {
+    selecionada = null;
+    iTit.textContent = padrao.tit; iSub.textContent = padrao.sub; iPorque.textContent = padrao.porque; iEstudar.textContent = padrao.estudar;
+    btVoltar.hidden = true;
+    map.flyTo({ center: PIL.centro, zoom: 14.2, speed: 1.4 });
+    aplicar();
+  });
+
+  // Filtros
   document.querySelectorAll('.seg button').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
@@ -143,16 +356,70 @@ body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
     });
   });
   var min = document.getElementById('min');
-  min.addEventListener('input', function () {
-    minimo = +min.value; document.getElementById('min-val').textContent = minimo; if (dados) aplicar();
-  });
-  function alternar(chk, ids) {
+  min.addEventListener('input', function () { minimo = +min.value; document.getElementById('min-val').textContent = minimo; if (dados) aplicar(); });
+  document.getElementById('busca').addEventListener('input', function (e) { busca = semAcento(e.target.value.trim()); if (dados) aplicar(); });
+  document.getElementById('ordem').addEventListener('change', function (e) { ordem = e.target.value; if (dados) aplicar(); });
+
+  function alternar(chk, ids, extra) {
     document.getElementById(chk).addEventListener('change', function (e) {
-      ids.forEach(function (id) { map.setLayoutProperty(id, 'visibility', e.target.checked ? 'visible' : 'none'); });
+      var on = e.target.checked;
+      ids.forEach(function (id) { map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none'); });
+      if (extra) extra(on);
     });
   }
   alternar('c-ruas', ['ruas', 'ruas-halo']);
-  alternar('c-piloto', ['piloto-fundo', 'piloto-borda']);
+  alternar('c-piloto', ['piloto-fundo', 'piloto-borda'], function (on) {
+    if (map._rotuloPiloto) map._rotuloPiloto.getElement().style.display = on ? '' : 'none';
+  });
+
+  // Estimativa com premissas (m³ = mm × m² / 1000)
+  var SOL = {
+    parque: { nome: 'Parque alagável', area: null,
+      premissa: '<b>Premissa:</b> o volume que um parque alagável guarda depende do formato do terreno. Ele será calculado pelo relevo real (ANADEM 30 m) no pipeline, por isso ainda não mostramos número.' },
+    jardim: { nome: 'Jardim de chuva', area: 1000,
+      retem: function (mm) { return Math.min(mm * 1000 / 1000, 150 * 100 / 1000); },
+      premissa: '<b>Premissa:</b> jardim de 100 m² recebendo a água de 1.000 m² de rua e calçada, com lâmina de 15 cm (até 150 L por m² de jardim). <b>Fonte:</b> Hinman, WSU Extension, 2007.' },
+    telhado: { nome: 'Telhado verde', area: 1000,
+      retem: function (mm) { return mm * 1000 / 1000 * 0.47; },
+      premissa: '<b>Premissa:</b> 1.000 m² de telhado verde retendo 47% da chuva (limite inferior da faixa de 47–62% medida). <b>Fonte:</b> Vacari et al., 2019, UFMT.' },
+    piso: { nome: 'Piso permeável', area: 1000,
+      retem: function (mm) { return Math.min(mm, 50) * 1000 / 1000; },
+      premissa: '<b>Premissa:</b> 1.000 m² de estacionamento com base de brita de 25 cm e 20% de vazios (até 50 mm de chuva). Indicado para o Centro. <b>Fonte:</b> PMSP, ETS-03/2013.' }
+  };
+  var solAtual = 'jardim';
+  var chuva = document.getElementById('chuva');
+  function fmt(v) { return (Math.round(v * 10) / 10).toLocaleString('pt-BR') + ' m³'; }
+  function calc() {
+    var s = SOL[solAtual], mm = +chuva.value;
+    document.getElementById('chuva-val').textContent = mm + ' mm';
+    document.getElementById('c-nome').textContent = s.nome;
+    document.getElementById('premissa').innerHTML = s.premissa;
+    var box = document.getElementById('barras-calc'); box.innerHTML = '';
+    if (!s.area) { box.innerHTML = '<p class="resumo">Volume calculado pelo relevo: em breve.</p>'; return; }
+    var cai = mm * s.area / 1000, ret = s.retem(mm), max = 120 * s.area / 1000;
+    [['Chuva que cai', cai, 'var(--geo)'], ['Pode ser retido', ret, 'var(--green)']].forEach(function (r) {
+      var d = document.createElement('div'); d.className = 'lin';
+      d.title = r[0] + ': ' + fmt(r[1]) + '';
+      d.innerHTML = '<span></span><span class="trilho"><span class="bar"></span></span><span class="v"></span>';
+      d.children[0].textContent = r[0];
+      d.querySelector('.bar').style.width = (r[1] / max * 100) + '%';
+      d.querySelector('.bar').style.background = r[2];
+      d.children[2].textContent = fmt(r[1]);
+      box.appendChild(d);
+    });
+    var pct = document.createElement('p'); pct.className = 'resumo';
+    pct.innerHTML = 'Retém cerca de <b></b> da chuva dessa área.';
+    pct.querySelector('b').textContent = Math.round(ret / cai * 100) + '%';
+    box.appendChild(pct);
+  }
+  document.querySelectorAll('.sol').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.sol').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true'); solAtual = b.dataset.sol; calc();
+    });
+  });
+  chuva.addEventListener('input', calc);
+  calc();
 })();
 </script>
 </body>

@@ -95,22 +95,22 @@ h2{font-size:clamp(28px,3.2vw,38px);line-height:1.15;max-width:24ch;margin-botto
 .card svg{display:block;width:100%;height:auto;background:linear-gradient(180deg,var(--bg-2),var(--surface-2));border-bottom:1px solid var(--line);padding:14px 10px 0}
 .card h3{font-size:17px;padding:18px 18px 6px;color:var(--ink)}
 .card p{font-size:14.5px;color:var(--ink-2);padding:0 18px 20px}
-.card svg *{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.card .solo{fill:#1A2A40;stroke:none}
-.card .linha{stroke:#4A5F7E;stroke-width:2}
-.card .agua{stroke:var(--geo);stroke-width:5}
-.card .agua-cheia{fill:rgba(108,182,255,.35);stroke:none}
-.card .nivel{stroke:var(--geo);stroke-width:1.5;stroke-dasharray:4 4}
-.card .seta{stroke:var(--geo);stroke-width:2;stroke-dasharray:2 5}
-.card .chuva{stroke:var(--geo);stroke-width:2;opacity:.7}
-.card .infiltra{stroke:var(--geo);stroke-width:2;stroke-dasharray:3 5;opacity:.85}
-.card .planta,.card .tronco{stroke:var(--green);stroke-width:2.5}
-.card .copa{fill:rgba(61,213,152,.25);stroke:var(--green);stroke-width:2}
-.card .bloco-piso{stroke:#8DA2BF;stroke-width:8}
-.card .brita{fill:#4A5F7E}
-.card .predio{fill:#16263D;stroke:#4A5F7E;stroke-width:2}
-.card .telhado{fill:rgba(61,213,152,.3);stroke:var(--green);stroke-width:2}
-.card .janela{stroke:#2C3F5C;stroke-width:1.5}
+.ilu *{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ilu .solo{fill:#1A2A40;stroke:none}
+.ilu .linha{stroke:#4A5F7E;stroke-width:2}
+.ilu .agua{stroke:var(--geo);stroke-width:5}
+.ilu .agua-cheia{fill:rgba(108,182,255,.35);stroke:none}
+.ilu .nivel{stroke:var(--geo);stroke-width:1.5;stroke-dasharray:4 4}
+.ilu .seta{stroke:var(--geo);stroke-width:2;stroke-dasharray:2 5}
+.ilu .chuva{stroke:var(--geo);stroke-width:2;opacity:.7}
+.ilu .infiltra{stroke:var(--geo);stroke-width:2;stroke-dasharray:3 5;opacity:.85}
+.ilu .planta,.ilu .tronco{stroke:var(--green);stroke-width:2.5}
+.ilu .copa{fill:rgba(61,213,152,.25);stroke:var(--green);stroke-width:2}
+.ilu .bloco-piso{stroke:#8DA2BF;stroke-width:8}
+.ilu .brita{fill:#4A5F7E}
+.ilu .predio{fill:#16263D;stroke:#4A5F7E;stroke-width:2}
+.ilu .telhado{fill:rgba(61,213,152,.3);stroke:var(--green);stroke-width:2}
+.ilu .janela{stroke:#2C3F5C;stroke-width:1.5}
 .aviso{margin-top:8px;font-size:14.5px;color:var(--ink-2);border-left:2px solid var(--green);padding:4px 0 4px 14px;max-width:80ch}
 
 /* Metodologia */
@@ -158,3 +158,8 @@ h2{font-size:clamp(28px,3.2vw,38px);line-height:1.15;max-width:24ch;margin-botto
   .barras li{grid-template-columns:130px 1fr 28px}
   .bloco{padding-top:72px}
 }
+
+/* Rótulo da área-piloto no mapa */
+.rotulo-piloto{background:rgba(9,30,26,.92);border:1px solid rgba(61,213,152,.6);border-radius:8px;padding:6px 10px;display:grid;gap:1px;pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.rotulo-piloto b{font:600 12.5px/1.2 var(--sans);color:var(--green)}
+.rotulo-piloto span{font-size:11.5px;color:var(--ink-2)}

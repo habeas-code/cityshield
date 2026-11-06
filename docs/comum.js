@@ -43,9 +43,25 @@ window.CityShield = (function () {
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
     map.on('load', function () {
+      // Troca o preto do estilo "dark" por azul-marinho e destaca rios e represas.
+      map.getStyle().layers.forEach(function (l) {
+        try {
+          if (l.type === 'background') map.setPaintProperty(l.id, 'background-color', '#0B1A2E');
+          else if (l.type === 'fill' && /water/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', '#123A63');
+          else if (l.type === 'line' && /waterway/.test(l.id)) map.setPaintProperty(l.id, 'line-color', '#1F5A92');
+          else if (l.type === 'fill' && /landuse|landcover|park/.test(l.id)) map.setPaintProperty(l.id, 'fill-color', '#10233A');
+        } catch (e) { /* camada sem essa propriedade: ignora */ }
+      });
+
       map.addSource('piloto', { type: 'geojson', data: circulo(PILOTO.centro, PILOTO.raioM) });
       map.addLayer({ id: 'piloto-fundo', type: 'fill', source: 'piloto', paint: { 'fill-color': COR_VERDE, 'fill-opacity': 0.08 } });
       map.addLayer({ id: 'piloto-borda', type: 'line', source: 'piloto', paint: { 'line-color': COR_VERDE, 'line-width': 1.5, 'line-dasharray': [3, 2] } });
+
+      var rotulo = document.createElement('div');
+      rotulo.className = 'rotulo-piloto';
+      rotulo.innerHTML = '<b>Área-piloto: Núcleo Norte</b><span>raio de 800 m</span>';
+      map._rotuloPiloto = new maplibregl.Marker({ element: rotulo, anchor: 'bottom', offset: [0, -4] })
+        .setLngLat([PILOTO.centro[0], PILOTO.centro[1] + PILOTO.raioM / 111320]).addTo(map);
 
       map.addSource('ruas', { type: 'geojson', data: opts.dados || 'dados/ruas.geojson' });
       map.addLayer({
