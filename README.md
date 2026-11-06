@@ -4,7 +4,8 @@
 
 Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com), trilha **Meio ambiente**.
 
-🌐 Página do projeto: https://habeas-code.github.io/cityshield/
+🌐 Página do projeto: https://habeas-code.github.io/cityshield/  
+🗺️ Plataforma (protótipo): https://habeas-code.github.io/cityshield/mapa.html
 
 ---
 

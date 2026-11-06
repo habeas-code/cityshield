@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plataforma · CityShield</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="estilo.css">
+<style>
+html,body{height:100%}
+body{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+.barra{display:flex;align-items:center;gap:16px;padding:10px 18px;border-bottom:1px solid var(--line);background:var(--bg)}
+.barra .tag{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:5px 9px}
+.barra .voltar{margin-left:auto;font-size:14px;color:var(--ink-2)}
+.app{display:grid;grid-template-columns:340px 1fr;min-height:0}
+.lado{border-right:1px solid var(--line);background:var(--bg-2);display:grid;grid-template-rows:auto auto 1fr auto;min-height:0}
+.sec{padding:16px 18px;border-bottom:1px solid var(--line);display:grid;gap:10px}
+.sec-titulo{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.camada{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-2)}
+.camada input{accent-color:var(--geo);width:15px;height:15px;margin:0}
+.camada .ponto{width:10px;height:10px;border-radius:50%;flex:none}
+.camada.off{opacity:.45}
+.camada small{margin-left:auto;font:500 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);border:1px solid var(--line-2);border-radius:8px;padding:3px;gap:3px}
+.seg button{background:none;border:0;color:var(--ink-2);font:500 13px/1 var(--sans);padding:8px 4px;border-radius:6px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface-2);color:var(--ink)}
+.faixa{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;font-size:14px;color:var(--ink-2)}
+.faixa input{grid-column:1/-1;accent-color:var(--geo);width:100%}
+.faixa output{font-variant-numeric:tabular-nums;color:var(--ink)}
+.resumo{font-size:13px;color:var(--muted)}
+.resumo b{color:var(--ink);font-weight:600}
+.lista{overflow-y:auto;list-style:none;margin:0;padding:6px 8px}
+.lista li{margin:0}
+.lista button{width:100%;display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;background:none;border:0;border-radius:8px;padding:9px 10px;color:var(--ink-2);font:14px/1.3 var(--sans);cursor:pointer}
+.lista button:hover,.lista button:focus-visible{background:var(--surface)}
+.lista .nome{color:var(--ink)}
+.lista .n{font-variant-numeric:tabular-nums;color:var(--geo);font-weight:600}
+.lista .det{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.rodape-lado{padding:12px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+#mapa{height:100%;min-height:0}
+@media (max-width:760px){
+  body{overflow:auto;grid-template-rows:auto auto}
+  .app{grid-template-columns:1fr}
+  #mapa{height:60vh;order:-1}
+  .lado{border-right:0}
+  .lista{max-height:50vh}
+}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <a class="marca" href="index.html" aria-label="CityShield, voltar ao início">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="var(--geo)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    CITYSHIELD
+  </a>
+  <span class="tag">Protótipo · Sorocaba</span>
+  <a class="voltar" href="index.html">Sobre o projeto</a>
+</header>
+
+<div class="app">
+  <aside class="lado">
+    <div class="sec">
+      <p class="sec-titulo">Camadas</p>
+      <label class="camada"><input type="checkbox" id="c-ruas" checked><span class="ponto" style="background:var(--geo)"></span>Registros por rua (2022–2023)</label>
+      <label class="camada"><input type="checkbox" id="c-piloto" checked><span class="ponto" style="border:1.5px dashed var(--green)"></span>Área-piloto Norte (800 m)</label>
+      <label class="camada off"><input type="checkbox" disabled><span class="ponto" style="background:#C8701F"></span>Risco pelo relevo (HAND)<small>em breve</small></label>
+      <label class="camada off"><input type="checkbox" disabled><span class="ponto" style="background:var(--green)"></span>Áreas candidatas<small>em breve</small></label>
+    </div>
+    <div class="sec">
+      <p class="sec-titulo">Filtros</p>
+      <div class="seg" role="group" aria-label="Tipo de registro">
+        <button type="button" data-tipo="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-tipo="alagamentos" aria-pressed="false">Alagamento</button>
+        <button type="button" data-tipo="inundacoes" aria-pressed="false">Inundação</button>
+      </div>
+      <label class="faixa">Mínimo de registros por rua <output id="min-val">1</output>
+        <input type="range" id="min" min="1" max="10" value="1">
+      </label>
+      <p class="resumo" id="resumo">Carregando…</p>
+    </div>
+    <ul class="lista" id="lista" aria-label="Ruas com registros"></ul>
+    <p class="rodape-lado">Um círculo por rua, em posição aproximada; não representa endereços. Fonte: relatórios COMPDEC 2022–2023 (Defesa Civil de Sorocaba).</p>
+  </aside>
+  <div id="mapa" role="region" aria-label="Mapa de Sorocaba"></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="comum.js"></script>
+<script>
+(function () {
+  var dados = null, tipo = 'todos', minimo = 1;
+  var lista = document.getElementById('lista');
+  var resumo = document.getElementById('resumo');
+
+  var map = CityShield.criarMapa('mapa', {
+    center: [-47.46, -23.478], zoom: 11.8, interativo: true,
+    aoCarregar: function () {
+      fetch('dados/ruas.geojson').then(function (r) { return r.json(); }).then(function (g) {
+        dados = g; aplicar();
+      }).catch(function () { resumo.textContent = 'Não foi possível carregar os dados.'; });
+    }
+  });
+
+  function passa(p) {
+    if (p.registros < minimo) return false;
+    if (tipo !== 'todos' && !(p[tipo] > 0)) return false;
+    return true;
+  }
+
+  function aplicar() {
+    var filtro = ['all', ['>=', ['get', 'registros'], minimo]];
+    if (tipo !== 'todos') filtro.push(['>', ['get', tipo], 0]);
+    ['ruas', 'ruas-halo'].forEach(function (id) { map.setFilter(id, filtro); });
+
+    var visiveis = dados.features.filter(function (f) { return passa(f.properties); });
+    var total = visiveis.reduce(function (s, f) { return s + f.properties.registros; }, 0);
+    resumo.innerHTML = '<b></b> ruas · <b></b> registros no mapa';
+    var bs = resumo.querySelectorAll('b'); bs[0].textContent = visiveis.length; bs[1].textContent = total;
+
+    lista.innerHTML = '';
+    visiveis.forEach(function (f) {
+      var p = f.properties;
+      var li = document.createElement('li');
+      var bt = document.createElement('button'); bt.type = 'button';
+      var nome = document.createElement('span'); nome.className = 'nome'; nome.textContent = p.rua;
+      var n = document.createElement('span'); n.className = 'n'; n.textContent = p.registros;
+      var det = document.createElement('span'); det.className = 'det';
+      det.textContent = p.alagamentos + ' alag. · ' + p.inundacoes + ' inund. · ' + p.relatorios + ' de 15 relatórios';
+      bt.appendChild(nome); bt.appendChild(n); bt.appendChild(det);
+      bt.addEventListener('click', function () {
+        map.flyTo({ center: f.geometry.coordinates, zoom: 15, speed: 1.4 });
+        CityShield.abrirPopup(map, f.geometry.coordinates, p);
+      });
+      li.appendChild(bt); lista.appendChild(li);
+    });
+  }
+
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true'); tipo = b.dataset.tipo; if (dados) aplicar();
+    });
+  });
+  var min = document.getElementById('min');
+  min.addEventListener('input', function () {
+    minimo = +min.value; document.getElementById('min-val').textContent = minimo; if (dados) aplicar();
+  });
+  function alternar(chk, ids) {
+    document.getElementById(chk).addEventListener('change', function (e) {
+      ids.forEach(function (id) { map.setLayoutProperty(id, 'visibility', e.target.checked ? 'visible' : 'none'); });
+    });
+  }
+  alternar('c-ruas', ['ruas', 'ruas-halo']);
+  alternar('c-piloto', ['piloto-fundo', 'piloto-borda']);
+})();
+</script>
+</body>
+</html>
