@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CityShield · Enchentes e soluções verdes em Sorocaba</title>
+<meta name="description" content="Mapa que mostra onde Sorocaba alaga e onde soluções verdes podem segurar essa água. Projeto do time Habeas Code no Hack Brasil 2026.">
+<style>
+:root{
+  --paper:#F2F5F4; --card:#FFFFFF; --ink:#11252C; --muted:#56696D; --line:#D3DDDB;
+  --rain:#1D6BAE; --rain-soft:#DCEAF6; --green:#2B8452; --green-soft:#DDF0E4;
+  --risk:#C8701F; --risk-soft:#F8E8D6;
+  --display:"Arial Narrow", "Segoe UI", Arial, sans-serif;
+  --body:"Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --mono:Consolas, "SF Mono", monospace;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#0E1A1E; --card:#152429; --ink:#E4EDEB; --muted:#9DB0B2; --line:#2A3D42;
+    --rain:#5EA6E6; --rain-soft:#173247; --green:#5CC489; --green-soft:#16362A;
+    --risk:#E99A4F; --risk-soft:#3A2818;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--body)}
+.wrap{max-width:960px;margin:0 auto;padding:48px 20px 72px;display:grid;gap:64px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(40px,8vw,76px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(26px,4vw,36px);font-weight:700}
+h3{font-size:20px}
+p{margin:0;max-width:64ch}
+.kicker{font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--rain)}
+header{display:grid;gap:20px}
+.lead{font-size:clamp(20px,2.6vw,24px);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 14px/1 var(--body);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.chip.g{background:var(--green-soft);border-color:transparent;color:var(--green)}
+section{display:grid;gap:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:4px}
+.stat b{font:800 44px/1 var(--display);color:var(--rain);font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--rain);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start}
+.step.v{border-top-color:var(--green)}
+.step::before{counter-increment:s;content:counter(s);font:700 13px/1 var(--mono);color:var(--muted)}
+.step p{font-size:16px;color:var(--muted)}
+.sols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.sol{background:var(--green-soft);border-radius:10px;padding:16px;display:grid;gap:4px}
+.sol b{color:var(--green)}
+.sol span{font-size:15px}
+.note{background:var(--risk-soft);border-left:5px solid var(--risk);border-radius:8px;padding:16px 18px;font-size:16px}
+.team{display:flex;flex-wrap:wrap;gap:10px}
+.team span{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--ink);color:var(--paper)}
+.btn.o{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--rain);outline-offset:3px}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:15px;color:var(--muted);display:grid;gap:6px}
+a{color:var(--rain)}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header>
+  <div class="kicker">Hack Brasil 2026 · Trilha Meio ambiente</div>
+  <h1>CityShield</h1>
+  <p class="lead">Onde Sorocaba alaga, e onde soluções verdes podem segurar essa água.</p>
+  <div class="chips">
+    <span class="chip">Sorocaba/SP</span>
+    <span class="chip">Piloto: zona Norte</span>
+    <span class="chip g">Soluções baseadas na natureza</span>
+    <span class="chip">🚧 Em construção</span>
+  </div>
+  <div class="cta">
+    <a class="btn" href="https://github.com/habeas-code/cityshield">Ver o código no GitHub</a>
+  </div>
+</header>
+
+<section>
+  <div class="kicker">O problema</div>
+  <h2>A cidade alaga nos mesmos lugares, todo ano</h2>
+  <p>Os relatórios da Defesa Civil de Sorocaba de 2022 e 2023 mostram que as enchentes se repetem. Algumas ruas aparecem em quase todos os relatórios. A água que não infiltra no asfalto desce para os pontos baixos perto dos rios e córregos.</p>
+  <div class="stats">
+    <div class="stat"><b>250+</b><span>ocorrências de alagamento e inundação em 2022–2023</span></div>
+    <div class="stat"><b>89</b><span>ruas diferentes com registro</span></div>
+    <div class="stat"><b>10 de 15</b><span>relatórios citam a Rua XV de Agosto</span></div>
+  </div>
+  <p class="muted" style="font-size:15px;color:var(--muted)">Fonte: Relatórios COMPDEC 2022–2023 (Defesa Civil de Sorocaba), contagem agregada por rua.</p>
+</section>
+
+<section>
+  <div class="kicker">A solução</div>
+  <h2>Um mapa que responde: onde estudar qual solução primeiro?</h2>
+  <div class="steps">
+    <div class="step"><h3>Risco pelo relevo</h3><p>Calculamos a altura de cada ponto em relação ao rio mais próximo (método HAND).</p></div>
+    <div class="step"><h3>Histórico real</h3><p>Cruzamos com as ocorrências da Defesa Civil, agrupadas por rua.</p></div>
+    <div class="step v"><h3>Áreas candidatas</h3><p>Praças, estacionamentos, terrenos e telhados perto dos pontos críticos.</p></div>
+    <div class="step v"><h3>Antes e depois</h3><p>Para cada área, uma solução verde, uma nota de prioridade e quanto de água ela pode reter.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Soluções verdes</div>
+  <h2>O que o mapa recomenda</h2>
+  <div class="sols">
+    <div class="sol"><b>Jardim de chuva</b><span>Canteiro rebaixado que recebe a água da rua.</span></div>
+    <div class="sol"><b>Piso permeável</b><span>Estacionamento que deixa a água infiltrar.</span></div>
+    <div class="sol"><b>Telhado verde</b><span>Segura parte da chuva antes de chegar ao chão.</span></div>
+    <div class="sol"><b>Parque alagável</b><span>Área verde feita para encher na chuva forte e esvaziar depois.</span></div>
+  </div>
+  <p class="note">As áreas são <strong>candidatas a estudo</strong>, não obras aprovadas. Cada número de retenção mostra a fonte técnica de onde veio.</p>
+</section>
+
+<section>
+  <div class="kicker">Para quem</div>
+  <h2>Defesa Civil, prefeitura e moradores</h2>
+  <p>Começamos pelo núcleo Norte (Parque das Águas, Jd. Maria do Carmo e Abaeté), que concentra muitos registros num raio de 800 m. Depois, o Centro.</p>
+</section>
+
+<section>
+  <div class="kicker">Time Habeas Code</div>
+  <div class="team"><span>Lucas</span><span>Enzo</span><span>Rafael</span><span>Nicollas</span></div>
+</section>
+
+<footer>
+  <span>CityShield · Projeto open source (licença MIT) do time Habeas Code para o <a href="https://hackbrasil.com">Hack Brasil 2026</a>.</span>
+  <span>Nenhum dado pessoal é publicado: as ocorrências aparecem só agregadas por rua.</span>
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Dados com endereço de pessoas: NUNCA subir
+dados_privados/
+
+# Senhas
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+
+# Rasters grandes baixados pelo pipeline
+*.tif
+*.tiff
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

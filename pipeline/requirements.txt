@@ -1,0 +1,1 @@
+# bibliotecas entram conforme os passos forem feitos (pysheds, geopandas, osmnx...)
