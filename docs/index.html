@@ -7,50 +7,62 @@
 <meta name="description" content="Transformamos dados ambientais e geográficos em oportunidades de infraestrutura verde para cidades mais resilientes. Projeto do time Habeas Code no Hack Brasil 2026.">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
 <link rel="stylesheet" href="estilo.css">
+<link rel="stylesheet" href="inicio.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="marca" href="#topo" aria-label="CityShield, início">
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="var(--geo)" stroke-width="1.8" stroke-linecap="round"/></svg>
-      CITYSHIELD
+    <a class="marca-bloco" href="#topo" aria-label="CityShield, início">
+      <span class="escudo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="#3DD598" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="#6CB6FF" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+      <span><b>CITYSHIELD</b><small>Inteligência Ambiental Urbana</small></span>
     </a>
     <div class="links">
       <a href="#projeto">Projeto</a>
       <a href="#dados">Dados</a>
       <a href="#solucoes">Soluções</a>
       <a href="#metodologia">Metodologia</a>
+      <a href="#fontes">Fontes</a>
     </div>
-    <a class="btn btn-sm" href="mapa.html">Abrir plataforma</a>
+    <a class="btn-plataforma" href="mapa.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      Abrir plataforma →
+    </a>
   </div>
 </nav>
 
 <header class="hero" id="topo">
   <div class="hero-texto">
-    <p class="kicker">Inteligência ambiental urbana · Hack Brasil 2026</p>
-    <h1>A água volta sempre para as mesmas ruas.</h1>
-    <p class="sub">Transformamos dados ambientais e geográficos em oportunidades de infraestrutura verde para cidades mais resilientes. Começando por Sorocaba.</p>
+    <p class="pilula-topo">Inteligência ambiental urbana · Hack Brasil 2026</p>
+    <h1>A água volta sempre para as <em>mesmas ruas.</em></h1>
+    <p class="sub">Transformamos dados ambientais e geográficos em oportunidades de infraestrutura verde para cidades mais resilientes. Começando por <strong>Sorocaba</strong>.</p>
     <div class="acoes">
-      <a class="btn" href="mapa.html">Abrir plataforma →</a>
-      <a class="btn btn-ghost" href="https://github.com/habeas-code/cityshield">Ver código</a>
+      <a class="btn-plataforma grande" href="mapa.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        Explorar a plataforma →
+      </a>
+      <a class="btn btn-ghost" href="#projeto">Conhecer o projeto</a>
     </div>
   </div>
-
   <div class="hero-mapa">
-    <div id="mapa" role="img" aria-label="Mapa escuro de Sorocaba com as ruas que tiveram registros de alagamento ou inundação e o círculo da área-piloto no Norte"></div>
-    <div class="piloto">
-      <p class="kicker">Área-piloto · Núcleo Norte</p>
-      <p class="piloto-local">Sorocaba, SP</p>
-      <p class="piloto-bairros">Parque das Águas · Jd. Maria do Carmo · Jd. Abaeté</p>
-      <div class="numeros">
-        <div><b>253</b><span>registros históricos</span></div>
-        <div><b>89</b><span>ruas registradas</span></div>
-        <div><b class="verde">41</b><span>registros no piloto</span></div>
-      </div>
-    </div>
+    <div id="mapa" role="img" aria-label="Mapa de Sorocaba com as ruas que tiveram registros de alagamento ou inundação e o círculo da área-piloto no Norte"></div>
   </div>
 </header>
+
+<section class="numeros-faixa" aria-label="Números principais">
+  <div class="num">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+    <b>253</b><span>registros históricos de alagamento e inundação, 2022–2023</span>
+  </div>
+  <div class="num">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 3 21M17 3l4 18M12 4v3m0 4v3m0 4v3"/></svg>
+    <b>89</b><span>ruas diferentes citadas nos relatórios</span>
+  </div>
+  <div class="num verde">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22v-6M7 16h10l-5-7Zm1.5-4L12 3l-3.5 9"/></svg>
+    <b>41</b><span>registros associados às ruas no raio de 800 m da área-piloto Norte</span>
+  </div>
+</section>
 
 <section class="objetivo" id="projeto">
   <p class="kicker">Nosso objetivo</p>
@@ -58,24 +70,48 @@
 </section>
 
 <section class="bloco">
-  <p class="kicker">Como o CityShield funciona</p>
-  <h2>Do registro de alagamento à decisão de onde investir</h2>
-  <ol class="jornada">
-    <li><span class="etapa">01</span><h3>Diagnóstico ambiental</h3><p>Cruza registros históricos da Defesa Civil, relevo, rios e características urbanas.</p></li>
-    <li><span class="etapa">02</span><h3>Identificação de oportunidades</h3><p>Localiza praças, estacionamentos, terrenos e telhados que podem ser investigados para receber infraestrutura verde.</p></li>
-    <li><span class="etapa">03</span><h3>Análise de soluções</h3><p>Apresenta alternativas compatíveis com as características de cada área.</p></li>
-    <li><span class="etapa">04</span><h3>Comparação de cenários</h3><p>Compara estimativas de escoamento e retenção, deixando as premissas e as fontes visíveis.</p></li>
+  <div class="cab">
+    <h2>Do registro à <em>solução</em></h2>
+    <p>Uma plataforma para entender, planejar e agir por uma cidade que segura melhor a água da chuva.</p>
+  </div>
+  <ol class="fluxo-etapas">
+    <li>
+      <span class="n">1</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/></svg>
+      <h3>Diagnóstico ambiental</h3>
+      <p>Cruza registros da Defesa Civil, relevo, rios e características urbanas.</p>
+    </li>
+    <li>
+      <span class="n">2</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <h3>Identificação de oportunidades</h3>
+      <p>Localiza praças, estacionamentos, terrenos e telhados que podem ser investigados.</p>
+    </li>
+    <li>
+      <span class="n">3</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21c0-9 5-15 15-16-1 10-7 15-15 16Zm0 0 7-7"/></svg>
+      <h3>Análise de soluções</h3>
+      <p>Apresenta alternativas verdes compatíveis com cada área.</p>
+    </li>
+    <li>
+      <span class="n">4</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-4m5 4V8m5 8v-6"/></svg>
+      <h3>Comparação de cenários</h3>
+      <p>Compara escoamento e retenção, com premissas e fontes visíveis.</p>
+    </li>
   </ol>
 </section>
 
 <section class="bloco" id="dados">
-  <p class="kicker">Dados históricos</p>
-  <h2>Algumas ruas aparecem em quase todo relatório</h2>
+  <div class="cab">
+    <h2>Ruas com maior recorrência nos relatórios</h2>
+    <p>Os 15 relatórios da Defesa Civil de 2022 e 2023 mostram que as ocorrências se repetem nos mesmos lugares.</p>
+  </div>
   <div class="dados-grid">
     <div class="painel">
-      <h3 class="painel-titulo">Ruas com mais registros, 2022–2023</h3>
+      <h3 class="painel-titulo">Registros por rua, 2022–2023</h3>
       <ul class="barras" id="barras"></ul>
-      <p class="nota">Registros de alagamento e inundação por rua. Passe o mouse para ver em quantos relatórios a rua aparece.</p>
+      <p class="nota">Passe o mouse em uma rua para ver em quantos relatórios ela aparece.</p>
     </div>
     <div class="indicadores">
       <div class="ind"><b>15</b><span>relatórios da Defesa Civil analisados</span></div>
@@ -83,102 +119,113 @@
       <div class="ind"><b>124 · 129</b><span>alagamentos · inundações</span></div>
     </div>
   </div>
-  <p class="fonte">Fonte: relatórios COMPDEC de 2022 e 2023 (Defesa Civil de Sorocaba), anexos ao TCC de M. C. Vargem (Unesp, 2024). Contagem por rua feita pelo time; nenhum endereço individual é publicado.</p>
+  <p class="fonte">Contagem por rua feita pelo time a partir dos relatórios COMPDEC; nenhum endereço individual é publicado. Detalhes em <a href="#fontes">Fontes</a>.</p>
 </section>
 
 <section class="bloco" id="solucoes">
-  <p class="kicker">Soluções verdes</p>
-  <h2>O que a plataforma pode recomendar</h2>
-  <div class="cards">
-    <article class="card">
-      <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true">
-        <path d="M0 52h70l18 22h64l18-22h70v68H0Z" class="solo"/>
-        <path d="M0 52h70l18 22h64l18-22h70" class="linha"/>
-        <path d="M90 74h60" class="agua"/>
-        <path d="M28 42c14 0 24 3 38 9M212 42c-14 0-24 3-38 9" class="seta"/>
-        <path d="M104 74v-14m6 14v-20m6 20v-12m14 12v-18m6 18v-12" class="planta"/>
-        <path d="M110 84v14m20-14v14m-10-10v18" class="infiltra"/>
-      </svg>
-      <h3>Jardim de chuva</h3>
-      <p>Recebe e infiltra parte da água da chuva que escorre da rua.</p>
+  <div class="cab">
+    <h2>Soluções verdes para <em>investigar</em></h2>
+    <p>Infraestrutura que imita a natureza: em vez de mandar toda a chuva para o bueiro, segura e infiltra parte dela.</p>
+  </div>
+  <div class="fotos">
+    <article class="foto">
+      <img src="img/jardim-de-chuva.jpg" alt="Jardim de chuva com plantas e água acumulada ao lado de uma calçada" width="720" height="480" loading="lazy">
+      <div class="foto-txt">
+        <h3>Jardim de chuva</h3>
+        <p>Canteiro rebaixado que recebe a enxurrada da rua e deixa infiltrar.</p>
+        <span class="ref">Até 150 L por m² · Hinman, 2007</span>
+      </div>
     </article>
-    <article class="card">
-      <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true">
-        <path d="M30 18v10m30-16v10m40-4v10m40-14v10m40 2v10m30-16v10" class="chuva"/>
-        <path d="M0 62h240v58H0Z" class="solo"/>
-        <path d="M14 50h40m8 0h40m8 0h40m8 0h40m8 0h40" class="bloco-piso"/>
-        <path d="M58 54v26m48-26v26m48-26v26m48-26v26" class="infiltra"/>
-        <circle cx="30" cy="84" r="2.5" class="brita"/><circle cx="82" cy="96" r="2.5" class="brita"/><circle cx="130" cy="82" r="2.5" class="brita"/><circle cx="176" cy="98" r="2.5" class="brita"/><circle cx="220" cy="86" r="2.5" class="brita"/>
-      </svg>
-      <h3>Piso permeável</h3>
-      <p>Permite a infiltração em superfícies pavimentadas adequadas, como estacionamentos.</p>
+    <article class="foto">
+      <img src="img/piso-permeavel.jpg" alt="Piso de concreto vazado com grama crescendo nos furos" width="720" height="480" loading="lazy">
+      <div class="foto-txt">
+        <h3>Piso permeável</h3>
+        <p>Pavimento que deixa a água passar para uma camada de brita.</p>
+        <span class="ref">Até 50 mm de chuva · PMSP, 2013</span>
+      </div>
     </article>
-    <article class="card">
-      <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true">
-        <path d="M60 6v10m40-12v10m40-2v10m40-10v10" class="chuva"/>
-        <path d="M50 44h140v76H50Z" class="predio"/>
-        <path d="M46 36h148v8H46Z" class="telhado"/>
-        <path d="M60 36v-8m8 8v-12m8 12v-7m30 7v-10m8 10v-6m30 6v-11m8 11v-7m20 7v-9" class="planta"/>
-        <path d="M70 60h20v14H70Zm40 0h20v14h-20Zm40 0h20v14h-20ZM70 88h20v14H70Zm40 0h20v14h-20Zm40 0h20v14h-20Z" class="janela"/>
-        <path d="M196 44v10m0 8v10" class="infiltra"/>
-      </svg>
-      <h3>Telhado verde</h3>
-      <p>Retém parte da precipitação na cobertura e solta a água devagar.</p>
+    <article class="foto">
+      <img src="img/telhado-verde.jpg" alt="Vista aérea de um telhado coberto de vegetação no meio de prédios" width="720" height="480" loading="lazy">
+      <div class="foto-txt">
+        <h3>Telhado verde</h3>
+        <p>Cobertura com vegetação que retém parte da chuva e solta devagar.</p>
+        <span class="ref">Retém 47–62% · Vacari et al., 2019</span>
+      </div>
     </article>
-    <article class="card">
-      <svg class="ilu" viewBox="0 0 240 120" aria-hidden="true">
-        <path d="M0 50c40 0 50 30 90 30h60c40 0 50-30 90-30v70H0Z" class="solo"/>
-        <path d="M70 66c20 18 80 18 100 0Z" class="agua-cheia"/>
-        <path d="M0 50c40 0 50 30 90 30h60c40 0 50-30 90-30" class="linha"/>
-        <path d="M58 66h124" class="nivel"/>
-        <path d="M24 50V34m194 16V34" class="tronco"/>
-        <circle cx="24" cy="28" r="11" class="copa"/><circle cx="218" cy="28" r="11" class="copa"/>
-      </svg>
-      <h3>Parque alagável</h3>
-      <p>Espaço projetado para guardar água temporariamente na chuva forte e esvaziar depois.</p>
+    <article class="foto">
+      <img src="img/parque-alagavel.jpg" alt="Parque com área gramada rebaixada cheia de água depois da chuva, cercada de árvores" width="720" height="480" loading="lazy">
+      <div class="foto-txt">
+        <h3>Parque alagável</h3>
+        <p>Área verde feita para encher na chuva forte e esvaziar depois.</p>
+        <span class="ref">Volume calculado pelo relevo</span>
+      </div>
     </article>
   </div>
-  <p class="aviso">As áreas indicadas são candidatas a estudo, não obras decididas. A plataforma ajuda a Defesa Civil e a prefeitura a escolher por onde começar.</p>
+  <p class="aviso">Áreas candidatas a estudo, não obras decididas. A plataforma ajuda a Defesa Civil e a prefeitura a escolher por onde começar.</p>
 </section>
 
 <section class="bloco" id="metodologia">
-  <p class="kicker">Metodologia</p>
-  <h2>Cálculo pesado antes, resultado leve no mapa</h2>
-  <div class="fluxo">
-    <div class="col">
-      <p class="col-titulo">Fontes</p>
-      <span>Registros da Defesa Civil</span>
-      <span>Relevo ANADEM 30 m</span>
-      <span>OpenStreetMap</span>
-      <span>Censo 2022 (IBGE)</span>
-      <span>Literatura técnica de retenção</span>
+  <div class="cab">
+    <h2>Metodologia</h2>
+    <p>O cálculo pesado roda uma vez no pipeline. A plataforma só mostra o resultado, por isso é rápida e não quebra.</p>
+  </div>
+  <div class="fluxograma">
+    <div class="fg-col">
+      <p class="fg-tit">Entradas</p>
+      <div class="fg-no">Registros da Defesa Civil</div>
+      <div class="fg-no">Relevo ANADEM 30 m</div>
+      <div class="fg-no">OpenStreetMap</div>
+      <div class="fg-no">Censo 2022 · IBGE</div>
     </div>
-    <div class="seta-fluxo" aria-hidden="true">→</div>
-    <div class="col destaque">
-      <p class="col-titulo">Pipeline Python</p>
-      <span>Registros agrupados por rua</span>
-      <span>Altura em relação à drenagem (HAND)</span>
-      <span>Áreas candidatas e nota de prioridade</span>
-      <span>Volumes antes e depois</span>
-      <span>Teste de validação</span>
+    <div class="fg-seta" aria-hidden="true"></div>
+    <div class="fg-col">
+      <p class="fg-tit">Processamento (Python)</p>
+      <div class="fg-no geo">1 · Agrupar registros por rua</div>
+      <div class="fg-no geo">2 · Altura em relação à drenagem (HAND)</div>
+      <div class="fg-no geo">3 · Áreas candidatas</div>
+      <div class="fg-no geo">4 · Nota = risco × registros × área</div>
     </div>
-    <div class="seta-fluxo" aria-hidden="true">→</div>
-    <div class="col">
-      <p class="col-titulo">Plataforma</p>
-      <span>PostGIS + API FastAPI</span>
-      <span>Mapa com camadas e filtros</span>
-      <span>Ficha de cada área</span>
-      <span>Cenário antes e depois</span>
+    <div class="fg-seta" aria-hidden="true"></div>
+    <div class="fg-col">
+      <p class="fg-tit">Verificação</p>
+      <div class="fg-no">% dos registros nas faixas de risco alto e médio</div>
+      <div class="fg-no">Retenção com fonte da literatura</div>
+    </div>
+    <div class="fg-seta" aria-hidden="true"></div>
+    <div class="fg-col">
+      <p class="fg-tit">Saída</p>
+      <div class="fg-no verde">Mapa com camadas</div>
+      <div class="fg-no verde">Ficha de cada área</div>
+      <div class="fg-no verde">Cenário antes e depois</div>
     </div>
   </div>
   <div class="metodo-notas">
-    <p><b>Sobre o HAND.</b> O indicador mede a altura de cada ponto em relação à rede de drenagem mais próxima. Pontos baixos tendem a acumular água, mas o HAND sozinho não determina onde vai inundar. Por isso ele é combinado com os registros reais e conferido contra eles.</p>
-    <p><b>Validação.</b> Medimos que porcentagem dos registros da Defesa Civil cai nas faixas de risco alto e médio, no piloto e na cidade inteira. O resultado aparece na plataforma, seja ele bom ou ruim.</p>
-    <p><b>Retenção.</b> Cada número de antes e depois mostra a fonte: piso permeável (PMSP, ETS-03/2013), jardim de chuva (Hinman, WSU, 2007), telhado verde (Vacari et al., 2019).</p>
+    <p><b>Sobre o HAND.</b> Mede a altura de cada ponto em relação à rede de drenagem mais próxima. Pontos baixos tendem a acumular água, mas o HAND sozinho não determina onde vai inundar. Por isso ele é combinado com os registros reais e conferido contra eles.</p>
+    <p><b>Validação.</b> Medimos que porcentagem dos registros cai nas faixas de risco alto e médio, no piloto e na cidade inteira. O resultado aparece na plataforma, seja ele bom ou ruim.</p>
+    <p><b>Limites.</b> Os registros estão agrupados por rua, não por endereço. As estimativas de retenção são contas com premissas da literatura, não modelagem hidráulica.</p>
   </div>
-  <div class="fontes">
-    <span>Defesa Civil de Sorocaba</span><span>Unesp</span><span>ANA · ANADEM</span><span>OpenStreetMap</span><span>IBGE</span><span>Serviço Geológico do Brasil</span>
+</section>
+
+<section class="bloco" id="fontes">
+  <div class="cab">
+    <h2>Fontes e transparência</h2>
+    <p>Todo número da plataforma aponta para a origem.</p>
   </div>
+  <div class="fontes-grid">
+    <div class="fonte-card"><b>Defesa Civil de Sorocaba</b><p>15 relatórios COMPDEC de 2022–2023, publicados como anexo do TCC de M. C. Vargem (Unesp, 2024). Usados para contar registros por rua.</p></div>
+    <div class="fonte-card"><b>ANA · ANADEM</b><p>Modelo de relevo de 30 m que mede o chão, sem prédios e árvores. Base do cálculo do HAND.</p></div>
+    <div class="fonte-card"><b>OpenStreetMap</b><p>Ruas, rios, praças, estacionamentos e edificações. Base das áreas candidatas e do mapa.</p></div>
+    <div class="fonte-card"><b>IBGE · Censo 2022</b><p>Moradores por setor censitário, para estimar quantas pessoas vivem perto de cada área.</p></div>
+    <div class="fonte-card"><b>Serviço Geológico do Brasil</b><p>Carta de suscetibilidade a inundações de Sorocaba (2014), usada para comparação.</p></div>
+    <div class="fonte-card"><b>Literatura técnica</b><p>PMSP ETS-03/2013 (piso permeável), Hinman, WSU 2007 (jardim de chuva), Vacari et al. 2019, UFMT (telhado verde).</p></div>
+  </div>
+  <p class="creditos">Fotos: Wikimedia Commons. Jardim de chuva: U.S. EPA (domínio público). Piso permeável: Roman Eisele (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>). Telhado verde: TonyTheTiger (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>). Parque alagável: Leonhard Lenz (CC0). Recortadas e reduzidas.</p>
+</section>
+
+<section class="chamada">
+  <h2>Veja os dados no mapa</h2>
+  <p>Filtre por tipo de ocorrência, busque uma rua e compare soluções com premissas visíveis.</p>
+  <a class="btn-plataforma grande" href="mapa.html">Abrir plataforma →</a>
 </section>
 
 <footer class="rodape">
@@ -213,7 +260,7 @@
     li.querySelector('.b-val').textContent = r[1];
     ul.appendChild(li);
   });
-  CityShield.criarMapa('mapa', { center: [-47.462, -23.478], zoom: 11.3, interativo: false });
+  CityShield.criarMapa('mapa', { center: [-47.455, -23.476], zoom: 11.6, interativo: false });
 })();
 </script>
 </body>
