@@ -3,241 +3,189 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CityShield · Inteligência ambiental urbana para Sorocaba</title>
-<meta name="description" content="Transformamos dados ambientais e geográficos em oportunidades de infraestrutura verde para cidades mais resilientes. Projeto do time Habeas Code no Hack Brasil 2026.">
+<title>CityShield · Onde Sorocaba alaga, e onde dá pra segurar a água</title>
+<meta name="description" content="Em 2022 e 2023 a Defesa Civil de Sorocaba anotou 253 alagamentos e inundações. O CityShield mostra onde eles se repetem e onde soluções verdes podem segurar parte dessa água.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="estilo.css">
 <link rel="stylesheet" href="inicio.css">
 </head>
 <body>
 
 <nav class="nav">
-  <div class="nav-in">
-    <a class="marca-bloco" href="#topo" aria-label="CityShield, início">
-      <span class="escudo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="none" stroke="#3DD598" stroke-width="1.8"/><path d="M8 13c1.3-1 2.7-1 4 0s2.7 1 4 0" fill="none" stroke="#6CB6FF" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      <span><b>CITYSHIELD</b><small>Inteligência Ambiental Urbana</small></span>
+  <div class="largura">
+    <a class="logo" href="#topo" aria-label="CityShield, início">
+      <svg width="34" height="38" viewBox="0 0 34 38" aria-hidden="true"><path d="M17 2 3 7v11c0 9 6 15.5 14 18 8-2.5 14-9 14-18V7L17 2Z" fill="#0F1A14"/><path d="M8 22c3-2.5 6-2.5 9 0s6 2.5 9 0M8 27c3-2.5 6-2.5 9 0s6 2.5 9 0" fill="none" stroke="#6CC3E8" stroke-width="2.2" stroke-linecap="round"/><path d="M10 17l7-6 7 6" fill="none" stroke="#7BD6A0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      City<span class="verde">Shield</span>
     </a>
-    <div class="links">
-      <a href="#projeto">Projeto</a>
+    <div class="nav-links">
       <a href="#dados">Dados</a>
+      <a href="#piloto">Piloto</a>
       <a href="#solucoes">Soluções</a>
-      <a href="#metodologia">Metodologia</a>
+      <a href="#metodo">Metodologia</a>
       <a href="#fontes">Fontes</a>
     </div>
-    <a class="btn-plataforma" href="mapa.html">
-      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      Abrir plataforma →
-    </a>
+    <a class="bt pequeno" href="mapa.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span>Acessar o mapa →</span></a>
   </div>
 </nav>
 
 <header class="hero" id="topo">
-  <div class="hero-texto">
-    <p class="pilula-topo">Inteligência ambiental urbana · Hack Brasil 2026</p>
-    <h1>A água volta sempre para as <em>mesmas ruas.</em></h1>
-    <p class="sub">Transformamos dados ambientais e geográficos em oportunidades de infraestrutura verde para cidades mais resilientes. Começando por <strong>Sorocaba</strong>.</p>
+  <div class="hero-txt">
+    <span class="pilula"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Sorocaba · SP</span>
+    <h1>A água volta sempre para as <span class="verde">mesmas ruas.</span></h1>
+    <p class="sub">Em dois anos, a Defesa Civil anotou <b>253 alagamentos e inundações</b> em Sorocaba. A Av. Dom Aguirre apareceu 23 vezes. Queremos descobrir onde a cidade consegue segurar essa água antes de ela chegar lá.</p>
     <div class="acoes">
-      <a class="btn-plataforma grande" href="mapa.html">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-        Explorar a plataforma →
-      </a>
-      <a class="btn btn-ghost" href="#projeto">Conhecer o projeto</a>
+      <a class="bt" href="mapa.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/></svg>Ver o mapa →</a>
+      <a class="bt contorno" href="#dados"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-5m5 5V7m5 9v-8"/></svg>Conheça os dados</a>
     </div>
   </div>
   <div class="hero-mapa">
-    <div id="mapa" role="img" aria-label="Mapa de Sorocaba com as ruas que tiveram registros de alagamento ou inundação e o círculo da área-piloto no Norte"></div>
+    <div id="mapa-hero" role="img" aria-label="Imagem de satélite de Sorocaba com o contorno do município e um ponto em cada rua que teve alagamento ou inundação em 2022 e 2023"></div>
+    <div class="legenda">
+      <b>Registros por rua</b>
+      <span><i style="background:var(--alto)"></i>5 ou mais</span>
+      <span><i style="background:var(--medio)"></i>2 a 4</span>
+      <span><i style="background:var(--baixo)"></i>1</span>
+      <small>Defesa Civil, 2022–2023. Posição aproximada.</small>
+    </div>
   </div>
 </header>
 
-<section class="numeros-faixa" aria-label="Números principais">
-  <div class="num">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
-    <b>253</b><span>registros históricos de alagamento e inundação, 2022–2023</span>
-  </div>
-  <div class="num">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3 3 21M17 3l4 18M12 4v3m0 4v3m0 4v3"/></svg>
-    <b>89</b><span>ruas diferentes citadas nos relatórios</span>
-  </div>
-  <div class="num verde">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22v-6M7 16h10l-5-7Zm1.5-4L12 3l-3.5 9"/></svg>
-    <b>41</b><span>registros associados às ruas no raio de 800 m da área-piloto Norte</span>
-  </div>
-</section>
-
-<section class="objetivo" id="projeto">
-  <p class="kicker">Nosso objetivo</p>
-  <p class="frase">Não apenas identificar onde alaga. <span>Descobrir onde a cidade pode se tornar mais resiliente.</span></p>
-</section>
-
-<section class="bloco">
-  <div class="cab">
-    <h2>Do registro à <em>solução</em></h2>
-    <p>Uma plataforma para entender, planejar e agir por uma cidade que segura melhor a água da chuva.</p>
-  </div>
-  <ol class="fluxo-etapas">
-    <li>
-      <span class="n">1</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/></svg>
-      <h3>Diagnóstico ambiental</h3>
-      <p>Cruza registros da Defesa Civil, relevo, rios e características urbanas.</p>
-    </li>
-    <li>
-      <span class="n">2</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-      <h3>Identificação de oportunidades</h3>
-      <p>Localiza praças, estacionamentos, terrenos e telhados que podem ser investigados.</p>
-    </li>
-    <li>
-      <span class="n">3</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21c0-9 5-15 15-16-1 10-7 15-15 16Zm0 0 7-7"/></svg>
-      <h3>Análise de soluções</h3>
-      <p>Apresenta alternativas verdes compatíveis com cada área.</p>
-    </li>
-    <li>
-      <span class="n">4</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-4m5 4V8m5 8v-6"/></svg>
-      <h3>Comparação de cenários</h3>
-      <p>Compara escoamento e retenção, com premissas e fontes visíveis.</p>
-    </li>
-  </ol>
-</section>
-
-<section class="bloco" id="dados">
-  <div class="cab">
-    <h2>Ruas com maior recorrência nos relatórios</h2>
-    <p>Os 15 relatórios da Defesa Civil de 2022 e 2023 mostram que as ocorrências se repetem nos mesmos lugares.</p>
-  </div>
-  <div class="dados-grid">
-    <div class="painel">
-      <h3 class="painel-titulo">Registros por rua, 2022–2023</h3>
-      <ul class="barras" id="barras"></ul>
-      <p class="nota">Passe o mouse em uma rua para ver em quantos relatórios ela aparece.</p>
-    </div>
-    <div class="indicadores">
-      <div class="ind"><b>15</b><span>relatórios da Defesa Civil analisados</span></div>
-      <div class="ind"><b>10 de 15</b><span>relatórios citam a Av. XV de Agosto</span></div>
-      <div class="ind"><b>124 · 129</b><span>alagamentos · inundações</span></div>
+<div class="faixa">
+  <div class="largura">
+    <div class="numeros">
+      <div><svg class="ico" viewBox="0 0 48 48" style="color:var(--azul)" aria-hidden="true"><path d="M6 16c4-4 8-4 12 0s8 4 12 0 8-4 12 0M6 26c4-4 8-4 12 0s8 4 12 0 8-4 12 0M6 36c4-4 8-4 12 0s8 4 12 0 8-4 12 0" stroke-width="3"/></svg><p style="margin:0"><b class="n">253</b><span>registros de alagamentos e inundações</span></p></div>
+      <div><svg class="ico" viewBox="0 0 48 48" style="color:#5B6670" aria-hidden="true"><path d="M17 6 8 42M31 6l9 36M24 8v5m0 7v6m0 7v6" stroke-width="3"/></svg><p style="margin:0"><b class="n">89</b><span>ruas com registro</span></p></div>
+      <div><svg class="ico" viewBox="0 0 48 48" style="color:var(--verde)" aria-hidden="true"><path d="M24 4a14 14 0 0 0-14 14c0 10 14 26 14 26s14-16 14-26A14 14 0 0 0 24 4Z" fill="currentColor" stroke="none"/><circle cx="24" cy="18" r="5" fill="#fff" stroke="none"/></svg><p style="margin:0"><b class="n">41</b><span>registros na área-piloto Norte</span></p></div>
+      <div><svg class="ico" viewBox="0 0 48 48" style="color:var(--verde)" aria-hidden="true"><path d="M10 38C10 20 20 10 40 8c-2 20-12 30-30 30Zm0 0 14-14" fill="currentColor" stroke="none"/><path d="M10 38 26 22" stroke="#fff" stroke-width="2.5"/></svg><p style="margin:0"><b class="n">4</b><span>soluções verdes em estudo</span></p></div>
     </div>
   </div>
-  <p class="fonte">Contagem por rua feita pelo time a partir dos relatórios COMPDEC; nenhum endereço individual é publicado. Detalhes em <a href="#fontes">Fontes</a>.</p>
-</section>
+</div>
 
-<section class="bloco" id="solucoes">
-  <div class="cab">
-    <h2>Soluções verdes para <em>investigar</em></h2>
-    <p>Infraestrutura que imita a natureza: em vez de mandar toda a chuva para o bueiro, segura e infiltra parte dela.</p>
-  </div>
-  <div class="fotos">
-    <article class="foto">
-      <img src="img/jardim-de-chuva.jpg" alt="Jardim de chuva com plantas e água acumulada ao lado de uma calçada" width="720" height="480" loading="lazy">
-      <div class="foto-txt">
-        <h3>Jardim de chuva</h3>
-        <p>Canteiro rebaixado que recebe a enxurrada da rua e deixa infiltrar.</p>
-        <span class="ref">Até 150 L por m² · Hinman, 2007</span>
+<section id="dados">
+  <div class="largura">
+    <p class="rotulo">Os dados</p>
+    <h2>Lemos 15 relatórios da Defesa Civil, <span class="verde">rua por rua.</span></h2>
+    <div class="dados">
+      <div class="fatos">
+        <div class="fato"><b class="n">23</b><p>vezes a <strong>Av. Dom Aguirre</strong> aparece, em 8 relatórios diferentes. É a rua mais citada da cidade.</p></div>
+        <div class="fato"><b class="n">10<small>/15</small></b><p>relatórios citam a <strong>Av. XV de Agosto</strong>. Quase toda chuva forte, ela está lá.</p></div>
+        <div class="fato"><b class="n">124</b><p><strong>alagamentos</strong>: chuva que acumula na rua porque não tem para onde ir.</p></div>
+        <div class="fato"><b class="n">129</b><p><strong>inundações</strong>: rio ou córrego que transborda. Os dois problemas pedem soluções diferentes.</p></div>
       </div>
-    </article>
-    <article class="foto">
-      <img src="img/piso-permeavel.jpg" alt="Piso de concreto vazado com grama crescendo nos furos" width="720" height="480" loading="lazy">
-      <div class="foto-txt">
-        <h3>Piso permeável</h3>
-        <p>Pavimento que deixa a água passar para uma camada de brita.</p>
-        <span class="ref">Até 50 mm de chuva · PMSP, 2013</span>
+      <div class="grafico">
+        <h3>Ruas com mais alagamentos e inundações</h3>
+        <p class="sub2">Quantas vezes cada rua foi registrada pela Defesa Civil em 2022 e 2023, e em quantos dos 15 relatórios ela aparece.</p>
+        <ul class="barras" id="barras"></ul>
+        <p class="fonte">Fonte: relatórios COMPDEC da Defesa Civil de Sorocaba, anexos ao TCC de M. C. Vargem (Unesp, 2024). Contamos por rua; nenhum endereço é publicado.</p>
       </div>
-    </article>
-    <article class="foto">
-      <img src="img/telhado-verde.jpg" alt="Vista aérea de um telhado coberto de vegetação no meio de prédios" width="720" height="480" loading="lazy">
-      <div class="foto-txt">
-        <h3>Telhado verde</h3>
-        <p>Cobertura com vegetação que retém parte da chuva e solta devagar.</p>
-        <span class="ref">Retém 47–62% · Vacari et al., 2019</span>
+    </div>
+
+    <div class="caso">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20L12 3Zm0 6v5m0 3v.5"/></svg>
+      <div>
+        <p class="data">20 de janeiro de 2024</p>
+        <blockquote>Um carro ficou submerso na Av. Juvenal de Campos, na Vila Conceição. A mesma avenida já aparecia em <em>5 relatórios</em> de 2022 e 2023.</blockquote>
+        <p class="fonte">Fontes: Metrópoles (jan/2024); relatórios COMPDEC 2022–2023.</p>
       </div>
-    </article>
-    <article class="foto">
-      <img src="img/parque-alagavel.jpg" alt="Parque com área gramada rebaixada cheia de água depois da chuva, cercada de árvores" width="720" height="480" loading="lazy">
-      <div class="foto-txt">
-        <h3>Parque alagável</h3>
-        <p>Área verde feita para encher na chuva forte e esvaziar depois.</p>
-        <span class="ref">Volume calculado pelo relevo</span>
+    </div>
+  </div>
+</section>
+
+<section id="piloto">
+  <div class="largura">
+    <div class="piloto">
+      <div>
+        <p class="rotulo">O piloto</p>
+        <h2>Começamos pelo <span class="verde">Norte.</span></h2>
+        <div class="texto" style="margin-top:20px">
+          <p>No entorno do Parque das Águas, perto do Rio Sorocaba, os registros se concentram num raio de 800 metros. É uma área pequena o bastante para olhar terreno por terreno, e com espaço verde ao redor para testar ideias. O Centro vem em seguida.</p>
+        </div>
+        <div class="mini">
+          <div><svg class="ico" viewBox="0 0 24 24" style="color:#3D6B95" aria-hidden="true"><path d="M3 9c3-3 6-3 9 0s6 3 9 0M3 15c3-3 6-3 9 0s6 3 9 0"/></svg><p style="margin:0"><b class="n">41</b><span>registros nas ruas do raio</span></p></div>
+          <div><svg class="ico" viewBox="0 0 24 24" style="color:#5B6670" aria-hidden="true"><path d="M8 3 4 21M16 3l4 18M12 4v3m0 4v3m0 4v3"/></svg><p style="margin:0"><b class="n">15</b><span>ruas com registro</span></p></div>
+          <div><svg class="ico" viewBox="0 0 24 24" style="color:var(--verde)" aria-hidden="true"><path d="M12 22v-7M7 15h10l-5-8-5 8Zm1.5-3L12 3l-3.5 9"/></svg><p style="margin:0"><b class="n">45</b><span>áreas verdes mapeadas</span></p></div>
+          <div><svg class="ico" viewBox="0 0 24 24" style="color:var(--azul)" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3"/></svg><p style="margin:0"><b class="n">8</b><span>estacionamentos, cerca de 2,1 ha</span></p></div>
+        </div>
+        <p class="fonte">Fontes: Defesa Civil 2022–2023; OpenStreetMap (consultado em 06/11/2026).</p>
       </div>
-    </article>
-  </div>
-  <p class="aviso">Áreas candidatas a estudo, não obras decididas. A plataforma ajuda a Defesa Civil e a prefeitura a escolher por onde começar.</p>
-</section>
-
-<section class="bloco" id="metodologia">
-  <div class="cab">
-    <h2>Metodologia</h2>
-    <p>O cálculo pesado roda uma vez no pipeline. A plataforma só mostra o resultado, por isso é rápida e não quebra.</p>
-  </div>
-  <div class="fluxograma">
-    <div class="fg-col">
-      <p class="fg-tit">Entradas</p>
-      <div class="fg-no">Registros da Defesa Civil</div>
-      <div class="fg-no">Relevo ANADEM 30 m</div>
-      <div class="fg-no">OpenStreetMap</div>
-      <div class="fg-no">Censo 2022 · IBGE</div>
+      <div id="mapa-piloto" role="img" aria-label="Imagem de satélite da área-piloto no Norte de Sorocaba, com o círculo de 800 metros e as ruas com registro"></div>
     </div>
-    <div class="fg-seta" aria-hidden="true"></div>
-    <div class="fg-col">
-      <p class="fg-tit">Processamento (Python)</p>
-      <div class="fg-no geo">1 · Agrupar registros por rua</div>
-      <div class="fg-no geo">2 · Altura em relação à drenagem (HAND)</div>
-      <div class="fg-no geo">3 · Áreas candidatas</div>
-      <div class="fg-no geo">4 · Nota = risco × registros × área</div>
-    </div>
-    <div class="fg-seta" aria-hidden="true"></div>
-    <div class="fg-col">
-      <p class="fg-tit">Verificação</p>
-      <div class="fg-no">% dos registros nas faixas de risco alto e médio</div>
-      <div class="fg-no">Retenção com fonte da literatura</div>
-    </div>
-    <div class="fg-seta" aria-hidden="true"></div>
-    <div class="fg-col">
-      <p class="fg-tit">Saída</p>
-      <div class="fg-no verde">Mapa com camadas</div>
-      <div class="fg-no verde">Ficha de cada área</div>
-      <div class="fg-no verde">Cenário antes e depois</div>
-    </div>
-  </div>
-  <div class="metodo-notas">
-    <p><b>Sobre o HAND.</b> Mede a altura de cada ponto em relação à rede de drenagem mais próxima. Pontos baixos tendem a acumular água, mas o HAND sozinho não determina onde vai inundar. Por isso ele é combinado com os registros reais e conferido contra eles.</p>
-    <p><b>Validação.</b> Medimos que porcentagem dos registros cai nas faixas de risco alto e médio, no piloto e na cidade inteira. O resultado aparece na plataforma, seja ele bom ou ruim.</p>
-    <p><b>Limites.</b> Os registros estão agrupados por rua, não por endereço. As estimativas de retenção são contas com premissas da literatura, não modelagem hidráulica.</p>
   </div>
 </section>
 
-<section class="bloco" id="fontes">
-  <div class="cab">
-    <h2>Fontes e transparência</h2>
-    <p>Todo número da plataforma aponta para a origem.</p>
+<section id="solucoes">
+  <div class="largura">
+    <p class="rotulo">O que dá pra fazer</p>
+    <h2>Em vez de mandar toda a chuva para o bueiro, <span class="verde">segurar parte dela.</span></h2>
+    <div class="solucoes">
+      <a class="sol" href="mapa.html">
+        <img src="img/jardim-de-chuva.jpg" alt="Jardim de chuva com plantas e água acumulada ao lado de uma calçada" width="720" height="480" loading="lazy">
+        <div><h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>Jardim de chuva</h3><p>Canteiro mais baixo que a rua, que pode receber parte do escoamento e deixar infiltrar.</p><span class="ev">Até 150 litros por m²</span></div>
+      </a>
+      <a class="sol" href="mapa.html">
+        <img src="img/piso-permeavel.jpg" alt="Piso de concreto vazado com grama crescendo nos furos" width="720" height="480" loading="lazy">
+        <div><h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>Pavimento permeável</h3><p>Estacionamento que deixa a água passar para uma camada de brita.</p><span class="ev">Até 50 mm de chuva</span></div>
+      </a>
+      <a class="sol" href="mapa.html">
+        <img src="img/telhado-verde.jpg" alt="Vista aérea de um telhado coberto de vegetação no meio de prédios" width="720" height="480" loading="lazy">
+        <div><h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg>Telhado verde</h3><p>Cobertura com vegetação que segura parte da chuva e solta devagar.</p><span class="ev">Retém 47–62% da chuva</span></div>
+      </a>
+      <a class="sol" href="mapa.html">
+        <img src="img/parque-alagavel.jpg" alt="Parque com área gramada rebaixada cheia de água depois da chuva, cercada de árvores" width="720" height="480" loading="lazy">
+        <div><h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22v-6M7 16h10l-5-8-5 8ZM3 20c2-1.5 4-1.5 6 0M15 20c2-1.5 4-1.5 6 0"/></svg>Parque alagável</h3><p>Área verde feita para encher na chuva forte e esvaziar depois.</p><span class="ev h">Hipótese: precisa de estudo</span></div>
+      </a>
+    </div>
+    <p class="nota">Nenhuma dessas é uma obra decidida. O CityShield aponta onde vale investigar cada uma, e mostra a conta com as premissas à vista.</p>
   </div>
-  <div class="fontes-grid">
-    <div class="fonte-card"><b>Defesa Civil de Sorocaba</b><p>15 relatórios COMPDEC de 2022–2023, publicados como anexo do TCC de M. C. Vargem (Unesp, 2024). Usados para contar registros por rua.</p></div>
-    <div class="fonte-card"><b>ANA · ANADEM</b><p>Modelo de relevo de 30 m que mede o chão, sem prédios e árvores. Base do cálculo do HAND.</p></div>
-    <div class="fonte-card"><b>OpenStreetMap</b><p>Ruas, rios, praças, estacionamentos e edificações. Base das áreas candidatas e do mapa.</p></div>
-    <div class="fonte-card"><b>IBGE · Censo 2022</b><p>Moradores por setor censitário, para estimar quantas pessoas vivem perto de cada área.</p></div>
-    <div class="fonte-card"><b>Serviço Geológico do Brasil</b><p>Carta de suscetibilidade a inundações de Sorocaba (2014), usada para comparação.</p></div>
-    <div class="fonte-card"><b>Literatura técnica</b><p>PMSP ETS-03/2013 (piso permeável), Hinman, WSU 2007 (jardim de chuva), Vacari et al. 2019, UFMT (telhado verde).</p></div>
-  </div>
-  <p class="creditos">Fotos: Wikimedia Commons. Jardim de chuva: U.S. EPA (domínio público). Piso permeável: Roman Eisele (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>). Telhado verde: TonyTheTiger (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>). Parque alagável: Leonhard Lenz (CC0). Recortadas e reduzidas.</p>
 </section>
 
-<section class="chamada">
-  <h2>Veja os dados no mapa</h2>
-  <p>Filtre por tipo de ocorrência, busque uma rua e compare soluções com premissas visíveis.</p>
-  <a class="btn-plataforma grande" href="mapa.html">Abrir plataforma →</a>
+<section id="metodo">
+  <div class="largura">
+    <p class="rotulo">Metodologia</p>
+    <h2>O trabalho pesado roda antes. <span class="verde">O mapa mostra o resultado.</span></h2>
+    <div class="metodo">
+      <ol class="cadeia">
+        <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span><div><b>Registros por rua</b><span>Transcrevemos os relatórios da Defesa Civil e contamos as ocorrências de cada rua.</span></div></li>
+        <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 6-9 4 5 3-4 5 8H3Z"/></svg></span><div><b>Relevo</b><span>Com o modelo ANADEM (30 m), calculamos a altura de cada ponto em relação à drenagem mais próxima (HAND).</span></div></li>
+        <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><div><b>Áreas candidatas</b><span>Praças, estacionamentos, terrenos e telhados do OpenStreetMap perto dos pontos críticos.</span></div></li>
+        <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-4m5 4V8m5 8v-6"/></svg></span><div><b>Prioridade e retenção</b><span>Nota = risco × registros × área. Retenção estimada com valores publicados, cada um com a fonte.</span></div></li>
+      </ol>
+      <div class="limites">
+        <h3>O que o CityShield não faz</h3>
+        <p><b>Não prevê enchente.</b> O HAND é um indicador do terreno. Por isso é conferido contra os registros reais, e mostramos quanto acertou, seja bom ou ruim.</p>
+        <p><b>Não é modelagem hidráulica.</b> As estimativas de retenção são contas com premissas da literatura, para comparar opções, não para projetar obra.</p>
+        <p><b>Não publica endereços.</b> Os registros aparecem agrupados por rua, em posição aproximada.</p>
+      </div>
+    </div>
+    <div class="fontes" id="fontes">
+      <h3>Fontes</h3>
+      <ul>
+        <li><b>Defesa Civil de Sorocaba</b>: relatórios COMPDEC 2022–2023, via TCC de M. C. Vargem (Unesp, 2024)</li>
+        <li><b>ANA</b>: modelo de relevo ANADEM, 30 m</li>
+        <li><b>OpenStreetMap</b>: limite do município, ruas, rios, praças, estacionamentos e prédios</li>
+        <li><b>IBGE</b>: Censo 2022, moradores por setor</li>
+        <li><b>Serviço Geológico do Brasil</b>: carta de suscetibilidade a inundações (2014), para comparação</li>
+        <li><b>Retenção</b>: PMSP ETS-03/2013; Hinman, WSU (2007); Vacari et al., UFMT (2019)</li>
+        <li><b>Imagem de satélite</b>: Sentinel-2 cloudless 2016, EOX IT Services (CC BY 4.0)</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-<footer class="rodape">
-  <div>
-    <p class="marca-rodape">CITYSHIELD</p>
-    <p>Feito por Lucas, Enzo, Rafael e Nicollas, de Sorocaba, para o <a href="https://hackbrasil.com">Hack Brasil 2026</a>.</p>
+<section class="fim">
+  <div class="largura">
+    <h2>Veja onde a sua rua aparece.</h2>
+    <div class="acoes"><a class="bt" href="mapa.html">Abrir o mapa →</a><a class="bt contorno" href="https://github.com/habeas-code/cityshield">Ver o código</a></div>
+    <p class="time">Feito em Sorocaba pelo time Habeas Code, para o Hack Brasil 2026: <b>Lucas, Enzo, Rafael e Nicollas</b>.</p>
   </div>
-  <div class="rodape-links">
-    <a href="mapa.html">Plataforma</a>
-    <a href="https://github.com/habeas-code/cityshield">GitHub</a>
-    <span>Código sob licença MIT</span>
-    <span>Mapa: © OpenStreetMap, OpenFreeMap, OpenMapTiles</span>
+</section>
+
+<footer>
+  <div class="largura">
+    <p>Código aberto sob licença MIT · <a href="https://github.com/habeas-code/cityshield">github.com/habeas-code/cityshield</a></p>
+    <p>Mapa: © OpenStreetMap; Sentinel-2 cloudless 2016 by EOX IT Services GmbH (contém dados Copernicus Sentinel modificados, 2016). Fotos (Wikimedia Commons): U.S. EPA (domínio público); Roman Eisele (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>); TonyTheTiger (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>); Leonhard Lenz (CC0). Recortadas e reduzidas.</p>
   </div>
 </footer>
 
@@ -245,22 +193,69 @@
 <script src="comum.js"></script>
 <script>
 (function () {
-  var top = [
-    ['Av. Dom Aguirre', 23, 8], ['R. Projetada II (Guadalupe)', 14, 1], ['R. Jorge Bacelli', 12, 5],
+  // Gráfico das ruas, colorido pela mesma escala do mapa
+  function corRec(n) { return n >= 5 ? '#E0352B' : n >= 2 ? '#F28C28' : '#F2C230'; }
+  var top = [['Av. Dom Aguirre', 23, 8], ['R. Projetada II (Guadalupe)', 14, 1], ['R. Jorge Bacelli', 12, 5],
     ['Av. XV de Agosto', 11, 10], ['R. Eugênia de Oliveira Cirne', 9, 2], ['R. João Gabriel Mendes', 9, 8],
-    ['R. Oscar Harder', 8, 2], ['Av. Afonso Vergueiro', 8, 3]
-  ];
+    ['R. Oscar Harder', 8, 2], ['Av. Afonso Vergueiro', 8, 3]];
   var ul = document.getElementById('barras');
   top.forEach(function (r) {
     var li = document.createElement('li');
     li.title = r[0] + ': ' + r[1] + ' registros, em ' + r[2] + ' de 15 relatórios';
-    li.innerHTML = '<span class="b-nome"></span><span class="b-trilho"><span class="b-barra"></span></span><span class="b-val"></span>';
-    li.querySelector('.b-nome').textContent = r[0];
-    li.querySelector('.b-barra').style.width = (r[1] / 23 * 100) + '%';
-    li.querySelector('.b-val').textContent = r[1];
+    li.innerHTML = '<span class="nm"></span><span class="vl n"></span><span class="tr"><i></i></span><span class="det"></span>';
+    li.querySelector('.nm').textContent = r[0];
+    li.querySelector('.vl').textContent = r[1] + ' registros';
+    li.querySelector('.det').textContent = 'aparece em ' + r[2] + (r[2] === 1 ? ' relatório' : ' de 15 relatórios');
+    li.querySelector('i').style.width = (r[1] / 23 * 100) + '%';
+    li.querySelector('i').style.background = '#3D6B95';
     ul.appendChild(li);
   });
-  CityShield.criarMapa('mapa', { center: [-47.455, -23.476], zoom: 11.6, interativo: false });
+
+  // Satélite Sentinel-2 cloudless (EOX, CC BY 4.0)
+  var SATELITE = {
+    version: 8,
+    sources: { sat: { type: 'raster', tileSize: 256, maxzoom: 14,
+      tiles: ['https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg'],
+      attribution: '<a href="https://s2maps.eu">Sentinel-2 cloudless 2016</a> by EOX IT Services GmbH (Copernicus Sentinel data 2016) · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' } },
+    layers: [{ id: 'sat', type: 'raster', source: 'sat', paint: { 'raster-saturation': -0.1, 'raster-contrast': 0.08 } }]
+  };
+
+  function estilizar(map, comLimite) {
+    map.setPaintProperty('ruas', 'circle-color', ['step', ['get', 'registros'], '#F2C230', 2, '#F28C28', 5, '#E0352B']);
+    map.setPaintProperty('ruas', 'circle-radius', ['interpolate', ['linear'], ['sqrt', ['get', 'registros']], 1, 4.5, 4.8, 11]);
+    map.setPaintProperty('ruas', 'circle-opacity', 0.95);
+    map.setPaintProperty('ruas', 'circle-stroke-color', '#FFFFFF');
+    map.setPaintProperty('ruas', 'circle-stroke-width', 1.2);
+    map.setLayoutProperty('ruas-halo', 'visibility', 'none');
+    map.setPaintProperty('piloto-fundo', 'fill-color', '#7BD6A0');
+    map.setPaintProperty('piloto-fundo', 'fill-opacity', 0.14);
+    map.setPaintProperty('piloto-borda', 'line-color', '#7BD6A0');
+    map.setPaintProperty('piloto-borda', 'line-width', 2.5);
+    if (comLimite) {
+      map.addSource('limite', { type: 'geojson', data: 'dados/limite_sorocaba.geojson' });
+      map.addLayer({ id: 'limite-sombra', type: 'line', source: 'limite', paint: { 'line-color': '#000', 'line-width': 5, 'line-opacity': 0.25, 'line-blur': 2 } }, 'piloto-fundo');
+      map.addLayer({ id: 'limite', type: 'line', source: 'limite', paint: { 'line-color': '#FFFFFF', 'line-width': 2 } }, 'piloto-fundo');
+    }
+  }
+
+  var hero = CityShield.criarMapa('mapa-hero', {
+    estilo: SATELITE, center: [-47.46, -23.49], zoom: 10.6, interativo: false,
+    aoCarregar: function (m) {
+      estilizar(m, true);
+      if (m._rotuloPiloto) m._rotuloPiloto.getElement().style.display = 'none';
+      var nome = document.createElement('div');
+      nome.textContent = 'Sorocaba';
+      nome.style.cssText = 'font:800 26px/1 Figtree,Segoe UI,sans-serif;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.7);pointer-events:none';
+      new maplibregl.Marker({ element: nome }).setLngLat([-47.455, -23.515]).addTo(m);
+      m.fitBounds([[-47.571, -23.590], [-47.302, -23.350]], { padding: { top: 30, bottom: 30, left: Math.min(160, m.getContainer().clientWidth * 0.2), right: 30 }, duration: 0 });
+    }
+  });
+  if (hero) { hero.scrollZoom.disable(); hero.dragPan.disable(); hero.doubleClickZoom.disable(); hero.touchZoomRotate.disable(); }
+
+  CityShield.criarMapa('mapa-piloto', {
+    estilo: SATELITE, center: [-47.4472, -23.4702], zoom: 14, interativo: false,
+    aoCarregar: function (m) { estilizar(m, false); }
+  });
 })();
 </script>
 </body>
