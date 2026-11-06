@@ -92,6 +92,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .sol p{margin:0;color:var(--ink-2);font-size:12.5px}
 .sol button{justify-self:start;color:var(--accent);font-size:12.5px;margin-top:2px}
 .sol button:hover{text-decoration:underline}
+.aqui{margin:2px 0 0!important;font-size:12.5px;color:var(--ink)!important;background:var(--panel-2);border-left:2px solid var(--green);padding:6px 9px;border-radius:0 3px 3px 0}
+.aqui b{font-weight:600}
+.fonte-l{margin:0;font-size:11.5px;color:var(--muted)}
+.sim-kpis{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:4px;margin-bottom:14px}
+.sim-kpis div{padding:8px 10px;border-right:1px solid var(--line)}
+.sim-kpis div:last-child{border-right:0}
+.sim-kpis span{display:block;font-size:11.5px;color:var(--muted)}
+.sim-kpis b{font-size:15px;font-weight:600}
+.empilhada{display:flex;height:22px;border-radius:3px;overflow:hidden;margin:10px 0 6px;background:#3A3D42}
+.empilhada i{display:block;height:100%}
+.emp-leg{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--ink-2)}
+.emp-leg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.equiv{margin:12px 0 0;font-size:12.5px;color:var(--ink-2)}
+.equiv b{color:var(--ink)}
 .aviso{margin:12px 16px;padding:9px 11px;border-left:3px solid var(--warn);background:rgba(217,164,65,.08);color:var(--ink-2);font-size:12px}
 
 /* Simulação */
@@ -239,7 +253,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <div class="camada off">
           <div class="camada-cab">
             <span class="olho" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg></span>
-            <span class="camada-nome"><b>Relevo (HAND)</b><span>Aguardando processamento</span></span>
+            <span class="camada-nome"><b>Relevo (HAND)</b><span>Em desenvolvimento</span></span>
           </div>
         </div>
       </div>
@@ -263,26 +277,34 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <div class="bloco"><p>Soluções verdes a investigar no Núcleo Norte e o motivo de cada uma.</p></div>
       <div class="sol">
         <div class="sol-t"><b>Jardim de chuva</b><span class="status inv">Investigar</span></div>
-        <p>Recebe a enxurrada das ruas com registro e infiltra parte dela no solo.</p>
+        <p>Pode receber parte do escoamento das ruas próximas e infiltrá-lo no solo.</p>
+        <p class="aqui"><b>Por que aqui:</b> as 15 ruas com registro no raio do piloto têm alagamentos, ou seja, água da chuva acumulada na rua.</p>
+        <p class="fonte-l">Fonte: Defesa Civil de Sorocaba, 2022–2023</p>
         <button data-simular="jardim">Simular</button>
       </div>
       <div class="sol">
         <div class="sol-t"><b>Pavimento permeável</b><span class="status inv">Investigar</span></div>
         <p>Estacionamentos e calçadas que deixam a água passar para uma camada de brita.</p>
+        <p class="aqui"><b>Por que aqui:</b> 8 estacionamentos mapeados no raio de 800 m, somando cerca de 2,1 ha de área impermeável.</p>
+        <p class="fonte-l">Fonte: OpenStreetMap, consultado em 06/11/2026</p>
         <button data-simular="piso">Simular</button>
       </div>
       <div class="sol">
         <div class="sol-t"><b>Parque alagável</b><span class="status hip">Hipótese</span></div>
         <p>Área verde para guardar água temporariamente. Um parque alagar não comprova que ele sirva para armazenamento controlado; precisa de avaliação de viabilidade.</p>
+        <p class="aqui"><b>Por que aqui:</b> 45 áreas verdes mapeadas no raio, entre elas o Parque das Águas do Abaeté e o Parque Linear do Rio Sorocaba.</p>
+        <p class="fonte-l">Fonte: OpenStreetMap, consultado em 06/11/2026</p>
         <button data-simular="parque">Ver premissas</button>
       </div>
       <div class="sol">
         <div class="sol-t"><b>Telhado verde</b><span class="status inv">Investigar</span></div>
         <p>Coberturas de prédios grandes que retêm parte da chuva antes de ela chegar à rua.</p>
+        <p class="aqui"><b>Por que aqui:</b> 8 prédios com mais de 1.000 m² de cobertura mapeados no raio, cerca de 3,6 ha. O mapeamento de prédios na região é parcial.</p>
+        <p class="fonte-l">Fonte: OpenStreetMap, consultado em 06/11/2026</p>
         <button data-simular="telhado">Simular</button>
       </div>
       <div class="camada off" style="margin:12px 16px 0">
-        <div class="camada-cab"><span class="camada-nome"><b>Áreas candidatas</b><span>Aguardando processamento (OpenStreetMap)</span></span></div>
+        <div class="camada-cab"><span class="camada-nome"><b>Áreas candidatas</b><span>Em desenvolvimento · a partir do OpenStreetMap</span></span></div>
       </div>
       <p class="aviso">As oportunidades são preliminares e precisam de avaliação técnica.</p>
     </div>
@@ -308,7 +330,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
       <div class="bloco">
         <h3>Resultado</h3>
-        <div id="s-res"></div>
+        <div id="s-res"><p class="sub" style="margin:0">Exemplo: jardim de chuva de 100 m², chuva de 50 mm: cerca de 15 m³ retidos, 30% da água que chega.</p></div>
       </div>
       <div class="bloco">
         <h3>Premissas</h3>
@@ -327,7 +349,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <ul id="busca-res" hidden></ul>
       </div>
     </div>
-    <div class="visivel" id="visivel">Carregando dados…</div>
+    <div class="visivel" id="visivel">79 ruas com registros no mapa</div>
   </main>
 
   <aside class="lado dir" aria-label="Indicadores">
@@ -340,8 +362,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <ul id="d-porque">
         <li>Registros históricos próximos</li>
         <li>Proximidade do Rio Sorocaba</li>
-        <li>Áreas verdes e espaços urbanos disponíveis</li>
+        <li>Áreas verdes e espaços urbanos mapeados</li>
       </ul>
+      <p class="fonte-l" id="d-fonte" style="margin:-4px 0 12px">Fontes: Defesa Civil 2022–2023; OpenStreetMap</p>
       <div id="d-sol">
         <p class="rot">Soluções a investigar</p>
         <div class="tags"><span>Jardim de chuva</span><span>Pavimento permeável</span><span class="h">Parque alagável</span></div>
@@ -352,9 +375,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
     <section class="widget">
       <div class="w-cab"><h3>Na área visível</h3><span class="sub">atualiza ao mover o mapa</span></div>
       <div class="kpi">
-        <div><b class="n" id="k-reg">–</b><span>registros</span></div>
-        <div><b class="n" id="k-ruas">–</b><span>ruas</span></div>
+        <div><b class="n" id="k-reg">240</b><span>registros</span></div>
+        <div><b class="n" id="k-ruas">79</b><span>ruas</span></div>
       </div>
+      <p class="fonte-l" style="margin-top:8px">Fonte: relatórios COMPDEC, Defesa Civil de Sorocaba, 2022–2023</p>
     </section>
 
     <section class="widget">
@@ -599,14 +623,27 @@ label.campo .l b{color:var(--ink);font-weight:600}
     });
     var box = $('s-res'); box.innerHTML = '';
     if (!s.calc) { box.innerHTML = '<p class="sub" style="margin:0">Sem estimativa por enquanto: o volume de um parque alagável só pode ser calculado com o relevo real do terreno.</p>'; return; }
-    var r = s.calc(mm, A), pct = r.cai ? Math.round(r.ret / r.cai * 100) : 0;
-    box.innerHTML = '<div class="formula"><b class="n"></b><span>m³ retidos</span></div><p class="pct"><b class="n"></b> da água que chega · <span class="n"></span> m³ de chuva</p><div class="cats"></div>';
+    var r = s.calc(mm, A), pct = r.cai ? Math.round(r.ret / r.cai * 100) : 0, resto = Math.max(0, r.cai - r.ret);
+    box.innerHTML =
+      '<div class="sim-kpis"><div><span>Área</span><b class="n"></b></div><div><span>Chuva</span><b class="n"></b></div><div><span>Água que chega</span><b class="n"></b></div></div>' +
+      '<div class="formula"><b class="n"></b><span>m³ podem ser retidos</span></div>' +
+      '<div class="empilhada" role="img"><i style="background:#3FB27F"></i><i style="background:#6B7078"></i></div>' +
+      '<div class="emp-leg"><span style="--c:#3FB27F">Retido <b class="n"></b></span><span style="--c:#6B7078">Segue escoando <b class="n"></b></span></div>' +
+      '<p class="equiv">≈ <b class="n"></b> caixas d’água de 1.000 litros</p>' +
+      '<p class="fonte-l" style="margin-top:6px"></p>';
+    var k = box.querySelectorAll('.sim-kpis b');
+    k[0].textContent = A.toLocaleString('pt-BR') + ' m²';
+    k[1].textContent = mm + ' mm';
+    k[2].textContent = fmt(r.cai) + ' m³';
     box.querySelector('.formula b').textContent = fmt(r.ret);
-    box.querySelector('.pct b').textContent = pct + '%';
-    box.querySelector('.pct span').textContent = fmt(r.cai);
-    var c = box.querySelector('.cats');
-    c.appendChild(barra('Chuva que chega (m³)', fmt(r.cai), 1, '#6B7078', function () {}, false));
-    c.appendChild(barra('Pode ser retido (m³)', fmt(r.ret), r.cai ? r.ret / r.cai : 0, '#3FB27F', function () {}, false));
+    var barras = box.querySelectorAll('.empilhada i');
+    barras[0].style.width = pct + '%'; barras[1].style.width = (100 - pct) + '%';
+    box.querySelector('.empilhada').setAttribute('aria-label', pct + '% retido, ' + (100 - pct) + '% segue escoando');
+    var lg = box.querySelectorAll('.emp-leg b');
+    lg[0].textContent = pct + '% · ' + fmt(r.ret) + ' m³'; lg[1].textContent = (100 - pct) + '% · ' + fmt(resto) + ' m³';
+    box.querySelector('.equiv b').textContent = Math.round(r.ret).toLocaleString('pt-BR');
+    box.querySelector('.fonte-l').textContent = (solAtual === 'jardim' ? 'Água que chega considera 10 × a área do jardim escoando para ele. ' : '') +
+      'Fonte: ' + s.prem[s.prem.length - 1][1];
   }
   document.querySelectorAll('#s-opcoes button').forEach(function (b) { b.addEventListener('click', function () { escolherSol(b.dataset.sol); }); });
   $('s-chuva').addEventListener('input', simular);
