@@ -5,16 +5,18 @@
     python -m pipeline hand       drenagem e HAND (baixa o relevo se faltar)
     python -m pipeline hand --refazer
     python -m pipeline validacao  testa o HAND contra os registros da Defesa Civil
+    python -m pipeline areas      áreas candidatas a soluções verdes no piloto
 """
 
 import argparse
 
-from pipeline import hand, relevo, validacao
+from pipeline import areas, hand, relevo, validacao
 
 PASSOS = {
     "relevo": relevo.recortar,
     "hand": hand.calcular,
     "validacao": validacao.validar,
+    "areas": areas.extrair,
 }
 
 
