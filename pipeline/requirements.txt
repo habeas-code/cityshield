@@ -1,3 +1,6 @@
 # bibliotecas entram conforme os passos forem feitos (pysheds, geopandas, osmnx...)
 rasterio==1.5.2
-numpy==2.5.4
+# numpy < 2.4: o pysheds 0.5 ainda usa np.in1d, removido no numpy 2.4
+numpy==2.3.5
+pysheds==0.5
+shapely==2.2.0

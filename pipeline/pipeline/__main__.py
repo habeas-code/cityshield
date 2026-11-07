@@ -2,15 +2,17 @@
 
     python -m pipeline            roda todos os passos
     python -m pipeline relevo     roda só o passo do relevo
-    python -m pipeline relevo --refazer
+    python -m pipeline hand       drenagem e HAND (baixa o relevo se faltar)
+    python -m pipeline hand --refazer
 """
 
 import argparse
 
-from pipeline import relevo
+from pipeline import hand, relevo
 
 PASSOS = {
     "relevo": relevo.recortar,
+    "hand": hand.calcular,
 }
 
 
