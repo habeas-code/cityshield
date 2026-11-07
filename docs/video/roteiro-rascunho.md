@@ -12,22 +12,23 @@ Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica com o 
 
 > "Oi, somos o **Habeas Code**, de Sorocaba." *(cada um diz o próprio nome)* "Estamos na trilha **Meio Ambiente** com o **CityShield**: uma ferramenta que mostra onde a cidade alaga e onde soluções verdes podem segurar essa água."
 
-### 2. O problema (Nicollas, 40 s)
+### 2. O problema (Nicollas, 45 s)
 
 > "Em **20 de janeiro de 2024**, a chuva arrastou um carro até a Av. Juvenal de Campos, e ele ficou submerso. Não foi um caso isolado. A gente transcreveu os relatórios da Defesa Civil de 2022 e 2023: são **mais de 250 registros de alagamento e inundação em 89 ruas**.
-> A **Av. Dom Aguirre** aparece **23 vezes**. A **XV de Agosto** está em **10 dos 15 relatórios**. Os mesmos lugares alagam de novo e de novo."
+> A **Av. Dom Aguirre** aparece **23 vezes**. A **XV de Agosto** está em **10 dos 15 relatórios**. Os mesmos lugares alagam de novo e de novo.
+> E não ficou no passado: **em outubro deste ano**, a XV de Agosto e a Dom Aguirre foram **interditadas de novo** pela água."
 
 ### 3. O que falta hoje (Enzo, 25 s)
 
 > "Sorocaba já tem mapa de suscetibilidade, do Serviço Geológico, de 2014. Ele mostra **onde** é perigoso, mas não diz **o que fazer** em cada terreno. E a cidade já discute a ideia de cidade-esponja. Falta responder: **qual solução, e em qual lugar primeiro?**"
 
-### 4. O que já funciona (Lucas, compartilhando a tela, 50 s)
+### 4. O que já funciona (Lucas, compartilhando a tela, 45 s)
 
-*(mostrar o GitHub: README e quadro; depois `docs/validacao.md`)*
+*(mostrar a plataforma: manchas vermelhas seguindo os rios, pontos caindo em cima, quadro "O mapa acerta?"; se der tempo, o quadro de tarefas no GitHub)*
 
 > "Nesta primeira semana, já calculamos o risco da cidade inteira. Pegamos o relevo real, com 30 metros de resolução, e simulamos para onde a água da chuva escorre. Para cada ponto, medimos quantos metros ele está acima do córrego mais próximo. Esse método se chama **HAND**.
 > E testamos contra a realidade: **74% dos alagamentos registrados pela Defesa Civil caem nas áreas que o nosso mapa marca como risco alto**, que reúnem **só 12% das ruas** da cidade. É **seis vezes mais que o acaso**.
-> O Parque das Águas e a Juvenal de Campos, onde o carro foi arrastado, estão justamente no ponto mais baixo do mapa."
+> O Parque das Águas, a Juvenal de Campos e as duas avenidas interditadas em outubro estão justamente no vermelho do mapa."
 
 ### 5. O plano (Enzo, 25 s)
 
@@ -43,6 +44,7 @@ Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica com o 
 
 - O carro: **não falar idade nem número de vítimas** (os jornais divergem).
 - Registros são **por rua**, não endereço exato.
+- Interdições de 2026 (Band): XV de Agosto em **22/09** e **16/10**; Dom Aguirre em **16/10** (52 mm em 24 h). Falar "interditadas pela água", sem exagerar o tamanho.
 - O projeto de lei foi **apresentado**, não aprovado.
 - "74% no risco alto" é sobre **2022–2023** e sobre **onde houve registro**. Se alguém perguntar, a explicação está em `docs/validacao.md`.
 - Falar "vamos" para o que ainda não existe: recomendação de soluções e estimativa de volume.
@@ -67,9 +69,9 @@ Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica com o 
 - [ ] Todos com câmera ligada, nome aparecendo, visão em **galeria**
 - [ ] Lugar com luz de frente, fone de ouvido, celular no silencioso
 - [ ] Abas abertas para a tela (bloco 4):
-  - https://github.com/habeas-code/cityshield
-  - https://github.com/orgs/habeas-code/projects/1
-  - https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md
+  - https://habeas-code.github.io/cityshield/mapa.html (plataforma, principal)
+  - https://github.com/orgs/habeas-code/projects/1 (quadro de tarefas)
+  - https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md (reserva)
 - [ ] Gravar **duas tomadas** e escolher a melhor
 - [ ] Conferir: **até 3:00** e os 4 aparecem
 
