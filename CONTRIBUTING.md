@@ -4,14 +4,16 @@ Guia do **Habeas Code** para manter o CityShield organizado. Leia uma vez antes 
 
 ## Frentes
 
-Cada pessoa é dona de uma frente: revisa o que entra nela e decide quando há dúvida.
+Cada frente tem responsável: ele cuida das tarefas dela, revisa o que entra e decide quando há dúvida.
 
 | Frente | Pastas | Responsável |
 |---|---|---|
-| Mapas e dados | `pipeline/`, `db/` | _a definir_ |
-| Backend | `api/` | _a definir_ |
-| Site | `web/`, `docs/` (página pública) | _a definir_ |
-| Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, conteúdo jurídico | _a definir_ |
+| Mapas e dados | `pipeline/` | Lucas ([@LucasAmadoS](https://github.com/LucasAmadoS)) |
+| Site | `web/`, `docs/` (página pública) | Lucas ([@LucasAmadoS](https://github.com/LucasAmadoS)) |
+| Backend | `api/`, `db/` | Enzo ([@enzocalhareslava-boop](https://github.com/enzocalhareslava-boop)) e Nicollas |
+| Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, conteúdo jurídico | Rafael ([@rafaelsiverisaugusto](https://github.com/rafaelsiverisaugusto)), advogado do time |
+
+**Revisão cruzada:** o PR de uma frente é aprovado por alguém de **outra** frente. Assim todo mundo entende o projeto inteiro, e não só a sua parte.
 
 ## Quadro de tarefas
 
