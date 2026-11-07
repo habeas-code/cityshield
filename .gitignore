@@ -24,3 +24,6 @@ dist/
 Thumbs.db
 .vscode/
 .idea/
+
+# Saídas locais do pipeline (relevo recortado, intermediários)
+pipeline/dados/
