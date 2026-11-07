@@ -4,7 +4,12 @@
 
 **Onde Sorocaba alaga e onde soluções verdes podem segurar essa água.**
 
+[![CI](https://github.com/habeas-code/cityshield/actions/workflows/ci.yml/badge.svg)](https://github.com/habeas-code/cityshield/actions/workflows/ci.yml)
+[![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg)](LICENSE)
+
 Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com), trilha **Meio ambiente**.
+
+📋 [Quadro de tarefas](https://github.com/orgs/habeas-code/projects/1) · 📅 [Cronograma](docs/CRONOGRAMA.md) · 🧭 [Decisões](docs/decisoes.md) · 🤝 [Como contribuir](CONTRIBUTING.md)
 
 🌐 Página do projeto: https://habeas-code.github.io/cityshield/  
 🗺️ Plataforma (protótipo): https://habeas-code.github.io/cityshield/mapa.html
