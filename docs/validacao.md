@@ -39,6 +39,19 @@ Dentro do piloto, a maior parte das ruas já é de risco alto: a área inteira e
 
 **Conferência por outro caminho:** usando só o ponto central de cada rua (a prévia da tarefa #8), 74% dos registros também caem no risco alto.
 
+### Conferência com eventos de 2026
+
+O mapa foi testado com registros de 2022–2023. Em 2026, a imprensa noticiou interdições por alagamento exatamente nas duas avenidas com mais registros:
+
+| Data | O que aconteceu | Chuva | Parte da rua no risco alto do mapa |
+|---|---|---|---|
+| 22/09/2026 | Av. XV de Agosto interditada por alagamento "após o nível do Rio Sorocaba subir com as chuvas" | 23 mm em 24 h | 90% |
+| 16/10/2026 | Av. Quinze de Agosto (entre a R. Fernandópolis e a Radial Norte) e Av. Dom Aguirre (entre a Av. Dr. Artur Bernardes e a Radial Norte) interditadas | 52 mm em 24 h; 216 mm em outubro | XV de Agosto 90%, Dom Aguirre 99,8% |
+
+Não é um teste estatístico (são dois eventos noticiados, não um registro completo), mas mostra que os pontos que o mapa marca continuam alagando em anos que ele não viu.
+
+Fontes: [Band, 22/09/2026](https://www.band.com.br/nacional/sp/xv-de-agosto-sorocaba) · [Band, 16/10/2026](https://www.band.com.br/nacional/sp/chuva-interdicoes-sorocaba)
+
 ## Limitações
 
 - **Ruas, não pontos.** Uma avenida longa como a Dom Aguirre (12,9 km no mapa) recebe os registros distribuídos ao longo dela toda. É uma aproximação.
