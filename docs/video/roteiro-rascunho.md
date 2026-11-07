@@ -2,7 +2,7 @@
 
 Vídeo de **até 3 minutos**, com **os 4 aparecendo**, para o rascunho inicial do Hack Brasil (libera os créditos). Não é o vídeo final: aqui apresentamos o time, o problema, o que já funciona e o plano.
 
-Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica melhor com o advogado do time.
+Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica com o Rafael porque, como advogado, ele responde melhor sobre o projeto de lei e o papel da prefeitura.
 
 ---
 
@@ -12,7 +12,7 @@ Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica melhor
 
 > "Oi, somos o **Habeas Code**, de Sorocaba." *(cada um diz o próprio nome)* "Estamos na trilha **Meio Ambiente** com o **CityShield**: uma ferramenta que mostra onde a cidade alaga e onde soluções verdes podem segurar essa água."
 
-### 2. O problema (Rafael, 40 s)
+### 2. O problema (Nicollas, 40 s)
 
 > "Em **20 de janeiro de 2024**, a chuva arrastou um carro até a Av. Juvenal de Campos, e ele ficou submerso. Não foi um caso isolado. A gente transcreveu os relatórios da Defesa Civil de 2022 e 2023: são **mais de 250 registros de alagamento e inundação em 89 ruas**.
 > A **Av. Dom Aguirre** aparece **23 vezes**. A **XV de Agosto** está em **10 dos 15 relatórios**. Os mesmos lugares alagam de novo e de novo."
@@ -29,11 +29,11 @@ Os nomes em cada bloco são sugestão; troquem à vontade. O bloco 6 fica melhor
 > E testamos contra a realidade: **74% dos alagamentos registrados pela Defesa Civil caem nas áreas que o nosso mapa marca como risco alto**, que reúnem **só 12% das ruas** da cidade. É **seis vezes mais que o acaso**.
 > O Parque das Águas e a Juvenal de Campos, onde o carro foi arrastado, estão justamente no ponto mais baixo do mapa."
 
-### 5. O plano (Enzo ou Nicollas, 25 s)
+### 5. O plano (Enzo, 25 s)
 
 > "Agora vamos cruzar esse risco com os terrenos livres do mapa aberto da cidade: estacionamentos, praças, telhados grandes. Para cada um, o CityShield vai recomendar uma solução verde, como jardim de chuva, piso permeável ou parque inundável, e estimar **quanta água ela segura, sempre com fonte**. Começamos pela Zona Norte, perto do Parque das Águas."
 
-### 6. Para quem e fechamento (Nicollas, de preferência o advogado, 25 s)
+### 6. Para quem e fechamento (Rafael, 25 s)
 
 > "O CityShield é para quem decide onde investir contra enchentes: a **Defesa Civil e a prefeitura**. E beneficia direto os moradores das ruas que alagam todo ano. Já existe na Câmara um projeto de lei de cidade-esponja: a gente quer mostrar **por onde começar**. Obrigado!" *(todos acenam)*
 
