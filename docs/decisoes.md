@@ -116,3 +116,23 @@ Cada decisão nova entra no fim, com número, data e as alternativas que conside
 **Decisão:** a plataforma segue o estilo de CARTO, ArcGIS Living Atlas e Mapbox: mapa em destaque, camadas com legenda, painéis discretos. Fotos só com licença livre (Wikimedia Commons), com créditos em `docs/img/CREDITOS.md`.
 
 **Por quê:** o público é técnico (Defesa Civil, prefeitura) e precisa confiar no que vê. E não podemos usar fotos sem direito de uso.
+
+## D13. Público: quem decide onde investir contra enchentes
+
+**Data:** 07/11/2026
+
+**Decisão:** o CityShield é feito para quem **decide onde investir**. Quem mais se beneficia são os **moradores** das ruas que alagam.
+
+| Grupo | Quem | Para quê |
+|---|---|---|
+| **Usa (principal)** | Defesa Civil de Sorocaba | apontar onde agir antes da próxima chuva, com base nos próprios registros |
+| | Prefeitura: secretarias de Meio Ambiente e de Obras/Planejamento | priorizar onde estudar cada solução verde, com pouco orçamento |
+| | Câmara de Vereadores | mostrar por onde começar se o PL Cidade-Esponja (2024) avançar |
+| **Se beneficia** | Moradores das ruas que alagam (Parque das Águas, Dom Aguirre, XV de Agosto...) e associações de bairro | entender o risco da sua rua e cobrar ação com dado na mão |
+| **Também pode usar** | Universidades, ONGs ambientais, imprensa local | pesquisa, fiscalização, reportagem |
+
+**Em uma frase (pitch):** "O CityShield é para quem decide onde investir contra enchentes em Sorocaba, a Defesa Civil e a prefeitura, e beneficia diretamente os moradores das ruas que alagam todo ano."
+
+**Por quê:** solução verde é obra pública. Quem pode transformar a recomendação em jardim de chuva ou parque inundável é o poder público, então a ferramenta precisa falar a língua de quem decide: risco, prioridade, área e volume, sempre com fonte.
+
+**Consequências:** explica o visual técnico (D12), a falta de login (D9: ferramenta pública, aberta a qualquer um) e a exigência de fonte em todo número (D11).
