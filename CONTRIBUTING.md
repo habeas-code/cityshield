@@ -1,0 +1,112 @@
+# Como o time trabalha
+
+Guia do **Habeas Code** para manter o CityShield organizado. Leia uma vez antes do primeiro commit.
+
+## Frentes
+
+Cada pessoa é dona de uma frente: revisa o que entra nela e decide quando há dúvida.
+
+| Frente | Pastas | Responsável |
+|---|---|---|
+| Mapas e dados | `pipeline/`, `db/` | _a definir_ |
+| Backend | `api/` | _a definir_ |
+| Site | `web/`, `docs/` (página pública) | _a definir_ |
+| Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, conteúdo jurídico | _a definir_ |
+
+## Fluxo de uma tarefa
+
+```
+Issue  →  branch  →  commits  →  Pull Request  →  1 revisão  →  merge na main
+```
+
+1. **Toda tarefa vira uma issue** com o modelo "Tarefa". Coloque o rótulo da frente e se atribua.
+2. **Crie uma branch a partir da `main` atualizada:**
+   ```bash
+   git switch main
+   git pull
+   git switch -c feat/hand-area-piloto
+   ```
+3. **Faça commits pequenos** seguindo o padrão abaixo.
+4. **Abra um Pull Request** usando o modelo e escreva `Fecha #12` (número da issue) na descrição.
+5. **Outra pessoa revisa.** O merge só acontece com 1 aprovação. Use **Squash and merge**.
+6. **Apague a branch** depois do merge.
+
+Ninguém faz push direto na `main`.
+
+## Nome das branches
+
+`tipo/descricao-curta`, em minúsculas e com hífen:
+
+```
+feat/hand-area-piloto
+fix/legenda-mapa-celular
+docs/roteiro-video
+```
+
+## Padrão de commits
+
+Usamos [Conventional Commits](https://www.conventionalcommits.org/pt-br/) com a descrição em português:
+
+```
+tipo(escopo): o que mudou, no presente
+```
+
+| Tipo | Quando usar |
+|---|---|
+| `feat` | funcionalidade nova |
+| `fix` | correção de erro |
+| `docs` | README, guias, textos |
+| `style` | só visual/CSS, sem mudar comportamento |
+| `refactor` | reorganiza código sem mudar o resultado |
+| `test` | testes |
+| `data` | dados, fontes, camadas geradas |
+| `chore` | configuração, dependências, Docker, CI |
+
+**Escopos:** `pipeline`, `api`, `web`, `docs`, `db`, `infra`.
+
+Exemplos:
+
+```
+feat(pipeline): calcula HAND da área piloto Norte
+fix(web): legenda do mapa cortada no celular
+data(pipeline): adiciona estacionamentos do OSM no raio de 800 m
+docs: roteiro do vídeo do rascunho
+chore(infra): fixa versão do PostGIS no compose
+```
+
+Regras:
+- Uma mudança por commit. Se precisar de "e" na mensagem, provavelmente são dois commits.
+- Até ~70 caracteres na primeira linha, sem ponto final.
+- Se precisar explicar o porquê, pule uma linha e escreva no corpo.
+
+## Commit todo dia
+
+A organização do Hack Brasil acompanha os commits. Cada um faz pelo menos um commit nos dias em que trabalhar, mesmo que pequeno. Trabalho parado no seu computador não conta.
+
+## O que nunca vai para o repositório
+
+- `dados_privados/`: endereços e números de casa da Defesa Civil. **Nunca.**
+- `.env` e qualquer senha ou chave de API. Use o `.env.example` como modelo.
+- Arquivos `.tif` grandes: o pipeline baixa sozinho.
+- Fotos sem licença livre. Toda imagem nova entra em `docs/img/CREDITOS.md`.
+
+O CI barra automaticamente algumas dessas coisas, mas confira antes do `git add`.
+
+## Números e fontes
+
+Todo número que aparece no site ou no vídeo precisa ter fonte. Escreva a fonte no código ou no texto, junto do número. Os registros mostram **concentração por rua**, não o endereço exato. Não escreva o contrário.
+
+## Quando está pronto
+
+Uma tarefa está pronta quando:
+
+- [ ] funciona rodando com `docker compose up` (ou abrindo a página)
+- [ ] o PR foi revisado e aprovado por outra pessoa
+- [ ] números novos têm fonte
+- [ ] o README ou a documentação foi atualizado, se algo mudou para quem usa
+
+## Comunicação
+
+- **WhatsApp:** recados rápidos e aviso de "abri PR, alguém revisa?".
+- **Issues e PRs:** decisões técnicas, para ficar registrado.
+- **Reunião semanal:** o que cada um fez, o que vai fazer, o que está travando.

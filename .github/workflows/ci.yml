@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  padrao:
+    name: Padrão do time
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nada de dados privados, .env ou rasters
+        run: |
+          proibidos=$(git ls-files | grep -E '^dados_privados/|(^|/)\.env$|\.tiff?$' || true)
+          if [ -n "$proibidos" ]; then
+            echo "Arquivos que não podem ir para o repositório:"
+            echo "$proibidos"
+            exit 1
+          fi
+
+      - name: Título do PR no padrão
+        if: github.event_name == 'pull_request'
+        env:
+          TITULO: ${{ github.event.pull_request.title }}
+        run: |
+          if ! echo "$TITULO" | grep -Eq '^(feat|fix|docs|style|refactor|test|data|chore)(\((pipeline|api|web|docs|db|infra)\))?: .+'; then
+            echo "Título fora do padrão: $TITULO"
+            echo "Use: tipo(escopo): descrição   (veja CONTRIBUTING.md)"
+            exit 1
+          fi
+
+  python:
+    name: Python (lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check pipeline api --select E9,F63,F7,F82
