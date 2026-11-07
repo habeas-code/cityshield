@@ -4,15 +4,17 @@
     python -m pipeline relevo     roda só o passo do relevo
     python -m pipeline hand       drenagem e HAND (baixa o relevo se faltar)
     python -m pipeline hand --refazer
+    python -m pipeline validacao  testa o HAND contra os registros da Defesa Civil
 """
 
 import argparse
 
-from pipeline import hand, relevo
+from pipeline import hand, relevo, validacao
 
 PASSOS = {
     "relevo": relevo.recortar,
     "hand": hand.calcular,
+    "validacao": validacao.validar,
 }
 
 
