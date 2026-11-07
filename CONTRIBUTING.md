@@ -21,7 +21,7 @@ Todas as tarefas ficam no quadro: **https://github.com/orgs/habeas-code/projects
 |---|---|---|
 | **A fazer** | ninguém começou | entra sozinha quando a issue é criada |
 | **Fazendo** | alguém está trabalhando | você, ao começar |
-| **Revisão** | PR aberto esperando aprovação | sozinho, quando o PR tem `Fecha #N` |
+| **Revisão** | PR aberto esperando aprovação | sozinho, quando o PR tem `Closes #N` |
 | **Feito** | entrou na `main` | sozinho, quando o PR é mergeado |
 
 Cada card é uma issue. O **rótulo** diz a frente (`pipeline`, `api`, `web`, `produto`) e o **marco** diz a semana do [cronograma](docs/CRONOGRAMA.md).
@@ -46,7 +46,7 @@ Issue  →  branch  →  commits  →  Pull Request  →  1 revisão  →  merge
    git switch -c feat/hand-area-piloto
    ```
 3. **Faça commits pequenos** seguindo o padrão abaixo.
-4. **Abra um Pull Request** usando o modelo e escreva `Fecha #12` (número da issue) na descrição. É isso que move o card no quadro e fecha a issue no merge.
+4. **Abra um Pull Request** usando o modelo e escreva `Closes #12` (número da issue) na descrição. Tem que ser em inglês (`Closes`, `Fixes` ou `Resolves`): é isso que liga o PR à issue, move o card no quadro e fecha a issue no merge.
 5. **Outra pessoa revisa.** O merge só acontece com 1 aprovação. Use **Squash and merge**.
 6. **Apague a branch** depois do merge.
 

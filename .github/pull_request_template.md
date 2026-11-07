@@ -2,7 +2,9 @@
 
 <!-- Uma ou duas frases. -->
 
-Fecha #
+Closes #
+
+<!-- Em inglês mesmo: "Closes #12". É o que liga o PR à tarefa do quadro. -->
 
 ## Frente
 
