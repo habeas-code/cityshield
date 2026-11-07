@@ -130,4 +130,17 @@ Uma tarefa está pronta quando:
 
 - **WhatsApp:** recados rápidos e aviso de "abri PR, alguém revisa?".
 - **Issues e PRs:** decisões técnicas, para ficar registrado.
-- **Reunião semanal:** o que cada um fez, o que vai fazer, o que está travando.
+- **Reuniões:** horários fixos abaixo.
+
+## Reuniões
+
+| Dia | Horário | Duração | Pauta |
+|---|---|---|---|
+| **Terça** | 19h30–19h50 | 20 min | Acompanhamento: com o quadro aberto, cada um diz o que fez, o que vai fazer e o que está travando |
+| **Quinta** | 19h30–19h50 | 20 min | Acompanhamento: mesma pauta da terça |
+| **Domingo** | 10h00–10h40 | 40 min | Revisão da semana: quadro filtrado pelo marco da semana, meta do [cronograma](docs/CRONOGRAMA.md) cumprida ou não, o que passa para a próxima semana, distribuição das tarefas novas |
+
+Regras:
+- Começa e termina no horário. Assunto que não couber vira issue ou conversa à parte.
+- Quem não puder ir avisa antes no grupo e manda por escrito o que fez, o que vai fazer e o que está travando.
+- Decisão importante tomada na reunião entra em [`docs/decisoes.md`](docs/decisoes.md).
