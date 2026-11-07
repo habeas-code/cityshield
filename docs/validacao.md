@@ -17,7 +17,7 @@ Para refazer: `docker compose run --rm pipeline python -m pipeline validacao`. O
 | Baixo (> 15 m) | 12% | 70% | |
 | **Alto + médio** | **88%** | 30% | **2,9×** |
 
-223 dos 240 registros (75 de 79 ruas) foram localizados no mapa.
+Dos 253 registros transcritos dos relatórios (89 ruas), 240 (79 ruas) têm a rua localizada no mapa público (`docs/dados/ruas.geojson`). Destes, 223 (75 ruas) foram encontrados no OpenStreetMap e entram no teste.
 
 ### Área piloto (núcleo Norte, raio de 800 m)
 
