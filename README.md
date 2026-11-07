@@ -14,6 +14,14 @@ Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com
 🌐 Página do projeto: https://habeas-code.github.io/cityshield/  
 🗺️ Plataforma (protótipo): https://habeas-code.github.io/cityshield/mapa.html
 
+> **🇬🇧 In English**
+>
+> **CityShield shows where Sorocaba (Brazil) floods and where nature-based solutions could hold that water.** The city's Civil Defense logged 250+ flooding events on 89 streets in 2022–2023, often the same streets every year. The city already discusses "sponge city" measures (rain gardens, permeable paving, green roofs, floodable parks), but lacks a practical answer to *which solution to study first, and where*.
+>
+> CityShield computes flood risk from the terrain (HAND method on the ANADEM 30 m terrain model), cross-checks it with the Civil Defense records, finds candidate sites in OpenStreetMap (squares, parking lots, large roofs) and recommends a solution for each one, with a priority score and an estimate of how much water it could retain. Every number comes with its source.
+>
+> **For:** Civil Defense and city departments deciding where to invest; it directly benefits residents of streets that flood every year. **Pilot:** northern Sorocaba (Parque das Águas), 800 m radius. **Stack:** Python pipeline (rasterio, pysheds, GeoPandas) → PostGIS → FastAPI → React + MapLibre. **Status:** in progress for Hack Brasil 2026 (Environment track). Team docs are in Portuguese.
+
 ---
 
 ## O problema
@@ -69,7 +77,7 @@ docker compose up                 # sobe PostGIS + API
 ```
 
 - API: http://localhost:8000/docs
-- Pipeline (quando existir): `docker compose run --rm pipeline`
+- Pipeline: `docker compose run --rm pipeline` (todos os passos) ou `docker compose run --rm pipeline python -m pipeline relevo` (só o relevo)
 
 ## Dados e privacidade
 
