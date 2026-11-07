@@ -62,6 +62,7 @@ header nav a:hover{color:var(--ink);text-decoration:none}
 .camada-leg{padding:2px 12px 10px 46px;display:grid;gap:5px;font-size:12px;color:var(--ink-2)}
 .camada-leg .it{display:flex;align-items:center;gap:8px}
 .camada-leg .it i{width:9px;height:9px;border-radius:50%;flex:none}
+.camada-leg .it i.q{border-radius:2px;width:11px}
 .camada-leg .tam{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:11.5px}
 .camada-leg .tam i{display:inline-block;border-radius:50%;border:1px solid var(--ink-2);margin-right:4px;vertical-align:middle}
 .camada.off{opacity:.55}
@@ -251,10 +252,26 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <span class="camada-nome"><b>Área-piloto Norte</b><span>Raio de 800 m</span></span>
           </div>
         </div>
-        <div class="camada off">
+        <div class="camada" id="cam-risco">
           <div class="camada-cab">
-            <span class="olho" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg></span>
-            <span class="camada-nome"><b>Relevo (HAND)</b><span>Em desenvolvimento</span></span>
+            <button class="olho" data-camada="risco" aria-pressed="true" aria-label="Mostrar ou esconder risco pelo relevo">
+              <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
+            </button>
+            <span class="camada-nome"><b>Risco pelo relevo (HAND)</b><span>Altura acima do córrego mais próximo · ANADEM 30 m</span></span>
+          </div>
+          <div class="camada-leg">
+            <span class="it"><i class="q" style="background:rgba(214,69,93,.75)"></i>Alto: até 5 m acima do córrego</span>
+            <span class="it"><i class="q" style="background:rgba(214,69,93,.35)"></i>Médio: de 5 a 15 m</span>
+          </div>
+        </div>
+        <div class="camada" id="cam-drenagem">
+          <div class="camada-cab">
+            <button class="olho" data-camada="drenagem" aria-pressed="true" aria-label="Mostrar ou esconder córregos calculados">
+              <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
+            </button>
+            <span class="camada-nome"><b>Córregos calculados</b><span>Onde se juntam mais de 0,5 km² de chuva</span></span>
           </div>
         </div>
       </div>
@@ -270,7 +287,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         </label>
       </div>
       <div class="bloco">
-        <p>Cada ponto é uma rua, em posição aproximada. Nenhum endereço é publicado. O HAND será um indicador topográfico, não uma previsão de alagamento.</p>
+        <p>Cada ponto é uma rua, em posição aproximada. Nenhum endereço é publicado. O HAND mostra onde o relevo favorece o acúmulo de água; não é uma previsão de alagamento.</p>
       </div>
     </div>
 
@@ -373,6 +390,16 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
     </section>
 
+    <section class="widget" id="w-valida">
+      <div class="w-cab"><h3>O mapa acerta?</h3><span class="sub">cidade inteira</span></div>
+      <div class="kpi">
+        <div><b class="n" id="v-reg">74%</b><span>dos registros caem no risco alto</span></div>
+        <div><b class="n" id="v-ruas">12%</b><span>das ruas da cidade estão nele</span></div>
+      </div>
+      <p class="sub" style="margin:8px 0 0"><b class="n" id="v-vezes" style="color:var(--ink)">6,0×</b> mais que o acaso. Teste com 223 registros da Defesa Civil, 2022–2023.</p>
+      <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
+    </section>
+
     <section class="widget">
       <div class="w-cab"><h3>Na área visível</h3><span class="sub">atualiza ao mover o mapa</span></div>
       <div class="kpi">
@@ -431,6 +458,34 @@ label.campo .l b{color:var(--ink);font-weight:600}
       map.setPaintProperty('piloto-fundo', 'fill-color', '#3FB27F');
       map.setPaintProperty('piloto-fundo', 'fill-opacity', 0.07);
       map.setPaintProperty('piloto-borda', 'line-color', '#3FB27F');
+
+      // Risco pelo relevo (HAND) e córregos: por baixo da área-piloto e dos pontos
+      map.addSource('risco', { type: 'geojson', data: 'dados/risco_hand.geojson' });
+      map.addLayer({
+        id: 'risco', type: 'fill', source: 'risco',
+        paint: {
+          'fill-color': '#D6455D',
+          'fill-opacity': ['match', ['get', 'classe'], 'alto', 0.42, 'medio', 0.16, 0],
+          'fill-antialias': false
+        }
+      }, 'piloto-fundo');
+      map.addSource('drenagem', { type: 'geojson', data: 'dados/drenagem.geojson' });
+      map.addLayer({
+        id: 'drenagem', type: 'line', source: 'drenagem',
+        paint: {
+          'line-color': '#7FC8F8',
+          'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.6, 15, 1.6],
+          'line-opacity': 0.75
+        }
+      }, 'piloto-fundo');
+
+      fetch('dados/validacao.json').then(function (r) { return r.json(); }).then(function (v) {
+        var c = v.cidade, pct = function (x) { return Math.round(x * 100) + '%'; };
+        $('v-reg').textContent = pct(c.fracao_registros.alto);
+        $('v-ruas').textContent = pct(c.fracao_ruas.alto);
+        $('v-vezes').textContent = c.vezes_acima_do_acaso_alto.toFixed(1).replace('.', ',') + '×';
+      }).catch(function () { /* mantém os números do HTML */ });
+
       fetch('dados/ruas.geojson').then(function (r) { return r.json(); }).then(function (g) {
         g.features.forEach(function (f) { f.properties.dist = distM(f.geometry.coordinates, PIL.centro); });
         dados = g; aplicar();
@@ -459,7 +514,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     b.addEventListener('click', function () {
       var on = b.getAttribute('aria-pressed') !== 'true';
       b.setAttribute('aria-pressed', on);
-      var ids = b.dataset.camada === 'ruas' ? ['ruas'] : ['piloto-fundo', 'piloto-borda'];
+      var ids = { ruas: ['ruas'], piloto: ['piloto-fundo', 'piloto-borda'], risco: ['risco'], drenagem: ['drenagem'] }[b.dataset.camada];
       ids.forEach(function (id) { map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none'); });
       if (b.dataset.camada === 'piloto' && map._rotuloPiloto) map._rotuloPiloto.getElement().style.display = on ? '' : 'none';
       b.closest('.camada').classList.toggle('desligada', !on);
