@@ -48,6 +48,7 @@ LIMITE = REFERENCIA / "limite_sorocaba.geojson"
 
 SIMPLIFICAR = 0.00008  # graus (~8 m): deixa o GeoJSON leve sem mudar o desenho
 PRECISAO = 0.00001     # graus (~1 m): arredonda as coordenadas
+MENOR_MANCHA_GRAUS2 = 1500 / (102_000 * 110_600)  # ~1.500 m² (um lote) em Sorocaba
 
 
 def _area_celula_m2(transform, lat):
@@ -121,11 +122,15 @@ def calcular(refazer=False):
         partes = [shape(g) for g, v in shapes(mascara, mask=mascara == 1, transform=grid.affine) if v == 1]
         geom = set_precision(unary_union(partes).intersection(municipio).simplify(SIMPLIFICAR), PRECISAO)
         fracao = geom.area / area_mun
-        feicoes.append({"type": "Feature",
-                        "properties": {"classe": classe, "hand_min_m": de, "hand_max_m": ate,
-                                       "fracao_municipio": round(fracao, 4)},
-                        "geometry": mapping(geom)})
-        print(f"hand: risco {classe} ({de:g}–{ate:g} m) = {fracao:.1%} do município")
+        # Uma feição por mancha: o mapa fatia e desenha aos poucos, em vez de um polígono gigante.
+        # Manchas menores que um lote somem do desenho (a fração acima já foi calculada com elas).
+        manchas = [p for p in getattr(geom, "geoms", [geom])
+                   if p.geom_type == "Polygon" and p.area >= MENOR_MANCHA_GRAUS2]
+        for mancha in manchas:
+            feicoes.append({"type": "Feature",
+                            "properties": {"classe": classe, "hand_min_m": de, "hand_max_m": ate},
+                            "geometry": mapping(mancha)})
+        print(f"hand: risco {classe} ({de:g}–{ate:g} m) = {fracao:.1%} do município, {len(manchas)} manchas")
     _gravar(RISCO, feicoes, "HAND (Nobre et al., 2011) sobre ANADEM v1")
 
     km = sum(shape(t["geometry"]).length for t in trechos) * 111.32 * np.cos(np.radians(lat_media))
