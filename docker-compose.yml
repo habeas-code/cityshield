@@ -30,6 +30,7 @@ services:
       - ./pipeline:/app
       - ./dados_privados:/dados_privados:ro
       - ./web/public/dados:/saida
+      - ./docs/dados:/referencia:ro
     command: python -m pipeline
 
 volumes:

@@ -16,6 +16,8 @@ from pathlib import Path
 import rasterio
 from rasterio.windows import from_bounds
 
+from pipeline.caminhos import DADOS
+
 # Sorocaba fica na zona UTM 23, faixa de latitude K.
 URL_TILE = "https://metadados.snirh.gov.br/files/anadem_v1_tiles/anadem_v1_23K.tif"
 
@@ -23,7 +25,7 @@ URL_TILE = "https://metadados.snirh.gov.br/files/anadem_v1_tiles/anadem_v1_23K.t
 # Itupararanga e os córregos que chegam à cidade (oeste, sul, leste, norte).
 AREA_ESTUDO = (-47.75, -23.75, -47.20, -23.25)
 
-SAIDA = Path(__file__).resolve().parent.parent / "dados" / "relevo" / "anadem_sorocaba.tif"
+SAIDA = DADOS / "relevo" / "anadem_sorocaba.tif"
 
 OPCOES_GDAL = {
     "GDAL_DISABLE_READDIR_ON_OPEN": "EMPTY_DIR",  # não lista a pasta remota
