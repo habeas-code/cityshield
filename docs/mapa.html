@@ -321,8 +321,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <p class="fonte-l">Fonte: OpenStreetMap, consultado em 06/11/2026</p>
         <button data-simular="telhado">Simular</button>
       </div>
-      <div class="camada off" style="margin:12px 16px 0">
-        <div class="camada-cab"><span class="camada-nome"><b>Áreas candidatas</b><span>Em desenvolvimento · a partir do OpenStreetMap</span></span></div>
+      <div class="camada" id="cam-areas" style="margin:12px 16px 0">
+        <div class="camada-cab">
+          <button class="olho" data-camada="areas" aria-pressed="true" aria-label="Mostrar ou esconder áreas candidatas">
+            <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
+          </button>
+          <span class="camada-nome"><b>Áreas candidatas</b><span id="areas-resumo">OpenStreetMap · raio do piloto</span></span>
+        </div>
+        <div class="camada-leg">
+          <span class="it"><i class="q" style="background:#4CC38A"></i>Área verde (parque, praça, gramado)</span>
+          <span class="it"><i class="q" style="background:#AEB6C2"></i>Estacionamento aberto</span>
+          <span class="it"><i class="q" style="background:#E0B341"></i>Telhado com mais de 1.000 m²</span>
+          <span class="sub" style="padding-left:19px">Clique numa área para ver o tamanho e o risco</span>
+        </div>
       </div>
       <p class="aviso">As oportunidades são preliminares e precisam de avaliação técnica.</p>
     </div>
@@ -486,6 +498,18 @@ label.campo .l b{color:var(--ink);font-weight:600}
         $('v-vezes').textContent = c.vezes_acima_do_acaso_alto.toFixed(1).replace('.', ',') + '×';
       }).catch(function () { /* mantém os números do HTML */ });
 
+      // Áreas candidatas a soluções verdes: acima do risco, abaixo dos pontos
+      var COR_AREA = ['match', ['get', 'tipo'], 'area_verde', '#4CC38A', 'estacionamento', '#AEB6C2', 'telhado', '#E0B341', '#888'];
+      map.addSource('areas', { type: 'geojson', data: 'dados/areas_candidatas.geojson' });
+      map.addLayer({ id: 'areas', type: 'fill', source: 'areas', paint: { 'fill-color': COR_AREA, 'fill-opacity': 0.35 } }, 'ruas-halo');
+      map.addLayer({ id: 'areas-borda', type: 'line', source: 'areas', paint: { 'line-color': COR_AREA, 'line-width': 1.2 } }, 'ruas-halo');
+      fetch('dados/areas_candidatas.geojson').then(function (r) { return r.json(); }).then(function (g) {
+        var ha = g.features.reduce(function (s, f) { return s + f.properties.area_m2; }, 0) / 10000;
+        $('areas-resumo').textContent = g.features.length + ' áreas, ' + ha.toFixed(1).replace('.', ',') + ' ha · OpenStreetMap';
+      }).catch(function () { /* mantém o texto padrão */ });
+      map.on('mouseenter', 'areas', function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'areas', function () { map.getCanvas().style.cursor = ''; });
+
       fetch('dados/ruas.geojson').then(function (r) { return r.json(); }).then(function (g) {
         g.features.forEach(function (f) { f.properties.dist = distM(f.geometry.coordinates, PIL.centro); });
         dados = g; aplicar();
@@ -494,10 +518,29 @@ label.campo .l b{color:var(--ink);font-weight:600}
       map.on('click', function (e) {
         var rua = map.queryRenderedFeatures(e.point, { layers: ['ruas'] })[0];
         if (rua) { selecionar(rua.properties.rua, false); return; }
+        var area = map.queryRenderedFeatures(e.point, { layers: ['areas'] })[0];
+        if (area) { popupArea(e.lngLat, area.properties); return; }
         if (map.queryRenderedFeatures(e.point, { layers: ['piloto-fundo'] })[0]) selecionarPiloto(false);
       });
     }
   });
+
+  // ---------- Áreas candidatas ----------
+  var popupAreaAtual = null;
+  function popupArea(lngLat, p) {
+    if (popupAreaAtual) popupAreaAtual.remove();
+    var pct = function (x) { return Math.round(x * 100) + '%'; };
+    var area = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
+    var div = document.createElement('div'); div.className = 'pop';
+    var b = document.createElement('b'); b.textContent = p.nome && p.nome !== 'null' ? p.nome : p.rotulo;
+    var s1 = document.createElement('span'); s1.textContent = p.rotulo + ' · ' + area;
+    var s2 = document.createElement('span'); s2.style.display = 'block';
+    s2.textContent = 'Risco alto em ' + pct(p.fracao_alto) + ' da área, médio em ' + pct(p.fracao_medio);
+    var s3 = document.createElement('span'); s3.style.display = 'block'; s3.style.fontSize = '11.5px';
+    s3.textContent = 'Candidata a estudo, não terreno disponível';
+    [b, s1, s2, s3].forEach(function (x) { div.appendChild(x); });
+    popupAreaAtual = new maplibregl.Popup({ closeButton: false, offset: 6 }).setLngLat(lngLat).setDOMContent(div).addTo(map);
+  }
 
   // ---------- Abas ----------
   var abas = { diag: $('a-diag'), oport: $('a-oport'), sim: $('a-sim') };
@@ -514,7 +557,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     b.addEventListener('click', function () {
       var on = b.getAttribute('aria-pressed') !== 'true';
       b.setAttribute('aria-pressed', on);
-      var ids = { ruas: ['ruas'], piloto: ['piloto-fundo', 'piloto-borda'], risco: ['risco'], drenagem: ['drenagem'] }[b.dataset.camada];
+      var ids = { ruas: ['ruas'], piloto: ['piloto-fundo', 'piloto-borda'], risco: ['risco'], drenagem: ['drenagem'], areas: ['areas', 'areas-borda'] }[b.dataset.camada];
       ids.forEach(function (id) { map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none'); });
       if (b.dataset.camada === 'piloto' && map._rotuloPiloto) map._rotuloPiloto.getElement().style.display = on ? '' : 'none';
       b.closest('.camada').classList.toggle('desligada', !on);
