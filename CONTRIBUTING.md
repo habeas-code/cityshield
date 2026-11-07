@@ -13,13 +13,32 @@ Cada pessoa é dona de uma frente: revisa o que entra nela e decide quando há d
 | Site | `web/`, `docs/` (página pública) | _a definir_ |
 | Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, conteúdo jurídico | _a definir_ |
 
+## Quadro de tarefas
+
+Todas as tarefas ficam no quadro: **https://github.com/orgs/habeas-code/projects/1**
+
+| Coluna | Significa | Quem move |
+|---|---|---|
+| **A fazer** | ninguém começou | entra sozinha quando a issue é criada |
+| **Fazendo** | alguém está trabalhando | você, ao começar |
+| **Revisão** | PR aberto esperando aprovação | sozinho, quando o PR tem `Fecha #N` |
+| **Feito** | entrou na `main` | sozinho, quando o PR é mergeado |
+
+Cada card é uma issue. O **rótulo** diz a frente (`pipeline`, `api`, `web`, `produto`) e o **marco** diz a semana do [cronograma](docs/CRONOGRAMA.md).
+
+**Para pegar uma tarefa:** abra o card, clique em **Assignees** e se coloque, depois arraste para **Fazendo**. Pegue uma tarefa por vez.
+
+**Para criar uma tarefa nova:** no repositório, vá em **Issues → New issue → Tarefa**. Ela entra sozinha no quadro em **A fazer**. Coloque o rótulo da frente e o marco da semana.
+
+Na revisão do fim de semana, o time olha o quadro filtrado pelo marco da semana: o que não foi para **Feito** é discutido ou vai para a semana seguinte.
+
 ## Fluxo de uma tarefa
 
 ```
 Issue  →  branch  →  commits  →  Pull Request  →  1 revisão  →  merge na main
 ```
 
-1. **Toda tarefa vira uma issue** com o modelo "Tarefa". Coloque o rótulo da frente e se atribua.
+1. **Toda tarefa é uma issue do quadro.** Se ainda não existe, crie com o modelo "Tarefa", com o rótulo da frente, e se atribua.
 2. **Crie uma branch a partir da `main` atualizada:**
    ```bash
    git switch main
@@ -27,7 +46,7 @@ Issue  →  branch  →  commits  →  Pull Request  →  1 revisão  →  merge
    git switch -c feat/hand-area-piloto
    ```
 3. **Faça commits pequenos** seguindo o padrão abaixo.
-4. **Abra um Pull Request** usando o modelo e escreva `Fecha #12` (número da issue) na descrição.
+4. **Abra um Pull Request** usando o modelo e escreva `Fecha #12` (número da issue) na descrição. É isso que move o card no quadro e fecha a issue no merge.
 5. **Outra pessoa revisa.** O merge só acontece com 1 aprovação. Use **Squash and merge**.
 6. **Apague a branch** depois do merge.
 
