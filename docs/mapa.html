@@ -108,6 +108,17 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .emp-leg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
 .equiv{margin:12px 0 0;font-size:12.5px;color:var(--ink-2)}
 .equiv b{color:var(--ink)}
+.ref{font-size:11.5px;color:var(--muted)}
+.ad{margin-top:12px}
+.ad-rot{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.ad-rot b{color:var(--ink);font-weight:600}
+.ad .empilhada{margin:5px 0 0}
+.ad-tab{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+.ad-tab th{font-weight:400;color:var(--muted);text-align:left;padding:4px 0;border-bottom:1px solid var(--line)}
+.ad-tab td{padding:5px 0;border-bottom:1px solid var(--line);color:var(--ink-2)}
+.ad-tab td:nth-child(n+2),.ad-tab th:nth-child(n+2){text-align:right;font-variant-numeric:tabular-nums}
+.ad-tab td b{color:var(--ink);font-weight:600}
+.aviso a{color:var(--accent)}
 .aviso{margin:12px 16px;padding:9px 11px;border-left:3px solid var(--warn);background:rgba(217,164,65,.08);color:var(--ink-2);font-size:12px}
 
 /* Simulação */
@@ -398,33 +409,41 @@ label.campo .l b{color:var(--ink);font-weight:600}
     </div>
 
     <div class="rolar" id="a-sim" hidden>
-      <div class="bloco"><p>Estimativa com premissas da literatura técnica. Não é modelagem hidráulica.</p></div>
+      <div class="bloco"><p><b>Cenário da área piloto:</b> se as soluções recomendadas fossem feitas nas áreas candidatas, quanto da chuva deixaria de ir para a rua? Estimativa com valores publicados, não modelagem hidráulica.</p></div>
       <div class="bloco">
         <h3>Parâmetros</h3>
-        <div class="campo">Solução
-          <span class="opcoes" id="s-opcoes">
-            <button type="button" data-sol="jardim" aria-pressed="true">Jardim de chuva</button>
-            <button type="button" data-sol="piso" aria-pressed="false">Pav. permeável</button>
-            <button type="button" data-sol="telhado" aria-pressed="false">Telhado verde</button>
-            <button type="button" data-sol="parque" aria-pressed="false">Parque alagável</button>
+        <label class="campo"><span class="l">Chuva <b class="n" id="c-chuva-val">50 mm</b></span>
+          <input type="range" id="c-chuva" min="10" max="120" step="5" value="50" aria-describedby="c-chuva-ref">
+          <small class="ref" id="c-chuva-ref">16/10/2026: 52 mm em 24 h, Dom Aguirre e XV interditadas</small>
+        </label>
+        <div class="campo">Soluções
+          <span class="opcoes" id="c-sol">
+            <button type="button" data-sol="jardim_chuva" aria-pressed="true">Jardim de chuva</button>
+            <button type="button" data-sol="piso_permeavel" aria-pressed="true">Piso permeável</button>
+            <button type="button" data-sol="telhado_verde" aria-pressed="true">Telhado verde</button>
+            <button type="button" data-sol="parque_inundavel" aria-pressed="true">Parque inundável</button>
           </span>
         </div>
-        <label class="campo"><span class="l">Chuva de referência <b class="n" id="s-chuva-val">50 mm</b></span>
-          <input type="range" id="s-chuva" min="10" max="120" step="5" value="50">
-        </label>
-        <label class="campo"><span id="s-area-rot">Área do jardim (m²)</span>
-          <input type="number" id="s-area" min="10" max="100000" step="10" value="100">
-        </label>
+        <div class="campo">Áreas
+          <span class="opcoes" id="c-quais">
+            <button type="button" data-quais="todas" aria-pressed="true">Todas as candidatas</button>
+            <button type="button" data-quais="prioridade" aria-pressed="false">Só prioridade média ou alta</button>
+          </span>
+        </div>
       </div>
       <div class="bloco">
-        <h3>Resultado</h3>
-        <div id="s-res"><p class="sub" style="margin:0">Exemplo: jardim de chuva de 100 m², chuva de 50 mm: cerca de 15 m³ retidos, 30% da água que chega.</p></div>
+        <h3>Antes e depois</h3>
+        <div id="c-res"><p class="sub" style="margin:0">Carregando as áreas…</p></div>
+      </div>
+      <div class="bloco" id="c-parques" hidden>
+        <h3>Parques inundáveis</h3>
+        <div id="c-parques-res"></div>
       </div>
       <div class="bloco">
-        <h3>Premissas</h3>
-        <ul class="prem" id="s-prem"></ul>
+        <h3>Premissas e fontes</h3>
+        <ul class="prem" id="c-prem"></ul>
       </div>
-      <p class="aviso">Valores médios de referência. O resultado real depende do solo, da declividade e do projeto.</p>
+      <p class="aviso">Valores de projeto publicados, não medição em Sorocaba. O resultado real depende do solo, do lençol freático, da declividade e do projeto. <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#quanta-água-cada-solução-segura-17" target="_blank" rel="noopener">Como calculamos</a></p>
     </div>
   </aside>
 
@@ -586,7 +605,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
   // ---------- Áreas candidatas ----------
   var popupAreaAtual = null;
-  var totalAreas = 0;
+  var totalAreas = 0, areasDados = null;
   var DESCRICAO = {
     parque_inundavel: 'Armazenamento temporário da água da chuva: o parque alaga de forma controlada e devolve a água aos poucos. Depende de estudo de viabilidade técnica e ambiental.',
     jardim_chuva: 'Canteiro rebaixado (bioretenção) que recebe o escoamento das calçadas e ruas próximas e favorece a infiltração. Depende de estudo do solo.',
@@ -774,10 +793,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
   function irPara(a) {
     document.querySelectorAll('.abas button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.aba === a ? 'true' : 'false'); });
     Object.keys(abas).forEach(function (k) { abas[k].hidden = k !== a; });
+    destacarCenario(a === 'sim');
   }
   document.querySelectorAll('.abas button').forEach(function (b) { b.addEventListener('click', function () { irPara(b.dataset.aba); }); });
   document.querySelectorAll('[data-aba-ir]').forEach(function (b) { b.addEventListener('click', function () { irPara(b.dataset.abaIr); }); });
-  document.querySelectorAll('[data-simular]').forEach(function (b) { b.addEventListener('click', function () { escolherSol(b.dataset.simular); irPara('sim'); }); });
+  var SIMULAR = { jardim: 'jardim_chuva', piso: 'piso_permeavel', telhado: 'telhado_verde', parque: 'parque_inundavel' };
+  document.querySelectorAll('[data-simular]').forEach(function (b) {
+    b.addEventListener('click', function () { cenarioSo(SIMULAR[b.dataset.simular]); irPara('sim'); });
+  });
 
   // ---------- Camadas e filtros ----------
   document.querySelectorAll('.olho[data-camada]').forEach(function (b) {
@@ -918,63 +941,139 @@ label.campo .l b{color:var(--ink);font-weight:600}
   });
   document.addEventListener('click', function (e) { if (!e.target.closest('.busca')) lista.hidden = true; });
 
-  // ---------- Simulação (m³ = mm × m² / 1000) ----------
-  var SOL = {
-    jardim: { rot: 'Área do jardim (m²)', area: 100,
-      calc: function (mm, A) { var cai = mm * 10 * A / 1000; return { cai: cai, ret: Math.min(cai, 0.15 * A) }; },
-      prem: [['Área que escoa', '10 × a área do jardim (ruas e calçadas em volta)'], ['Lâmina', '15 cm, até 150 L por m²'], ['Fonte', 'Hinman, WSU Extension, 2007']] },
-    piso: { rot: 'Área do pavimento (m²)', area: 1000,
-      calc: function (mm, A) { var cai = mm * A / 1000; return { cai: cai, ret: Math.min(mm, 50) * A / 1000 }; },
-      prem: [['Base', 'brita de 25 cm com 20% de vazios'], ['Capacidade', 'até 50 mm de chuva'], ['Fonte', 'PMSP, ETS-03/2013']] },
-    telhado: { rot: 'Área do telhado (m²)', area: 1000,
-      calc: function (mm, A) { var cai = mm * A / 1000; return { cai: cai, ret: 0.47 * cai }; },
-      prem: [['Retenção', '47% da chuva (limite inferior da faixa 47–62%)'], ['Fonte', 'Vacari et al., 2019, UFMT']] },
-    parque: { rot: 'Área do parque (m²)', area: 10000, calc: null,
-      prem: [['Volume', 'depende da profundidade e do formato do terreno'], ['Cálculo', 'pelo relevo ANADEM 30 m, no pipeline'], ['Status', 'hipótese; avaliar viabilidade']] }
-  };
-  var solAtual = 'jardim';
-  function fmt(v) { return (Math.round(v * 10) / 10).toLocaleString('pt-BR'); }
-  function escolherSol(k) {
-    solAtual = k;
-    document.querySelectorAll('#s-opcoes button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.sol === k ? 'true' : 'false'); });
-    $('s-area').value = SOL[k].area; simular();
+  // ---------- Cenário antes/depois (#20) ----------
+  // Mesmas contas de pipeline/pipeline/volumes.py; os parâmetros vêm do próprio arquivo
+  // (recomendacoes.geojson → parametros), então site, pipeline e API usam os mesmos números.
+  var ROT_SOL = { jardim_chuva: 'Jardim de chuva', piso_permeavel: 'Piso permeável', telhado_verde: 'Telhado verde', parque_inundavel: 'Parque inundável' };
+  var cen = { chuva: 50, sol: { jardim_chuva: true, piso_permeavel: true, telhado_verde: true, parque_inundavel: true }, quais: 'todas' };
+  var milharC = function (x) { return Math.round(x).toLocaleString('pt-BR'); };
+
+  function aguaArea(p, mm, par) {
+    var m = mm / 1000, A = p.area_m2;
+    if (p.solucao === 'piso_permeavel') return { chega: A * m, ret: A * Math.min(mm, par.piso_capacidade_mm) / 1000 };
+    if (p.solucao === 'telhado_verde') return { chega: A * m, ret: A * m * par.telhado_retencao };
+    if (p.solucao === 'jardim_chuva') {
+      var J = A * par.jardim_fracao_da_area, chega = J * par.jardim_area_que_escoa * m;
+      return { chega: chega, ret: Math.min(chega, J * par.jardim_lamina_m) };
+    }
+    return null; // parque: capacidade fixa, não depende da chuva
   }
-  function simular() {
-    var s = SOL[solAtual], mm = +$('s-chuva').value, A = Math.max(0, +$('s-area').value || 0);
-    $('s-chuva-val').textContent = mm + ' mm'; $('s-area-rot').textContent = s.rot;
-    var pr = $('s-prem'); pr.innerHTML = '';
-    s.prem.forEach(function (p) {
-      var li = document.createElement('li'), a = document.createElement('span'), b = document.createElement('span');
-      a.textContent = p[0]; b.textContent = p[1]; li.appendChild(a); li.appendChild(b); pr.appendChild(li);
+  function incluida(p) { return cen.sol[p.solucao] && (cen.quais === 'todas' || p.nota >= 10); }
+
+  function cenario() {
+    if (!areasDados) return;
+    var par = areasDados.parametros, mm = cen.chuva;
+    $('c-chuva-val').textContent = mm + ' mm';
+    var tot = { chega: 0, ret: 0, n: 0 }, porSol = {}, parques = { n: 0, cap: 0 };
+    areasDados.features.forEach(function (f) {
+      var p = f.properties;
+      if (!incluida(p)) return;
+      if (p.solucao === 'parque_inundavel') { parques.n++; parques.cap += p.volume_m3 || 0; return; }
+      var a = aguaArea(p, mm, par);
+      tot.chega += a.chega; tot.ret += a.ret; tot.n++;
+      var s = porSol[p.solucao] || (porSol[p.solucao] = { n: 0, chega: 0, ret: 0 });
+      s.n++; s.chega += a.chega; s.ret += a.ret;
     });
-    var box = $('s-res'); box.innerHTML = '';
-    if (!s.calc) { box.innerHTML = '<p class="sub" style="margin:0">O volume de um parque alagável depende do relevo real do terreno: veja o volume de cada parque do piloto clicando nele, na aba Oportunidades.</p>'; return; }
-    var r = s.calc(mm, A), pct = r.cai ? Math.round(r.ret / r.cai * 100) : 0, resto = Math.max(0, r.cai - r.ret);
-    box.innerHTML =
-      '<div class="sim-kpis"><div><span>Área</span><b class="n"></b></div><div><span>Chuva</span><b class="n"></b></div><div><span>Água que chega</span><b class="n"></b></div></div>' +
-      '<div class="formula"><b class="n"></b><span>m³ podem ser retidos</span></div>' +
-      '<div class="empilhada" role="img"><i style="background:#3FB27F"></i><i style="background:#6B7078"></i></div>' +
-      '<div class="emp-leg"><span style="--c:#3FB27F">Retido <b class="n"></b></span><span style="--c:#6B7078">Segue escoando <b class="n"></b></span></div>' +
-      '<p class="equiv">≈ <b class="n"></b> caixas d’água de 1.000 litros</p>' +
-      '<p class="fonte-l" style="margin-top:6px"></p>';
-    var k = box.querySelectorAll('.sim-kpis b');
-    k[0].textContent = A.toLocaleString('pt-BR') + ' m²';
-    k[1].textContent = mm + ' mm';
-    k[2].textContent = fmt(r.cai) + ' m³';
-    box.querySelector('.formula b').textContent = fmt(r.ret);
-    var barras = box.querySelectorAll('.empilhada i');
-    barras[0].style.width = pct + '%'; barras[1].style.width = (100 - pct) + '%';
-    box.querySelector('.empilhada').setAttribute('aria-label', pct + '% retido, ' + (100 - pct) + '% segue escoando');
-    var lg = box.querySelectorAll('.emp-leg b');
-    lg[0].textContent = pct + '% · ' + fmt(r.ret) + ' m³'; lg[1].textContent = (100 - pct) + '% · ' + fmt(resto) + ' m³';
-    box.querySelector('.equiv b').textContent = Math.round(r.ret).toLocaleString('pt-BR');
-    box.querySelector('.fonte-l').textContent = (solAtual === 'jardim' ? 'Água que chega considera 10 × a área do jardim escoando para ele. ' : '') +
-      'Fonte: ' + s.prem[s.prem.length - 1][1];
+
+    var box = $('c-res'); box.innerHTML = '';
+    var el = function (tag, classe, texto) { var e = document.createElement(tag); if (classe) e.className = classe; if (texto != null) e.textContent = texto; return e; };
+    if (!tot.n) {
+      box.appendChild(el('p', 'sub', cen.sol.parque_inundavel && parques.n
+        ? 'Só parques escolhidos: veja a capacidade deles abaixo. Escolha jardim, piso ou telhado para ver a chuva retida.'
+        : 'Nenhuma área com essas escolhas. Marque pelo menos uma solução.'));
+    } else {
+      var pct = Math.round(tot.ret / tot.chega * 100), segue = tot.chega - tot.ret;
+      var kp = el('div', 'sim-kpis');
+      [['Áreas', String(tot.n)], ['Água que chega', milharC(tot.chega) + ' m³'], ['Retida', milharC(tot.ret) + ' m³']].forEach(function (k) {
+        var d = el('div'); d.appendChild(el('span', null, k[0])); d.appendChild(el('b', 'n', k[1])); kp.appendChild(d);
+      });
+      box.appendChild(kp);
+      var barra = function (rotulo, valor, partes) {
+        var w = el('div', 'ad'), r = el('div', 'ad-rot');
+        r.appendChild(el('span', null, rotulo)); r.appendChild(el('b', null, valor)); w.appendChild(r);
+        var e = el('div', 'empilhada'); e.setAttribute('role', 'img'); e.setAttribute('aria-label', rotulo + ': ' + valor);
+        partes.forEach(function (pt) { var i = el('i'); i.style.width = pt[0] + '%'; i.style.background = pt[1]; e.appendChild(i); });
+        w.appendChild(e); return w;
+      };
+      box.appendChild(barra('Antes: vai para a rua', milharC(tot.chega) + ' m³', [[100, '#6B7078']]));
+      box.appendChild(barra('Depois: vai para a rua', milharC(segue) + ' m³', [[pct, '#3FB27F'], [100 - pct, '#6B7078']]));
+      var leg = el('div', 'emp-leg');
+      var l1 = el('span', null, 'Retido ' + pct + '%'); l1.style.setProperty('--c', '#3FB27F');
+      var l2 = el('span', null, 'Segue escoando ' + (100 - pct) + '%'); l2.style.setProperty('--c', '#6B7078');
+      leg.appendChild(l1); leg.appendChild(l2); box.appendChild(leg);
+      var eq = el('p', 'equiv'); eq.appendChild(document.createTextNode('≈ '));
+      eq.appendChild(el('b', null, milharC(tot.ret))); eq.appendChild(document.createTextNode(' caixas d’água de 1.000 litros a menos na rua'));
+      box.appendChild(eq);
+      var tab = el('table', 'ad-tab'), th = el('tr');
+      ['Solução', 'Áreas', 'Chega', 'Retida'].forEach(function (t) { th.appendChild(el('th', null, t)); });
+      tab.appendChild(th);
+      Object.keys(ROT_SOL).forEach(function (k) {
+        if (!porSol[k]) return;
+        var tr = el('tr'); tr.appendChild(el('td', null, ROT_SOL[k])); tr.appendChild(el('td', null, String(porSol[k].n)));
+        tr.appendChild(el('td', null, milharC(porSol[k].chega) + ' m³'));
+        var td = el('td'); td.appendChild(el('b', null, milharC(porSol[k].ret) + ' m³')); tr.appendChild(td);
+        tab.appendChild(tr);
+      });
+      box.appendChild(tab);
+    }
+
+    var blocoP = $('c-parques');
+    blocoP.hidden = !(cen.sol.parque_inundavel && parques.n);
+    if (!blocoP.hidden) {
+      var pr = $('c-parques-res'); pr.innerHTML = '';
+      var f = el('div', 'formula'); f.appendChild(el('b', 'n', milharC(parques.cap))); f.appendChild(el('span', null, 'm³ de capacidade em ' + parques.n + (parques.n === 1 ? ' parque' : ' parques')));
+      pr.appendChild(f);
+      pr.appendChild(el('p', 'sub', 'Reservatório para quando o rio e as galerias transbordam. É capacidade, não chuva retida: por isso não entra na conta de antes e depois e não muda com a chuva escolhida.'));
+    }
+
+    var prem = $('c-prem'); prem.innerHTML = '';
+    var fontes = par.fontes || {};
+    [['Chuva', mm + ' mm sobre cada área (e sobre as ruas em volta, no caso dos jardins)'],
+     ['Piso permeável', 'segura até ' + par.piso_capacidade_mm + ' mm da chuva que cai nele · ' + (fontes.piso_permeavel || '')],
+     ['Jardim de chuva', 'ocupa ' + Math.round(par.jardim_fracao_da_area * 100) + '% da área verde, recebe a água de ' + par.jardim_area_que_escoa + '× a sua área e guarda ' + Math.round(par.jardim_lamina_m * 100) + ' cm · ' + (fontes.jardim_chuva || '')],
+     ['Telhado verde', 'retém ' + Math.round(par.telhado_retencao * 100) + '% da chuva (em chuva forte é menos) · ' + (fontes.telhado_verde || '')],
+     ['Parque inundável', 'capacidade até ' + par.parque_lamina_m + ' m acima do fundo, pelo relevo · ' + (fontes.parque_inundavel || '')]
+    ].forEach(function (x) {
+      var li = el('li'); li.appendChild(el('span', null, x[0])); li.appendChild(el('span', null, x[1])); prem.appendChild(li);
+    });
+    destacarCenario(!abas.sim.hidden);
   }
-  document.querySelectorAll('#s-opcoes button').forEach(function (b) { b.addEventListener('click', function () { escolherSol(b.dataset.sol); }); });
-  $('s-chuva').addEventListener('input', simular);
-  $('s-area').addEventListener('input', simular);
-  simular();
+
+  // No mapa, durante o cenário, as áreas incluídas ficam fortes e as outras apagadas.
+  function destacarCenario(ligado) {
+    if (!map || !map.getLayer || !map.getLayer('areas')) return;
+    if (!ligado) {
+      map.setPaintProperty('areas', 'fill-opacity', 0.35);
+      map.setPaintProperty('areas-borda', 'line-opacity', 1);
+      return;
+    }
+    var sols = Object.keys(cen.sol).filter(function (k) { return cen.sol[k]; });
+    var cond = ['all', ['in', ['get', 'solucao'], ['literal', sols]]];
+    if (cen.quais === 'prioridade') cond.push(['>=', ['get', 'nota'], 10]);
+    map.setPaintProperty('areas', 'fill-opacity', ['case', cond, 0.6, 0.06]);
+    map.setPaintProperty('areas-borda', 'line-opacity', ['case', cond, 1, 0.15]);
+  }
+
+  function cenarioSo(sol) {
+    Object.keys(cen.sol).forEach(function (k) { cen.sol[k] = k === sol; });
+    cen.quais = 'todas';
+    sincronizarBotoes(); cenario();
+  }
+  function sincronizarBotoes() {
+    document.querySelectorAll('#c-sol button').forEach(function (b) { b.setAttribute('aria-pressed', String(!!cen.sol[b.dataset.sol])); });
+    document.querySelectorAll('#c-quais button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.quais === cen.quais)); });
+  }
+  document.querySelectorAll('#c-sol button').forEach(function (b) {
+    b.addEventListener('click', function () { cen.sol[b.dataset.sol] = !cen.sol[b.dataset.sol]; sincronizarBotoes(); cenario(); });
+  });
+  document.querySelectorAll('#c-quais button').forEach(function (b) {
+    b.addEventListener('click', function () { cen.quais = b.dataset.quais; sincronizarBotoes(); cenario(); });
+  });
+  $('c-chuva').addEventListener('input', function () { cen.chuva = +this.value; cenario(); });
+  // Carrega as áreas sem depender do mapa: o cenário funciona mesmo se o mapa não abrir.
+  fetch('dados/recomendacoes.geojson').then(function (r) { return r.json(); })
+    .then(function (g) { areasDados = g; cenario(); })
+    .catch(function () { $('c-res').textContent = 'Não foi possível carregar as áreas.'; });
 })();
 </script>
 </body>

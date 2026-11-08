@@ -43,6 +43,10 @@ window.CityShield = (function () {
       pitch: opts.pitch || 0,
       bearing: opts.bearing || 0,
       maxPitch: 70,
+      // Mapa interativo fica preso em Sorocaba: município com ~25 km de folga em volta.
+      // Ninguém se perde afastando o zoom até o mundo inteiro.
+      maxBounds: opts.interativo ? [[-47.82, -23.84], [-47.05, -23.10]] : undefined,
+      minZoom: opts.interativo ? 9 : 0,
       attributionControl: { compact: true }
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), opts.posControles || 'top-right');

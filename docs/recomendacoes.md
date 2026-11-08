@@ -100,6 +100,32 @@ Nota 0 não quer dizer que a área é inútil: quer dizer que **não tem registr
 
 **Limites:** são valores de projeto publicados, não medições em Sorocaba. Solo argiloso e lençol freático alto reduzem a infiltração. O relevo de 30 m dá ordem de grandeza para os parques, não o volume de projeto. Telhado verde precisa de laudo da estrutura.
 
+## Cenário antes e depois (#20)
+
+Na plataforma, a aba **Simulação** mostra o cenário da área piloto: a pessoa escolhe a **chuva** (10 a 120 mm), as **soluções** e se entram **todas as áreas** ou **só as de prioridade média ou alta**, e vê quanto da água vai para a rua **antes** e **depois**.
+
+Para cada área de jardim, piso ou telhado, com chuva de `P` mm:
+
+| Solução | Água que chega | Água retida |
+|---|---|---|
+| Piso permeável | área × P | área × mín(P, 50 mm) |
+| Telhado verde | área × P | área × P × 0,47 |
+| Jardim de chuva | jardim × 10 × P, com jardim = 10% da área | mín(chega, jardim × 0,15 m) |
+
+Antes = soma da água que chega. Depois = antes − retida. Os **parques** aparecem num bloco separado, com a **capacidade** total, que não muda com a chuva e não entra na conta de antes e depois.
+
+Os números (50 mm, 0,47, 10%, 10×, 0,15 m) **não estão escritos no site**: ele lê do campo `parametros` do `recomendacoes.geojson`, que o pipeline grava a partir de `pipeline/pipeline/volumes.py`. Assim pipeline, site e API (`/cenario`, #18) usam sempre os mesmos valores. Com 50 mm, a conta do site dá exatamente o `volume_m3` do pipeline em todas as 44 áreas de jardim, piso e telhado (conferido em teste).
+
+Na área piloto, com todas as áreas:
+
+| Chuva | Chega | Retida | Retido |
+|---|---|---|---|
+| 10 mm | 1.337 m³ | 1.195 m³ | 89% |
+| 50 mm | 6.686 m³ | 2.937 m³ | 44% |
+| 120 mm | 16.047 m³ | 3.818 m³ | 24% |
+
+Em chuva forte a porcentagem cai porque as soluções enchem: é o comportamento esperado, e o painel mostra isso em vez de esconder.
+
 ## O que o arquivo traz
 
 Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pipeline/pipeline/areas.py) (tipo, nome, área, frações de risco) e mais:
