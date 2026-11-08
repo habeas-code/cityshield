@@ -85,6 +85,19 @@ label.campo .l{display:flex;justify-content:space-between}
 label.campo .l b{color:var(--ink);font-weight:600}
 
 /* Soluções */
+.fila{list-style:none;margin:8px 0 0;padding:0}
+.fila li button{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;width:100%;padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;color:var(--ink)}
+.fila li button:hover,.fila li button:focus-visible{background:var(--hover)}
+.fila .pos{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.fila .nome{display:grid;min-width:0}
+.fila .nome b{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila .nome span{font-size:11.5px;color:var(--ink-2)}
+.fila .nt{display:grid;justify-items:end;gap:3px;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.fila .nt i{display:block;width:44px;height:4px;border-radius:2px;background:var(--panel-2);overflow:hidden}
+.fila .nt i::after{content:"";display:block;height:100%;width:var(--w);background:var(--c)}
+.fila-mais{margin-top:8px;padding:6px 10px;border:1px solid var(--line-2);border-radius:4px;font-size:12.5px;color:var(--ink-2)}
+.fila-mais:hover{color:var(--ink);border-color:var(--accent)}
+.fila-nota{margin:8px 0 0}
 .sol{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;gap:4px}
 .sol-t{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .sol-t b{font-weight:600}
@@ -200,7 +213,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .pop b{display:block;font-weight:600}
 .pop span{color:var(--ink-2)}
 .pop-area .maplibregl-popup-content{padding:0;border-radius:8px;overflow:hidden}
-.pa{width:310px}
+.pa{width:min(310px,78vw)}
 .pa-cab{padding:12px 40px 9px 14px;border-bottom:1px solid var(--line)}
 .pa-cab b{display:block;font-size:16px;font-weight:600;line-height:1.25;color:var(--ink)}
 .pa-cab span{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-2)}
@@ -362,6 +375,12 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
     <div class="rolar" id="a-oport" hidden>
       <div class="bloco"><p>Soluções verdes a investigar no Núcleo Norte e o motivo de cada uma.</p></div>
+      <div class="bloco fila-bloco">
+        <div class="w-cab"><h3>Por onde começar</h3><span class="sub">prioridade de 0 a 100</span></div>
+        <ol class="fila" id="fila"><li class="sub">Carregando as áreas…</li></ol>
+        <button type="button" class="fila-mais" id="fila-mais" hidden>Ver todas</button>
+        <p class="sub fila-nota">Prioridade = risco × ocorrências por perto × tamanho. Clique numa área para ver a ficha.</p>
+      </div>
       <div class="sol">
         <div class="sol-t"><b>Jardim de chuva</b><span class="status inv">Investigar</span></div>
         <p>Pode receber parte do escoamento das ruas próximas e infiltrá-lo no solo.</p>
@@ -402,7 +421,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <span class="it"><i class="q" style="background:#4CC38A"></i>Área verde (parque, praça, gramado)</span>
           <span class="it"><i class="q" style="background:#AEB6C2"></i>Estacionamento aberto</span>
           <span class="it"><i class="q" style="background:#E0B341"></i>Telhado com mais de 1.000 m²</span>
-          <span class="sub" style="padding-left:19px">Clique numa área para ver o tamanho e o risco</span>
+          <span class="sub" style="padding-left:19px">Clique numa área para ver a ficha: solução, prioridade, risco e volume</span>
         </div>
       </div>
       <p class="aviso">As oportunidades são preliminares e precisam de avaliação técnica.</p>
@@ -1070,9 +1089,52 @@ label.campo .l b{color:var(--ink);font-weight:600}
     b.addEventListener('click', function () { cen.quais = b.dataset.quais; sincronizarBotoes(); cenario(); });
   });
   $('c-chuva').addEventListener('input', function () { cen.chuva = +this.value; cenario(); });
+  // ---------- Fila "Por onde começar" (#19) ----------
+  var FILA_INICIAL = 10, filaAberta = false;
+  function caixaDaArea(geom) {
+    var xs = [], ys = [];
+    (function walk(c) { if (typeof c[0] === 'number') { xs.push(c[0]); ys.push(c[1]); } else c.forEach(walk); })(geom.coordinates);
+    return [[Math.min.apply(null, xs), Math.min.apply(null, ys)], [Math.max.apply(null, xs), Math.max.apply(null, ys)]];
+  }
+  function abrirArea(f) {
+    var cx = caixaDaArea(f.geometry), centro = [(cx[0][0] + cx[1][0]) / 2, (cx[0][1] + cx[1][1]) / 2];
+    if (window.innerWidth <= 760) { var m = $('mapa'); if (m && m.scrollIntoView) m.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (!map) return;
+    map.fitBounds(cx, { padding: 60, maxZoom: 17, duration: 700 });
+    map.once('moveend', function () { popupArea(centro, f.properties); });
+  }
+  function montarFila() {
+    var ol = $('fila'); if (!ol || !areasDados) return;
+    ol.innerHTML = '';
+    var lista = areasDados.features.slice().sort(function (a, b) { return a.properties.posicao - b.properties.posicao; });
+    var mostrar = filaAberta ? lista : lista.slice(0, FILA_INICIAL);
+    mostrar.forEach(function (f) {
+      var p = f.properties, temNome = p.nome && p.nome !== 'null';
+      var cor = p.nota >= 50 ? '#3FB27F' : p.nota >= 10 ? '#D9A441' : '#7D828A';
+      var li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', p.posicao + 'º: ' + (temNome ? p.nome : p.rotulo) + ', ' + p.solucao_rotulo + ', prioridade ' + p.nota);
+      var pos = document.createElement('span'); pos.className = 'pos'; pos.textContent = p.posicao + 'º';
+      var nome = document.createElement('span'); nome.className = 'nome';
+      var nb = document.createElement('b'); nb.textContent = temNome ? p.nome : p.rotulo + ' sem nome';
+      var ns = document.createElement('span'); ns.textContent = p.solucao_rotulo;
+      nome.appendChild(nb); nome.appendChild(ns);
+      var nt = document.createElement('span'); nt.className = 'nt'; nt.textContent = p.nota;
+      var barra = document.createElement('i'); barra.style.setProperty('--w', Math.max(p.nota, 2) + '%'); barra.style.setProperty('--c', cor);
+      nt.appendChild(barra);
+      b.appendChild(pos); b.appendChild(nome); b.appendChild(nt);
+      b.addEventListener('click', function () { abrirArea(f); });
+      li.appendChild(b); ol.appendChild(li);
+    });
+    var mais = $('fila-mais');
+    mais.hidden = lista.length <= FILA_INICIAL;
+    mais.textContent = filaAberta ? 'Mostrar só as 10 primeiras' : 'Ver todas as ' + lista.length;
+  }
+  $('fila-mais').addEventListener('click', function () { filaAberta = !filaAberta; montarFila(); });
+
   // Carrega as áreas sem depender do mapa: o cenário funciona mesmo se o mapa não abrir.
   fetch('dados/recomendacoes.geojson').then(function (r) { return r.json(); })
-    .then(function (g) { areasDados = g; cenario(); })
+    .then(function (g) { areasDados = g; cenario(); montarFila(); })
     .catch(function () { $('c-res').textContent = 'Não foi possível carregar as áreas.'; });
 })();
 </script>
