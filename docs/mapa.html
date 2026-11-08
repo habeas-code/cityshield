@@ -212,7 +212,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:var(--panel)}
 .pop b{display:block;font-weight:600}
 .pop span{color:var(--ink-2)}
-.pop-area .maplibregl-popup-content{padding:0;border-radius:8px;overflow:hidden}
+.pop-area .maplibregl-popup-content{padding:0;border-radius:8px;overflow:hidden auto;max-height:min(68vh,620px);overscroll-behavior:contain}
 .pa{width:min(310px,78vw)}
 .pa-cab{padding:12px 40px 9px 14px;border-bottom:1px solid var(--line)}
 .pa-cab b{display:block;font-size:16px;font-weight:600;line-height:1.25;color:var(--ink)}
@@ -805,6 +805,26 @@ label.campo .l b{color:var(--ink);font-weight:600}
     div.appendChild(rod);
     popupAreaAtual = new maplibregl.Popup({ closeButton: true, offset: 8, maxWidth: '330px', className: 'pop-area' })
       .setLngLat(lngLat).setDOMContent(div).addTo(map);
+    caberNaTela(popupAreaAtual);
+  }
+
+  // Move o mapa para o popup inteiro ficar visível (MapLibre não faz isso sozinho).
+  function caberNaTela(popup) {
+    requestAnimationFrame(function () {
+      var el = popup.getElement && popup.getElement();
+      if (!el || !map) return;
+      var m = map.getContainer().getBoundingClientRect(), folga = 12;
+      // Altura máxima = altura do mapa (no celular o mapa é menor que a tela).
+      var conteudo = el.querySelector('.maplibregl-popup-content');
+      if (conteudo) conteudo.style.maxHeight = Math.max(220, Math.min(620, m.height - 2 * folga - 20)) + 'px';
+      var r = el.getBoundingClientRect();
+      var dx = 0, dy = 0;
+      if (r.bottom > m.bottom - folga) dy = r.bottom - m.bottom + folga;
+      if (r.top - dy < m.top + folga) dy = r.top - m.top - folga;
+      if (r.right > m.right - folga) dx = r.right - m.right + folga;
+      if (r.left - dx < m.left + folga) dx = r.left - m.left - folga;
+      if (dx || dy) map.panBy([dx, dy], { duration: 300 });
+    });
   }
 
   // ---------- Abas ----------
@@ -1100,8 +1120,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
     var cx = caixaDaArea(f.geometry), centro = [(cx[0][0] + cx[1][0]) / 2, (cx[0][1] + cx[1][1]) / 2];
     if (window.innerWidth <= 760) { var m = $('mapa'); if (m && m.scrollIntoView) m.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     if (!map) return;
-    map.fitBounds(cx, { padding: 60, maxZoom: 17, duration: 700 });
-    map.once('moveend', function () { popupArea(centro, f.properties); });
+    // A área fica no alto do mapa, para a ficha (que abre para baixo) caber embaixo dela.
+    var alto = map.getContainer().clientHeight;
+    map.fitBounds(cx, { padding: { top: 50, left: 50, right: 50, bottom: Math.max(50, Math.round(alto * 0.6)) }, maxZoom: 17, duration: 0 });
+    popupArea(centro, f.properties);
   }
   function montarFila() {
     var ol = $('fila'); if (!ol || !areasDados) return;
