@@ -49,6 +49,13 @@ window.CityShield = (function () {
     if (opts.escala) map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), opts.posControles || 'top-right');
 
     map.on('load', function () {
+      // Créditos começam fechados (só o botão ⓘ); abrem ao clicar.
+      function fecharCreditos() {
+        var cred = map.getContainer().querySelector('.maplibregl-ctrl-attrib');
+        if (cred) { cred.classList.remove('maplibregl-compact-show'); cred.removeAttribute('open'); }
+      }
+      fecharCreditos();
+      map.once('idle', fecharCreditos);
       // No mapa escuro: troca o preto por azul-marinho e destaca rios e represas.
       if (!opts.claro && !opts.estilo) map.getStyle().layers.forEach(function (l) {
         try {
