@@ -37,7 +37,7 @@ Sorocaba já tem mapa de suscetibilidade a inundação (Serviço Geológico, 201
 | 2 | **Testa o próprio mapa** contra as ocorrências reais da Defesa Civil. | ✅ pronto |
 | 3 | **Encontra áreas candidatas** perto dos pontos críticos: parques, praças, estacionamentos e telhados grandes do OpenStreetMap, com o risco de cada uma. | ✅ pronto no piloto |
 | 4 | **Recomenda uma solução** para cada área e dá uma **nota de prioridade** (risco × ocorrências × área). [Como funciona](docs/recomendacoes.md) | ✅ pronto no piloto |
-| 5 | **Estima quanta água** cada solução seguraria numa chuva escolhida, com a fonte de cada número. | 🔨 em andamento (#17) |
+| 5 | **Estima quanta água** cada solução seguraria numa chuva escolhida, com a fonte de cada número. [Como funciona](docs/recomendacoes.md#quanta-água-cada-solução-segura-17) | ✅ pronto no piloto |
 
 **Piloto:** núcleo Norte (Parque das Águas, Jd. Maria do Carmo, Abaeté), raio de 800 m, onde se concentram 41 registros. O Centro vem depois.
 

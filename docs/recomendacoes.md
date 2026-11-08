@@ -69,6 +69,37 @@ Cada fator vai de 0 a 1. Como é uma multiplicação, a área só vai para o top
 
 Nota 0 não quer dizer que a área é inútil: quer dizer que **não tem registro a até 300 m** ou que está **fora do risco**. São 17 áreas assim, entre elas o maior telhado (1,9 ha, num ponto alto). Um telhado verde num lugar alto também segura água que desceria para a várzea, mas esse efeito à distância não entra na nota desta versão.
 
+## Quanta água cada solução segura (#17)
+
+**Chuva de referência: 50 mm**, perto da chuva de **16/10/2026** em Sorocaba (52 mm em 24 h), quando a Av. Dom Aguirre e a XV de Agosto foram interditadas. Cada número usa um valor publicado ([D11](decisoes.md#d11-toda-estimativa-com-fonte)) ou uma conta com o relevo, e o site mostra a conta e a fonte no ⓘ de cada área.
+
+| Solução | Conta | Valor usado | Fonte |
+|---|---|---|---|
+| Piso permeável | área × 50 mm | a base de brita segura até **50 mm** da chuva que cai no próprio piso | Prefeitura de São Paulo, ETS-03/2013 (brita de 25 cm × 20% de vazios) |
+| Jardim de chuva | área do jardim × 15 cm | lâmina de **15 cm = 150 L por m²**; o jardim recebe a água de 10× a sua área em volta | Hinman, *Rain Gardens*, WSU Extension, 2007 |
+| Telhado verde | área × 50 mm × 47% | retém **47%** da chuva (limite de baixo da faixa 47–62%; em chuva forte é menos) | Vacari et al., 2019, *E&S Engineering and Science*, UFMT |
+| Parque inundável | volume entre o terreno e uma lâmina de **1 m** acima do fundo | capacidade de armazenamento, pelo relevo | cálculo do CityShield sobre o ANADEM v1 (30 m) |
+
+**Premissas nossas** (estão no começo de `pipeline/pipeline/volumes.py` e saem no campo `parametros` do arquivo):
+
+- **Jardins ocupam 10% da área verde.** Uma praça não vira um jardim de chuva inteiro: ela continua sendo praça, com canteiros rebaixados. Com 10%, a conta fica conservadora.
+- **Parque alaga até 1 m acima do fundo.** O fundo é o 10º percentil da altura do terreno dentro do parque. As células mais de 3 m abaixo da mediana ficam de fora, porque são lago ou leito de rio e já têm água (é o caso de parte do Porto das Águas).
+
+**Resultado na área piloto:**
+
+| Solução | Áreas | Volume |
+|---|---|---|
+| Parque inundável | 4 | ≈ 131.700 m³ de **capacidade** de armazenamento |
+| Jardim de chuva | 31 | ≈ 1.300 m³ retidos na chuva de 50 mm |
+| Piso permeável | 7 | ≈ 1.000 m³ retidos na chuva de 50 mm |
+| Telhado verde | 6 | ≈ 630 m³ retidos na chuva de 50 mm |
+
+1 m³ = 1.000 litros = uma caixa d'água comum. Os parques da várzea concentram quase todo o volume. A nota de prioridade não usa o volume: ela continua sendo risco × ocorrências × tamanho.
+
+**Capacidade não é o mesmo que água retida.** Jardim, piso e telhado seguram a chuva que cai neles ou em volta. O parque inundável é um **reservatório**: a capacidade diz quanto cabe nele quando o rio e as galerias transbordam. Por isso o site usa rótulos diferentes ("água que segura" e "água que pode guardar") e os dois tipos não são somados.
+
+**Limites:** são valores de projeto publicados, não medições em Sorocaba. Solo argiloso e lençol freático alto reduzem a infiltração. O relevo de 30 m dá ordem de grandeza para os parques, não o volume de projeto. Telhado verde precisa de laudo da estrutura.
+
 ## O que o arquivo traz
 
 Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pipeline/pipeline/areas.py) (tipo, nome, área, frações de risco) e mais:
@@ -83,6 +114,11 @@ Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pip
 | `fator_risco`, `fator_registros`, `fator_tamanho` | `1.0`, `0.97`, `0.98` | os três fatores da nota, de 0 a 1, com 2 casas (a nota sai deles, então a conta fecha) |
 | `nota` | `95` | prioridade de 0 a 100 |
 | `posicao` | `1` | lugar na fila (1 = primeira) |
+| `volume_m3` | `63879` | água que a solução segura (retido) ou pode guardar (capacidade), em m³ |
+| `volume_tipo` | `capacidade` | `retido` (chuva de 50 mm) ou `capacidade` (parque) |
+| `fracao_retida` | `0.3` ou `null` | parte da água que chega que fica retida; `null` no parque |
+| `volume_conta` | `jardim de 455 m² (10% da área) × 15 cm de lâmina` | a conta, em texto |
+| `volume_fonte` | `Hinman, Rain Gardens, WSU Extension, 2007` | a fonte do valor |
 
 Esse é o formato que a API entrega em `/areas` e `/areas/{id}` (#18).
 
@@ -91,4 +127,3 @@ Esse é o formato que a API entrega em `/areas` e `/areas/{id}` (#18).
 - **Áreas são candidatas a estudo**, não terrenos disponíveis: uma praça pode já ter outro uso, e um estacionamento pode ser particular.
 - A regra olha o tipo e o relevo. Ela não sabe se o solo infiltra bem, se há rede de drenagem por baixo, nem quem é o dono da área. Isso é trabalho de projeto, depois da priorização.
 - Os parâmetros (1 ha, metade no risco alto, 300 m, 1 m) estão no começo de `pipeline/pipeline/recomendacoes.py` e saem gravados no arquivo, no campo `parametros`. Mudar um deles e rodar de novo refaz a fila inteira.
-- O volume de água que cada solução segura vem na tarefa #17, com as fontes já escolhidas ([D11](decisoes.md#d11-toda-estimativa-com-fonte)).

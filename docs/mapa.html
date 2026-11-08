@@ -240,6 +240,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .pa-info-txt p:last-child{margin-bottom:0}
 .pa-conta{font-variant-numeric:tabular-nums;color:var(--ink)!important;font-weight:600}
 .pa-fontes{display:block;margin-bottom:4px}
+.pa-txt .pa-vol{font-size:15px;font-weight:600;color:#7FC8F8;margin-bottom:1px}
 .pa-alerta svg{stroke:var(--warn)} .pa-alerta .pa-txt b{color:var(--warn)}
 .pa-rodape{margin:0;padding:8px 14px 9px;background:var(--panel-2);font-size:11.5px;color:var(--muted)}
 .pa-rodape a{color:var(--accent)}
@@ -593,6 +594,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
   };
   var ICONES = {
+    agua: '<path d="M4 15c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M4 19c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M12 3s4 4.5 4 7a4 4 0 0 1-8 0c0-2.5 4-7 4-7Z"/>',
     evidencia: '<path d="M9 11.5 11 13.5 15.5 9"/><rect x="4" y="4" width="16" height="16" rx="3"/>',
     nota: '<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/>',
     solucao: '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19l7-7"/>',
@@ -719,6 +721,23 @@ label.campo .l b{color:var(--ink);font-weight:600}
       sol.appendChild(el('span', 'pa-sol sol-' + p.solucao, p.solucao_rotulo));
       sol.appendChild(el('span', null, DESCRICAO[p.solucao]));
       corpo.appendChild(linha('solucao', 'Intervenção recomendada', sol, 'pa-int'));
+
+      if (p.volume_m3 != null && p.volume_m3 !== 'null') {
+        var milhar = function (x) { return Math.round(x).toLocaleString('pt-BR'); };
+        var cap = p.volume_tipo === 'capacidade';
+        var vol = el('div');
+        var vb = el('span', 'pa-vol', '≈ ' + milhar(p.volume_m3) + ' m³');
+        vol.appendChild(vb);
+        vol.appendChild(el('span', null, '= ' + milhar(p.volume_m3) + ' caixas d’água de 1.000 litros' +
+          (!cap && p.fracao_retida && p.fracao_retida !== 'null' ? ' · ' + Math.round(p.fracao_retida * 100) + '% da água que chega' : '')));
+        corpo.appendChild(linha('agua', cap ? 'Água que pode guardar' : 'Água que segura', vol, null,
+          cap ? 'capacidade de armazenamento, com até 1 m de lâmina' : 'numa chuva de 50 mm, como a de 16/10/2026 (52 mm)', [
+            'Conta: ' + p.volume_conta + '.',
+            'Fonte: ' + p.volume_fonte + '.',
+            cap ? 'Relevo de 30 m: é ordem de grandeza. Não conta a água que já existe em lago ou leito de rio.'
+                : 'Valor de projeto publicado, não medição em Sorocaba. Solo e lençol freático podem mudar o resultado.'
+          ]));
+      }
 
       var ev = el('ul', 'pa-evid');
       var porque = {
@@ -929,7 +948,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       a.textContent = p[0]; b.textContent = p[1]; li.appendChild(a); li.appendChild(b); pr.appendChild(li);
     });
     var box = $('s-res'); box.innerHTML = '';
-    if (!s.calc) { box.innerHTML = '<p class="sub" style="margin:0">Sem estimativa por enquanto: o volume de um parque alagável só pode ser calculado com o relevo real do terreno.</p>'; return; }
+    if (!s.calc) { box.innerHTML = '<p class="sub" style="margin:0">O volume de um parque alagável depende do relevo real do terreno: veja o volume de cada parque do piloto clicando nele, na aba Oportunidades.</p>'; return; }
     var r = s.calc(mm, A), pct = r.cai ? Math.round(r.ret / r.cai * 100) : 0, resto = Math.max(0, r.cai - r.ret);
     box.innerHTML =
       '<div class="sim-kpis"><div><span>Área</span><b class="n"></b></div><div><span>Chuva</span><b class="n"></b></div><div><span>Água que chega</span><b class="n"></b></div></div>' +
