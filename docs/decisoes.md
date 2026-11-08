@@ -136,3 +136,22 @@ Cada decisão nova entra no fim, com número, data e as alternativas que conside
 **Por quê:** solução verde é obra pública. Quem pode transformar a recomendação em jardim de chuva ou parque inundável é o poder público, então a ferramenta precisa falar a língua de quem decide: risco, prioridade, área e volume, sempre com fonte.
 
 **Consequências:** explica o visual técnico (D12), a falta de login (D9: ferramenta pública, aberta a qualquer um) e a exigência de fonte em todo número (D11).
+
+## D14. Site em HTML, CSS e JavaScript puros, sem React
+
+**Data:** 08/11/2026
+
+**Decisão:** o site continua como está: páginas em HTML, CSS e JavaScript puros (`docs/index.html`, `docs/mapa.html`, `docs/comum.js`), publicadas direto pelo GitHub Pages, com o MapLibre guardado em `docs/vendor/`. A migração para React + Vite (#12) foi cancelada.
+
+**Por quê:**
+
+- O site já funciona e está publicado, com mapa de risco, validação, áreas com recomendação, popup explicado e painel antes/depois. Refazer em React levaria dias só para voltar ao mesmo ponto, perto do congelamento de 26/11.
+- Sem etapa de build, tem menos coisa para quebrar na entrega: o que está no repositório é o que está no ar.
+- O júri avalia se funciona, se está completo e como foi construído. Um site leve, sem dependências, que abre rápido no celular atende melhor a isso do que trocar de biblioteca.
+- O MapLibre é o mesmo nos dois casos: o mapa, que é a parte principal, não muda.
+
+**Alternativas:** React + Vite + TypeScript + TanStack Query, o plano original da #12. Bom para sites grandes com muito estado; o nosso tem duas páginas e um mapa.
+
+**Consequências:** a pasta `web/` guarda só a saída do pipeline (`web/public/dados/`). O site lê os arquivos de `docs/dados/` e, quando a API estiver no ar, passa a ler dela com plano B para os arquivos (#24, D10).
+
+**Pode voltar:** se o projeto continuar depois do hackathon e o site crescer (login, edição de dados), React volta a fazer sentido.
