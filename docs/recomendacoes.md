@@ -132,6 +132,7 @@ Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pip
 
 | Campo | Exemplo | O que é |
 |---|---|---|
+| `id` | `way-48448685` | id fixo da área, vindo do OpenStreetMap (`osm` com hífen no lugar da barra). Use este em `/areas/{id}`; a `posicao` muda quando os parâmetros mudam |
 | `solucao` | `parque_inundavel` | código da solução: `parque_inundavel`, `jardim_chuva`, `piso_permeavel`, `telhado_verde` |
 | `solucao_rotulo` | `Parque inundável` | nome para mostrar |
 | `motivo` | `Área verde grande na várzea: ...` | uma frase explicando a escolha |
