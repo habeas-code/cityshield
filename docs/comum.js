@@ -46,6 +46,22 @@ window.CityShield = (function () {
       attributionControl: { compact: true }
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), opts.posControles || 'top-right');
+
+    // Plano B do mapa de fundo: se o estilo de terceiros (CARTO, OpenFreeMap) falhar ou
+    // demorar, troca por um fundo liso para as camadas do CityShield aparecerem mesmo assim.
+    var estiloOk = false, usouReserva = false;
+    map.once('style.load', function () { estiloOk = true; });
+    function fundoReserva() {
+      if (estiloOk || usouReserva) return;
+      usouReserva = true;
+      if (window.console) console.warn('CityShield: mapa de fundo indisponível, usando fundo simples.');
+      map.setStyle({
+        version: 8, sources: {},
+        layers: [{ id: 'fundo', type: 'background', paint: { 'background-color': opts.claro ? '#E0E4DE' : '#0B1A2E' } }]
+      });
+    }
+    map.on('error', function () { if (!estiloOk) fundoReserva(); });
+    setTimeout(fundoReserva, 10000);
     if (opts.escala) map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), opts.posControles || 'top-right');
 
     map.on('load', function () {
@@ -67,7 +83,7 @@ window.CityShield = (function () {
       });
 
       // Prédios em 3D (altura do OpenStreetMap; 6 m quando não informada)
-      if (opts.tresD) {
+      if (opts.tresD && map.getSource('openmaptiles')) {
         var primeiroRotulo = (map.getStyle().layers.filter(function (l) { return l.type === 'symbol'; })[0] || {}).id;
         map.addLayer({
           id: 'predios-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 13,

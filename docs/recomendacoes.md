@@ -80,7 +80,7 @@ Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pip
 | `motivo` | `Área verde grande na várzea: ...` | uma frase explicando a escolha |
 | `alerta` | `Área no nível do córrego: ...` ou `null` | aviso do lençol freático |
 | `registros_perto` | `33` | registros em ruas a até 300 m |
-| `fator_risco`, `fator_registros`, `fator_tamanho` | `0.998`, `0.971`, `0.984` | os três fatores da nota, de 0 a 1 |
+| `fator_risco`, `fator_registros`, `fator_tamanho` | `1.0`, `0.97`, `0.98` | os três fatores da nota, de 0 a 1, com 2 casas (a nota sai deles, então a conta fecha) |
 | `nota` | `95` | prioridade de 0 a 100 |
 | `posicao` | `1` | lugar na fila (1 = primeira) |
 

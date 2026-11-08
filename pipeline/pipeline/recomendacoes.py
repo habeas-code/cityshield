@@ -97,15 +97,18 @@ def recomendar(refazer=False):
         tamanho = math.log(p["area_m2"] / areas.AREA_MINIMA_M2) / math.log(max_area / areas.AREA_MINIMA_M2)
         tamanho = min(max(tamanho, 0.0), 1.0)
         solucao = _solucao(p)
+        # A nota sai dos fatores já arredondados a 2 casas: a conta que o site mostra
+        # (100 × risco × ocorrências × tamanho) tem que dar exatamente a nota.
+        risco, registros, tamanho = round(risco, 2), round(registros, 2), round(tamanho, 2)
         p.update({
             "solucao": solucao,
             "solucao_rotulo": SOLUCOES[solucao],
             "motivo": MOTIVOS[solucao],
             "alerta": _alerta(p, solucao),
             "registros_perto": perto,
-            "fator_risco": round(risco, 3),
-            "fator_registros": round(registros, 3),
-            "fator_tamanho": round(tamanho, 3),
+            "fator_risco": risco,
+            "fator_registros": registros,
+            "fator_tamanho": tamanho,
             "nota": round(100 * risco * registros * tamanho),
         })
 

@@ -3,3 +3,5 @@
 *.jpg binary
 *.pdf binary
 *.tif binary
+# Bibliotecas de terceiros guardadas como vieram (conferidas por hash)
+docs/vendor/** -text -diff linguist-vendored
