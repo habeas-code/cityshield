@@ -188,6 +188,63 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:var(--panel)}
 .pop b{display:block;font-weight:600}
 .pop span{color:var(--ink-2)}
+.pop-area .maplibregl-popup-content{padding:0;border-radius:8px;overflow:hidden}
+.pa{width:310px}
+.pa-cab{padding:12px 40px 9px 14px;border-bottom:1px solid var(--line)}
+.pa-cab b{display:block;font-size:16px;font-weight:600;line-height:1.25;color:var(--ink)}
+.pa-cab span{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-2)}
+.pa-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:9px 14px 2px}
+.pa-kpi{border:1px solid var(--line-2);border-radius:6px;padding:6px 8px 6px;background:var(--panel-2)}
+.pa-kpi span{display:block;font-size:12px;color:var(--ink-2);line-height:1.2}
+.pa-kpi b{display:block;font-size:19px;font-weight:600;color:var(--ink);margin-top:3px;line-height:1.1;white-space:nowrap}
+.pa-kpi small{display:block;font-size:11.5px;color:var(--ink-2);line-height:1.2;margin-top:2px}
+.pa-corpo{padding:2px 14px 2px}
+.pa-linha{display:grid;grid-template-columns:18px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.pa-linha:last-child{border-bottom:0}
+.pa-linha svg{width:18px;height:18px;margin-top:1px;fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pa-txt b{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.pa-txt span{display:block;font-size:12px;line-height:1.4;color:var(--ink-2)}
+.pa-pri-topo{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pa-pri-topo b{font-size:18px;font-weight:600;line-height:1;margin:0}
+.pa-pri-topo small{font-size:11.5px;font-weight:400;color:var(--muted);margin-left:1px}
+.pa-barra{height:5px;background:var(--panel-2);border-radius:3px;margin-top:5px;overflow:hidden}
+.pa-barra i{display:block;height:100%;border-radius:3px;background:var(--muted)}
+.pa-pri.alta .pa-barra i{background:var(--green)} .pa-pri.alta .pa-pri-topo b{color:#6FCB9F}
+.pa-pri.media .pa-barra i{background:var(--warn)} .pa-pri.media .pa-pri-topo b{color:var(--warn)}
+.pa-txt .pa-sol{font-size:14px;font-weight:600;margin-bottom:2px}
+.pa-txt .sol-parque_inundavel,.pa-txt .sol-jardim_chuva{color:#6FCB9F} .pa-txt .sol-piso_permeavel{color:#C3CAD4} .pa-txt .sol-telhado_verde{color:#E0B341}
+.pa-risco-topo{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pa-risco-topo b{font-size:14px;font-weight:600}
+.pa-risco-topo span{font-size:11.5px;color:var(--muted);text-align:right}
+.nivel-alto{color:#F07A8C} .nivel-medio{color:#E8A0AC} .nivel-baixo{color:var(--ink-2)}
+.pa-pilha{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--panel-2);margin:5px 0 4px;gap:2px}
+.pa-pilha i{display:block;height:100%}
+.f-alto{background:#D6455D} .f-medio{background:#E8A0AC} .f-baixo{background:#5A5E66}
+.pa-legenda{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--ink-2)}
+.pa-legenda span{display:flex;align-items:center;gap:5px}
+.pa-legenda span.zero{color:var(--muted)}
+.pa-legenda i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.pa-legenda span.zero i{opacity:.45}
+.pa-evid{margin:2px 0 0;padding:0;list-style:none}
+.pa-evid li{position:relative;padding-left:12px;font-size:12px;line-height:1.4;color:var(--ink-2);margin-top:3px}
+.pa-evid li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.pa-dica{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:var(--muted);margin-top:1px}
+.pa-explica{display:block;margin-top:5px;font-size:11.5px;line-height:1.35;color:var(--ink-2)}
+.pa-int{background:rgba(63,178,127,.09);border:1px solid rgba(63,178,127,.28);border-radius:6px;padding:8px 10px;margin:6px -4px}
+.pa-int svg{stroke:#6FCB9F}
+.pa-linha.pa-int + .pa-linha{border-top:0}
+.pa-info{display:inline-grid;place-items:center;width:15px;height:15px;margin-left:6px;vertical-align:1px;border:1px solid var(--line-2);border-radius:50%;background:none;color:var(--ink-2);font:italic 600 10px/1 Georgia,serif;cursor:pointer;padding:0}
+.pa-info:hover,.pa-info[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.pa-info-txt{margin:6px 0 4px;padding:7px 9px;background:var(--panel-2);border-radius:5px}
+.pa-info-txt p{margin:0 0 5px;font-size:11.5px;line-height:1.4;color:var(--ink-2)}
+.pa-info-txt p:last-child{margin-bottom:0}
+.pa-conta{font-variant-numeric:tabular-nums;color:var(--ink)!important;font-weight:600}
+.pa-fontes{display:block;margin-bottom:4px}
+.pa-alerta svg{stroke:var(--warn)} .pa-alerta .pa-txt b{color:var(--warn)}
+.pa-rodape{margin:0;padding:8px 14px 9px;background:var(--panel-2);font-size:11.5px;color:var(--muted)}
+.pa-rodape a{color:var(--accent)}
+.maplibregl-popup-close-button{color:var(--ink-2);font-size:20px;line-height:1;padding:6px 10px;border-radius:0 8px 0 4px}
+.maplibregl-popup-close-button:hover{background:var(--hover);color:var(--ink)}
 .rotulo-piloto{background:var(--panel);border:1px solid var(--green);border-radius:3px;padding:3px 7px;display:grid;pointer-events:none}
 .rotulo-piloto b{font-size:11.5px;font-weight:600;color:#6FCB9F}
 .rotulo-piloto span{font-size:10.5px;color:var(--ink-2)}
@@ -500,10 +557,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
       // Áreas candidatas a soluções verdes: acima do risco, abaixo dos pontos
       var COR_AREA = ['match', ['get', 'tipo'], 'area_verde', '#4CC38A', 'estacionamento', '#AEB6C2', 'telhado', '#E0B341', '#888'];
-      map.addSource('areas', { type: 'geojson', data: 'dados/areas_candidatas.geojson' });
+      map.addSource('areas', { type: 'geojson', data: 'dados/recomendacoes.geojson' });
       map.addLayer({ id: 'areas', type: 'fill', source: 'areas', paint: { 'fill-color': COR_AREA, 'fill-opacity': 0.35 } }, 'ruas-halo');
       map.addLayer({ id: 'areas-borda', type: 'line', source: 'areas', paint: { 'line-color': COR_AREA, 'line-width': 1.2 } }, 'ruas-halo');
-      fetch('dados/areas_candidatas.geojson').then(function (r) { return r.json(); }).then(function (g) {
+      fetch('dados/recomendacoes.geojson').then(function (r) { return r.json(); }).then(function (g) {
+        totalAreas = g.features.length;
         var ha = g.features.reduce(function (s, f) { return s + f.properties.area_m2; }, 0) / 10000;
         $('areas-resumo').textContent = g.features.length + ' áreas, ' + ha.toFixed(1).replace('.', ',') + ' ha · OpenStreetMap';
       }).catch(function () { /* mantém o texto padrão */ });
@@ -527,19 +585,169 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
   // ---------- Áreas candidatas ----------
   var popupAreaAtual = null;
+  var totalAreas = 0;
+  var DESCRICAO = {
+    parque_inundavel: 'Armazenamento temporário da água da chuva: o parque alaga de forma controlada e devolve a água aos poucos. Depende de estudo de viabilidade técnica e ambiental.',
+    jardim_chuva: 'Canteiro rebaixado (bioretenção) que recebe o escoamento das calçadas e ruas próximas e favorece a infiltração. Depende de estudo do solo.',
+    piso_permeavel: 'Pavimento que deixa a água passar para uma camada de brita por baixo, reduzindo o escoamento para a rua. Depende de estudo do solo e do uso.',
+    telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
+  };
+  var ICONES = {
+    evidencia: '<path d="M9 11.5 11 13.5 15.5 9"/><rect x="4" y="4" width="16" height="16" rx="3"/>',
+    nota: '<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/>',
+    solucao: '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19l7-7"/>',
+    risco: '<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/>',
+    registros: '<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11Z"/><circle cx="12" cy="10" r="2"/>',
+    alerta: '<path d="M12 4 2.5 20h19L12 4Z"/><path d="M12 10v4M12 17v.5"/>'
+  };
   function popupArea(lngLat, p) {
     if (popupAreaAtual) popupAreaAtual.remove();
     var pct = function (x) { return Math.round(x * 100) + '%'; };
-    var area = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
-    var div = document.createElement('div'); div.className = 'pop';
-    var b = document.createElement('b'); b.textContent = p.nome && p.nome !== 'null' ? p.nome : p.rotulo;
-    var s1 = document.createElement('span'); s1.textContent = p.rotulo + ' · ' + area;
-    var s2 = document.createElement('span'); s2.style.display = 'block';
-    s2.textContent = 'Risco alto em ' + pct(p.fracao_alto) + ' da área, médio em ' + pct(p.fracao_medio);
-    var s3 = document.createElement('span'); s3.style.display = 'block'; s3.style.fontSize = '11.5px';
-    s3.textContent = 'Candidata a estudo, não terreno disponível';
-    [b, s1, s2, s3].forEach(function (x) { div.appendChild(x); });
-    popupAreaAtual = new maplibregl.Popup({ closeButton: false, offset: 6 }).setLngLat(lngLat).setDOMContent(div).addTo(map);
+    var num = function (x) { return String(x).replace('.', ','); };
+    var area = p.area_m2 >= 10000 ? num((p.area_m2 / 10000).toFixed(1)) + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
+    var el = function (tag, classe, texto) {
+      var e = document.createElement(tag);
+      if (classe) e.className = classe;
+      if (texto != null) e.textContent = texto;
+      return e;
+    };
+    var linha = function (icone, rotulo, valor, classe, dica, info) {
+      var l = el('div', 'pa-linha' + (classe ? ' ' + classe : ''));
+      var ic = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      ic.setAttribute('viewBox', '0 0 24 24'); ic.setAttribute('aria-hidden', 'true'); ic.innerHTML = ICONES[icone];
+      l.appendChild(ic);
+      var t = el('div', 'pa-txt');
+      var tit = el('b', null, rotulo);
+      var caixa = null;
+      if (info) {
+        var bt = el('button', 'pa-info', 'i');
+        bt.type = 'button'; bt.setAttribute('aria-label', 'Como é calculado'); bt.setAttribute('aria-expanded', 'false');
+        caixa = el('div', 'pa-info-txt'); caixa.hidden = true;
+        info.forEach(function (x) { caixa.appendChild(typeof x === 'string' ? el('p', null, x) : x); });
+        bt.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          caixa.hidden = !caixa.hidden; bt.setAttribute('aria-expanded', String(!caixa.hidden));
+        });
+        tit.appendChild(bt);
+      }
+      if (dica) tit.appendChild(el('em', 'pa-dica', dica));
+      t.appendChild(tit);
+      if (caixa) t.appendChild(caixa);
+      if (valor) t.appendChild(typeof valor === 'string' ? el('span', null, valor) : valor);
+      l.appendChild(t);
+      return l;
+    };
+
+    var temNome = p.nome && p.nome !== 'null';
+    var div = el('div', 'pa');
+    var cab = el('div', 'pa-cab');
+    cab.appendChild(el('b', null, temNome ? p.nome : p.rotulo + ' sem nome'));
+    cab.appendChild(el('span', null, p.rotulo + (p.solucao_rotulo ? ' · candidata a ' + p.solucao_rotulo.toLowerCase() : '')));
+    div.appendChild(cab);
+    var kpis = el('div', 'pa-kpis');
+    var regs = p.registros_perto != null && p.registros_perto !== 'null' ? String(p.registros_perto) : '–';
+    [['Área', area], ['Ocorrências', regs, 'a até 300 m'], ['Altura do terreno', num(p.hand_min_m) + ' m', 'acima do córrego']].forEach(function (k) {
+      var c = el('div', 'pa-kpi');
+      c.appendChild(el('span', null, k[0]));
+      c.appendChild(el('b', null, k[1]));
+      if (k[2]) c.appendChild(el('small', null, k[2]));
+      kpis.appendChild(c);
+    });
+    div.appendChild(kpis);
+    var corpo = el('div', 'pa-corpo');
+
+    var medio = p.fracao_medio || 0, alto = p.fracao_alto || 0, baixo = Math.max(0, 1 - alto - medio);
+    var nivel = alto >= 0.5 ? 'alto' : alto + medio >= 0.5 ? 'medio' : 'baixo';
+    var risco = el('div', 'pa-risco');
+    var rtopo = el('div', 'pa-risco-topo');
+    rtopo.appendChild(el('b', 'nivel-' + nivel, { alto: 'Risco alto', medio: 'Risco médio', baixo: 'Risco baixo' }[nivel]));
+    risco.appendChild(rtopo);
+    var pilha = el('div', 'pa-pilha');
+    [['alto', alto], ['medio', medio], ['baixo', baixo]].forEach(function (f) {
+      if (f[1] <= 0) return;
+      var seg = el('i', 'f-' + f[0]); seg.style.width = (f[1] * 100) + '%'; pilha.appendChild(seg);
+    });
+    risco.appendChild(pilha);
+    var faixas = [['alto', 'alto', alto], ['medio', 'médio', medio], ['baixo', 'baixo', baixo]].filter(function (f) { return Math.round(f[2] * 100) > 0; });
+    var leg = el('div', 'pa-legenda');
+    if (faixas.length === 1) {
+      leg.appendChild(el('span', null, 'A área inteira está em risco ' + faixas[0][1]));
+    } else {
+      faixas.forEach(function (f) {
+        var it = el('span'); it.appendChild(el('i', 'f-' + f[0]));
+        it.appendChild(document.createTextNode(pct(f[2]) + ' em risco ' + f[1]));
+        leg.appendChild(it);
+      });
+    }
+    risco.appendChild(leg);
+    corpo.appendChild(linha('risco', 'Risco de alagamento', risco, null, 'o quanto o terreno fica exposto à água', [
+      'Medido pela altura do terreno acima do córrego mais próximo (método HAND), calculada sobre o relevo ANADEM de 30 m.',
+      'Alto: até 5 m acima do córrego. Médio: de 5 a 15 m. Baixo: acima de 15 m.',
+      '"0 m acima do córrego" quer dizer que o terreno está no mesmo nível do córrego. Não é profundidade de água nem previsão de enchente.'
+    ]));
+
+    if (p.solucao_rotulo) {
+      var faixa = p.nota >= 50 ? 'alta' : p.nota >= 10 ? 'media' : 'baixa';
+      var pri = el('div', 'pa-pri ' + faixa);
+      var topo = el('div', 'pa-pri-topo');
+      topo.appendChild(el('span', null, { alta: 'Alta', media: 'Média', baixa: 'Baixa' }[faixa] + ' · ' + p.posicao + 'º de ' + (totalAreas || 48)));
+      var n = el('b', null, String(p.nota)); n.appendChild(el('small', null, '/100'));
+      topo.appendChild(n);
+      pri.appendChild(topo);
+      var barra = el('div', 'pa-barra'); var fill = el('i'); fill.style.width = Math.max(p.nota, 2) + '%';
+      barra.appendChild(fill); pri.appendChild(barra);
+      var fatores = [['registros', +p.fator_registros], ['tamanho', +p.fator_tamanho], ['risco', +p.fator_risco]]
+        .sort(function (x, y) { return x[1] - y[1]; });
+      var explica;
+      if (faixa === 'alta') explica = 'Vai bem nos três critérios: risco, ocorrências por perto e tamanho.';
+      else if (p.registros_perto === 0) explica = 'Nenhuma ocorrência registrada a até 300 m, por isso fica no fim da fila, mesmo com risco.';
+      else explica = {
+        registros: 'Menos ocorrências por perto do que as primeiras da fila: foi isso que baixou a nota.',
+        tamanho: 'Área pequena, que segura menos água: foi isso que baixou a nota.',
+        risco: 'Pouca área em risco: foi isso que baixou a nota.'
+      }[fatores[0][0]];
+      pri.appendChild(el('span', 'pa-explica', explica));
+      var f2 = function (x) { return (+x).toFixed(2).replace('.', ','); };
+      var conta = el('p', 'pa-conta', '100 × ' + f2(p.fator_risco) + ' × ' + f2(p.fator_registros) + ' × ' + f2(p.fator_tamanho) + ' = ' + p.nota);
+      corpo.appendChild(linha('nota', 'Prioridade', pri, null, 'por onde começar: risco × ocorrências × tamanho', [
+        'Nota = 100 × risco × ocorrências × tamanho. Cada critério vai de 0 a 1 e todos têm o mesmo peso: é uma multiplicação, então a área só chega ao topo se for bem nos três.',
+        'Risco: parte do terreno em risco alto, mais metade da parte em risco médio. Ocorrências: registros da Defesa Civil em ruas a até 300 m, comparados com a área que tem mais. Tamanho: em escala logarítmica, para um parque grande não apagar as praças.',
+        'Nesta área:', conta
+      ]));
+
+      var sol = el('div');
+      sol.appendChild(el('span', 'pa-sol sol-' + p.solucao, p.solucao_rotulo));
+      sol.appendChild(el('span', null, DESCRICAO[p.solucao]));
+      corpo.appendChild(linha('solucao', 'Intervenção recomendada', sol, 'pa-int'));
+
+      var ev = el('ul', 'pa-evid');
+      var porque = {
+        parque_inundavel: 'Área verde de ' + area + ': espaço para guardar muita água',
+        jardim_chuva: 'Área verde de ' + area + ': cabe um canteiro rebaixado',
+        piso_permeavel: 'Estacionamento aberto de ' + area + ' de piso impermeável',
+        telhado_verde: 'Cobertura de ' + area + ' que hoje manda a chuva direto para a rua'
+      }[p.solucao];
+      var itens = [porque];
+      if (alto >= 0.5) itens.push(pct(alto) + ' do terreno na várzea, em risco alto');
+      else if (alto + medio > 0) itens.push(pct(alto + medio) + ' do terreno em risco alto ou médio');
+      if (p.registros_perto > 0) itens.push(p.registros_perto + (p.registros_perto === 1 ? ' ocorrência registrada' : ' ocorrências registradas') + ' pela Defesa Civil em ruas a até 300 m');
+      else itens.push('Nenhuma ocorrência registrada a até 300 m: por isso a prioridade é baixa');
+      itens.forEach(function (t) { ev.appendChild(el('li', null, t)); });
+      corpo.appendChild(linha('evidencia', 'Por que aqui', ev));
+
+      if (p.alerta && p.alerta !== 'null') corpo.appendChild(linha('alerta', 'Atenção', p.alerta, 'pa-alerta'));
+    }
+    div.appendChild(corpo);
+
+    var rod = el('p', 'pa-rodape');
+    rod.appendChild(el('span', 'pa-fontes', 'Dados usados: relevo ANADEM 30 m · ocorrências da Defesa Civil 2022–2023 (por rua) · áreas do OpenStreetMap' + (p.tipo === 'telhado' ? ' (prédios mapeados só em parte)' : '')));
+    rod.appendChild(document.createTextNode('Candidata a estudo, não terreno disponível. '));
+    var link = el('a', null, 'Como calculamos');
+    link.href = 'https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md'; link.target = '_blank'; link.rel = 'noopener';
+    rod.appendChild(link);
+    div.appendChild(rod);
+    popupAreaAtual = new maplibregl.Popup({ closeButton: true, offset: 8, maxWidth: '330px', className: 'pop-area' })
+      .setLngLat(lngLat).setDOMContent(div).addTo(map);
   }
 
   // ---------- Abas ----------
