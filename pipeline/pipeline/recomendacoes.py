@@ -103,6 +103,9 @@ def recomendar(refazer=False):
         # (100 × risco × ocorrências × tamanho) tem que dar exatamente a nota.
         risco, registros, tamanho = round(risco, 2), round(registros, 2), round(tamanho, 2)
         p.update({
+            # Id fixo para a API (/areas/{id}): vem do OpenStreetMap, não muda quando a fila muda.
+            # Hífen no lugar da barra ("way/123" -> "way-123") para caber numa URL.
+            "id": p["osm"].replace("/", "-"),
             "solucao": solucao,
             "solucao_rotulo": SOLUCOES[solucao],
             "motivo": MOTIVOS[solucao],
@@ -119,6 +122,9 @@ def recomendar(refazer=False):
     colecao["features"].sort(key=lambda f: -f["properties"]["nota"])
     for posicao, f in enumerate(colecao["features"], start=1):
         f["properties"]["posicao"] = posicao
+        f["id"] = f["properties"]["id"]
+    ids = [f["id"] for f in colecao["features"]]
+    assert len(ids) == len(set(ids)), "id repetido nas áreas"
     colecao["metodo"] = "docs/recomendacoes.md"
     colecao["parametros"] = {
         "parque_area_minima_m2": PARQUE_AREA_MINIMA_M2,

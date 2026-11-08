@@ -47,7 +47,7 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 
 | Dia | O quê |
 |---|---|
-| 23–25/11 | deploy (Rafael, #23): banco no Neon, API no Render, site na Vercel; plano B com GeoJSON estático; testar no celular |
+| 23–25/11 | deploy (Rafael, #23): banco no Neon e API no Render (o site segue no GitHub Pages); plano B com GeoJSON estático (Lucas, #24); testar no celular |
 | 26/11 | **congelar funcionalidades**: daqui em diante, só correção de bug e texto |
 | 27/11 | gravar o vídeo final (Nicollas, #25) (≤ 3 min, produto funcionando, de preferência em inglês) |
 | 28/11 | README final (Enzo, #26), conferir licença, links e créditos das imagens |
