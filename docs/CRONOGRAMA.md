@@ -27,7 +27,7 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 |---|---|
 | Mapas e dados | baixar o relevo ANADEM 30 m da área piloto; calcular o HAND; rede de drenagem; validação: % dos registros nas faixas de risco alto e médio (piloto e cidade) |
 | Backend | **Rafael:** carregar no PostGIS as camadas de risco e os registros por rua (#10); endpoints `/camadas/risco` e `/camadas/registros` (#11); CORS e `/saude` testando o banco (#56) |
-| Site | projeto React + Vite + MapLibre rodando, mostrando as camadas da API (ou do GeoJSON do plano B) |
+| Site | mapa com as camadas de risco e registros (feito em HTML puro, sem React: ver D14) |
 | Produto | **Enzo:** pedir à Defesa Civil os relatórios de 2024–2026 (protocolo de pesquisa acadêmica) (#13). **Nicollas:** revisar textos de risco com linguagem simples (#14) |
 
 **Revisão de fim de semana (15/11):** o número "X% dos registros caem em risco alto/médio" existe e está certo?

@@ -87,7 +87,7 @@ pipeline/  (Python: rasterio, pysheds, shapely, pyproj)
 | `docs/` | Plataforma e página pública (GitHub Pages), dados publicados e documentação |
 | `api/` | API FastAPI (hoje: `/saude`; camadas e fichas em construção) |
 | `db/init/` | SQL rodado na primeira vez que o banco sobe (PostGIS) |
-| `web/` | Saída do pipeline (`web/public/dados/`); o site em React vem depois |
+| `web/` | Saída do pipeline (`web/public/dados/`); o site fica em `docs/`, em HTML puro ([D14](docs/decisoes.md#d14-site-em-html-css-e-javascript-puros-sem-react)) |
 
 As decisões de projeto e o porquê de cada uma estão em [docs/decisoes.md](docs/decisoes.md).
 
