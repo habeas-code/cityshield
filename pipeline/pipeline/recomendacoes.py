@@ -7,16 +7,17 @@ cada número estão em docs/recomendacoes.md.
     solução   depende do tipo da área, do tamanho e do risco (HAND)
     nota      = 100 × risco × registros × tamanho   (cada fator vai de 0 a 1)
 
-Saída: web/public/dados/recomendacoes.geojson (as mesmas áreas, com solução e nota)
+Saída: web/public/dados/recomendacoes.geojson (as mesmas áreas, com solução, nota e volume)
 """
 
 import json
 import math
 
+import rasterio
 from shapely.geometry import shape
 from shapely.ops import transform
 
-from pipeline import areas
+from pipeline import areas, relevo, volumes
 from pipeline.caminhos import SAIDA
 from pipeline.validacao import PARA_UTM, RUAS
 
@@ -85,12 +86,13 @@ def recomendar(refazer=False):
         p = f["properties"]
         geom = transform(PARA_UTM, shape(f["geometry"]))
         perto = sum(n for ponto, n in ruas if geom.distance(ponto) <= RAIO_REGISTROS_M)
-        linhas.append((f, p, perto))
+        linhas.append((f, p, perto, shape(f["geometry"])))
 
-    max_registros = max(perto for _, _, perto in linhas) or 1
-    max_area = max(p["area_m2"] for _, p, _ in linhas)
+    max_registros = max(perto for _, _, perto, _ in linhas) or 1
+    max_area = max(p["area_m2"] for _, p, _, _ in linhas)
+    fonte_relevo = rasterio.open(relevo.SAIDA)
 
-    for f, p, perto in linhas:
+    for f, p, perto, poligono in linhas:
         risco = p["fracao_alto"] + 0.5 * p["fracao_medio"]
         registros = perto / max_registros
         # Tamanho em escala logarítmica: um parque de 15 ha não vale 700 praças pequenas.
@@ -111,6 +113,8 @@ def recomendar(refazer=False):
             "fator_tamanho": tamanho,
             "nota": round(100 * risco * registros * tamanho),
         })
+        p.update(volumes.estimar(p, poligono, fonte_relevo))
+    fonte_relevo.close()
 
     colecao["features"].sort(key=lambda f: -f["properties"]["nota"])
     for posicao, f in enumerate(colecao["features"], start=1):
@@ -121,13 +125,18 @@ def recomendar(refazer=False):
         "parque_fracao_alto_minima": PARQUE_FRACAO_ALTO_MINIMA,
         "raio_registros_m": RAIO_REGISTROS_M,
         "hand_alerta_m": HAND_ALERTA_M,
+        "chuva_ref_mm": volumes.CHUVA_REF_MM,
+        "jardim_fracao_da_area": volumes.JARDIM_FRACAO_DA_AREA,
+        "parque_lamina_m": volumes.PARQUE_LAMINA_M,
     }
     SAIDA_GEOJSON.write_text(json.dumps(colecao, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     for solucao, rotulo in SOLUCOES.items():
         doTipo = [f["properties"] for f in colecao["features"] if f["properties"]["solucao"] == solucao]
         area = sum(p["area_m2"] for p in doTipo)
-        print(f"recomendacoes: {rotulo}: {len(doTipo)} áreas, {area / 10_000:.1f} ha")
+        volume = sum(p.get("volume_m3", 0) for p in doTipo)
+        volume_txt = f"{volume:,}".replace(",", ".")
+        print(f"recomendacoes: {rotulo}: {len(doTipo)} áreas, {area / 10_000:.1f} ha, {volume_txt} m³")
     print("recomendacoes: as 5 primeiras na fila:")
     for f in colecao["features"][:5]:
         p = f["properties"]
