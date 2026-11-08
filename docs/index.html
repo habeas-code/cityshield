@@ -170,7 +170,7 @@
         <li><b>IBGE</b>: Censo 2022, moradores por setor</li>
         <li><b>Serviço Geológico do Brasil</b>: carta de suscetibilidade a inundações (2014), para comparação</li>
         <li><b>Retenção</b>: PMSP ETS-03/2013; Hinman, WSU (2007); Vacari et al., UFMT (2019)</li>
-        <li><b>Imagem de satélite</b>: Sentinel-2 cloudless 2016, EOX IT Services (CC BY 4.0)</li>
+        <li><b>Imagem de satélite</b>: Esri World Imagery (Esri, Maxar, Earthstar Geographics)</li>
       </ul>
     </div>
   </div>
@@ -187,7 +187,7 @@
 <footer>
   <div class="largura">
     <p>Código aberto sob licença MIT · <a href="https://github.com/habeas-code/cityshield">github.com/habeas-code/cityshield</a></p>
-    <p>Mapa: © OpenStreetMap; Sentinel-2 cloudless 2016 by EOX IT Services GmbH (contém dados Copernicus Sentinel modificados, 2016). Fotos (Wikimedia Commons): U.S. EPA (domínio público); Roman Eisele (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>); TonyTheTiger (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>); Leonhard Lenz (CC0). Recortadas e reduzidas.</p>
+    <p>Mapa: © OpenStreetMap; imagem de satélite Esri World Imagery (Esri, Maxar, Earthstar Geographics). Fotos (Wikimedia Commons): U.S. EPA (domínio público); Roman Eisele (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>); TonyTheTiger (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>); Leonhard Lenz (CC0). Recortadas e reduzidas.</p>
   </div>
 </footer>
 
@@ -213,12 +213,12 @@
     ul.appendChild(li);
   });
 
-  // Satélite Sentinel-2 cloudless (EOX, CC BY 4.0)
+  // Satélite Esri World Imagery (imagem de alta resolução; créditos no botão ⓘ)
   var SATELITE = {
     version: 8,
-    sources: { sat: { type: 'raster', tileSize: 256, maxzoom: 14,
-      tiles: ['https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg'],
-      attribution: '<a href="https://s2maps.eu">Sentinel-2 cloudless 2016</a> by EOX IT Services GmbH (Copernicus Sentinel data 2016) · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' } },
+    sources: { sat: { type: 'raster', tileSize: 256, maxzoom: 18,
+      tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+      attribution: 'Imagem: Esri, Maxar, Earthstar Geographics · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' } },
     layers: [{ id: 'sat', type: 'raster', source: 'sat', paint: { 'raster-saturation': -0.1, 'raster-contrast': 0.08 } }]
   };
 
