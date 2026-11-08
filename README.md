@@ -9,7 +9,7 @@
 
 Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com), trilha **Meio Ambiente**.
 
-🗺️ **[Abrir a plataforma](https://habeas-code.github.io/cityshield/mapa.html)** · 🌐 [Página do projeto](https://habeas-code.github.io/cityshield/) · 📋 [Quadro de tarefas](https://github.com/orgs/habeas-code/projects/1) · 📅 [Cronograma](docs/CRONOGRAMA.md) · 🧭 [Decisões](docs/decisoes.md) · ✅ [Validação](docs/validacao.md)
+🗺️ **[Abrir a plataforma](https://habeas-code.github.io/cityshield/mapa.html)** · 🌐 [Página do projeto](https://habeas-code.github.io/cityshield/) · 📋 [Quadro de tarefas](https://github.com/orgs/habeas-code/projects/1) · 📅 [Cronograma](docs/CRONOGRAMA.md) · 🧭 [Decisões](docs/decisoes.md) · ✅ [Validação](docs/validacao.md) · 🌱 [Recomendações](docs/recomendacoes.md)
 
 > **🇬🇧 In English**
 >
@@ -36,7 +36,7 @@ Sorocaba já tem mapa de suscetibilidade a inundação (Serviço Geológico, 201
 | 1 | **Mostra o risco pelo relevo:** para cada ponto da cidade, quantos metros ele está acima do córrego mais próximo (método HAND). Quanto mais baixo, mais fácil a água chegar. | ✅ pronto |
 | 2 | **Testa o próprio mapa** contra as ocorrências reais da Defesa Civil. | ✅ pronto |
 | 3 | **Encontra áreas candidatas** perto dos pontos críticos: parques, praças, estacionamentos e telhados grandes do OpenStreetMap, com o risco de cada uma. | ✅ pronto no piloto |
-| 4 | **Recomenda uma solução** para cada área e dá uma **nota de prioridade** (risco × ocorrências × área). | 🔨 em andamento (#16) |
+| 4 | **Recomenda uma solução** para cada área e dá uma **nota de prioridade** (risco × ocorrências × área). [Como funciona](docs/recomendacoes.md) | ✅ pronto no piloto |
 | 5 | **Estima quanta água** cada solução seguraria numa chuva escolhida, com a fonte de cada número. | 🔨 em andamento (#17) |
 
 **Piloto:** núcleo Norte (Parque das Águas, Jd. Maria do Carmo, Abaeté), raio de 800 m, onde se concentram 41 registros. O Centro vem depois.
