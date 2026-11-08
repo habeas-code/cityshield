@@ -127,7 +127,12 @@ def recomendar(refazer=False):
         "hand_alerta_m": HAND_ALERTA_M,
         "chuva_ref_mm": volumes.CHUVA_REF_MM,
         "jardim_fracao_da_area": volumes.JARDIM_FRACAO_DA_AREA,
+        "jardim_lamina_m": volumes.JARDIM_LAMINA_M,
+        "jardim_area_que_escoa": volumes.JARDIM_AREA_QUE_ESCOA,
+        "piso_capacidade_mm": volumes.PISO_CAPACIDADE_MM,
+        "telhado_retencao": volumes.TELHADO_RETENCAO,
         "parque_lamina_m": volumes.PARQUE_LAMINA_M,
+        "fontes": volumes.FONTES,
     }
     SAIDA_GEOJSON.write_text(json.dumps(colecao, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
