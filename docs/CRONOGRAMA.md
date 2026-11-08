@@ -26,7 +26,7 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 | Frente | Entregas |
 |---|---|
 | Mapas e dados | baixar o relevo ANADEM 30 m da área piloto; calcular o HAND; rede de drenagem; validação: % dos registros nas faixas de risco alto e médio (piloto e cidade) |
-| Backend | carregar no PostGIS as camadas de risco e os registros por rua; endpoints `/camadas/risco` e `/camadas/registros` |
+| Backend | **Enzo:** carregar no PostGIS as camadas de risco e os registros por rua (#10). **Nicollas:** endpoints `/camadas/risco` e `/camadas/registros` (#11). Os dois combinam antes o formato das tabelas |
 | Site | projeto React + Vite + MapLibre rodando, mostrando as camadas da API (ou do GeoJSON do plano B) |
 | Produto | pedir à Defesa Civil os relatórios de 2024–2026 (protocolo de pesquisa acadêmica); revisar textos de risco com linguagem simples |
 
@@ -37,7 +37,7 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 | Frente | Entregas |
 |---|---|
 | Mapas e dados | áreas candidatas do OSM (estacionamentos, praças, telhados grandes) no raio de 800 m; regra de qual solução cabe em cada área; nota = risco × registros × área; volume retido com as fontes já escolhidas |
-| Backend | endpoints `/areas`, `/areas/{id}` (ficha) e `/cenario` (antes/depois para uma chuva escolhida) |
+| Backend | **Nicollas:** endpoints `/areas`, `/areas/{id}` (ficha) e `/cenario` (antes/depois para uma chuva escolhida) (#18). **Enzo:** preparar o deploy (#23) |
 | Site | ficha da área ao clicar; painel antes/depois; lista ordenada por nota |
 | Produto | conferir cada número com a fonte; ligar ao PL Cidade-Esponja (advogado); rascunho do roteiro do vídeo final |
 
@@ -47,7 +47,7 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 
 | Dia | O quê |
 |---|---|
-| 23–25/11 | deploy: banco no Neon, API no Render, site na Vercel; plano B com GeoJSON estático; testar no celular |
+| 23–25/11 | deploy (Enzo, #23): banco no Neon, API no Render, site na Vercel; plano B com GeoJSON estático; testar no celular |
 | 26/11 | **congelar funcionalidades**: daqui em diante, só correção de bug e texto |
 | 27/11 | gravar o vídeo final (≤ 3 min, produto funcionando, de preferência em inglês) |
 | 28/11 | README final, conferir licença, links e créditos das imagens |
