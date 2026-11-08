@@ -10,8 +10,8 @@ Cada frente tem responsável: ele cuida das tarefas dela, revisa o que entra e d
 |---|---|---|
 | Mapas e dados | `pipeline/` | Lucas ([@LucasAmadoS](https://github.com/LucasAmadoS)) |
 | Site | `web/`, `docs/` (página pública) | Lucas ([@LucasAmadoS](https://github.com/LucasAmadoS)) |
-| Backend | `api/`, `db/` | Enzo ([@enzocalhareslava-boop](https://github.com/enzocalhareslava-boop)) e Nicollas ([@nicollasscarpellileon](https://github.com/nicollasscarpellileon)) |
-| Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, conteúdo jurídico | Rafael ([@rafaelsiverisaugusto](https://github.com/rafaelsiverisaugusto)), advogado do time |
+| Backend | `api/`, `db/` | Rafael ([@rafaelsiverisaugusto](https://github.com/rafaelsiverisaugusto)) |
+| Produto e apresentação | `README.md`, `docs/`, vídeo, pitch, fontes | Enzo ([@enzocalhareslava-boop](https://github.com/enzocalhareslava-boop)) (dados, fontes e Defesa Civil) e Nicollas ([@nicollasscarpellileon](https://github.com/nicollasscarpellileon)) (textos e vídeo). Conteúdo jurídico com consultoria do Rafael, advogado do time |
 
 **Revisão cruzada:** o PR de uma frente é aprovado por alguém de **outra** frente. Assim todo mundo entende o projeto inteiro, e não só a sua parte.
 

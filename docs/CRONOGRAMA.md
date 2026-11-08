@@ -26,9 +26,9 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 | Frente | Entregas |
 |---|---|
 | Mapas e dados | baixar o relevo ANADEM 30 m da área piloto; calcular o HAND; rede de drenagem; validação: % dos registros nas faixas de risco alto e médio (piloto e cidade) |
-| Backend | **Enzo:** carregar no PostGIS as camadas de risco e os registros por rua (#10). **Nicollas:** endpoints `/camadas/risco` e `/camadas/registros` (#11). Os dois combinam antes o formato das tabelas |
+| Backend | **Rafael:** carregar no PostGIS as camadas de risco e os registros por rua (#10); endpoints `/camadas/risco` e `/camadas/registros` (#11); CORS e `/saude` testando o banco (#56) |
 | Site | projeto React + Vite + MapLibre rodando, mostrando as camadas da API (ou do GeoJSON do plano B) |
-| Produto | pedir à Defesa Civil os relatórios de 2024–2026 (protocolo de pesquisa acadêmica); revisar textos de risco com linguagem simples |
+| Produto | **Enzo:** pedir à Defesa Civil os relatórios de 2024–2026 (protocolo de pesquisa acadêmica) (#13). **Nicollas:** revisar textos de risco com linguagem simples (#14) |
 
 **Revisão de fim de semana (15/11):** o número "X% dos registros caem em risco alto/médio" existe e está certo?
 
@@ -37,9 +37,9 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 | Frente | Entregas |
 |---|---|
 | Mapas e dados | áreas candidatas do OSM (estacionamentos, praças, telhados grandes) no raio de 800 m; regra de qual solução cabe em cada área; nota = risco × registros × área; volume retido com as fontes já escolhidas |
-| Backend | **Nicollas:** endpoints `/areas`, `/areas/{id}` (ficha) e `/cenario` (antes/depois para uma chuva escolhida) (#18). **Enzo:** preparar o deploy (#23) |
+| Backend | **Rafael:** endpoints `/areas`, `/areas/{id}` (ficha) e `/cenario` (antes/depois para uma chuva escolhida) (#18); preparar o deploy (#23) |
 | Site | ficha da área ao clicar; painel antes/depois; lista ordenada por nota |
-| Produto | conferir cada número com a fonte; ligar ao PL Cidade-Esponja (advogado); rascunho do roteiro do vídeo final |
+| Produto | **Enzo:** conferir cada número com a fonte e ligar ao PL Cidade-Esponja, com consultoria do Rafael (#21). **Nicollas:** rascunho do roteiro do vídeo final (#22) |
 
 **Revisão de fim de semana (22/11):** dá para abrir o site, clicar numa área e entender o que fazer ali e por quê?
 
@@ -47,10 +47,10 @@ O time trabalha meio período (estágio e faculdade), então cada semana tem **u
 
 | Dia | O quê |
 |---|---|
-| 23–25/11 | deploy (Enzo, #23): banco no Neon, API no Render, site na Vercel; plano B com GeoJSON estático; testar no celular |
+| 23–25/11 | deploy (Rafael, #23): banco no Neon, API no Render, site na Vercel; plano B com GeoJSON estático; testar no celular |
 | 26/11 | **congelar funcionalidades**: daqui em diante, só correção de bug e texto |
-| 27/11 | gravar o vídeo final (≤ 3 min, produto funcionando, de preferência em inglês) |
-| 28/11 | README final, conferir licença, links e créditos das imagens |
+| 27/11 | gravar o vídeo final (Nicollas, #25) (≤ 3 min, produto funcionando, de preferência em inglês) |
+| 28/11 | README final (Enzo, #26), conferir licença, links e créditos das imagens |
 | 29/11 | **enviar a submissão** |
 | 30/11 | folga para emergência (prazo às 23h59) |
 

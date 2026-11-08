@@ -124,9 +124,9 @@ De Sorocaba/SP.
 | Pessoa | Frente |
 |---|---|
 | Lucas | Mapas e dados, Site · líder do time |
-| Enzo | Backend (API e banco) |
-| Nicollas | Backend (API e banco) |
-| Rafael | Produto e apresentação · advogado, revisão jurídica |
+| Enzo | Produto e apresentação · dados, fontes e Defesa Civil |
+| Nicollas | Produto e apresentação · textos e vídeo |
+| Rafael | Backend (API e banco) · advogado, consultoria jurídica |
 
 Como trabalhamos: [CONTRIBUTING.md](CONTRIBUTING.md) (padrão de commits, revisão cruzada, reuniões) e [quadro de tarefas](https://github.com/orgs/habeas-code/projects/1).
 
