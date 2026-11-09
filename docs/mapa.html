@@ -938,15 +938,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
   var CHUVA_16_10_MM = 52;  // 16/10/2026: Av. Dom Aguirre e XV de Agosto interditadas
   // Parque: com quantos mm de chuva enche só com a enxurrada das ruas em volta (pipeline contribuicao)
   // Vindo do mapa, listas chegam como texto; vindo do arquivo, como lista
-  function lista(x) {
+  function comoLista(x) {
     if (typeof x === 'string') { try { return JSON.parse(x); } catch (e) { return null; } }
     return Array.isArray(x) ? x : null;
   }
   function nivelTxt(m) { return m < 1 ? Math.round(m * 100) + ' cm' : m.toFixed(2).replace('.', ',') + ' m'; }
   function enche(p) {
-    var mm = lista(p.enche_com_mm);
+    var mm = comoLista(p.enche_com_mm);
     if (!mm || mm.length !== 2 || !p.contribuicao_m2 || p.contribuicao_m2 === 'null') return null;
-    var sobe = lista(p.sobe_16_10_m), sobeTxt = null;
+    var sobe = comoLista(p.sobe_16_10_m), sobeTxt = null;
     if (sobe && sobe.length === 2 && sobe[0] != null) {
       sobeTxt = 'Na chuva de 16/10/2026 (52 mm), a água subiria ' +
         (sobe[1] == null ? 'mais de 2 m: passaria do parque.' : 'de ' + nivelTxt(sobe[0]) + ' a ' + nivelTxt(sobe[1]) + ' acima do fundo.');
@@ -958,7 +958,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     return {
       frase: 'Enche com uma chuva de ' + mm[0] + ' a ' + mm[1] + ' mm. ' + ref,
       sobe: sobeTxt,
-      curva: lista(p.curva_cota_volume),
+      curva: comoLista(p.curva_cota_volume),
       notas: (sobeTxt ? [sobeTxt + ' Sai da curva cota-volume do parque, medida no relevo.'] : []).concat([
         'Conta: capacidade ÷ (área que escoa para o parque × parte da chuva que escorre). Área que escoa: ' + km2 + ' km² de ruas e encostas em volta, pelo relevo.',
         'Não considera a cheia do rio nem dos córregos: só a enxurrada que desce do bairro em volta.',
