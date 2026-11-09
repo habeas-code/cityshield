@@ -52,6 +52,7 @@ header nav.links a:hover{color:var(--ink);text-decoration:none}
 .passos{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);font-size:13px}
 .passos b{color:var(--ink);font-weight:600}
 .links-lista{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13px}
+.links-lista.baixar span{display:block;font-size:12px;color:var(--muted);margin-top:1px}
 .rolar{overflow-y:auto;flex:1;min-height:0;scrollbar-width:none}
 .rolar::-webkit-scrollbar{display:none}
 .bloco{padding:16px 18px 6px}
@@ -674,6 +675,19 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="index.html">Página do projeto</a></li>
         </ul>
         <p class="sub" style="margin-top:10px">Relevo ANADEM 30 m · ocorrências da Defesa Civil de Sorocaba, 2022–2023 (por rua) · áreas do OpenStreetMap.</p>
+      </div>
+      <div class="bloco">
+        <h3>Baixar os dados</h3>
+        <p class="sub">Arquivos GeoJSON: abrem direto no QGIS, no ArcGIS ou em qualquer programa de mapas.</p>
+        <ul class="links-lista baixar">
+          <li><a href="dados/recomendacoes.geojson" download>Áreas candidatas</a><span>48 áreas da área-piloto com solução, nota de prioridade, volumes e avisos · ≈ 70 KB</span></li>
+          <li><a href="dados/risco_hand.geojson" download>Risco pelo relevo (HAND)</a><span>manchas de risco alto e médio no município · ≈ 1,7 MB</span></li>
+          <li><a href="dados/drenagem.geojson" download>Córregos e rios</a><span>drenagem calculada do relevo · ≈ 190 KB</span></li>
+          <li><a href="dados/ruas.geojson" download>Ocorrências por rua</a><span>registros da Defesa Civil 2022–2023, um ponto por rua, sem endereço · ≈ 16 KB</span></li>
+          <li><a href="dados/validacao.json" download>Validação do mapa de risco</a><span>números da comparação com as ocorrências (JSON) · ≈ 16 KB</span></li>
+          <li><a href="dados/limite_sorocaba.geojson" download>Limite do município</a><span>≈ 12 KB</span></li>
+        </ul>
+        <p class="sub" style="margin-top:10px">O que cada campo quer dizer: <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#o-que-o-arquivo-traz" target="_blank" rel="noopener">dicionário das áreas</a>. As áreas, ruas e córregos usam o OpenStreetMap (© colaboradores do OpenStreetMap, licença ODbL); o relevo é o ANADEM (Laipelt et al., 2024). Ao usar, cite "CityShield, Habeas Code".</p>
       </div>
       <div class="bloco">
         <h3>Referências</h3>
