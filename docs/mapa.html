@@ -60,16 +60,19 @@ header nav.links a:hover{color:var(--ink);text-decoration:none}
 
 /* Lista de camadas (estilo CARTO Builder) */
 .camada{border-radius:8px;background:var(--panel-2);margin-bottom:8px}
-.camada-cab{display:flex;align-items:center;gap:10px;padding:9px 10px}
-.olho{width:26px;height:26px;border-radius:3px;display:grid;place-items:center;color:var(--ink-2);flex:none}
-.olho:hover{background:var(--hover);color:var(--ink)}
-.olho svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.olho[aria-pressed="false"]{color:var(--muted)}
-.olho[aria-pressed="false"] .aberto,.olho[aria-pressed="true"] .fechado{display:none}
+.grupo{margin:14px 0 6px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.bloco h3 + .grupo{margin-top:0}
+.camada-cab{display:flex;align-items:center;gap:10px;padding:7px 10px}
+.olho{position:relative;width:32px;height:18px;border-radius:9px;background:var(--accent);flex:none;transition:background .15s}
+.olho::after{content:"";position:absolute;top:2px;left:16px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .15s}
+.olho[aria-pressed="false"]{background:#4A525C}
+.olho[aria-pressed="false"]::after{left:2px}
+.olho svg{display:none}
+.olho:hover{filter:brightness(1.1)}
 .camada-nome{flex:1;min-width:0}
 .camada-nome b{display:block;font-weight:600;font-size:13px}
-.camada-nome span{display:block;color:var(--muted);font-size:11.5px}
-.camada-leg{padding:0 12px 11px 46px;display:grid;gap:6px;font-size:12px;color:var(--ink-2)}
+.camada-nome span{display:block;color:var(--muted);font-size:11px;line-height:1.3}
+.camada-leg{padding:0 12px 9px 52px;display:grid;gap:5px;font-size:12px;color:var(--ink-2)}
 .camada-leg .it{display:flex;align-items:center;gap:8px}
 .camada-leg .it i{width:9px;height:9px;border-radius:50%;flex:none}
 .camada-leg .it i.q{border-radius:2px;width:11px}
@@ -245,6 +248,13 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .sp-kpi b{font-size:18px;font-weight:600;line-height:1.15}
 .sp-kpi b small{font-size:12px;font-weight:500;color:var(--ink-2);margin-left:4px}
 .mapa-area.sim .visivel,.mapa-area.sim #mapa .maplibregl-ctrl-bottom-right .maplibregl-ctrl-group{display:none}
+.dica{position:absolute;top:12px;right:12px;z-index:3;width:280px;padding:12px 30px 12px 14px;border-radius:10px;background:var(--panel);box-shadow:0 6px 18px rgba(0,0,0,.45);font-size:12.5px;color:var(--ink-2)}
+.dica > b{display:block;font-size:14px;color:var(--ink);margin-bottom:6px}
+.dica ul{margin:0;padding-left:16px;display:grid;gap:5px}
+.dica li b{color:var(--ink);font-weight:600}
+.dica-x{position:absolute;top:6px;right:8px;width:22px;height:22px;border-radius:4px;font-size:18px;line-height:1;color:var(--ink-2)}
+.dica-x:hover{background:var(--hover);color:var(--ink)}
+.mapa-area.sim .dica{display:none}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
 #mapa{position:absolute;inset:0}
@@ -356,6 +366,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
   .mapa-area{height:65vh;order:-1}
   .busca{width:200px}
   .dir{display:block;border-left:0;border-top:1px solid var(--line)}
+  .dica{left:10px;right:10px;width:auto;top:auto;bottom:10px}
   .mapa-area.sim{height:auto}
   .mapa-area.sim #mapa,.mapa-area.sim .barra-mapa{display:none}
   .sim-painel{position:static;margin:0;border-radius:0;box-shadow:none;max-width:none}
@@ -394,6 +405,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     <div class="rolar" id="a-diag">
       <div class="bloco">
         <h3>Camadas</h3>
+        <p class="grupo">O que aconteceu</p>
         <div class="camada" id="cam-ruas">
           <div class="camada-cab">
             <button class="olho" data-camada="ruas" aria-pressed="true" aria-label="Mostrar ou esconder registros por rua">
@@ -405,18 +417,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <div class="camada-leg">
             <span class="it"><i style="background:var(--alag)"></i>Mais alagamentos</span>
             <span class="it"><i style="background:var(--inund)"></i>Mais inundações</span>
-            <span class="tam"><span><i style="width:6px;height:6px"></i>1</span><span><i style="width:12px;height:12px"></i>10</span><span><i style="width:20px;height:20px"></i>23 registros</span></span>
+            <span class="tam"><span><i style="width:9px;height:9px"></i>1</span><span><i style="width:20px;height:20px"></i>10</span><span><i style="width:28px;height:28px"></i>23 registros</span></span>
           </div>
         </div>
-        <div class="camada" id="cam-piloto">
-          <div class="camada-cab">
-            <button class="olho" data-camada="piloto" aria-pressed="true" aria-label="Mostrar ou esconder área-piloto">
-              <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
-              <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
-            </button>
-            <span class="camada-nome"><b>Área-piloto Norte</b><span>Raio de 800 m</span></span>
-          </div>
-        </div>
+        <p class="grupo">Risco pelo relevo</p>
         <div class="camada" id="cam-risco">
           <div class="camada-cab">
             <button class="olho" data-camada="risco" aria-pressed="true" aria-label="Mostrar ou esconder risco pelo relevo">
@@ -426,8 +430,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <span class="camada-nome"><b>Risco pelo relevo (HAND)</b><span>Altura acima do córrego mais próximo · ANADEM 30 m</span></span>
           </div>
           <div class="camada-leg">
-            <span class="it"><i class="q" style="background:rgba(214,69,93,.75)"></i>Alto: até 5 m acima do córrego</span>
-            <span class="it"><i class="q" style="background:rgba(214,69,93,.35)"></i>Médio: de 5 a 15 m</span>
+            <span class="it"><i class="q" style="background:rgba(214,69,93,.6)"></i>Alto: até 5 m acima do córrego</span>
+            <span class="it"><i class="q" style="background:rgba(214,69,93,.25)"></i>Médio: de 5 a 15 m</span>
           </div>
         </div>
         <div class="camada" id="cam-drenagem">
@@ -437,6 +441,16 @@ label.campo .l b{color:var(--ink);font-weight:600}
               <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
             </button>
             <span class="camada-nome"><b>Córregos calculados</b><span>Onde se juntam mais de 0,5 km² de chuva</span></span>
+          </div>
+        </div>
+        <p class="grupo">Área de estudo</p>
+        <div class="camada" id="cam-piloto">
+          <div class="camada-cab">
+            <button class="olho" data-camada="piloto" aria-pressed="true" aria-label="Mostrar ou esconder área-piloto">
+              <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
+            </button>
+            <span class="camada-nome"><b>Área-piloto Norte</b><span>Raio de 800 m</span></span>
           </div>
         </div>
       </div>
@@ -452,7 +466,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         </label>
       </div>
       <div class="bloco">
-        <p>Cada ponto é uma rua, em posição aproximada. Nenhum endereço é publicado. O HAND mostra onde o relevo favorece o acúmulo de água; não é uma previsão de alagamento.</p>
+        <p>Cada ponto é uma rua, em posição aproximada: 240 registros em 79 ruas (dos 253 transcritos, 13 são de ruas que não conseguimos localizar). Nenhum endereço é publicado. O HAND mostra onde o relevo favorece o acúmulo de água; não é uma previsão de alagamento.</p>
       </div>
     </div>
 
@@ -563,6 +577,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
     </div>
     <div class="visivel" id="visivel">79 ruas com registros no mapa</div>
+    <aside class="dica" id="dica" hidden aria-label="Como começar">
+      <button type="button" class="dica-x" id="dica-x" aria-label="Fechar orientação">×</button>
+      <b>Comece aqui</b>
+      <ul>
+        <li>Clique num <b>ponto</b> (uma rua que alagou) ou numa <b>área</b> para ver os detalhes.</li>
+        <li>Ligue e desligue as <b>camadas</b> no painel à esquerda para comparar.</li>
+        <li>Siga as abas: <b>Diagnóstico → Oportunidades → Simulação</b>.</li>
+      </ul>
+    </aside>
     <section class="sim-painel" id="sim-painel" hidden aria-label="Simulação de cenários">
       <div class="sp-cab">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 4-6 5 5"/></svg>
@@ -598,7 +621,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <div class="w-cab"><h3 id="d-tipo">Área-piloto</h3><button id="d-voltar" hidden>Voltar ao piloto</button></div>
       <h2 id="d-tit">Núcleo Norte</h2>
       <p class="sub" id="d-sub">Parque das Águas · Jd. Maria do Carmo · Jd. Abaeté</p>
-      <div class="kpi"><div><b class="n" id="d-num">41</b><span id="d-num-txt">registros associados ao raio de 800 m</span></div></div>
+      <div class="kpi"><div><b class="n" id="d-num">41</b><span id="d-num-txt">registros de 2022–2023 em ruas localizadas no raio de 800 m (não são ocorrências dentro do parque)</span></div></div>
       <p class="rot">Por que investigar</p>
       <ul id="d-porque">
         <li>Registros históricos próximos</li>
@@ -619,7 +642,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <div><b class="n" id="v-reg">74%</b><span>dos registros caem no risco alto</span></div>
         <div><b class="n" id="v-ruas">12%</b><span>das ruas da cidade estão nele</span></div>
       </div>
-      <p class="sub" style="margin:8px 0 0"><b class="n" id="v-vezes" style="color:var(--ink)">6,0×</b> mais que o acaso. Comparação com 223 registros da Defesa Civil, 2022–2023.</p>
+      <p class="sub" style="margin:8px 0 0"><b class="n" id="v-vezes" style="color:var(--ink)">6,0×</b> mais que o acaso. Comparação com 223 registros da Defesa Civil, 2022–2023.
+        <button type="button" class="pa-info" id="v-info-bt" aria-expanded="false" aria-controls="v-info" aria-label="Como estes números foram calculados">i</button></p>
+      <div class="pa-info-txt" id="v-info" hidden>
+        <p><b>74%:</b> dos 223 registros testados, 74% caem em trechos de rua no risco alto. Como o relatório diz a rua e não o ponto exato, os registros de cada rua são divididos pelo comprimento dela em cada faixa.</p>
+        <p><b>12%:</b> de todo o comprimento de ruas da cidade (OpenStreetMap), 12% fica no risco alto.</p>
+        <p><b>6×:</b> 74% ÷ 12%. Se os alagamentos caíssem em qualquer rua ao acaso, o risco alto teria só 12% deles.</p>
+        <p><b>253 → 240 → 223:</b> 253 registros foram transcritos dos relatórios (89 ruas). 240 têm a rua localizada no mapa (79 ruas, os pontos que você vê). 223 tiveram o traçado da rua achado no OpenStreetMap e entram no teste (75 ruas).</p>
+      </div>
       <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não é a taxa de acerto de uma previsão.</p>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
     </section>
@@ -675,9 +705,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
     estilo: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
     center: [-47.455, -23.478], zoom: 12.3, interativo: true, corPorTipo: true, posControles: 'bottom-right', escala: true,
     aoCarregar: function () {
-      map.setPaintProperty('ruas', 'circle-stroke-color', '#121314');
-      map.setPaintProperty('ruas', 'circle-stroke-width', 1);
-      map.setPaintProperty('ruas', 'circle-opacity', 0.9);
+      map.setPaintProperty('ruas', 'circle-stroke-color', 'rgba(255,255,255,.9)');
+      map.setPaintProperty('ruas', 'circle-stroke-width', 1.3);
+      map.setPaintProperty('ruas', 'circle-opacity', 1);
+      map.setPaintProperty('ruas', 'circle-radius', ['interpolate', ['linear'], ['sqrt', ['get', 'registros']], 1, 4.5, 4.8, 14]);
       map.setLayoutProperty('ruas-halo', 'visibility', 'none');
       map.setPaintProperty('piloto-fundo', 'fill-color', '#3FB27F');
       map.setPaintProperty('piloto-fundo', 'fill-opacity', 0.07);
@@ -689,7 +720,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         id: 'risco', type: 'fill', source: 'risco',
         paint: {
           'fill-color': '#D6455D',
-          'fill-opacity': ['match', ['get', 'classe'], 'alto', 0.42, 'medio', 0.16, 0],
+          'fill-opacity': ['match', ['get', 'classe'], 'alto', 0.28, 'medio', 0.10, 0],
           'fill-antialias': false
         }
       }, 'piloto-fundo');
@@ -1333,6 +1364,28 @@ label.campo .l b{color:var(--ink);font-weight:600}
     mais.textContent = filaAberta ? 'Mostrar só as 10 primeiras' : 'Ver todas as ' + lista.length;
   }
   $('fila-mais').addEventListener('click', function () { filaAberta = !filaAberta; montarFila(); });
+
+  // ---------- Orientação para quem acabou de entrar ----------
+  (function () {
+    var dica = $('dica'); if (!dica) return;
+    var vista = false;
+    try { vista = localStorage.getItem('cityshield-dica') === '1'; } catch (e) { /* sem armazenamento: mostra sempre */ }
+    if (vista) return;
+    dica.hidden = false;
+    function fechar() {
+      if (dica.hidden) return;
+      dica.hidden = true;
+      try { localStorage.setItem('cityshield-dica', '1'); } catch (e) { /* ignora */ }
+    }
+    $('dica-x').addEventListener('click', fechar);
+    if (map) { map.on('click', fechar); map.on('dragstart', fechar); }
+    document.querySelectorAll('.abas button, .olho').forEach(function (b) { b.addEventListener('click', fechar); });
+  })();
+
+  // ⓘ do quadro de validação
+  $('v-info-bt').addEventListener('click', function () {
+    var c = $('v-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
+  });
 
   // Carrega as áreas sem depender do mapa: o cenário funciona mesmo se o mapa não abrir.
   fetch('dados/recomendacoes.geojson').then(function (r) { return r.json(); })
