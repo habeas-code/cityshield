@@ -442,6 +442,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
   html,body{height:auto}
   body{overflow:auto;grid-template-rows:56px auto;min-height:100%}
   .rolar,.dir{overflow:visible;flex:none}
+  /* As abas ficam sempre à mão; o mapa para logo abaixo delas quando a lista leva até ele */
+  header{position:sticky;top:0;z-index:30}
+  #mapa{scroll-margin-top:56px}
   header{gap:8px;padding:0 8px}
   .logo span,header nav.links{display:none}
   .abas button{padding:8px 9px;gap:6px;font-size:12.5px}
@@ -1193,6 +1196,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
   // ---------- Abas ----------
   var abas = { diag: $('a-diag'), oport: $('a-oport'), sim: $('a-sim'), sobre: $('a-sobre') };
   function irPara(a) {
+    // No celular a página rola: ao trocar de aba, volta para o começo dela
+    if (window.innerWidth <= 760 && window.scrollY > 0) window.scrollTo(0, 0);
     document.querySelectorAll('.abas button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.aba === a ? 'true' : 'false'); });
     Object.keys(abas).forEach(function (k) { abas[k].hidden = k !== a; });
     destacarCenario(a === 'sim');
