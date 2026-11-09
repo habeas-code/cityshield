@@ -122,6 +122,13 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .equiv{margin:12px 0 0;font-size:12.5px;color:var(--ink-2)}
 .equiv b{color:var(--ink)}
 .ref{font-size:11.5px;color:var(--muted)}
+.c-dest{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.c-dest div{border:1px solid var(--line-2);border-radius:6px;padding:9px 10px;background:var(--panel-2)}
+.c-dest span{display:block;font-size:12px;color:var(--ink-2)}
+.c-dest b{display:block;font-size:22px;font-weight:600;line-height:1.15;margin-top:3px;color:var(--ink)}
+.c-dest small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.c-dest .ret{border-color:rgba(63,178,127,.45);background:rgba(63,178,127,.08)}
+.c-dest .ret b{color:#6FCB9F}
 .ad{margin-top:12px}
 .ad-rot{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--ink-2)}
 .ad-rot b{color:var(--ink);font-weight:600}
@@ -262,6 +269,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .pa-info-txt{margin:6px 0 4px;padding:7px 9px;background:var(--panel-2);border-radius:5px}
 .pa-info-txt p{margin:0 0 5px;font-size:11.5px;line-height:1.4;color:var(--ink-2)}
 .pa-info-txt p:last-child{margin-bottom:0}
+.pa-fatores{display:grid;gap:4px;margin:2px 0 6px}
+.pa-fatores div{display:grid;grid-template-columns:78px 1fr 34px;align-items:center;gap:8px;font-size:11.5px;color:var(--ink-2)}
+.pa-fatores > div > i{display:block;height:6px;border-radius:3px;background:var(--hover);overflow:hidden}
+.pa-fatores > div > i > i{display:block;height:100%;background:var(--accent)}
+.pa-fatores b{text-align:right;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .pa-conta{font-variant-numeric:tabular-nums;color:var(--ink)!important;font-weight:600}
 .pa-fontes{display:block;margin-bottom:4px}
 .pa-txt .pa-vol{font-size:15px;font-weight:600;color:#7FC8F8;margin-bottom:1px}
@@ -499,12 +511,13 @@ label.campo .l b{color:var(--ink);font-weight:600}
     </section>
 
     <section class="widget" id="w-valida">
-      <div class="w-cab"><h3>O mapa acerta?</h3><span class="sub">cidade inteira</span></div>
+      <div class="w-cab"><h3>O mapa bate com a realidade?</h3><span class="sub">cidade inteira</span></div>
       <div class="kpi">
         <div><b class="n" id="v-reg">74%</b><span>dos registros caem no risco alto</span></div>
         <div><b class="n" id="v-ruas">12%</b><span>das ruas da cidade estão nele</span></div>
       </div>
-      <p class="sub" style="margin:8px 0 0"><b class="n" id="v-vezes" style="color:var(--ink)">6,0×</b> mais que o acaso. Teste com 223 registros da Defesa Civil, 2022–2023.</p>
+      <p class="sub" style="margin:8px 0 0"><b class="n" id="v-vezes" style="color:var(--ink)">6,0×</b> mais que o acaso. Comparação com 223 registros da Defesa Civil, 2022–2023.</p>
+      <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não é a taxa de acerto de uma previsão.</p>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
     </section>
 
@@ -640,6 +653,18 @@ label.campo .l b{color:var(--ink);font-weight:600}
     registros: '<path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11Z"/><circle cx="12" cy="10" r="2"/>',
     alerta: '<path d="M12 4 2.5 20h19L12 4Z"/><path d="M12 10v4M12 17v.5"/>'
   };
+  // Três barrinhas com os fatores da nota (dentro do ⓘ da prioridade).
+  function fatoresBarras(p) {
+    var box = document.createElement('div'); box.className = 'pa-fatores';
+    [['Risco', p.fator_risco], ['Ocorrências', p.fator_registros], ['Tamanho', p.fator_tamanho]].forEach(function (f) {
+      var v = +f[1] || 0, linha = document.createElement('div');
+      var r = document.createElement('span'); r.textContent = f[0];
+      var b = document.createElement('i'); var fill = document.createElement('i'); fill.style.width = Math.max(v * 100, 1) + '%'; b.appendChild(fill);
+      var n = document.createElement('b'); n.textContent = v.toFixed(2).replace('.', ',');
+      linha.appendChild(r); linha.appendChild(b); linha.appendChild(n); box.appendChild(linha);
+    });
+    return box;
+  }
   function popupArea(lngLat, p) {
     if (popupAreaAtual) popupAreaAtual.remove();
     var pct = function (x) { return Math.round(x * 100) + '%'; };
@@ -752,7 +777,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       corpo.appendChild(linha('nota', 'Prioridade', pri, null, 'por onde começar: risco × ocorrências × tamanho', [
         'Nota = 100 × risco × ocorrências × tamanho. Cada critério vai de 0 a 1 e todos têm o mesmo peso: é uma multiplicação, então a área só chega ao topo se for bem nos três.',
         'Risco: parte do terreno em risco alto, mais metade da parte em risco médio. Ocorrências: registros da Defesa Civil em ruas a até 300 m, comparados com a área que tem mais. Tamanho: em escala logarítmica, para um parque grande não apagar as praças.',
-        'Nesta área:', conta
+        'Nesta área:', fatoresBarras(p), conta
       ]));
 
       var sol = el('div');
@@ -1022,11 +1047,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
         : 'Nenhuma área com essas escolhas. Marque pelo menos uma solução.'));
     } else {
       var pct = Math.round(tot.ret / tot.chega * 100), segue = tot.chega - tot.ret;
-      var kp = el('div', 'sim-kpis');
-      [['Áreas', String(tot.n)], ['Água que chega', milharC(tot.chega) + ' m³'], ['Retida', milharC(tot.ret) + ' m³']].forEach(function (k) {
-        var d = el('div'); d.appendChild(el('span', null, k[0])); d.appendChild(el('b', 'n', k[1])); kp.appendChild(d);
+      var dest = el('div', 'c-dest');
+      [['Água que chega', milharC(tot.chega) + ' m³', 'chuva de ' + mm + ' mm em ' + tot.n + ' áreas'],
+       ['Água retida', milharC(tot.ret) + ' m³', pct + '% do que chega']].forEach(function (k, i) {
+        var d = el('div', i ? 'ret' : null);
+        d.appendChild(el('span', null, k[0])); d.appendChild(el('b', 'n', k[1])); d.appendChild(el('small', null, k[2]));
+        dest.appendChild(d);
       });
-      box.appendChild(kp);
+      box.appendChild(dest);
       var barra = function (rotulo, valor, partes) {
         var w = el('div', 'ad'), r = el('div', 'ad-rot');
         r.appendChild(el('span', null, rotulo)); r.appendChild(el('b', null, valor)); w.appendChild(r);

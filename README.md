@@ -45,7 +45,7 @@ Sorocaba já tem mapa de suscetibilidade a inundação (Serviço Geológico, 201
 
 ## Resultados até agora
 
-**O mapa acerta.** Testamos o risco calculado contra os registros da Defesa Civil de 2022–2023 ([método e limitações](docs/validacao.md)):
+**O mapa bate com a realidade.** Comparamos o risco calculado com os registros da Defesa Civil de 2022–2023 ([método e limitações](docs/validacao.md)). É uma associação com o que já aconteceu, não a taxa de acerto de uma previsão:
 
 | Faixa de risco | Registros da Defesa Civil | Ruas da cidade | |
 |---|---|---|---|
