@@ -17,7 +17,7 @@ import rasterio
 from shapely.geometry import shape
 from shapely.ops import transform
 
-from pipeline import areas, contribuicao, relevo, volumes
+from pipeline import areas, contribuicao, declividade, relevo, volumes
 from pipeline.caminhos import SAIDA
 from pipeline.validacao import PARA_UTM, RUAS
 
@@ -34,6 +34,15 @@ RAIO_REGISTROS_M = 300
 # Abaixo disso a área está praticamente no nível do córrego: o lençol freático pode
 # estar raso e a infiltração, limitada. Critério nosso, para alertar, não para excluir.
 HAND_ALERTA_M = 1.0
+
+# Declividade (%) a partir da qual a solução pede cuidado de projeto. Também só alertam.
+# Piso: a base de brita deve ser quase plana; acima de 3%, base em degraus (terraços).
+#   Minnesota Pollution Control Agency, Minnesota Stormwater Manual, "Design criteria for
+#   permeable pavement".
+# Jardim de chuva: abaixo de 15% para o jardim convencional; acima, avaliação geotécnica.
+#   Hinman, Rain Gardens, WSU Extension, 2007 (a mesma fonte da lâmina de 15 cm).
+PISO_DECLIVIDADE_MAX_PCT = 3
+JARDIM_DECLIVIDADE_MAX_PCT = 15
 
 SOLUCOES = {
     "parque_inundavel": "Parque inundável",
@@ -60,11 +69,32 @@ def _solucao(p):
     return "jardim_chuva"
 
 
-def _alerta(p, solucao):
+def _alertas(p, solucao):
+    """Avisos de projeto: (texto completo, rótulo curto para a lista). Vazio = sem aviso."""
+    avisos = []
     infiltra = solucao in ("jardim_chuva", "piso_permeavel")
     if infiltra and p["hand_min_m"] < HAND_ALERTA_M:
-        return "Área no nível do córrego: conferir a profundidade do lençol freático antes de projetar."
-    return None
+        avisos.append(("Área no nível do córrego: conferir a profundidade do lençol freático antes de projetar.",
+                       "lençol"))
+    decl = p.get("declividade_pct")
+    if decl is not None:
+        txt = f"{decl:g}".replace(".", ",")
+        if solucao == "piso_permeavel" and decl > PISO_DECLIVIDADE_MAX_PCT:
+            avisos.append((f"Terreno com cerca de {txt}% de declividade: acima de {PISO_DECLIVIDADE_MAX_PCT}%, "
+                           "a base de brita precisa ser feita em degraus (Minnesota Stormwater Manual).",
+                           "inclinação"))
+        if solucao == "jardim_chuva" and decl >= JARDIM_DECLIVIDADE_MAX_PCT:
+            avisos.append((f"Terreno com cerca de {txt}% de declividade: a partir de {JARDIM_DECLIVIDADE_MAX_PCT}%, "
+                           "o jardim de chuva precisa de avaliação geotécnica (Hinman, WSU, 2007).",
+                           "inclinação"))
+    return avisos
+
+
+ROTULO_ALERTA = {
+    ("lençol",): "conferir o lençol freático",
+    ("inclinação",): "terreno inclinado",
+    ("lençol", "inclinação"): "conferir lençol e inclinação",
+}
 
 
 def _ruas():
@@ -92,8 +122,10 @@ def recomendar(refazer=False):
     max_area = max(p["area_m2"] for _, p, _, _ in linhas)
     fonte_relevo = rasterio.open(relevo.SAIDA)
     drenagem = None  # caminho da água, calculado só se houver parque
+    inclinacao = declividade.Declividade()
 
     for f, p, perto, poligono in linhas:
+        p["declividade_pct"] = inclinacao.mediana_pct(f["geometry"])
         risco = p["fracao_alto"] + 0.5 * p["fracao_medio"]
         registros = perto / max_registros
         # Tamanho em escala logarítmica: um parque de 15 ha não vale 700 praças pequenas.
@@ -103,6 +135,7 @@ def recomendar(refazer=False):
         # A nota sai dos fatores já arredondados a 2 casas: a conta que o site mostra
         # (100 × risco × ocorrências × tamanho) tem que dar exatamente a nota.
         risco, registros, tamanho = round(risco, 2), round(registros, 2), round(tamanho, 2)
+        avisos = _alertas(p, solucao)
         p.update({
             # Id fixo para a API (/areas/{id}): vem do OpenStreetMap, não muda quando a fila muda.
             # Hífen no lugar da barra ("way/123" -> "way-123") para caber numa URL.
@@ -110,7 +143,8 @@ def recomendar(refazer=False):
             "solucao": solucao,
             "solucao_rotulo": SOLUCOES[solucao],
             "motivo": MOTIVOS[solucao],
-            "alerta": _alerta(p, solucao),
+            "alerta": " ".join(t for t, _ in avisos) or None,
+            "alerta_curto": ROTULO_ALERTA.get(tuple(r for _, r in avisos)),
             "registros_perto": perto,
             "fator_risco": risco,
             "fator_registros": registros,
@@ -122,6 +156,7 @@ def recomendar(refazer=False):
             drenagem = drenagem or contribuicao.Drenagem()
             p.update(volumes.enchimento(p["volume_m3"], drenagem.area_m2(f["geometry"]), p.get("curva_cota_volume")))
     fonte_relevo.close()
+    inclinacao.fechar()
 
     colecao["features"].sort(key=lambda f: -f["properties"]["nota"])
     for posicao, f in enumerate(colecao["features"], start=1):
@@ -135,6 +170,8 @@ def recomendar(refazer=False):
         "parque_fracao_alto_minima": PARQUE_FRACAO_ALTO_MINIMA,
         "raio_registros_m": RAIO_REGISTROS_M,
         "hand_alerta_m": HAND_ALERTA_M,
+        "piso_declividade_max_pct": PISO_DECLIVIDADE_MAX_PCT,
+        "jardim_declividade_max_pct": JARDIM_DECLIVIDADE_MAX_PCT,
         "chuva_ref_mm": volumes.CHUVA_REF_MM,
         "jardim_fracao_da_area": volumes.JARDIM_FRACAO_DA_AREA,
         "jardim_lamina_m": volumes.JARDIM_LAMINA_M,
