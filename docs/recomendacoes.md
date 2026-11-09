@@ -93,13 +93,14 @@ Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é 
 | Solução | Conta | Valor usado | Fonte |
 |---|---|---|---|
 | Piso permeável | área × 50 mm | a base de brita segura até **50 mm** da chuva que cai no próprio piso | Prefeitura de São Paulo, ETS-03/2013 (brita de 25 cm × 20% de vazios) |
-| Jardim de chuva | área do jardim × 15 cm | lâmina de **15 cm = 150 L por m²**; o jardim recebe a água de 10× a sua área em volta | Hinman, *Rain Gardens*, WSU Extension, 2007 |
+| Jardim de chuva | área do jardim × 15 cm | lâmina de **15 cm = 150 L por m²**; o jardim recebe a água de 10× a sua área em volta | Hinman, *Rain Gardens*, WSU Extension, 2007; conferido no [EPA Bioretention Design Handbook](https://www.epa.gov/system/files/documents/2023-11/bioretentiondesignhandbook_plainnov2023.pdf) (EPA 841-B-23-002, 2023) |
 | Telhado verde | área × 50 mm × 47% | retém **47%** da chuva (limite de baixo da faixa 47–62%; em chuva forte é menos) | Vacari et al., 2019, *E&S Engineering and Science*, UFMT |
 | Parque inundável | volume entre o terreno e uma lâmina de **1 m** acima do fundo | capacidade de armazenamento, pelo relevo | cálculo do CityShield sobre o ANADEM v1 (30 m) |
 
 **Premissas nossas** (estão no começo de `pipeline/pipeline/volumes.py` e saem no campo `parametros` do arquivo):
 
 - **Jardins ocupam 10% da área verde.** Uma praça não vira um jardim de chuva inteiro: ela continua sendo praça, com canteiros rebaixados. Com 10%, a conta fica conservadora.
+- **O jardim recebe a água de 10× a sua área** (ocupa 10% da área que drena para ele). O [manual de biorretenção da EPA (2023)](https://www.epa.gov/system/files/documents/2023-11/bioretentiondesignhandbook_plainnov2023.pdf) dimensiona o jardim com **5% a 10%** da área que drena e diz que passar de **25×** (área impermeável ÷ área do jardim) causa problema; recomenda lâmina de **15 cm** perto de calçadas, a mesma que usamos. Os nossos 10× e 15 cm estão dentro do que ele recomenda.
 - **Parque alaga até 1 m acima do fundo.** O fundo é o 10º percentil da altura do terreno dentro do parque. As células mais de 3 m abaixo da mediana ficam de fora, porque são lago ou leito de rio e já têm água (é o caso de parte do Porto das Águas).
 
 **Resultado na área piloto:**
@@ -211,7 +212,7 @@ Cada área em `recomendacoes.geojson` tem os campos do [passo das áreas](../pip
 | `volume_tipo` | `capacidade` | `retido` (chuva de 50 mm) ou `capacidade` (parque) |
 | `fracao_retida` | `0.3` ou `null` | parte da água que chega que fica retida; `null` no parque |
 | `volume_conta` | `jardim de 455 m² (10% da área) × 15 cm de lâmina` | a conta, em texto |
-| `volume_fonte` | `Hinman, Rain Gardens, WSU Extension, 2007` | a fonte do valor |
+| `volume_fonte` | `Hinman, Rain Gardens, WSU Extension, 2007; EPA, ...` | a fonte do valor |
 
 Esse é o formato que a API entrega em `/areas` e `/areas/{id}` (#18).
 
