@@ -115,6 +115,26 @@ Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é 
 
 **Capacidade não é o mesmo que água retida.** Jardim, piso e telhado seguram a chuva que cai neles ou em volta. O parque inundável é um **reservatório**: a capacidade diz quanto cabe nele quando o rio e as galerias transbordam. Por isso o site usa rótulos diferentes ("água que segura" e "água que pode guardar") e os dois tipos não são somados.
 
+### Com quanta chuva o parque enche
+
+**A capacidade ganha escala: o Parque Linear enche com 31 a 44 mm de chuva, e o Abaeté só com 174 a 243 mm.** Um parque recebe a chuva que cai nele e a enxurrada das ruas, quintais e telhados mais altos em volta, a sua **área de contribuição**. Calculamos essa área para cada parque (`pipeline/pipeline/contribuicao.py`) e comparamos com a capacidade:
+
+```
+enche com (mm) = capacidade ÷ (área de contribuição × parte da chuva que escorre) × 1000
+```
+
+- **Área de contribuição:** sobre o mesmo relevo do HAND, partimos das células do parque e subimos o caminho da água. A subida **para nos córregos e no rio** (mais de 0,5 km² drenados, a mesma regra que desenha a drenagem). Sem isso, o Abaeté receberia a bacia inteira do Rio Sorocaba, ~470 km² vindos de outras cidades, e "encheria com 0,3 mm". Então o número é **só a enxurrada do bairro em volta: a cheia do rio e dos córregos fica de fora.**
+- **Parte que escorre** (coeficiente de escoamento C): **0,50 a 0,70**, valor para "áreas de bairros" da Tabela 1 de [Rio-Águas (Prefeitura do Rio), Instruções Técnicas para Estudos Hidrológicos e Dimensionamento Hidráulico de Drenagem Urbana, 2ª versão, 2019](https://fundacaorioaguas.prefeitura.rio/wp-content/uploads/sites/48/2024/05/Instrucao-Tecnica-REVISAO-1.pdf). Usamos a faixa inteira, e por isso o resultado é uma faixa.
+
+| Parque | Capacidade | Área que escoa para ele | Enche com | Na chuva de 16/10/2026 (52 mm) |
+|---|---|---|---|---|
+| Parque das Águas do Abaeté | 63.879 m³ | 0,53 km² | 174 a 243 mm | sobraria espaço |
+| Parque Linear do Rio Sorocaba | 33.308 m³ | 1,52 km² | 31 a 44 mm | encheria |
+| Parque Porto das Águas | 32.526 m³ | 1,04 km² | 45 a 62 mm | ficaria perto de encher |
+| Praça Abiul | 1.978 m³ | 0,05 km² | 57 a 79 mm | sobraria espaço |
+
+**Como ler:** um parque que enche com pouca chuva (Parque Linear) já faria diferença nas chuvas comuns de Sorocaba. Um que só enche com muita chuva (Abaeté) tem espaço sobrando para a enxurrada do bairro. Saber se vale levar até ele também água de córrego é pergunta para o projeto de engenharia, não para esta conta. Os campos `contribuicao_m2` e `enche_com_mm` só existem nos parques e **não mudam a nota**.
+
 **Limites:** são valores de projeto publicados, não medições em Sorocaba. Solo argiloso e lençol freático alto reduzem a infiltração. O relevo de 30 m dá ordem de grandeza para os parques, não o volume de projeto. Telhado verde precisa de laudo da estrutura.
 
 ## Cenário antes e depois (#20)
