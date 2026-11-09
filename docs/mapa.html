@@ -1579,7 +1579,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var nivel = (p.fracao_alto || 0) >= 0.5 ? 'Risco alto' : (p.fracao_alto || 0) + (p.fracao_medio || 0) >= 0.5 ? 'Risco médio' : 'Risco baixo';
       var tam = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
       var nm = document.createElement('small'); nm.textContent = nivel + ' · ' + p.registros_perto + (p.registros_perto === 1 ? ' ocorrência' : ' ocorrências') + ' · ' + tam;
-      if (p.alerta && p.alerta !== 'null') { var am = document.createElement('small'); am.className = 'alerta-m'; am.textContent = '⚠ conferir o lençol freático'; nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); nome.appendChild(am); }
+      if (p.alerta && p.alerta !== 'null') { var am = document.createElement('small'); am.className = 'alerta-m'; am.textContent = '⚠ ' + (p.alerta_curto && p.alerta_curto !== 'null' ? p.alerta_curto : 'conferir antes de projetar'); nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); nome.appendChild(am); }
       else { nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); }
       if (p.id === areaSel) b.className = 'sel';
       var nt = document.createElement('span'); nt.className = 'nt'; nt.textContent = p.nota;

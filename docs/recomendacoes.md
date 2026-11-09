@@ -135,6 +135,20 @@ enche com (mm) = capacidade ÷ (área de contribuição × parte da chuva que es
 
 **Como ler:** um parque que enche com pouca chuva (Parque Linear) já faria diferença nas chuvas comuns de Sorocaba. Um que só enche com muita chuva (Abaeté) tem espaço sobrando para a enxurrada do bairro. Saber se vale levar até ele também água de córrego é pergunta para o projeto de engenharia, não para esta conta. Os campos `contribuicao_m2` e `enche_com_mm` só existem nos parques e **não mudam a nota**.
 
+### Avisos de projeto: lençol freático e declividade
+
+Os avisos **não tiram nenhuma área da fila**: dizem o que conferir em campo antes de projetar. Saem no campo `alerta` (texto completo) e `alerta_curto` (rótulo da lista).
+
+| Aviso | Vale para | Quando aparece | Fonte |
+|---|---|---|---|
+| Lençol freático | jardim de chuva, piso permeável | o ponto mais baixo da área está a menos de 1 m do córrego (HAND) | critério nosso; Hinman (2007) também pede atenção quando o lençol fica a menos de 30 cm do fundo do jardim |
+| Declividade do piso | piso permeável | declividade mediana **acima de 3%** | [Minnesota Stormwater Manual (MPCA)](https://stormwater.pca.state.mn.us/Design_criteria_for_permeable_pavement): base quase plana; acima de 3%, base em degraus (terraços) |
+| Declividade do jardim | jardim de chuva | declividade mediana **a partir de 15%** | Hinman, *Rain Gardens*, WSU Extension, 2007: jardim convencional abaixo de 15%; acima, avaliação geotécnica |
+
+A declividade (`declividade_pct`, em todas as áreas) é a mediana das células de 30 m do ANADEM que a área toca (`pipeline/pipeline/declividade.py`).
+
+**No piloto:** 3 dos 7 estacionamentos passam de 3% (4,2%, 4,5% e 7,1%) e ganham o aviso; um deles também tem o do lençol. **Nenhum jardim chega a 15%** (o mais inclinado tem 8,6%): a regra está pronta para quando o projeto cobrir a cidade, mas no piloto não gera aviso. Com células de 30 m, um estacionamento pequeno tem poucas células e o número é indicativo.
+
 ### Curva cota-volume: até onde a água sobe
 
 **Na chuva de 16/10/2026 (52 mm), a água subiria de 25 a 34 cm no Abaeté e passaria de 1 m no Parque Linear.** A capacidade de 1 m é um ponto só. A **curva cota-volume** mostra o parque inteiro: para cada nível de água acima do fundo (25 cm, 50 cm, 75 cm, 1 m, 1,5 m e 2 m), quanto ele guarda e quanto de área fica alagada. Sai do mesmo terreno da capacidade (ANADEM, fundo no 10º percentil), em `volumes._curva_cota_volume`.
