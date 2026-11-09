@@ -52,7 +52,8 @@ header nav.links a:hover{color:var(--ink);text-decoration:none}
 .passos{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);font-size:13px}
 .passos b{color:var(--ink);font-weight:600}
 .links-lista{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13px}
-.rolar{overflow-y:auto;flex:1;min-height:0}
+.rolar{overflow-y:auto;flex:1;min-height:0;scrollbar-width:none}
+.rolar::-webkit-scrollbar{display:none}
 .bloco{padding:16px 18px 6px}
 .bloco h3{margin:0 0 10px;font-size:14px;font-weight:600;letter-spacing:.005em}
 .bloco > p{margin:0;color:var(--ink-2);font-size:13px;line-height:1.5}
@@ -62,8 +63,8 @@ header nav.links a:hover{color:var(--ink);text-decoration:none}
 .camada{border-radius:8px;background:var(--panel-2);margin-bottom:8px}
 .sec{margin:0}
 #a-diag:not([hidden]){display:flex;flex-direction:column}
-#a-diag > .bloco:first-child{display:flex;flex-direction:column;gap:11px;padding-top:12px;padding-bottom:10px}
-#a-diag > .bloco:first-child h3{margin:0}
+#a-diag > .bloco-camadas{display:flex;flex-direction:column;gap:11px;padding-top:12px;padding-bottom:10px}
+#a-diag > .bloco-camadas h3{margin:0}
 #a-diag > .bloco:last-child{margin-top:auto;padding-top:6px;padding-bottom:14px}
 .sec-cab{display:flex;align-items:center;gap:10px;width:100%;padding:10px 10px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--ink);text-align:left}
 .sec-cab:hover{background:var(--hover)}
@@ -296,6 +297,36 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .restaurar{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:4px;padding:8px;border-radius:8px;background:var(--panel-2);font-size:12.5px;color:var(--ink-2)}
 .restaurar:hover{color:var(--ink);background:var(--hover)}
 .restaurar svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.aba-sub{padding:12px 18px 2px;display:grid;gap:1px}
+.aba-sub b{font-size:12px;font-weight:600;color:var(--accent)}
+.aba-sub span{font-size:12px;color:var(--muted)}
+.filtro-sol{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 10px}
+.filtro-sol button{padding:5px 11px;border-radius:999px;background:var(--panel-2);font-size:12.5px;color:var(--ink-2)}
+.filtro-sol button:hover{color:var(--ink)}
+.filtro-sol button[aria-pressed="true"]{background:rgba(76,155,240,.16);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(76,155,240,.55)}
+.ordem{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:12.5px;color:var(--ink-2)}
+.ordem select{width:auto;padding:5px 8px;font-size:12.5px;background:var(--panel-2);border-color:transparent;border-radius:6px}
+.fila .prio{font-size:11px;font-weight:600}
+.fila .prio.alta{color:#6FCB9F} .fila .prio.media{color:var(--warn)} .fila .prio.baixa{color:var(--muted)}
+.fila .alerta-m{color:var(--warn)}
+.fila li button.sel{box-shadow:inset 0 0 0 1px #7FE0B0;background:rgba(63,178,127,.10)}
+.fa-badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600;margin-bottom:6px}
+.fa-badge.alta{background:rgba(63,178,127,.16);color:#6FCB9F} .fa-badge.media{background:rgba(217,164,65,.16);color:var(--warn)} .fa-badge.baixa{background:var(--panel-2);color:var(--ink-2)}
+.fa-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0}
+.fa-kpis div{padding:8px 9px;border-radius:8px;background:var(--panel-2)}
+.fa-kpis b{display:block;font-size:19px;font-weight:600;line-height:1.1}
+.fa-kpis span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:2px;line-height:1.25}
+.fa-sec{margin:14px 0 6px;font-size:13px;font-weight:600;color:var(--ink)}
+.fa-int{padding:10px 12px;border-radius:8px;background:rgba(63,178,127,.10);border:1px solid rgba(63,178,127,.3)}
+.fa-int b{display:block;color:#6FCB9F;font-size:14px;font-weight:600;margin-bottom:3px}
+.fa-int p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.45}
+.fa-alerta{margin-top:10px;padding:8px 10px;border-radius:8px;background:rgba(217,164,65,.10);font-size:12px;color:var(--ink-2)}
+.fa-alerta b{color:var(--warn)}
+.fa-passos{margin:0;padding:0;list-style:none;display:grid;gap:6px;counter-reset:passo}
+.fa-passos li{position:relative;padding-left:26px;font-size:12.5px;color:var(--ink-2);line-height:1.35;counter-increment:passo}
+.fa-passos li::before{content:counter(passo);position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--panel-2);display:grid;place-items:center;font-size:11px;font-weight:600;color:var(--ink)}
+.fa-fonte{margin:12px 0 0;font-size:11.5px;color:var(--muted)}
+.fa-voltar{margin-top:8px;font-size:12.5px;color:var(--accent)}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
 #mapa{position:absolute;inset:0}
@@ -445,7 +476,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
   <aside class="lado esq">
 
     <div class="rolar" id="a-diag">
-      <div class="bloco">
+      <div class="aba-sub"><b>Entender o problema</b><span>Onde está o risco e o que já aconteceu</span></div>
+      <div class="bloco bloco-camadas">
         <h3>Camadas e filtros</h3>
         <section class="sec aberta">
           <button type="button" class="sec-cab" aria-expanded="true" aria-controls="sec-ocorr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11Z"/><circle cx="12" cy="10" r="2"/></svg><span>O que aconteceu</span><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
@@ -528,12 +560,27 @@ label.campo .l b{color:var(--ink);font-weight:600}
     </div>
 
     <div class="rolar" id="a-oport" hidden>
-      <div class="bloco"><p>Soluções verdes a investigar no Núcleo Norte e o motivo de cada uma.</p></div>
+      <div class="aba-sub"><b>Encontrar soluções</b><span>Onde intervir primeiro e por quê</span></div>
       <div class="bloco fila-bloco">
-        <div class="w-cab"><h3>Por onde começar</h3><span class="sub">Núcleo Norte · prioridade 0–100</span></div>
+        <div class="w-cab"><h3>Oportunidades prioritárias</h3><span class="sub" id="fila-conta">48 encontradas</span></div>
+        <div class="filtro-sol" id="filtro-sol" role="group" aria-label="Filtrar por solução">
+          <button type="button" data-f="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-f="parque_inundavel" aria-pressed="false">Parques</button>
+          <button type="button" data-f="jardim_chuva" aria-pressed="false">Jardins</button>
+          <button type="button" data-f="piso_permeavel" aria-pressed="false">Piso</button>
+          <button type="button" data-f="telhado_verde" aria-pressed="false">Telhados</button>
+        </div>
+        <label class="ordem">Ordenar por
+          <select id="fila-ordem">
+            <option value="prioridade">Prioridade</option>
+            <option value="ocorrencias">Ocorrências por perto</option>
+            <option value="tamanho">Tamanho</option>
+            <option value="agua">Água que segura</option>
+          </select>
+        </label>
         <ol class="fila" id="fila"><li class="sub">Carregando as áreas…</li></ol>
         <button type="button" class="fila-mais" id="fila-mais" hidden>Ver todas</button>
-        <p class="sub fila-nota">Prioridade = risco × ocorrências por perto × tamanho. Clique numa área para ver a ficha.</p>
+        <p class="sub fila-nota">Prioridade = risco × ocorrências por perto × tamanho. Clique numa oportunidade para ver a ficha e destacá-la no mapa.</p>
       </div>
       <div class="sol">
         <div class="sol-t"><b>Jardim de chuva</b><span class="status inv">Investigar</span></div>
@@ -582,6 +629,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     </div>
 
     <div class="rolar" id="a-sim" hidden>
+      <div class="aba-sub"><b>Avaliar cenários</b><span>O que muda depois da intervenção</span></div>
       <div class="bloco"><p><b>Cenário da área piloto:</b> escolha a chuva e as soluções no painel sobre o mapa. Aqui ficam os detalhes: quanto cada solução segura, os parques e as premissas. Estimativa com valores publicados, não modelagem hidráulica.</p></div>
       <div class="bloco">
         <h3>Detalhes do cenário</h3>
@@ -619,6 +667,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="index.html">Página do projeto</a></li>
         </ul>
         <p class="sub" style="margin-top:10px">Relevo ANADEM 30 m · ocorrências da Defesa Civil de Sorocaba, 2022–2023 (por rua) · áreas do OpenStreetMap.</p>
+      </div>
+      <div class="bloco">
+        <h3>Referências</h3>
+        <ul class="links-lista">
+          <li><a href="https://doi.org/10.1016/j.jenvman.2024.120999" target="_blank" rel="noopener">Alves et al. (2024)</a>: seleção de locais para soluções verdes com SIG e análise multicritério, em Londrina (PR). É o mesmo tipo de método da nossa prioridade.</li>
+          <li><a href="https://doi.org/10.2166/wst.2009.186" target="_blank" rel="noopener">Yang et al. (2009)</a>: jardim de chuva em campo, chuva de 180 mm, volume escoado ≈42% menor e pico ≈70% menor.</li>
+          <li><a href="https://www.eghn.org/en/enghaveparken/" target="_blank" rel="noopener">Enghaveparken, Copenhague</a>: parque que guarda 22.600 m³ de chuva e continua sendo parque.</li>
+        </ul>
       </div>
       <p class="aviso">Ferramenta de triagem para orientar estudos técnicos, não modelagem hidráulica nem projeto de obra.</p>
     </div>
@@ -686,6 +742,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
   </main>
 
   <aside class="lado dir" aria-label="Indicadores">
+    <section class="widget det" id="det-area" hidden aria-live="polite"></section>
     <section class="widget det" id="detalhe">
       <div class="w-cab"><h3 id="d-tipo">Área-piloto</h3><button id="d-voltar" hidden>Voltar ao piloto</button></div>
       <h2 id="d-tit">Núcleo Norte</h2>
@@ -815,6 +872,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       map.addSource('areas', { type: 'geojson', data: 'dados/recomendacoes.geojson' });
       map.addLayer({ id: 'areas', type: 'fill', source: 'areas', paint: { 'fill-color': COR_AREA, 'fill-opacity': 0.35 } }, 'ruas-halo');
       map.addLayer({ id: 'areas-borda', type: 'line', source: 'areas', paint: { 'line-color': COR_AREA, 'line-width': 1.2 } }, 'ruas-halo');
+      map.addLayer({ id: 'area-sel', type: 'line', source: 'areas', filter: ['==', ['get', 'id'], ''], paint: { 'line-color': '#7FE0B0', 'line-width': 3.2 } }, 'ruas-halo');
       fetch('dados/recomendacoes.geojson').then(function (r) { return r.json(); }).then(function (g) {
         totalAreas = g.features.length;
         var ha = g.features.reduce(function (s, f) { return s + f.properties.area_m2; }, 0) / 10000;
@@ -845,7 +903,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
         var rua = map.queryRenderedFeatures(e.point, { layers: ['ruas'] })[0];
         if (rua) { selecionar(rua.properties.rua, false); return; }
         var area = map.queryRenderedFeatures(e.point, { layers: ['areas'] })[0];
-        if (area) { popupArea(e.lngLat, area.properties); return; }
+        if (area) {
+          if (abaAtual === 'oport' && painelDireito()) { var fa = areaPorId(area.properties.id); if (fa) { selecionarArea(fa, false); return; } }
+          popupArea(e.lngLat, area.properties); return;
+        }
         if (map.queryRenderedFeatures(e.point, { layers: ['piloto-fundo'] })[0]) selecionarPiloto(false);
       });
     }
@@ -859,6 +920,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
     jardim_chuva: 'Canteiro rebaixado (bioretenção) que recebe o escoamento das calçadas e ruas próximas e favorece a infiltração. Depende de estudo do solo.',
     piso_permeavel: 'Pavimento que deixa a água passar para uma camada de brita por baixo, reduzindo o escoamento para a rua. Depende de estudo do solo e do uso.',
     telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
+  };
+  // Exemplo real ou medição publicada ao lado da nossa estimativa (não muda nenhum número)
+  var EXEMPLO = {
+    parque_inundavel: 'Exemplo real: o Enghaveparken, em Copenhague, guarda 22.600 m³ com parte do parque rebaixada e cercada por um dique baixo. É o que a nossa conta de 1 m supõe.',
+    jardim_chuva: 'Medição publicada: num teste de campo com chuva de 180 mm, um jardim de chuva reduziu ≈42% do volume escoado e ≈70% do pico (Yang et al., 2009).'
   };
   var ICONES = {
     agua: '<path d="M4 15c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M4 19c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M12 3s4 4.5 4 7a4 4 0 0 1-8 0c0-2.5 4-7 4-7Z"/>',
@@ -1014,8 +1080,12 @@ label.campo .l b{color:var(--ink);font-weight:600}
             'Conta: ' + p.volume_conta + '.',
             'Fonte: ' + p.volume_fonte + '.',
             cap ? 'Relevo de 30 m: é ordem de grandeza. Não conta a água que já existe em lago ou leito de rio.'
-                : 'Valor de projeto publicado, não medição em Sorocaba. Solo e lençol freático podem mudar o resultado.'
-          ]));
+                : p.solucao === 'piso_permeavel'
+                  ? 'Conta só a água guardada na brita, sem infiltração no solo: vale também em solo argiloso, com dreno no fundo.'
+                  : p.solucao === 'telhado_verde'
+                    ? 'Valor publicado, não medição em Sorocaba. Em chuva forte retém menos; depende do substrato e da estrutura do prédio.'
+                    : 'Valor de projeto publicado, não medição em Sorocaba. Solo e lençol freático podem mudar o resultado.'
+          ].concat(EXEMPLO[p.solucao] ? [EXEMPLO[p.solucao]] : [])));
       }
 
       var ev = el('ul', 'pa-evid');
@@ -1074,6 +1144,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
     document.querySelectorAll('.abas button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.aba === a ? 'true' : 'false'); });
     Object.keys(abas).forEach(function (k) { abas[k].hidden = k !== a; });
     destacarCenario(a === 'sim');
+    abaAtual = a;
+    modoOportunidades(a === 'oport');
     var sim = a === 'sim';
     $('sim-painel').hidden = !sim;
     document.querySelector('.mapa-area').classList.toggle('sim', sim);
@@ -1434,7 +1506,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
   function montarFila() {
     var ol = $('fila'); if (!ol || !areasDados) return;
     ol.innerHTML = '';
-    var lista = areasDados.features.slice().sort(function (a, b) { return a.properties.posicao - b.properties.posicao; });
+    var ORDEM = {
+      prioridade: function (a, b) { return a.properties.posicao - b.properties.posicao; },
+      ocorrencias: function (a, b) { return b.properties.registros_perto - a.properties.registros_perto || a.properties.posicao - b.properties.posicao; },
+      tamanho: function (a, b) { return b.properties.area_m2 - a.properties.area_m2; },
+      agua: function (a, b) { return (b.properties.volume_m3 || 0) - (a.properties.volume_m3 || 0); }
+    };
+    var lista = areasDados.features.filter(function (f) { return filaFiltro === 'todas' || f.properties.solucao === filaFiltro; })
+      .sort(ORDEM[filaOrdem] || ORDEM.prioridade);
+    $('fila-conta').textContent = lista.length + (lista.length === 1 ? ' encontrada' : ' encontradas');
     var mostrar = filaAberta ? lista : lista.slice(0, FILA_INICIAL);
     mostrar.forEach(function (f) {
       var p = f.properties, temNome = p.nome && p.nome !== 'null';
@@ -1445,16 +1525,21 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var pos = document.createElement('span'); pos.className = 'pos'; pos.textContent = p.posicao + 'º';
       var nome = document.createElement('span'); nome.className = 'nome';
       var nb = document.createElement('b'); nb.textContent = temNome ? p.nome : p.rotulo + ' sem nome';
+      var faixaP = p.nota >= 50 ? 'alta' : p.nota >= 10 ? 'media' : 'baixa';
+      var pr = document.createElement('span'); pr.className = 'prio ' + faixaP;
+      pr.textContent = { alta: 'Alta prioridade', media: 'Prioridade média', baixa: 'Prioridade baixa' }[faixaP];
       var ns = document.createElement('span'); ns.textContent = p.solucao_rotulo;
       var nivel = (p.fracao_alto || 0) >= 0.5 ? 'Risco alto' : (p.fracao_alto || 0) + (p.fracao_medio || 0) >= 0.5 ? 'Risco médio' : 'Risco baixo';
       var tam = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
       var nm = document.createElement('small'); nm.textContent = nivel + ' · ' + p.registros_perto + (p.registros_perto === 1 ? ' ocorrência' : ' ocorrências') + ' · ' + tam;
-      nome.appendChild(nb); nome.appendChild(ns); nome.appendChild(nm);
+      if (p.alerta && p.alerta !== 'null') { var am = document.createElement('small'); am.className = 'alerta-m'; am.textContent = '⚠ conferir o lençol freático'; nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); nome.appendChild(am); }
+      else { nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); }
+      if (p.id === areaSel) b.className = 'sel';
       var nt = document.createElement('span'); nt.className = 'nt'; nt.textContent = p.nota;
       var barra = document.createElement('i'); barra.style.setProperty('--w', Math.max(p.nota, 2) + '%'); barra.style.setProperty('--c', cor);
       nt.appendChild(barra);
       b.appendChild(pos); b.appendChild(nome); b.appendChild(nt);
-      b.addEventListener('click', function () { abrirArea(f); });
+      b.addEventListener('click', function () { if (painelDireito()) selecionarArea(f, true); else abrirArea(f); });
       li.appendChild(b); ol.appendChild(li);
     });
     var mais = $('fila-mais');
@@ -1462,6 +1547,126 @@ label.campo .l b{color:var(--ink);font-weight:600}
     mais.textContent = filaAberta ? 'Mostrar só as 10 primeiras' : 'Ver todas as ' + lista.length;
   }
   $('fila-mais').addEventListener('click', function () { filaAberta = !filaAberta; montarFila(); });
+  document.querySelectorAll('#filtro-sol button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      filaFiltro = b.dataset.f;
+      document.querySelectorAll('#filtro-sol button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      montarFila();
+    });
+  });
+  $('fila-ordem').addEventListener('change', function () { filaOrdem = this.value; montarFila(); });
+
+  // ---------- Oportunidade selecionada: mapa + ficha no painel direito ----------
+  var filaFiltro = 'todas', filaOrdem = 'prioridade', areaSel = null, abaAtual = 'diag';
+  // Ficha no painel direito só quando ele está ao lado do mapa (desktop); no celular ele fica no fim da página.
+  function painelDireito() { var d = document.querySelector('.dir'); return window.innerWidth > 760 && d && getComputedStyle(d).display !== 'none'; }
+  function areaPorId(id) {
+    if (!areasDados) return null;
+    for (var i = 0; i < areasDados.features.length; i++) if (areasDados.features[i].properties.id === id) return areasDados.features[i];
+    return null;
+  }
+  // Ruas com registro a até 300 m da borda da área (mesmo critério da nota)
+  function ruasPerto(f) {
+    if (!dados) return [];
+    var c = PIL.centro, kx = 111320 * Math.cos(c[1] * Math.PI / 180), ky = 110574;
+    var xy = function (q) { return [q[0] * kx, q[1] * ky]; };
+    var segs = [];
+    var polis = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+    polis.forEach(function (poli) { poli.forEach(function (anel) { for (var i = 1; i < anel.length; i++) segs.push([xy(anel[i - 1]), xy(anel[i])]); }); });
+    var dist = function (pt, s) {
+      var ax = s[0][0], ay = s[0][1], bx = s[1][0], by = s[1][1], dx = bx - ax, dy = by - ay;
+      var t = dx || dy ? Math.max(0, Math.min(1, ((pt[0] - ax) * dx + (pt[1] - ay) * dy) / (dx * dx + dy * dy))) : 0;
+      return Math.hypot(pt[0] - ax - t * dx, pt[1] - ay - t * dy);
+    };
+    return dados.features.filter(function (r) {
+      var pt = xy(r.geometry.coordinates);
+      return segs.some(function (s) { return dist(pt, s) <= 300; });
+    }).map(function (r) { return r.properties.rua; });
+  }
+  function modoOportunidades(ligado) {
+    if (!map || !map.getLayer || !map.getLayer('risco')) return;
+    // Na aba Oportunidades o foco é a intervenção: o risco fica de fundo
+    map.setPaintProperty('risco', 'fill-opacity', ligado ? ['match', ['get', 'classe'], 'alto', 0.12, 'medio', 0.05, 0] : ['match', ['get', 'classe'], 'alto', 0.28, 'medio', 0.10, 0]);
+    if (!ligado) limparSelecao();
+    else pintarSelecao();
+  }
+  function pintarSelecao() {
+    if (!map || !map.getLayer('area-sel')) return;
+    map.setFilter('area-sel', ['==', ['get', 'id'], areaSel || '']);
+    if (areaSel) {
+      map.setPaintProperty('areas', 'fill-opacity', ['case', ['==', ['get', 'id'], areaSel], 0.7, 0.14]);
+      var f = areaPorId(areaSel), perto = f ? ruasPerto(f) : [];
+      map.setPaintProperty('ruas', 'circle-opacity', ['case', ['in', ['get', 'rua'], ['literal', perto]], 1, 0.18]);
+      map.setPaintProperty('ruas', 'circle-stroke-opacity', ['case', ['in', ['get', 'rua'], ['literal', perto]], 1, 0.18]);
+    } else {
+      map.setPaintProperty('areas', 'fill-opacity', abaAtual === 'oport' ? 0.5 : 0.35);
+      map.setPaintProperty('ruas', 'circle-opacity', 1);
+      map.setPaintProperty('ruas', 'circle-stroke-opacity', 1);
+    }
+  }
+  function limparSelecao() {
+    areaSel = null;
+    $('det-area').hidden = true; $('detalhe').hidden = false;
+    pintarSelecao();
+    montarFila();
+  }
+  function selecionarArea(f, voar) {
+    areaSel = f.properties.id;
+    if (voar && map) map.fitBounds(caixaDaArea(f.geometry), { padding: 90, maxZoom: 16.5, duration: 600 });
+    pintarSelecao();
+    fichaArea(f.properties);
+    montarFila();
+  }
+
+  var PASSOS = {
+    parque_inundavel: ['Confirmar o uso atual do parque e quem administra a área', 'Estudo de viabilidade técnica e ambiental (cota de cheia do rio, solo, licenças)', 'Projeto de armazenamento temporário com a prefeitura'],
+    jardim_chuva: ['Visitar e confirmar o uso atual da área', 'Sondagem do solo e da profundidade do lençol freático', 'Projeto de jardins de chuva com a drenagem das ruas em volta'],
+    piso_permeavel: ['Conferir quem é o dono do estacionamento', 'Sondagem do solo e do lençol freático', 'Projeto de pavimento permeável com base de brita'],
+    telhado_verde: ['Conferir quem é o dono do prédio', 'Laudo da estrutura da cobertura', 'Projeto de telhado verde extensivo']
+  };
+  function fichaArea(p) {
+    var box = $('det-area'); box.innerHTML = '';
+    var el = function (tag, classe, texto) { var e = document.createElement(tag); if (classe) e.className = classe; if (texto != null) e.textContent = texto; return e; };
+    var faixa = p.nota >= 50 ? 'alta' : p.nota >= 10 ? 'media' : 'baixa';
+    var alto = +p.fracao_alto || 0, medio = +p.fracao_medio || 0;
+    var area = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
+    var cab = el('div', 'w-cab'); cab.appendChild(el('h3', null, 'Oportunidade selecionada')); cab.appendChild(el('span', 'sub', p.posicao + 'º de ' + (totalAreas || 48)));
+    box.appendChild(cab);
+    box.appendChild(el('span', 'fa-badge ' + faixa, { alta: 'Alta prioridade', media: 'Prioridade média', baixa: 'Prioridade baixa' }[faixa]));
+    box.appendChild(el('h2', null, p.nome && p.nome !== 'null' ? p.nome : p.rotulo + ' sem nome'));
+    box.appendChild(el('p', 'sub', p.rotulo + ' · ' + area + ' · área-piloto Norte, Sorocaba/SP'));
+    var k = el('div', 'fa-kpis');
+    [[String(p.nota), 'prioridade de 0 a 100'], [String(p.registros_perto), 'ocorrências a até 300 m'],
+     [p.volume_m3 != null ? Math.round(p.volume_m3).toLocaleString('pt-BR') + ' m³' : '–', p.volume_tipo === 'capacidade' ? 'pode guardar' : 'segura em 50 mm']].forEach(function (x) {
+      var d = el('div'); d.appendChild(el('b', 'n', x[0])); d.appendChild(el('span', null, x[1])); k.appendChild(d);
+    });
+    box.appendChild(k);
+    box.appendChild(el('p', 'fa-sec', 'Por que essa oportunidade?'));
+    var ul = el('ul', 'checks');
+    ul.appendChild(el('li', null, Math.round(alto * 100) + '% do terreno em risco alto' + (medio > 0.01 ? ' e ' + Math.round(medio * 100) + '% em médio' : '') + ' pelo relevo'));
+    ul.appendChild(el('li', null, p.registros_perto > 0 ? p.registros_perto + ' ocorrências da Defesa Civil em ruas a até 300 m (destacadas no mapa)' : 'Nenhuma ocorrência registrada a até 300 m'));
+    ul.appendChild(el('li', null, 'Espaço de ' + area + ' para a intervenção'));
+    box.appendChild(ul);
+    box.appendChild(el('p', 'fa-sec', 'De onde vem a nota'));
+    box.appendChild(fatoresBarras(p));
+    box.appendChild(el('p', 'pa-conta', '100 × ' + (+p.fator_risco).toFixed(2).replace('.', ',') + ' × ' + (+p.fator_registros).toFixed(2).replace('.', ',') + ' × ' + (+p.fator_tamanho).toFixed(2).replace('.', ',') + ' = ' + p.nota));
+    box.appendChild(el('p', 'fa-sec', 'Intervenção sugerida'));
+    var it = el('div', 'fa-int'); it.appendChild(el('b', null, p.solucao_rotulo)); it.appendChild(el('p', null, DESCRICAO[p.solucao]));
+    box.appendChild(it);
+    if (EXEMPLO[p.solucao]) box.appendChild(el('p', 'fa-fonte', EXEMPLO[p.solucao]));
+    if (p.alerta && p.alerta !== 'null') { var al = el('p', 'fa-alerta'); al.appendChild(el('b', null, 'Atenção: ')); al.appendChild(document.createTextNode(p.alerta)); box.appendChild(al); }
+    box.appendChild(el('p', 'fa-sec', 'Próximos passos'));
+    var ol = el('ol', 'fa-passos'); (PASSOS[p.solucao] || []).forEach(function (t) { ol.appendChild(el('li', null, t)); }); box.appendChild(ol);
+    var bts = el('div', 'botoes'); bts.style.marginTop = '14px';
+    var sim = el('button', 'bt pri bt-grande', 'Simular esta intervenção'); sim.type = 'button';
+    sim.addEventListener('click', function () { cenarioSo(p.solucao); irPara('sim'); });
+    bts.appendChild(sim); box.appendChild(bts);
+    var volta = el('button', 'fa-voltar', '← Voltar ao Núcleo Norte'); volta.type = 'button';
+    volta.addEventListener('click', limparSelecao); box.appendChild(volta);
+    box.appendChild(el('p', 'fa-fonte', 'Candidata a estudo, não terreno disponível. Fontes: relevo ANADEM; Defesa Civil 2022–2023; OpenStreetMap.'));
+    $('detalhe').hidden = true; box.hidden = false;
+    var dir = document.querySelector('.dir'); if (dir) dir.scrollTop = 0;
+  }
 
   // ---------- Orientação para quem acabou de entrar ----------
   (function () {
