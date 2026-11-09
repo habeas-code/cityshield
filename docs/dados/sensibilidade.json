@@ -1,0 +1,82 @@
+{
+ "metodo": "docs/recomendacoes.md#sensibilidade-da-nota",
+ "comparado_com": "nota = 100 × risco × registros × tamanho",
+ "areas": 48,
+ "topo": 10,
+ "nosso_top3": [
+  "Parque das Águas do Abaeté Maria Barbosa Silva",
+  "Parque Linear do Rio Sorocaba Doutor Armando Pannunzio",
+  "Parque Porto das Águas"
+ ],
+ "cenarios": {
+  "iguais": {
+   "pesos": {
+    "risco": 0.33,
+    "registros": 0.33,
+    "tamanho": 0.33
+   },
+   "top10_em_comum": 8,
+   "top3_em_comum": 3,
+   "spearman": 0.907,
+   "maior_queda_do_top10": 5,
+   "top3": [
+    "Parque das Águas do Abaeté Maria Barbosa Silva",
+    "Parque Linear do Rio Sorocaba Doutor Armando Pannunzio",
+    "Parque Porto das Águas"
+   ]
+  },
+  "risco_em_dobro": {
+   "pesos": {
+    "risco": 0.5,
+    "registros": 0.25,
+    "tamanho": 0.25
+   },
+   "top10_em_comum": 8,
+   "top3_em_comum": 3,
+   "spearman": 0.861,
+   "maior_queda_do_top10": 15,
+   "top3": [
+    "Parque das Águas do Abaeté Maria Barbosa Silva",
+    "Parque Linear do Rio Sorocaba Doutor Armando Pannunzio",
+    "Parque Porto das Águas"
+   ]
+  },
+  "registros_em_dobro": {
+   "pesos": {
+    "risco": 0.25,
+    "registros": 0.5,
+    "tamanho": 0.25
+   },
+   "top10_em_comum": 9,
+   "top3_em_comum": 2,
+   "spearman": 0.893,
+   "maior_queda_do_top10": 4,
+   "top3": [
+    "Parque Linear do Rio Sorocaba Doutor Armando Pannunzio",
+    "Parque das Águas do Abaeté Maria Barbosa Silva",
+    "Área verde sem nome"
+   ]
+  },
+  "tamanho_em_dobro": {
+   "pesos": {
+    "risco": 0.25,
+    "registros": 0.25,
+    "tamanho": 0.5
+   },
+   "top10_em_comum": 8,
+   "top3_em_comum": 3,
+   "spearman": 0.914,
+   "maior_queda_do_top10": 5,
+   "top3": [
+    "Parque das Águas do Abaeté Maria Barbosa Silva",
+    "Parque Linear do Rio Sorocaba Doutor Armando Pannunzio",
+    "Parque Porto das Águas"
+   ]
+  }
+ },
+ "resumo": {
+  "top10_em_comum_minimo": 8,
+  "top3_em_comum_minimo": 2,
+  "spearman_minimo": 0.861
+ }
+}

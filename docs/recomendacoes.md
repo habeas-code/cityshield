@@ -69,6 +69,23 @@ Cada fator vai de 0 a 1. Como é uma multiplicação, a área só vai para o top
 
 Nota 0 não quer dizer que a área é inútil: quer dizer que **não tem registro a até 300 m** ou que está **fora do risco**. São 17 áreas assim, entre elas o maior telhado (1,9 ha, num ponto alto). Um telhado verde num lugar alto também segura água que desceria para a várzea, mas esse efeito à distância não entra na nota desta versão.
 
+### Sensibilidade da nota
+
+**A fila quase não muda quando a conta muda.** A nota é uma análise multicritério (MCE) por multiplicação. O jeito mais comum na literatura de seleção de locais para soluções verdes (por exemplo [Alves et al., 2024](https://doi.org/10.1016/j.jenvman.2024.120999), em Londrina) é a **combinação linear ponderada** (WLC): soma os fatores, cada um com um peso, e os pesos somam 1. Refizemos a fila com WLC e quatro conjuntos de pesos (`python -m pipeline sensibilidade`, saída `sensibilidade.json`):
+
+| Pesos WLC (risco / registros / tamanho) | Top 10 igual ao nosso | Top 3 igual | Spearman (fila inteira) |
+|---|---|---|---|
+| iguais (0,33 / 0,33 / 0,33) | 8 de 10 | 3 de 3 | 0,91 |
+| risco em dobro (0,50 / 0,25 / 0,25) | 8 de 10 | 3 de 3 | 0,86 |
+| registros em dobro (0,25 / 0,50 / 0,25) | 9 de 10 | 2 de 3 | 0,89 |
+| tamanho em dobro (0,25 / 0,25 / 0,50) | 8 de 10 | 3 de 3 | 0,91 |
+
+Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é sem relação.
+
+- **As 6 primeiras ficam no top 10 em todos os cenários.** Abaeté, Parque Linear e Porto das Águas são o top 3 em três dos quatro. Com registros em dobro, o Porto das Águas cede o 3º lugar a uma área verde com mais ocorrências por perto.
+- **Quem entra e sai são áreas do meio da fila**, do 7º ao 16º, com notas de 7 a 17. A que mais cai é uma área verde com risco 0,77: quando o risco pesa o dobro, as muitas áreas com risco 1,0 passam na frente dela.
+- **Por que mantemos a multiplicação:** na soma, uma área sem nenhuma ocorrência perto ainda pode subir só pelo risco e pelo tamanho. Na multiplicação, ela precisa dos três. É uma escolha de projeto (começar onde já alagou), e o teste mostra que ela não muda quem lidera a fila.
+
 ## Quanta água cada solução segura (#17)
 
 **Chuva de referência: 50 mm**, perto da chuva de **16/10/2026** em Sorocaba (52 mm em 24 h), quando a Av. Dom Aguirre e a XV de Agosto foram interditadas. Cada número usa um valor publicado ([D11](decisoes.md#d11-toda-estimativa-com-fonte)) ou uma conta com o relevo, e o site mostra a conta e a fonte no ⓘ de cada área.
