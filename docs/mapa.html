@@ -437,7 +437,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
   .dir{display:none}
 }
 @media (max-width:760px){
-  body{overflow:auto;grid-template-rows:56px auto}
+  /* No celular a página rola inteira: sem altura fixa da tela, e os painéis crescem com o conteúdo
+     (antes ficavam com ~120 px cada, rolando por dentro e sem barra visível) */
+  html,body{height:auto}
+  body{overflow:auto;grid-template-rows:56px auto;min-height:100%}
+  .rolar,.dir{overflow:visible;flex:none}
   header{gap:8px;padding:0 8px}
   .logo span,header nav.links{display:none}
   .abas button{padding:8px 9px;gap:6px;font-size:12.5px}
