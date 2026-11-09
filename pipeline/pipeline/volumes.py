@@ -25,7 +25,7 @@ CHUVA_REF_MM = 50
 PISO_CAPACIDADE_MM = 50          # brita de 25 cm × 20% de vazios
 JARDIM_LAMINA_M = 0.15           # 15 cm
 JARDIM_FRACAO_DA_AREA = 0.10     # premissa nossa: jardins ocupam 10% da área verde
-JARDIM_AREA_QUE_ESCOA = 10       # cada m² de jardim recebe a água de 10 m² em volta
+JARDIM_AREA_QUE_ESCOA = 10       # cada m² de jardim recebe a água de 10 m² em volta (EPA 2023: jardim = 5–10% da área que drena; máx. 25:1)
 TELHADO_RETENCAO = 0.47          # limite de baixo da faixa 47–62%
 PARQUE_LAMINA_M = 1.0            # premissa nossa: alaga até 1 m acima do fundo
 PARQUE_FORA_ABAIXO_DA_MEDIANA_M = 3   # células mais baixas que isso são lago ou leito de rio
@@ -40,7 +40,7 @@ FONTE_ESCOAMENTO = ("Prefeitura do Rio, Rio-Águas, Instruções Técnicas para 
 
 FONTES = {
     "piso_permeavel": "Prefeitura de São Paulo, ETS-03/2013 (pavimentos permeáveis)",
-    "jardim_chuva": "Hinman, Rain Gardens, WSU Extension, 2007",
+    "jardim_chuva": "Hinman, Rain Gardens, WSU Extension, 2007; EPA, Bioretention Design Handbook, EPA 841-B-23-002, 2023",
     "telhado_verde": "Vacari et al., 2019, E&S Engineering and Science, UFMT",
     "parque_inundavel": "Cálculo do CityShield sobre o relevo ANADEM v1 (30 m)",
 }
