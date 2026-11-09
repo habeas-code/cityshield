@@ -115,6 +115,8 @@ O pipeline é reproduzível: rodando do zero num clone limpo, gera exatamente os
 | Ocorrências de alagamento 2022–2023 | Defesa Civil de Sorocaba (relatórios anexos ao TCC de M. C. Vargem, Unesp, 2024) | agregados por rua |
 | Fotos das soluções | Wikimedia Commons | ver [créditos](docs/img/CREDITOS.md) |
 
+**Baixar os dados:** na plataforma, aba **Sobre → Baixar os dados**, ou direto em [`docs/dados/`](docs/dados/). São arquivos GeoJSON que abrem no QGIS e no ArcGIS. O que significa cada campo das áreas está em [`docs/recomendacoes.md`](docs/recomendacoes.md#o-que-o-arquivo-traz).
+
 **Privacidade:** o relatório da Defesa Civil tem endereços de pessoas. Ele fica só na pasta `dados_privados/`, que **nunca vai para o GitHub** (está no `.gitignore` e o CI bloqueia). O repositório e o site usam apenas dados **agregados por rua**.
 
 ## Time Habeas Code
