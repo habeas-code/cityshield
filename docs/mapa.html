@@ -60,6 +60,22 @@ header nav.links a:hover{color:var(--ink);text-decoration:none}
 
 /* Lista de camadas (estilo CARTO Builder) */
 .camada{border-radius:8px;background:var(--panel-2);margin-bottom:8px}
+.sec{margin:0}
+#a-diag:not([hidden]){display:flex;flex-direction:column}
+#a-diag > .bloco:first-child{display:flex;flex-direction:column;gap:11px;padding-top:12px;padding-bottom:10px}
+#a-diag > .bloco:first-child h3{margin:0}
+#a-diag > .bloco:last-child{margin-top:auto;padding-top:6px;padding-bottom:14px}
+.sec-cab{display:flex;align-items:center;gap:10px;width:100%;padding:10px 10px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--ink);text-align:left}
+.sec-cab:hover{background:var(--hover)}
+.sec.aberta > .sec-cab{background:var(--panel-2)}
+.sec-cab > svg:first-child{width:17px;height:17px;flex:none;fill:none;stroke:var(--ink-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sec.aberta > .sec-cab > svg:first-child{stroke:var(--accent)}
+.sec-cab span{flex:1}
+.sec-cab .seta{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+.sec.aberta .seta{transform:rotate(180deg)}
+.sec-corpo{margin:10px 0 2px 18px;padding-left:12px;border-left:1px solid var(--line-2)}
+.sec-corpo .camada:last-child{margin-bottom:0}
+.sec-corpo .seg{margin-top:2px}
 .grupo{margin:14px 0 6px;font-size:12px;font-weight:600;color:var(--ink-2)}
 .bloco h3 + .grupo{margin-top:0}
 .camada-cab{display:flex;align-items:center;gap:10px;padding:7px 10px}
@@ -204,12 +220,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .det h2{margin:2px 0 2px;font-size:16px;font-weight:600}
 .det .kpi{margin:12px 0}
 .det ul{margin:0 0 12px;padding-left:18px;color:var(--ink-2);display:grid;gap:3px}
+.det ul.checks{list-style:none;padding:0;gap:7px}
+.det ul.checks li{position:relative;padding-left:26px;color:var(--ink);font-size:13px;line-height:1.35}
+.det ul.checks li::before{content:"";position:absolute;left:0;top:0;width:17px;height:17px;border-radius:50%;background:rgba(63,178,127,.18)}
+.det ul.checks li::after{content:"";position:absolute;left:6px;top:4px;width:4px;height:7px;border:solid #6FCB9F;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.rot-alerta{display:flex;align-items:center;gap:7px;color:var(--ink)!important;font-size:13.5px!important;font-weight:600;margin:4px 0 9px!important}
+.rot-alerta svg{width:17px;height:17px;fill:none;stroke:var(--warn);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .det .rot{font-size:12px;color:var(--muted);margin:0 0 6px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.tags span{font-size:12px;padding:3px 8px;border-radius:3px;background:var(--panel-2);border:1px solid var(--line-2)}
+.tags span{font-size:12.5px;padding:4px 11px;border-radius:999px;background:rgba(63,178,127,.10);border:1px solid rgba(63,178,127,.35);color:var(--ink)}
 .tags span.h{border-color:rgba(217,164,65,.5)}
 .tags span.h::after{content:" · avaliar viabilidade";color:var(--warn)}
-.botoes{display:flex;gap:8px}
+.botoes{display:grid;gap:8px}
+.bt-grande{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;font-size:13.5px;font-weight:600;border-radius:8px}
+.bt-grande svg{width:15px;height:15px;fill:currentColor}
 .bt{padding:6px 12px;border:1px solid var(--line-2);border-radius:4px;font-size:12.5px}
 .bt:hover{background:var(--hover)}
 .bt.pri{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -255,6 +279,23 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .dica-x{position:absolute;top:6px;right:8px;width:22px;height:22px;border-radius:4px;font-size:18px;line-height:1;color:var(--ink-2)}
 .dica-x:hover{background:var(--hover);color:var(--ink)}
 .mapa-area.sim .dica{display:none}
+.leg-mapa{position:absolute;left:10px;bottom:46px;z-index:2;display:flex;gap:18px;padding:9px 12px;border-radius:8px;background:rgba(28,33,40,.92);box-shadow:0 2px 8px rgba(0,0,0,.4);font-size:12px;color:var(--ink-2)}
+.leg-mapa div{display:grid;gap:4px;align-content:start}
+.leg-mapa b{font-size:11.5px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.leg-mapa span{display:flex;align-items:center;gap:7px}
+.leg-mapa i{width:9px;height:9px;border-radius:50%;flex:none}
+.leg-mapa i.q{border-radius:2px;width:11px}
+.leg-mapa i.l{height:2px;width:12px;border-radius:1px}
+.mapa-area.sim .leg-mapa{display:none}
+.etq .maplibregl-popup-content{padding:6px 10px;border-radius:6px;font-size:12px;pointer-events:none}
+.etq .maplibregl-popup-tip{display:none}
+.etq b{display:block;font-size:12.5px}
+.etq span{color:var(--ink-2)}
+.kbd{position:absolute;right:8px;top:7px;padding:1px 6px;border:1px solid var(--line-2);border-radius:4px;font-size:11px;color:var(--muted);pointer-events:none}
+.busca input:focus ~ .kbd,.busca input:not(:placeholder-shown) ~ .kbd{display:none}
+.restaurar{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:4px;padding:8px;border-radius:8px;background:var(--panel-2);font-size:12.5px;color:var(--ink-2)}
+.restaurar:hover{color:var(--ink);background:var(--hover)}
+.restaurar svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
 #mapa{position:absolute;inset:0}
@@ -367,6 +408,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
   .busca{width:200px}
   .dir{display:block;border-left:0;border-top:1px solid var(--line)}
   .dica{left:10px;right:10px;width:auto;top:auto;bottom:10px}
+  .leg-mapa,.kbd{display:none}
   .mapa-area.sim{height:auto}
   .mapa-area.sim #mapa,.mapa-area.sim .barra-mapa{display:none}
   .sim-painel{position:static;margin:0;border-radius:0;box-shadow:none;max-width:none}
@@ -404,8 +446,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
     <div class="rolar" id="a-diag">
       <div class="bloco">
-        <h3>Camadas</h3>
-        <p class="grupo">O que aconteceu</p>
+        <h3>Camadas e filtros</h3>
+        <section class="sec aberta">
+          <button type="button" class="sec-cab" aria-expanded="true" aria-controls="sec-ocorr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-6-6-11a6 6 0 0 1 12 0c0 5-6 11-6 11Z"/><circle cx="12" cy="10" r="2"/></svg><span>O que aconteceu</span><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="sec-corpo" id="sec-ocorr">
         <div class="camada" id="cam-ruas">
           <div class="camada-cab">
             <button class="olho" data-camada="ruas" aria-pressed="true" aria-label="Mostrar ou esconder registros por rua">
@@ -420,7 +464,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <span class="tam"><span><i style="width:9px;height:9px"></i>1</span><span><i style="width:20px;height:20px"></i>10</span><span><i style="width:28px;height:28px"></i>23 registros</span></span>
           </div>
         </div>
-        <p class="grupo">Risco pelo relevo</p>
+          </div>
+        </section>
+        <section class="sec aberta">
+          <button type="button" class="sec-cab" aria-expanded="true" aria-controls="sec-risco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19 9 9l4 6 3-4 5 8H3Z"/></svg><span>Risco pelo relevo</span><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="sec-corpo" id="sec-risco">
         <div class="camada" id="cam-risco">
           <div class="camada-cab">
             <button class="olho" data-camada="risco" aria-pressed="true" aria-label="Mostrar ou esconder risco pelo relevo">
@@ -443,7 +491,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <span class="camada-nome"><b>Córregos calculados</b><span>Onde se juntam mais de 0,5 km² de chuva</span></span>
           </div>
         </div>
-        <p class="grupo">Área de estudo</p>
+          </div>
+        </section>
+        <section class="sec aberta">
+          <button type="button" class="sec-cab" aria-expanded="true" aria-controls="sec-area"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke-dasharray="3 2.4"/><circle cx="12" cy="12" r="1.6"/></svg><span>Área de estudo</span><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="sec-corpo" id="sec-area">
         <div class="camada" id="cam-piloto">
           <div class="camada-cab">
             <button class="olho" data-camada="piloto" aria-pressed="true" aria-label="Mostrar ou esconder área-piloto">
@@ -453,9 +505,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <span class="camada-nome"><b>Área-piloto Norte</b><span>Raio de 800 m</span></span>
           </div>
         </div>
-      </div>
-      <div class="bloco">
-        <h3>Filtros</h3>
+          </div>
+        </section>
+        <section class="sec aberta">
+          <button type="button" class="sec-cab" aria-expanded="true" aria-controls="sec-filtro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5L4 5Z"/></svg><span>Filtros dos registros</span><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="sec-corpo" id="sec-filtro">
         <div class="seg" role="group" aria-label="Tipo de registro">
           <button type="button" data-tipo="todos" aria-pressed="true">Todos</button>
           <button type="button" data-tipo="alagamentos" aria-pressed="false">Alagamento</button>
@@ -464,9 +518,12 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <label class="faixa"><span class="l">Mínimo de registros por rua <b class="n" id="min-val">1</b></span>
           <input type="range" id="min" min="1" max="10" value="1">
         </label>
+          </div>
+        </section>
+        <button type="button" class="restaurar" id="restaurar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.6"/><path d="M4 4v4.6h4.6"/></svg>Restaurar camadas e filtros</button>
       </div>
       <div class="bloco">
-        <p>Cada ponto é uma rua, em posição aproximada: 240 registros em 79 ruas (dos 253 transcritos, 13 são de ruas que não conseguimos localizar). Nenhum endereço é publicado. O HAND mostra onde o relevo favorece o acúmulo de água; não é uma previsão de alagamento.</p>
+        <p class="sub">Cada ponto é uma rua, em posição aproximada: 240 registros em 79 ruas. Nenhum endereço é publicado. O risco mostra onde o relevo favorece o acúmulo de água, não uma previsão.</p>
       </div>
     </div>
 
@@ -572,8 +629,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
     <div class="barra-mapa">
       <div class="busca caixa">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        <input type="search" id="busca" placeholder="Buscar rua" autocomplete="off" aria-label="Buscar rua">
+        <input type="search" id="busca" placeholder="Buscar rua" autocomplete="off" aria-label="Buscar rua (atalho Ctrl+K)" aria-keyshortcuts="Control+K">
+        <span class="kbd" aria-hidden="true">Ctrl K</span>
         <ul id="busca-res" hidden></ul>
+      </div>
+    </div>
+    <div class="leg-mapa" id="leg-mapa" aria-label="Legenda do mapa">
+      <div><b>Nível de risco</b>
+        <span><i class="q" style="background:rgba(214,69,93,.6)"></i>Alto</span>
+        <span><i class="q" style="background:rgba(214,69,93,.25)"></i>Médio</span>
+      </div>
+      <div><b>Outros</b>
+        <span><i style="background:var(--alag)"></i>Alagamento</span>
+        <span><i style="background:var(--inund)"></i>Inundação</span>
+        <span><i class="l" style="background:#7FC8F8"></i>Córregos</span>
       </div>
     </div>
     <div class="visivel" id="visivel">79 ruas com registros no mapa</div>
@@ -622,8 +691,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <h2 id="d-tit">Núcleo Norte</h2>
       <p class="sub" id="d-sub">Parque das Águas · Jd. Maria do Carmo · Jd. Abaeté</p>
       <div class="kpi"><div><b class="n" id="d-num">41</b><span id="d-num-txt">registros de 2022–2023 em ruas localizadas no raio de 800 m (não são ocorrências dentro do parque)</span></div></div>
-      <p class="rot">Por que investigar</p>
-      <ul id="d-porque">
+      <p class="rot rot-alerta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 2.5 20h19L12 4Z"/><path d="M12 10v4M12 17v.5"/></svg>Por que essa área merece atenção?</p>
+      <ul id="d-porque" class="checks">
         <li>Registros históricos próximos</li>
         <li>Proximidade do Rio Sorocaba</li>
         <li>Áreas verdes e espaços urbanos mapeados</li>
@@ -632,7 +701,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <div id="d-sol">
         <p class="rot">Soluções a investigar</p>
         <div class="tags"><span>Jardim de chuva</span><span>Pavimento permeável</span><span class="h">Parque alagável</span></div>
-        <div class="botoes"><button class="bt" data-aba-ir="oport">Oportunidades</button><button class="bt pri" data-aba-ir="sim">Simular intervenção</button></div>
+        <div class="botoes"><button class="bt pri bt-grande" data-aba-ir="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5L8 5.5Z"/></svg>Simular intervenção</button><button class="bt" data-aba-ir="oport">Ver oportunidades</button></div>
       </div>
     </section>
 
@@ -751,8 +820,21 @@ label.campo .l b{color:var(--ink);font-weight:600}
         var ha = g.features.reduce(function (s, f) { return s + f.properties.area_m2; }, 0) / 10000;
         $('areas-resumo').textContent = g.features.length + ' áreas, ' + ha.toFixed(1).replace('.', ',') + ' ha · OpenStreetMap';
       }).catch(function () { /* mantém o texto padrão */ });
+      var etiqueta = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 10, className: 'etq', maxWidth: '260px' });
       map.on('mouseenter', 'areas', function () { map.getCanvas().style.cursor = 'pointer'; });
-      map.on('mouseleave', 'areas', function () { map.getCanvas().style.cursor = ''; });
+      map.on('mousemove', 'areas', function (e) {
+        var p = e.features && e.features[0] && e.features[0].properties;
+        if (!p || !p.solucao_rotulo) return;
+        var alto = +p.fracao_alto || 0, medio = +p.fracao_medio || 0;
+        var nivel = alto >= 0.5 ? 'Risco alto' : alto + medio >= 0.5 ? 'Risco médio' : 'Risco baixo';
+        var d = document.createElement('div'), b = document.createElement('b'), sp = document.createElement('span');
+        b.textContent = p.nome && p.nome !== 'null' ? p.nome : p.rotulo + ' sem nome';
+        sp.textContent = nivel + ' · ' + p.nota + '/100 · ' + p.solucao_rotulo;
+        d.appendChild(b); d.appendChild(sp);
+        etiqueta.setLngLat(e.lngLat).setDOMContent(d).addTo(map);
+      });
+      map.on('mouseleave', 'areas', function () { map.getCanvas().style.cursor = ''; etiqueta.remove(); });
+      map.on('click', function () { etiqueta.remove(); });
 
       fetch('dados/ruas.geojson').then(function (r) { return r.json(); }).then(function (g) {
         g.features.forEach(function (f) { f.properties.dist = distM(f.geometry.coordinates, PIL.centro); });
@@ -1024,6 +1106,19 @@ label.campo .l b{color:var(--ink);font-weight:600}
   document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { definirTipo(b.dataset.tipo); }); });
   $('limpar-tipo').addEventListener('click', function () { definirTipo('todos'); });
   $('min').addEventListener('input', function () { minimo = +this.value; $('min-val').textContent = minimo; if (dados) aplicar(); });
+  document.querySelectorAll('.sec-cab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var aberta = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(aberta));
+      b.parentNode.classList.toggle('aberta', aberta);
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !aberta;
+    });
+  });
+  $('restaurar').addEventListener('click', function () {
+    document.querySelectorAll('.olho[data-camada]').forEach(function (b) { if (b.getAttribute('aria-pressed') !== 'true') b.click(); });
+    var t = document.querySelector('.seg button[data-tipo="todos"]'); if (t) t.click();
+    var m = $('min'); m.value = 1; m.dispatchEvent(new Event('input'));
+  });
 
   function passa(p) { return p.registros >= minimo && (tipo === 'todos' || p[tipo] > 0); }
   function aplicar() {
@@ -1116,6 +1211,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
   // ---------- Busca ----------
   var campo = $('busca'), lista = $('busca-res'), ativo = 0;
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); campo.focus(); campo.select(); }
+  });
   function renderBusca() {
     var q = semAcento(campo.value.trim());
     if (!q || !dados) { lista.hidden = true; return; }
