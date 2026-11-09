@@ -329,6 +329,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .fa-enche{margin:-2px 0 10px;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
 .fa-enche b{color:var(--ink);font-weight:600}
 .pa-enche{display:block;margin-top:4px;color:var(--ink)}
+.fa-curva{width:100%;border-collapse:collapse;font-size:12px;margin:2px 0 0}
+.fa-curva th{text-align:left;font-weight:500;color:var(--muted);padding:4px 6px 4px 0;border-bottom:1px solid var(--line)}
+.fa-curva td{padding:4px 6px 4px 0;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.fa-curva tr.ref td{color:var(--ink);font-weight:600}
 .fa-voltar{margin-top:8px;font-size:12.5px;color:var(--accent)}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
@@ -933,21 +937,33 @@ label.campo .l b{color:var(--ink);font-weight:600}
   var SENSIBILIDADE = null; // frase do teste de pesos, preenchida quando sensibilidade.json carrega
   var CHUVA_16_10_MM = 52;  // 16/10/2026: Av. Dom Aguirre e XV de Agosto interditadas
   // Parque: com quantos mm de chuva enche só com a enxurrada das ruas em volta (pipeline contribuicao)
+  // Vindo do mapa, listas chegam como texto; vindo do arquivo, como lista
+  function comoLista(x) {
+    if (typeof x === 'string') { try { return JSON.parse(x); } catch (e) { return null; } }
+    return Array.isArray(x) ? x : null;
+  }
+  function nivelTxt(m) { return m < 1 ? Math.round(m * 100) + ' cm' : m.toFixed(2).replace('.', ',') + ' m'; }
   function enche(p) {
-    var mm = p.enche_com_mm;
-    if (typeof mm === 'string') { try { mm = JSON.parse(mm); } catch (e) { mm = null; } } // vindo do mapa, listas chegam como texto
+    var mm = comoLista(p.enche_com_mm);
     if (!mm || mm.length !== 2 || !p.contribuicao_m2 || p.contribuicao_m2 === 'null') return null;
+    var sobe = comoLista(p.sobe_16_10_m), sobeTxt = null;
+    if (sobe && sobe.length === 2 && sobe[0] != null) {
+      sobeTxt = 'Na chuva de 16/10/2026 (52 mm), a água subiria ' +
+        (sobe[1] == null ? 'mais de 2 m: passaria do parque.' : 'de ' + nivelTxt(sobe[0]) + ' a ' + nivelTxt(sobe[1]) + ' acima do fundo.');
+    }
     var km2 = (p.contribuicao_m2 / 1e6).toFixed(2).replace('.', ',');
     var ref = mm[1] < CHUVA_16_10_MM ? 'Numa chuva como a de 16/10/2026 (52 mm), ele encheria.'
       : mm[0] > CHUVA_16_10_MM ? 'Numa chuva como a de 16/10/2026 (52 mm), ainda sobraria espaço.'
       : 'Numa chuva como a de 16/10/2026 (52 mm), ficaria perto de encher.';
     return {
       frase: 'Enche com uma chuva de ' + mm[0] + ' a ' + mm[1] + ' mm. ' + ref,
-      notas: [
+      sobe: sobeTxt,
+      curva: comoLista(p.curva_cota_volume),
+      notas: (sobeTxt ? [sobeTxt + ' Sai da curva cota-volume do parque, medida no relevo.'] : []).concat([
         'Conta: capacidade ÷ (área que escoa para o parque × parte da chuva que escorre). Área que escoa: ' + km2 + ' km² de ruas e encostas em volta, pelo relevo.',
         'Não considera a cheia do rio nem dos córregos: só a enxurrada que desce do bairro em volta.',
         'Parte que escorre: 50% a 70%, valor para áreas de bairros (Prefeitura do Rio, Rio-Águas, 2019). Por isso o resultado é uma faixa.'
-      ]
+      ])
     };
   }
   // Exemplo real ou medição publicada ao lado da nossa estimativa (não muda nenhum número)
@@ -1677,6 +1693,24 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var pe = el('p', 'fa-enche'); pe.appendChild(el('b', null, en.frase.split('. ')[0] + '. '));
       pe.appendChild(document.createTextNode(en.frase.split('. ').slice(1).join('. ') + ' Só a enxurrada das ruas em volta, sem a cheia do rio.'));
       box.appendChild(pe);
+    }
+    if (en && en.curva && en.curva.length) {
+      // Curva cota-volume: quanto o parque guarda e quanto alaga em cada nível de água
+      var lamRef = areasDados && areasDados.parametros ? areasDados.parametros.parque_lamina_m : 1;
+      box.appendChild(el('p', 'fa-sec', 'Até onde a água sobe'));
+      if (en.sobe) box.appendChild(el('p', 'fa-enche', en.sobe));
+      var tb = el('table', 'fa-curva'), cab2 = el('tr');
+      ['Água acima do fundo', 'Guarda', 'Área alagada'].forEach(function (t) { cab2.appendChild(el('th', null, t)); });
+      tb.appendChild(cab2);
+      en.curva.forEach(function (c) {
+        var tr = el('tr'); if (c.nivel_m === lamRef) tr.className = 'ref';
+        tr.appendChild(el('td', null, nivelTxt(c.nivel_m)));
+        tr.appendChild(el('td', null, Math.round(c.volume_m3).toLocaleString('pt-BR') + ' m³'));
+        tr.appendChild(el('td', null, (c.area_alagada_m2 / 1e4).toFixed(1).replace('.', ',') + ' ha'));
+        tb.appendChild(tr);
+      });
+      box.appendChild(tb);
+      box.appendChild(el('p', 'fa-fonte', 'Em destaque, 1 m: o nível usado na capacidade. Relevo de 30 m: em parque pequeno a curva tem poucos pontos e é só ordem de grandeza.'));
     }
     box.appendChild(el('p', 'fa-sec', 'Por que essa oportunidade?'));
     var ul = el('ul', 'checks');
