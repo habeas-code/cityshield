@@ -5,6 +5,10 @@ conexões abertas (o pool) e empresta uma a cada pedido, em vez de abrir uma
 conexão nova toda vez, o que seria lento.
 
 A API só LÊ o banco (D7). Quem grava as camadas é a carga (#10).
+
+O limite de 5 s por consulta (statement_timeout) não fica aqui, e sim no
+próprio banco (db/init/02_statement_timeout.sql e docs/deploy.md): o endereço
+com pooler do Neon recusa esse parâmetro na hora de conectar.
 """
 
 import logging
@@ -21,10 +25,7 @@ engine = create_engine(
     pool_size=2,  # poucas conexões: a API é pequena e o Neon gratuito tem limite
     max_overflow=3,  # até 3 a mais num pico de acessos
     pool_pre_ping=True,  # testa a conexão antes de usar: o Neon fecha as que ficam paradas
-    connect_args={
-        "connect_timeout": 5,  # desiste de conectar depois de 5 s
-        "options": "-c statement_timeout=5000",  # nenhuma consulta passa de 5 s
-    },
+    connect_args={"connect_timeout": 5},  # desiste de conectar depois de 5 s
 )
 
 
