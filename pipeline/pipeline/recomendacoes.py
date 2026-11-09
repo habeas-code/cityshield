@@ -17,7 +17,7 @@ import rasterio
 from shapely.geometry import shape
 from shapely.ops import transform
 
-from pipeline import areas, relevo, volumes
+from pipeline import areas, contribuicao, relevo, volumes
 from pipeline.caminhos import SAIDA
 from pipeline.validacao import PARA_UTM, RUAS
 
@@ -91,6 +91,7 @@ def recomendar(refazer=False):
     max_registros = max(perto for _, _, perto, _ in linhas) or 1
     max_area = max(p["area_m2"] for _, p, _, _ in linhas)
     fonte_relevo = rasterio.open(relevo.SAIDA)
+    drenagem = None  # caminho da água, calculado só se houver parque
 
     for f, p, perto, poligono in linhas:
         risco = p["fracao_alto"] + 0.5 * p["fracao_medio"]
@@ -117,6 +118,9 @@ def recomendar(refazer=False):
             "nota": round(100 * risco * registros * tamanho),
         })
         p.update(volumes.estimar(p, poligono, fonte_relevo))
+        if solucao == "parque_inundavel" and p.get("volume_m3"):
+            drenagem = drenagem or contribuicao.Drenagem()
+            p.update(volumes.enchimento(p["volume_m3"], drenagem.area_m2(f["geometry"])))
     fonte_relevo.close()
 
     colecao["features"].sort(key=lambda f: -f["properties"]["nota"])
@@ -138,6 +142,8 @@ def recomendar(refazer=False):
         "piso_capacidade_mm": volumes.PISO_CAPACIDADE_MM,
         "telhado_retencao": volumes.TELHADO_RETENCAO,
         "parque_lamina_m": volumes.PARQUE_LAMINA_M,
+        "escoamento_c": list(volumes.ESCOAMENTO_C),
+        "fonte_escoamento": volumes.FONTE_ESCOAMENTO,
         "fontes": volumes.FONTES,
     }
     SAIDA_GEOJSON.write_text(json.dumps(colecao, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

@@ -7,6 +7,7 @@ junto com a conta e a fonte, para o site mostrar. Detalhes em docs/recomendacoes
     jardim de chuva  lâmina de 15 cm = 150 L por m² de jardim       Hinman, WSU, 2007
     telhado verde    retém 47% da chuva (limite de baixo de 47–62%) Vacari et al., 2019
     parque           capacidade até 1 m acima do fundo, pelo relevo ANADEM
+    parque (enche)   com quantos mm enche: capacidade ÷ (área de contribuição × C 0,50–0,70)  Rio-Águas, 2019
 
 São estimativas para comparar opções e ordem de grandeza, não projeto de obra.
 """
@@ -28,6 +29,12 @@ JARDIM_AREA_QUE_ESCOA = 10       # cada m² de jardim recebe a água de 10 m² e
 TELHADO_RETENCAO = 0.47          # limite de baixo da faixa 47–62%
 PARQUE_LAMINA_M = 1.0            # premissa nossa: alaga até 1 m acima do fundo
 PARQUE_FORA_ABAIXO_DA_MEDIANA_M = 3   # células mais baixas que isso são lago ou leito de rio
+
+# Parte da chuva que escorre (coeficiente de escoamento C) em "áreas de bairros":
+# 0,50 a 0,70. Usamos a faixa inteira, não um número só.
+ESCOAMENTO_C = (0.50, 0.70)
+FONTE_ESCOAMENTO = ("Prefeitura do Rio, Rio-Águas, Instruções Técnicas para Estudos Hidrológicos "
+                    "e Drenagem Urbana, 2ª versão, 2019, Tabela 1")
 
 FONTES = {
     "piso_permeavel": "Prefeitura de São Paulo, ETS-03/2013 (pavimentos permeáveis)",
@@ -60,6 +67,22 @@ def _volume_parque(relevo, poligono_graus):
     lat = poligono_graus.centroid.y
     celula_m2 = (relevo.res[0] * 111_320 * math.cos(math.radians(lat))) * (relevo.res[1] * 110_574)
     return float(np.clip(fundo + PARQUE_LAMINA_M - z, 0, None).sum() * celula_m2)
+
+
+def enchimento(capacidade_m3, contribuicao_m2):
+    """Com quantos mm de chuva o parque enche, só com a enxurrada da área em volta.
+
+    enche com (mm) = capacidade ÷ (área de contribuição × parte que escorre) × 1000
+    Sai uma faixa: o menor valor usa o C mais alto (mais água escorre, enche antes).
+    """
+    if not capacidade_m3 or not contribuicao_m2:
+        return {}
+    c_min, c_max = ESCOAMENTO_C
+    return {
+        "contribuicao_m2": round(contribuicao_m2),
+        "enche_com_mm": [round(capacidade_m3 / (contribuicao_m2 * c_max) * 1000),
+                         round(capacidade_m3 / (contribuicao_m2 * c_min) * 1000)],
+    }
 
 
 def estimar(p, poligono_graus, relevo):

@@ -326,6 +326,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .fa-passos li{position:relative;padding-left:26px;font-size:12.5px;color:var(--ink-2);line-height:1.35;counter-increment:passo}
 .fa-passos li::before{content:counter(passo);position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--panel-2);display:grid;place-items:center;font-size:11px;font-weight:600;color:var(--ink)}
 .fa-fonte{margin:12px 0 0;font-size:11.5px;color:var(--muted)}
+.fa-enche{margin:-2px 0 10px;font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.fa-enche b{color:var(--ink);font-weight:600}
+.pa-enche{display:block;margin-top:4px;color:var(--ink)}
 .fa-voltar{margin-top:8px;font-size:12.5px;color:var(--accent)}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
@@ -928,6 +931,25 @@ label.campo .l b{color:var(--ink);font-weight:600}
     telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
   };
   var SENSIBILIDADE = null; // frase do teste de pesos, preenchida quando sensibilidade.json carrega
+  var CHUVA_16_10_MM = 52;  // 16/10/2026: Av. Dom Aguirre e XV de Agosto interditadas
+  // Parque: com quantos mm de chuva enche só com a enxurrada das ruas em volta (pipeline contribuicao)
+  function enche(p) {
+    var mm = p.enche_com_mm;
+    if (typeof mm === 'string') { try { mm = JSON.parse(mm); } catch (e) { mm = null; } } // vindo do mapa, listas chegam como texto
+    if (!mm || mm.length !== 2 || !p.contribuicao_m2 || p.contribuicao_m2 === 'null') return null;
+    var km2 = (p.contribuicao_m2 / 1e6).toFixed(2).replace('.', ',');
+    var ref = mm[1] < CHUVA_16_10_MM ? 'Numa chuva como a de 16/10/2026 (52 mm), ele encheria.'
+      : mm[0] > CHUVA_16_10_MM ? 'Numa chuva como a de 16/10/2026 (52 mm), ainda sobraria espaço.'
+      : 'Numa chuva como a de 16/10/2026 (52 mm), ficaria perto de encher.';
+    return {
+      frase: 'Enche com uma chuva de ' + mm[0] + ' a ' + mm[1] + ' mm. ' + ref,
+      notas: [
+        'Conta: capacidade ÷ (área que escoa para o parque × parte da chuva que escorre). Área que escoa: ' + km2 + ' km² de ruas e encostas em volta, pelo relevo.',
+        'Não considera a cheia do rio nem dos córregos: só a enxurrada que desce do bairro em volta.',
+        'Parte que escorre: 50% a 70%, valor para áreas de bairros (Prefeitura do Rio, Rio-Águas, 2019). Por isso o resultado é uma faixa.'
+      ]
+    };
+  }
   // Exemplo real ou medição publicada ao lado da nossa estimativa (não muda nenhum número)
   var EXEMPLO = {
     parque_inundavel: 'Exemplo real: o Enghaveparken, em Copenhague, guarda 22.600 m³ com parte do parque rebaixada e cercada por um dique baixo. É o que a nossa conta de 1 m supõe.',
@@ -1082,6 +1104,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
         vol.appendChild(vb);
         vol.appendChild(el('span', null, '= ' + milhar(p.volume_m3) + ' caixas d’água de 1.000 litros' +
           (!cap && p.fracao_retida && p.fracao_retida !== 'null' ? ' · ' + Math.round(p.fracao_retida * 100) + '% da água que chega' : '')));
+        var en = cap ? enche(p) : null;
+        if (en) vol.appendChild(el('span', 'pa-enche', en.frase));
         corpo.appendChild(linha('agua', cap ? 'Água que pode guardar' : 'Água que segura', vol, null,
           cap ? 'capacidade de armazenamento, com até 1 m de lâmina' : 'numa chuva de 50 mm, como a de 16/10/2026 (52 mm)', [
             'Conta: ' + p.volume_conta + '.',
@@ -1092,7 +1116,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
                   : p.solucao === 'telhado_verde'
                     ? 'Valor publicado, não medição em Sorocaba. Em chuva forte retém menos; depende do substrato e da estrutura do prédio.'
                     : 'Valor de projeto publicado, não medição em Sorocaba. Solo e lençol freático podem mudar o resultado.'
-          ].concat(EXEMPLO[p.solucao] ? [EXEMPLO[p.solucao]] : [])));
+          ].concat(en ? en.notas : []).concat(EXEMPLO[p.solucao] ? [EXEMPLO[p.solucao]] : [])));
       }
 
       var ev = el('ul', 'pa-evid');
@@ -1648,6 +1672,12 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var d = el('div'); d.appendChild(el('b', 'n', x[0])); d.appendChild(el('span', null, x[1])); k.appendChild(d);
     });
     box.appendChild(k);
+    var en = p.volume_tipo === 'capacidade' ? enche(p) : null;
+    if (en) {
+      var pe = el('p', 'fa-enche'); pe.appendChild(el('b', null, en.frase.split('. ')[0] + '. '));
+      pe.appendChild(document.createTextNode(en.frase.split('. ').slice(1).join('. ') + ' Só a enxurrada das ruas em volta, sem a cheia do rio.'));
+      box.appendChild(pe);
+    }
     box.appendChild(el('p', 'fa-sec', 'Por que essa oportunidade?'));
     var ul = el('ul', 'checks');
     ul.appendChild(el('li', null, Math.round(alto * 100) + '% do terreno em risco alto' + (medio > 0.01 ? ' e ' + Math.round(medio * 100) + '% em médio' : '') + ' pelo relevo'));
