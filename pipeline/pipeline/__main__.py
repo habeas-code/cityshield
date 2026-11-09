@@ -7,11 +7,12 @@
     python -m pipeline validacao  testa o HAND contra os registros da Defesa Civil
     python -m pipeline areas      áreas candidatas a soluções verdes no piloto
     python -m pipeline recomendacoes  solução e nota de prioridade de cada área
+    python -m pipeline sensibilidade  a fila muda se a nota usar outra conta (WLC)?
 """
 
 import argparse
 
-from pipeline import areas, hand, recomendacoes, relevo, validacao
+from pipeline import areas, hand, recomendacoes, relevo, sensibilidade, validacao
 
 PASSOS = {
     "relevo": relevo.recortar,
@@ -19,6 +20,7 @@ PASSOS = {
     "validacao": validacao.validar,
     "areas": areas.extrair,
     "recomendacoes": recomendacoes.recomendar,
+    "sensibilidade": sensibilidade.analisar,
 }
 
 

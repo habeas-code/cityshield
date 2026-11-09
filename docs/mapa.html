@@ -860,6 +860,12 @@ label.campo .l b{color:var(--ink);font-weight:600}
         }
       }, 'piloto-fundo');
 
+      // Teste de sensibilidade da nota (pipeline sensibilidade): vira uma frase no ⓘ da prioridade
+      fetch('dados/sensibilidade.json').then(function (r) { return r.json(); }).then(function (s) {
+        var r = s.resumo, n = Object.keys(s.cenarios).length;
+        SENSIBILIDADE = 'E se a conta fosse outra? Refizemos a fila somando os critérios com ' + n + ' conjuntos de pesos (WLC): o top ' + s.topo +
+          ' manteve pelo menos ' + r.top10_em_comum_minimo + ' das ' + s.topo + ' áreas.';
+      }).catch(function () { /* sem a frase, o ⓘ continua igual */ });
       fetch('dados/validacao.json').then(function (r) { return r.json(); }).then(function (v) {
         var c = v.cidade, pct = function (x) { return Math.round(x * 100) + '%'; };
         $('v-reg').textContent = pct(c.fracao_registros.alto);
@@ -921,6 +927,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     piso_permeavel: 'Pavimento que deixa a água passar para uma camada de brita por baixo, reduzindo o escoamento para a rua. Depende de estudo do solo e do uso.',
     telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
   };
+  var SENSIBILIDADE = null; // frase do teste de pesos, preenchida quando sensibilidade.json carrega
   // Exemplo real ou medição publicada ao lado da nossa estimativa (não muda nenhum número)
   var EXEMPLO = {
     parque_inundavel: 'Exemplo real: o Enghaveparken, em Copenhague, guarda 22.600 m³ com parte do parque rebaixada e cercada por um dique baixo. É o que a nossa conta de 1 m supõe.',
@@ -1060,7 +1067,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         'Nota = 100 × risco × ocorrências × tamanho. Cada critério vai de 0 a 1 e todos têm o mesmo peso: é uma multiplicação, então a área só chega ao topo se for bem nos três.',
         'Risco: parte do terreno em risco alto, mais metade da parte em risco médio. Ocorrências: registros da Defesa Civil em ruas a até 300 m, comparados com a área que tem mais. Tamanho: em escala logarítmica, para um parque grande não apagar as praças.',
         'Nesta área:', fatoresBarras(p), conta
-      ]));
+      ].concat(SENSIBILIDADE ? [SENSIBILIDADE] : [])));
 
       var sol = el('div');
       sol.appendChild(el('span', 'pa-sol sol-' + p.solucao, p.solucao_rotulo));
