@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{height:100%;margin:0}
-body{display:grid;grid-template-rows:44px 1fr;font:13px/1.45 var(--sans);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+body{display:grid;grid-template-rows:56px 1fr;font:13px/1.45 var(--sans);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
@@ -28,13 +28,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .n{font-variant-numeric:tabular-nums}
 
 /* Cabeçalho */
-header{display:flex;align-items:center;gap:14px;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--line)}
+header{display:flex;align-items:center;gap:18px;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--line);min-width:0}
 .logo{display:flex;align-items:center;gap:8px;color:var(--ink);font-weight:600;font-size:14px}
 .logo:hover{text-decoration:none}
 .titulo{color:var(--ink-2);font-size:13px;padding-left:14px;border-left:1px solid var(--line)}
-header nav{margin-left:auto;display:flex;gap:18px;font-size:13px}
-header nav a{color:var(--ink-2)}
-header nav a:hover{color:var(--ink);text-decoration:none}
+header nav.links{margin-left:auto;display:flex;gap:18px;font-size:13px;flex:none}
+header nav.links a{color:var(--ink-2)}
+header nav.links a:hover{color:var(--ink);text-decoration:none}
 
 .app{display:grid;grid-template-columns:300px minmax(0,1fr) 320px;min-height:0}
 
@@ -42,10 +42,16 @@ header nav a:hover{color:var(--ink);text-decoration:none}
 .lado{background:var(--panel);display:flex;flex-direction:column;min-height:0}
 .esq{border-right:1px solid var(--line)}
 .dir{border-left:1px solid var(--line);overflow-y:auto}
-.abas{display:flex;border-bottom:1px solid var(--line);padding:0 10px;flex:none}
-.abas button{padding:13px 10px 11px;color:var(--ink-2);border-bottom:2px solid transparent;font-size:13.5px;font-weight:500}
-.abas button:hover{color:var(--ink)}
-.abas button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.abas{display:flex;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.abas::-webkit-scrollbar{display:none}
+.abas button{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;color:var(--ink-2);font-size:13.5px;font-weight:500;white-space:nowrap;flex:none}
+.abas button svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.abas button:hover{color:var(--ink);background:var(--hover)}
+.abas button[aria-selected="true"]{color:var(--ink);background:rgba(76,155,240,.14);font-weight:600;box-shadow:inset 0 -2px 0 var(--accent)}
+.abas button[aria-selected="true"] svg{color:var(--accent)}
+.passos{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);font-size:13px}
+.passos b{color:var(--ink);font-weight:600}
+.links-lista{margin:0;padding:0;list-style:none;display:grid;gap:7px;font-size:13px}
 .rolar{overflow-y:auto;flex:1;min-height:0}
 .bloco{padding:16px 18px 6px}
 .bloco h3{margin:0 0 10px;font-size:14px;font-weight:600;letter-spacing:.005em}
@@ -206,6 +212,39 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .bt.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 .bt.pri:hover{filter:brightness(1.1)}
 
+/* Painel de simulação sobre o mapa */
+.sim-painel{position:absolute;left:12px;right:12px;bottom:12px;margin:0 auto;max-width:900px;z-index:3;background:var(--panel);border-radius:10px;padding:14px 16px 16px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.sp-cab{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.sp-cab svg{width:20px;height:20px;flex:none;margin-top:1px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sp-cab b{display:block;font-size:15px;font-weight:600}
+.sp-cab span{display:block;font-size:12.5px;color:var(--ink-2)}
+.sp-corpo{display:grid;grid-template-columns:200px minmax(0,1fr);grid-template-rows:auto auto;gap:12px 18px}
+.sp-ctrl{grid-row:1 / span 2;display:grid;align-content:start;gap:14px}
+.sp-chuva{display:grid;gap:4px}
+.sp-chuva span{font-size:12.5px;color:var(--ink-2)}
+.sp-chuva b{font-size:22px;font-weight:600;line-height:1.1}
+.sp-chuva small{font-size:11.5px;color:var(--muted);line-height:1.35}
+.sp-sols{border:0;margin:0;padding:0;display:grid;gap:7px}
+.sp-sols legend{padding:0;margin-bottom:6px;font-size:12.5px;color:var(--ink-2)}
+.sp-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.sp-check input{width:15px;height:15px;margin:0;accent-color:var(--accent);flex:none}
+.sp-check svg{width:15px;height:15px;flex:none;fill:none;stroke:var(--ink-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sp-prio{font-size:12.5px;color:var(--ink-2)}
+.sp-mapas{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);align-items:center}
+.sp-mapa{position:relative;height:170px;border-radius:8px;overflow:hidden;background:#101317}
+.sp-mini{position:absolute;inset:0}
+.sp-mini .maplibregl-ctrl-top-right,.sp-mini .maplibregl-ctrl-bottom-right .maplibregl-ctrl-group{display:none}
+.sp-tag{position:absolute;top:8px;left:50%;transform:translateX(-50%);padding:3px 12px;border-radius:999px;background:rgba(20,24,29,.85);font-size:12px;font-weight:600;z-index:2}
+.sp-tag.depois{background:#2F7D5C}
+.sp-seta{display:grid;place-items:center}
+.sp-seta svg{width:24px;height:24px;padding:4px;border-radius:50%;background:var(--panel-2);fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sp-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sp-kpi{display:grid;grid-template-columns:22px 1fr;gap:2px 8px;align-items:center;padding:10px 12px;border-radius:8px;background:var(--panel-2)}
+.sp-kpi svg{grid-row:1 / span 2;width:20px;height:20px;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.sp-kpi span{font-size:12px;color:var(--ink-2)}
+.sp-kpi b{font-size:18px;font-weight:600;line-height:1.15}
+.sp-kpi b small{font-size:12px;font-weight:500;color:var(--ink-2);margin-left:4px}
+.mapa-area.sim .visivel,.mapa-area.sim #mapa .maplibregl-ctrl-bottom-right .maplibregl-ctrl-group{display:none}
 /* Mapa */
 .mapa-area{position:relative;min-height:0}
 #mapa{position:absolute;inset:0}
@@ -303,16 +342,32 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .rotulo-piloto span{font-size:10.5px;color:var(--ink-2)}
 
 @media (max-width:1180px){
+  .sp-corpo{grid-template-columns:170px minmax(0,1fr)}
+  .sp-mapa{height:150px}
   .app{grid-template-columns:280px minmax(0,1fr)}
   .dir{display:none}
 }
 @media (max-width:760px){
-  body{overflow:auto;grid-template-rows:44px auto}
-  .titulo{display:none}
+  body{overflow:auto;grid-template-rows:56px auto}
+  header{gap:8px;padding:0 8px}
+  .logo span,header nav.links{display:none}
+  .abas button{padding:8px 9px;gap:6px;font-size:12.5px}
   .app{grid-template-columns:1fr}
   .mapa-area{height:65vh;order:-1}
   .busca{width:200px}
   .dir{display:block;border-left:0;border-top:1px solid var(--line)}
+  .mapa-area.sim{height:auto}
+  .mapa-area.sim #mapa,.mapa-area.sim .barra-mapa{display:none}
+  .sim-painel{position:static;margin:0;border-radius:0;box-shadow:none;max-width:none}
+  .sp-corpo{grid-template-columns:1fr}
+  .sp-ctrl{grid-row:auto}
+  .sp-mapa{height:150px}
+  .sp-kpis{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .abas{flex:1;justify-content:space-between;gap:2px}
+  .abas button{flex-direction:column;gap:2px;padding:5px 7px;font-size:11px;border-radius:7px}
+  .abas button svg{width:16px;height:16px}
 }
 </style>
 </head>
@@ -321,20 +376,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
 <header>
   <a class="logo" href="index.html">
     <svg width="20" height="22" viewBox="0 0 40 44" aria-hidden="true"><path d="M20 2 4 8v12c0 11 7 19 16 22 9-3 16-11 16-22V8L20 2Z" fill="#16263C" stroke="#A9ADB3" stroke-width="1.5"/><path d="M9 17c4-3 8-3 11-1s7 2 11-1" fill="none" stroke="#7BD6A0" stroke-width="2.4" stroke-linecap="round"/><path d="M9 23.5c4-3 8-3 11-1s7 2 11-1" fill="none" stroke="#7BD6A0" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><path d="M10 30c3.5-2.6 7-2.6 10-.9s6.5 1.7 10-.9" fill="none" stroke="#6CB6E8" stroke-width="2.6" stroke-linecap="round"/></svg>
-    CityShield
+    <span>CityShield</span>
   </a>
-  <span class="titulo">Alagamentos e soluções verdes · Sorocaba/SP</span>
-  <nav><a href="index.html">Sobre</a><a href="index.html#metodologia">Metodologia</a><a href="https://github.com/habeas-code/cityshield">GitHub</a></nav>
+  <nav class="abas" role="tablist" aria-label="Seções da plataforma">
+    <button role="tab" data-aba="diag" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M10 20V6M15 20v-9M20 20V9"/></svg><span>Diagnóstico</span></button>
+    <button role="tab" data-aba="oport" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19l7-7"/></svg><span>Oportunidades</span></button>
+    <button role="tab" data-aba="sim" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5L8 5.5Z"/></svg><span>Simulação</span></button>
+    <button role="tab" data-aba="sobre" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Sobre</span></button>
+  </nav>
+  <nav class="links"><a href="index.html">Página do projeto</a><a href="https://github.com/habeas-code/cityshield">GitHub</a></nav>
 </header>
 
 <div class="app">
 
   <aside class="lado esq">
-    <div class="abas" role="tablist">
-      <button role="tab" data-aba="diag" aria-selected="true">Diagnóstico</button>
-      <button role="tab" data-aba="oport" aria-selected="false">Oportunidades</button>
-      <button role="tab" data-aba="sim" aria-selected="false">Simulação</button>
-    </div>
 
     <div class="rolar" id="a-diag">
       <div class="bloco">
@@ -456,30 +511,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
     </div>
 
     <div class="rolar" id="a-sim" hidden>
-      <div class="bloco"><p><b>Cenário da área piloto:</b> se as soluções recomendadas fossem feitas nas áreas candidatas, quanto da chuva deixaria de ir para a rua? Estimativa com valores publicados, não modelagem hidráulica.</p></div>
+      <div class="bloco"><p><b>Cenário da área piloto:</b> escolha a chuva e as soluções no painel sobre o mapa. Aqui ficam os detalhes: quanto cada solução segura, os parques e as premissas. Estimativa com valores publicados, não modelagem hidráulica.</p></div>
       <div class="bloco">
-        <h3>Parâmetros</h3>
-        <label class="campo"><span class="l">Chuva <b class="n" id="c-chuva-val">50 mm</b></span>
-          <input type="range" id="c-chuva" min="10" max="120" step="5" value="50" aria-describedby="c-chuva-ref">
-          <small class="ref" id="c-chuva-ref">16/10/2026: 52 mm em 24 h, Dom Aguirre e XV interditadas</small>
-        </label>
-        <div class="campo">Soluções
-          <span class="opcoes" id="c-sol">
-            <button type="button" data-sol="jardim_chuva" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>Jardim de chuva</button>
-            <button type="button" data-sol="piso_permeavel" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>Piso permeável</button>
-            <button type="button" data-sol="telhado_verde" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg>Telhado verde</button>
-            <button type="button" data-sol="parque_inundavel" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M4 19c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M8 11V7m4 4V5m4 6V8"/></svg>Parque inundável</button>
-          </span>
-        </div>
-        <div class="campo">Áreas
-          <span class="opcoes" id="c-quais">
-            <button type="button" data-quais="todas" aria-pressed="true">Todas as candidatas</button>
-            <button type="button" data-quais="prioridade" aria-pressed="false">Só prioridade média ou alta</button>
-          </span>
-        </div>
-      </div>
-      <div class="bloco">
-        <h3>Antes e depois</h3>
+        <h3>Detalhes do cenário</h3>
         <div id="c-res"><p class="sub" style="margin:0">Carregando as áreas…</p></div>
       </div>
       <div class="bloco" id="c-parques" hidden>
@@ -491,6 +525,31 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <ul class="prem" id="c-prem"></ul>
       </div>
       <p class="aviso">Valores de projeto publicados, não medição em Sorocaba. O resultado real depende do solo, do lençol freático, da declividade e do projeto. <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#quanta-água-cada-solução-segura-17" target="_blank" rel="noopener">Como calculamos</a></p>
+    </div>
+    <div class="rolar" id="a-sobre" hidden>
+      <div class="bloco">
+        <h3>O que é o CityShield</h3>
+        <p>Uma ferramenta para decidir onde investir contra enchentes em Sorocaba: mostra onde a cidade alaga, quais terrenos podem receber soluções verdes e quanto de água elas seguram. Começa pela área-piloto Norte, em volta do Parque das Águas.</p>
+      </div>
+      <div class="bloco">
+        <h3>Como usar</h3>
+        <ol class="passos">
+          <li><b>Diagnóstico:</b> o risco pelo relevo e as ruas que alagaram, com a comparação entre os dois.</li>
+          <li><b>Oportunidades:</b> as áreas candidatas em ordem de prioridade. Clique numa para ver a ficha.</li>
+          <li><b>Simulação:</b> escolha a chuva e as soluções e veja o antes e depois.</li>
+        </ol>
+      </div>
+      <div class="bloco">
+        <h3>Dados e método</h3>
+        <ul class="links-lista">
+          <li><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md" target="_blank" rel="noopener">Como validamos o mapa de risco</a></li>
+          <li><a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md" target="_blank" rel="noopener">Soluções, prioridade e volumes</a></li>
+          <li><a href="https://github.com/habeas-code/cityshield/blob/main/docs/decisoes.md" target="_blank" rel="noopener">Decisões do projeto</a></li>
+          <li><a href="index.html">Página do projeto</a></li>
+        </ul>
+        <p class="sub" style="margin-top:10px">Relevo ANADEM 30 m · ocorrências da Defesa Civil de Sorocaba, 2022–2023 (por rua) · áreas do OpenStreetMap.</p>
+      </div>
+      <p class="aviso">Ferramenta de triagem para orientar estudos técnicos, não modelagem hidráulica nem projeto de obra.</p>
     </div>
   </aside>
 
@@ -504,6 +563,34 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
     </div>
     <div class="visivel" id="visivel">79 ruas com registros no mapa</div>
+    <section class="sim-painel" id="sim-painel" hidden aria-label="Simulação de cenários">
+      <div class="sp-cab">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 4-6 5 5"/></svg>
+        <div><b>Simulação de cenários</b><span>Quanto da chuva as soluções verdes seguram na área-piloto Norte.</span></div>
+      </div>
+      <div class="sp-corpo">
+        <div class="sp-ctrl">
+          <label class="sp-chuva"><span>Chuva</span><b class="n" id="c-chuva-val">50 mm</b>
+            <input type="range" id="c-chuva" min="10" max="120" step="5" value="50" aria-describedby="c-chuva-ref">
+            <small id="c-chuva-ref">16/10/2026: 52 mm, Dom Aguirre e XV interditadas</small>
+          </label>
+          <fieldset class="sp-sols" id="c-sol">
+            <legend>Soluções aplicadas</legend>
+            <label class="sp-check"><input type="checkbox" data-sol="parque_inundavel" checked><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M4 19c2.5-2 5.5-2 8 0s5.5 2 8 0"/><path d="M8 11V7m4 4V5m4 6V8"/></svg>Parques inundáveis</label>
+            <label class="sp-check"><input type="checkbox" data-sol="jardim_chuva" checked><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>Jardins de chuva</label>
+            <label class="sp-check"><input type="checkbox" data-sol="piso_permeavel" checked><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>Piso permeável</label>
+            <label class="sp-check"><input type="checkbox" data-sol="telhado_verde" checked><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg>Telhados verdes</label>
+          </fieldset>
+          <label class="sp-check sp-prio"><input type="checkbox" id="c-prio">Só prioridade média ou alta</label>
+        </div>
+        <div class="sp-mapas">
+          <div class="sp-mapa"><div id="mini-antes" class="sp-mini"></div><span class="sp-tag">Antes</span></div>
+          <span class="sp-seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <div class="sp-mapa"><div id="mini-depois" class="sp-mini"></div><span class="sp-tag depois">Depois</span></div>
+        </div>
+        <div class="sp-kpis" id="c-kpis"></div>
+      </div>
+    </section>
   </main>
 
   <aside class="lado dir" aria-label="Indicadores">
@@ -869,11 +956,16 @@ label.campo .l b{color:var(--ink);font-weight:600}
   }
 
   // ---------- Abas ----------
-  var abas = { diag: $('a-diag'), oport: $('a-oport'), sim: $('a-sim') };
+  var abas = { diag: $('a-diag'), oport: $('a-oport'), sim: $('a-sim'), sobre: $('a-sobre') };
   function irPara(a) {
     document.querySelectorAll('.abas button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.aba === a ? 'true' : 'false'); });
     Object.keys(abas).forEach(function (k) { abas[k].hidden = k !== a; });
     destacarCenario(a === 'sim');
+    var sim = a === 'sim';
+    $('sim-painel').hidden = !sim;
+    document.querySelector('.mapa-area').classList.toggle('sim', sim);
+    if (sim) { criarMinis(); Object.keys(minis || {}).forEach(function (k) { if (minis[k]) minis[k].resize(); }); }
+    else if (map && map.resize) setTimeout(function () { map.resize(); }, 0);
   }
   document.querySelectorAll('.abas button').forEach(function (b) { b.addEventListener('click', function () { irPara(b.dataset.aba); }); });
   document.querySelectorAll('[data-aba-ir]').forEach(function (b) { b.addEventListener('click', function () { irPara(b.dataset.abaIr); }); });
@@ -1038,6 +1130,64 @@ label.campo .l b{color:var(--ink);font-weight:600}
     }
     return null; // parque: capacidade fixa, não depende da chuva
   }
+  var ICO_KPI = {
+    chega: ['#4C9BF0', '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>'],
+    retida: ['#6CC2A8', '<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/>'],
+    area: ['#6CC2A8', '<path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19l7-7"/>']
+  };
+  function indicadores(tot, areaHa) {
+    var k = $('c-kpis'); if (!k) return; k.innerHTML = '';
+    var pct = tot.chega ? Math.round(tot.ret / tot.chega * 100) : 0;
+    [['chega', 'Água que chega', tot.n ? milharC(tot.chega) + ' m³' : '–', ''],
+     ['retida', 'Água retida', tot.n ? milharC(tot.ret) + ' m³' : '–', tot.n ? '(' + pct + '%)' : ''],
+     ['area', 'Área com soluções', areaHa.toFixed(1).replace('.', ',') + ' ha', '']].forEach(function (d) {
+      var c = document.createElement('div'); c.className = 'sp-kpi';
+      var ic = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      ic.setAttribute('viewBox', '0 0 24 24'); ic.setAttribute('aria-hidden', 'true'); ic.style.stroke = ICO_KPI[d[0]][0]; ic.innerHTML = ICO_KPI[d[0]][1];
+      var r = document.createElement('span'); r.textContent = d[1];
+      var v = document.createElement('b'); v.textContent = d[2];
+      if (d[3]) { var sm = document.createElement('small'); sm.textContent = d[3]; v.appendChild(sm); }
+      c.appendChild(ic); c.appendChild(r); c.appendChild(v); k.appendChild(c);
+    });
+  }
+
+  // Dois mapas pequenos, Antes e Depois, com o risco e as áreas reais do piloto.
+  var minis = null;
+  function criarMinis() {
+    if (minis || !window.CityShield) return;
+    minis = {};
+    var c = PIL.centro, dx = PIL.raioM / (111320 * Math.cos(c[1] * Math.PI / 180)), dy = PIL.raioM / 110574;
+    ['antes', 'depois'].forEach(function (qual) {
+      var m = CityShield.criarMapa('mini-' + qual, {
+        estilo: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+        center: c, zoom: 13.6, interativo: false,
+        aoCarregar: function (mm) {
+          ['ruas', 'ruas-halo'].forEach(function (l) { if (mm.getLayer(l)) mm.setLayoutProperty(l, 'visibility', 'none'); });
+          if (mm._rotuloPiloto) mm._rotuloPiloto.getElement().style.display = 'none';
+          mm.setPaintProperty('piloto-fundo', 'fill-opacity', 0);
+          mm.addSource('risco', { type: 'geojson', data: 'dados/risco_hand.geojson' });
+          mm.addLayer({ id: 'risco', type: 'fill', source: 'risco', paint: { 'fill-color': '#D6455D', 'fill-opacity': ['match', ['get', 'classe'], 'alto', 0.5, 'medio', 0.2, 0], 'fill-antialias': false } }, 'piloto-fundo');
+          mm.addSource('areas', { type: 'geojson', data: 'dados/recomendacoes.geojson' });
+          mm.addLayer({ id: 'areas', type: 'fill', source: 'areas', paint: { 'fill-color': '#8A929C', 'fill-opacity': 0.3 } });
+          mm.addLayer({ id: 'areas-borda', type: 'line', source: 'areas', paint: { 'line-color': '#9AA3AD', 'line-width': 0.8 } });
+          mm.fitBounds([[c[0] - dx, c[1] - dy], [c[0] + dx, c[1] + dy]], { padding: 6, duration: 0 });
+          minis[qual] = mm;
+          atualizarMinis();
+        }
+      });
+      if (m) { m.scrollZoom.disable(); m.dragPan.disable(); m.doubleClickZoom.disable(); m.touchZoomRotate.disable(); m.boxZoom.disable(); m.keyboard.disable(); }
+    });
+  }
+  function atualizarMinis() {
+    if (!minis || !minis.depois || !minis.depois.getLayer('areas')) return;
+    var sols = Object.keys(cen.sol).filter(function (k) { return cen.sol[k]; });
+    var cond = ['all', ['in', ['get', 'solucao'], ['literal', sols]]];
+    if (cen.quais === 'prioridade') cond.push(['>=', ['get', 'nota'], 10]);
+    minis.depois.setPaintProperty('areas', 'fill-color', ['case', cond, '#3FB27F', '#8A929C']);
+    minis.depois.setPaintProperty('areas', 'fill-opacity', ['case', cond, 0.8, 0.3]);
+    minis.depois.setPaintProperty('areas-borda', 'line-color', ['case', cond, '#7FE0B0', '#9AA3AD']);
+  }
+
   function incluida(p) { return cen.sol[p.solucao] && (cen.quais === 'todas' || p.nota >= 10); }
 
   function cenario() {
@@ -1056,6 +1206,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
     });
 
     var box = $('c-res'); box.innerHTML = '';
+    var areaHa = 0;
+    areasDados.features.forEach(function (f) { if (incluida(f.properties)) areaHa += f.properties.area_m2 / 10000; });
+    indicadores(tot, areaHa);
+    atualizarMinis();
     var el = function (tag, classe, texto) { var e = document.createElement(tag); if (classe) e.className = classe; if (texto != null) e.textContent = texto; return e; };
     if (!tot.n) {
       box.appendChild(el('p', 'sub', cen.sol.parque_inundavel && parques.n
@@ -1063,27 +1217,6 @@ label.campo .l b{color:var(--ink);font-weight:600}
         : 'Nenhuma área com essas escolhas. Marque pelo menos uma solução.'));
     } else {
       var pct = Math.round(tot.ret / tot.chega * 100), segue = tot.chega - tot.ret;
-      var dest = el('div', 'c-dest');
-      [['Água que chega', milharC(tot.chega) + ' m³', 'chuva de ' + mm + ' mm em ' + tot.n + ' áreas'],
-       ['Água retida', milharC(tot.ret) + ' m³', pct + '% do que chega']].forEach(function (k, i) {
-        var d = el('div', i ? 'ret' : null);
-        d.appendChild(el('span', null, k[0])); d.appendChild(el('b', 'n', k[1])); d.appendChild(el('small', null, k[2]));
-        dest.appendChild(d);
-      });
-      box.appendChild(dest);
-      var barra = function (rotulo, valor, partes) {
-        var w = el('div', 'ad'), r = el('div', 'ad-rot');
-        r.appendChild(el('span', null, rotulo)); r.appendChild(el('b', null, valor)); w.appendChild(r);
-        var e = el('div', 'empilhada'); e.setAttribute('role', 'img'); e.setAttribute('aria-label', rotulo + ': ' + valor);
-        partes.forEach(function (pt) { var i = el('i'); i.style.width = pt[0] + '%'; i.style.background = pt[1]; e.appendChild(i); });
-        w.appendChild(e); return w;
-      };
-      box.appendChild(barra('Antes: vai para a rua', milharC(tot.chega) + ' m³', [[100, '#5A626C']]));
-      box.appendChild(barra('Depois: vai para a rua', milharC(segue) + ' m³', [[pct, '#419D83'], [100 - pct, '#5A626C']]));
-      var leg = el('div', 'emp-leg');
-      var l1 = el('span', null, 'Retido ' + pct + '%'); l1.style.setProperty('--c', '#419D83');
-      var l2 = el('span', null, 'Segue escoando ' + (100 - pct) + '%'); l2.style.setProperty('--c', '#5A626C');
-      leg.appendChild(l1); leg.appendChild(l2); box.appendChild(leg);
       var eq = el('p', 'equiv'); eq.appendChild(document.createTextNode('≈ '));
       eq.appendChild(el('b', null, milharC(tot.ret))); eq.appendChild(document.createTextNode(' caixas d’água de 1.000 litros a menos na rua'));
       box.appendChild(eq);
@@ -1145,15 +1278,13 @@ label.campo .l b{color:var(--ink);font-weight:600}
     sincronizarBotoes(); cenario();
   }
   function sincronizarBotoes() {
-    document.querySelectorAll('#c-sol button').forEach(function (b) { b.setAttribute('aria-pressed', String(!!cen.sol[b.dataset.sol])); });
-    document.querySelectorAll('#c-quais button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.quais === cen.quais)); });
+    document.querySelectorAll('#c-sol input').forEach(function (c) { c.checked = !!cen.sol[c.dataset.sol]; });
+    $('c-prio').checked = cen.quais === 'prioridade';
   }
-  document.querySelectorAll('#c-sol button').forEach(function (b) {
-    b.addEventListener('click', function () { cen.sol[b.dataset.sol] = !cen.sol[b.dataset.sol]; sincronizarBotoes(); cenario(); });
+  document.querySelectorAll('#c-sol input').forEach(function (c) {
+    c.addEventListener('change', function () { cen.sol[c.dataset.sol] = c.checked; cenario(); });
   });
-  document.querySelectorAll('#c-quais button').forEach(function (b) {
-    b.addEventListener('click', function () { cen.quais = b.dataset.quais; sincronizarBotoes(); cenario(); });
-  });
+  $('c-prio').addEventListener('change', function () { cen.quais = this.checked ? 'prioridade' : 'todas'; cenario(); });
   $('c-chuva').addEventListener('input', function () { cen.chuva = +this.value; cenario(); });
   // ---------- Fila "Por onde começar" (#19) ----------
   var FILA_INICIAL = 10, filaAberta = false;
