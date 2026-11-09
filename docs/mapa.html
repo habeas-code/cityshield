@@ -445,6 +445,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
   /* As abas ficam sempre à mão; o mapa para logo abaixo delas quando a lista leva até ele */
   header{position:sticky;top:0;z-index:30}
   #mapa{scroll-margin-top:56px}
+  /* Com a ficha aberta, a busca sai da frente do título (volta quando a ficha fecha) */
+  .mapa-area:has(.maplibregl-popup) .barra-mapa{display:none}
   header{gap:8px;padding:0 8px}
   .logo span,header nav.links{display:none}
   .abas button{padding:8px 9px;gap:6px;font-size:12.5px}
