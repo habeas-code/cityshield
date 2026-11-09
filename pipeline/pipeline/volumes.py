@@ -33,6 +33,8 @@ PARQUE_FORA_ABAIXO_DA_MEDIANA_M = 3   # células mais baixas que isso são lago 
 # Parte da chuva que escorre (coeficiente de escoamento C) em "áreas de bairros":
 # 0,50 a 0,70. Usamos a faixa inteira, não um número só.
 ESCOAMENTO_C = (0.50, 0.70)
+CHUVA_16_10_MM = 52              # chuva medida em 16/10/2026, usada para "até onde a água sobe"
+CURVA_NIVEIS_M = (0.25, 0.5, 0.75, 1.0, 1.5, 2.0)   # níveis da curva cota-volume dos parques
 FONTE_ESCOAMENTO = ("Prefeitura do Rio, Rio-Águas, Instruções Técnicas para Estudos Hidrológicos "
                     "e Drenagem Urbana, 2ª versão, 2019, Tabela 1")
 
@@ -48,8 +50,8 @@ def _m2(valor):
     return f"{round(valor):,} m²".replace(",", ".")
 
 
-def _volume_parque(relevo, poligono_graus):
-    """Capacidade de armazenamento: volume entre o terreno e uma lâmina de 1 m acima do fundo.
+def _terreno_parque(relevo, poligono_graus):
+    """Alturas do terreno dentro do parque, o fundo e a área de cada célula.
 
     O fundo é o 10º percentil do terreno, sem as células muito abaixo da mediana (lago ou
     leito do rio, que já têm água). Relevo de 30 m: o resultado é ordem de grandeza.
@@ -63,26 +65,61 @@ def _volume_parque(relevo, poligono_graus):
     if z.size == 0:
         return None
     z = z[z >= np.median(z) - PARQUE_FORA_ABAIXO_DA_MEDIANA_M]
-    fundo = np.percentile(z, 10)
     lat = poligono_graus.centroid.y
     celula_m2 = (relevo.res[0] * 111_320 * math.cos(math.radians(lat))) * (relevo.res[1] * 110_574)
-    return float(np.clip(fundo + PARQUE_LAMINA_M - z, 0, None).sum() * celula_m2)
+    return z, float(np.percentile(z, 10)), celula_m2
 
 
-def enchimento(capacidade_m3, contribuicao_m2):
+def _volume_ate(terreno, lamina_m):
+    """Volume (m³) e área alagada (m²) com a água a `lamina_m` acima do fundo."""
+    z, fundo, celula_m2 = terreno
+    profundidade = np.clip(fundo + lamina_m - z, 0, None)
+    return float(profundidade.sum() * celula_m2), float((profundidade > 0).sum() * celula_m2)
+
+
+def _curva_cota_volume(terreno):
+    """Curva cota-volume: para cada nível de água, quanto o parque guarda e quanto alaga."""
+    curva = []
+    for lamina in CURVA_NIVEIS_M:
+        volume, area = _volume_ate(terreno, lamina)
+        curva.append({"nivel_m": lamina, "volume_m3": round(volume), "area_alagada_m2": round(area)})
+    return curva
+
+
+def _nivel_para(curva, volume_m3):
+    """Nível (m) em que o parque guarda `volume_m3`, interpolando na curva. None = passa do último."""
+    anterior_v, anterior_n = 0.0, 0.0
+    for ponto in curva:
+        if volume_m3 <= ponto["volume_m3"]:
+            fracao = (volume_m3 - anterior_v) / (ponto["volume_m3"] - anterior_v)
+            return anterior_n + fracao * (ponto["nivel_m"] - anterior_n)
+        anterior_v, anterior_n = ponto["volume_m3"], ponto["nivel_m"]
+    return None
+
+
+def enchimento(capacidade_m3, contribuicao_m2, curva=None):
     """Com quantos mm de chuva o parque enche, só com a enxurrada da área em volta.
 
     enche com (mm) = capacidade ÷ (área de contribuição × parte que escorre) × 1000
     Sai uma faixa: o menor valor usa o C mais alto (mais água escorre, enche antes).
+
+    Com a curva cota-volume, diz também até onde a água subiria na chuva de 16/10/2026:
+    água que chega = 52 mm × área × C, e o nível sai da curva. None no fim da faixa =
+    passaria do último nível da curva (a água sairia do parque).
     """
     if not capacidade_m3 or not contribuicao_m2:
         return {}
     c_min, c_max = ESCOAMENTO_C
-    return {
+    saida = {
         "contribuicao_m2": round(contribuicao_m2),
         "enche_com_mm": [round(capacidade_m3 / (contribuicao_m2 * c_max) * 1000),
                          round(capacidade_m3 / (contribuicao_m2 * c_min) * 1000)],
     }
+    if curva:
+        chega = [CHUVA_16_10_MM / 1000 * contribuicao_m2 * c for c in (c_min, c_max)]
+        niveis = [_nivel_para(curva, v) for v in chega]
+        saida["sobe_16_10_m"] = [round(n, 2) if n is not None else None for n in niveis]
+    return saida
 
 
 def estimar(p, poligono_graus, relevo):
@@ -90,6 +127,7 @@ def estimar(p, poligono_graus, relevo):
     chuva_m = CHUVA_REF_MM / 1000
     area = p["area_m2"]
     solucao = p["solucao"]
+    extra = {}
 
     if solucao == "piso_permeavel":
         chega = area * chuva_m
@@ -109,9 +147,11 @@ def estimar(p, poligono_graus, relevo):
                  f"{round(JARDIM_LAMINA_M * 100)} cm de lâmina")
         tipo = "retido"
     else:  # parque inundável
-        volume = _volume_parque(relevo, poligono_graus)
-        if volume is None:
+        terreno = _terreno_parque(relevo, poligono_graus)
+        if terreno is None:
             return {}
+        volume, _ = _volume_ate(terreno, PARQUE_LAMINA_M)
+        extra = {"curva_cota_volume": _curva_cota_volume(terreno)}
         chega = None
         conta = f"terreno do parque até {PARQUE_LAMINA_M:g} m acima do fundo, medido no relevo"
         tipo = "capacidade"
@@ -122,4 +162,5 @@ def estimar(p, poligono_graus, relevo):
         "fracao_retida": round(volume / chega, 2) if chega else None,
         "volume_conta": conta,
         "volume_fonte": FONTES[solucao],
+        **extra,
     }

@@ -120,7 +120,7 @@ def recomendar(refazer=False):
         p.update(volumes.estimar(p, poligono, fonte_relevo))
         if solucao == "parque_inundavel" and p.get("volume_m3"):
             drenagem = drenagem or contribuicao.Drenagem()
-            p.update(volumes.enchimento(p["volume_m3"], drenagem.area_m2(f["geometry"])))
+            p.update(volumes.enchimento(p["volume_m3"], drenagem.area_m2(f["geometry"]), p.get("curva_cota_volume")))
     fonte_relevo.close()
 
     colecao["features"].sort(key=lambda f: -f["properties"]["nota"])
@@ -143,6 +143,8 @@ def recomendar(refazer=False):
         "telhado_retencao": volumes.TELHADO_RETENCAO,
         "parque_lamina_m": volumes.PARQUE_LAMINA_M,
         "escoamento_c": list(volumes.ESCOAMENTO_C),
+        "chuva_16_10_mm": volumes.CHUVA_16_10_MM,
+        "curva_niveis_m": list(volumes.CURVA_NIVEIS_M),
         "fonte_escoamento": volumes.FONTE_ESCOAMENTO,
         "fontes": volumes.FONTES,
     }

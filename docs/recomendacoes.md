@@ -135,6 +135,21 @@ enche com (mm) = capacidade ÷ (área de contribuição × parte da chuva que es
 
 **Como ler:** um parque que enche com pouca chuva (Parque Linear) já faria diferença nas chuvas comuns de Sorocaba. Um que só enche com muita chuva (Abaeté) tem espaço sobrando para a enxurrada do bairro. Saber se vale levar até ele também água de córrego é pergunta para o projeto de engenharia, não para esta conta. Os campos `contribuicao_m2` e `enche_com_mm` só existem nos parques e **não mudam a nota**.
 
+### Curva cota-volume: até onde a água sobe
+
+**Na chuva de 16/10/2026 (52 mm), a água subiria de 25 a 34 cm no Abaeté e passaria de 1 m no Parque Linear.** A capacidade de 1 m é um ponto só. A **curva cota-volume** mostra o parque inteiro: para cada nível de água acima do fundo (25 cm, 50 cm, 75 cm, 1 m, 1,5 m e 2 m), quanto ele guarda e quanto de área fica alagada. Sai do mesmo terreno da capacidade (ANADEM, fundo no 10º percentil), em `volumes._curva_cota_volume`.
+
+Para a chuva de 16/10: água que chega = 52 mm × área de contribuição × C (0,50 a 0,70), e o nível sai da curva, interpolando entre os pontos.
+
+| Parque | Guarda a 50 cm | Guarda a 1 m | Guarda a 2 m | Na chuva de 16/10, a água subiria |
+|---|---|---|---|---|
+| Parque das Águas do Abaeté | 27.864 m³ | 63.879 m³ | 176.262 m³ | 25 a 34 cm |
+| Parque Linear do Rio Sorocaba | 13.041 m³ | 33.308 m³ | 104.062 m³ | 1,10 a 1,36 m |
+| Parque Porto das Águas | 18.356 m³ | 32.526 m³ | 82.474 m³ | 82 cm a 1,14 m |
+| Praça Abiul | 1.158 m³ | 1.978 m³ | 4.226 m³ | 59 a 90 cm |
+
+**Limites:** com células de 30 m, um parque pequeno tem poucos pontos de terreno (a Praça Abiul tem uns 12) e a curva sobe aos degraus. Acima de 1 m, a água pode sair do parque por onde o terreno for mais baixo: a conta supõe o parque fechado, como o dique do Enghaveparken. Entradas e saídas de água (vertedor, tubulação) ficam para o projeto. Os campos `curva_cota_volume` e `sobe_16_10_m` só existem nos parques e não mudam a nota.
+
 **Limites:** são valores de projeto publicados, não medições em Sorocaba. Solo argiloso e lençol freático alto reduzem a infiltração. O relevo de 30 m dá ordem de grandeza para os parques, não o volume de projeto. Telhado verde precisa de laudo da estrutura.
 
 ## Cenário antes e depois (#20)
