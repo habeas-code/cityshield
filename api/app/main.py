@@ -1,12 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app import banco
+from app.config import origens_cors
 
 app = FastAPI(
     title="CityShield API",
     description="Camadas de risco de enchente e soluções verdes para Sorocaba/SP.",
     version="0.1.0",
+)
+
+# CORS: diz ao navegador quais sites podem ler as respostas da API.
+# Só os endereços de CORS_ORIGINS (o site no GitHub Pages e o localhost),
+# e só GET, porque o site só lê (D7).
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origens_cors(),
+    allow_methods=["GET"],
 )
 
 
