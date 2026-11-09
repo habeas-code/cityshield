@@ -1657,6 +1657,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     box.appendChild(el('p', 'fa-sec', 'De onde vem a nota'));
     box.appendChild(fatoresBarras(p));
     box.appendChild(el('p', 'pa-conta', '100 × ' + (+p.fator_risco).toFixed(2).replace('.', ',') + ' × ' + (+p.fator_registros).toFixed(2).replace('.', ',') + ' × ' + (+p.fator_tamanho).toFixed(2).replace('.', ',') + ' = ' + p.nota));
+    if (SENSIBILIDADE) box.appendChild(el('p', 'fa-fonte', SENSIBILIDADE));
     box.appendChild(el('p', 'fa-sec', 'Intervenção sugerida'));
     var it = el('div', 'fa-int'); it.appendChild(el('b', null, p.solucao_rotulo)); it.appendChild(el('p', null, DESCRICAO[p.solucao]));
     box.appendChild(it);
