@@ -122,6 +122,7 @@ Todo número que aparece no site ou no vídeo precisa ter fonte. Escreva a fonte
 Uma tarefa está pronta quando:
 
 - [ ] funciona rodando com `docker compose up` (ou abrindo a página)
+- [ ] se mexeu no pipeline, os testes das contas passam: `pip install -r pipeline/requirements.txt pytest` e `cd pipeline && python -m pytest -q`
 - [ ] se mexeu no site, o teste no navegador passa: `pip install -r tests/site/requirements.txt`, `python -m playwright install --with-deps chromium` e `python -m pytest -q tests/site`
 - [ ] o PR foi revisado e aprovado por outra pessoa
 - [ ] números novos têm fonte
