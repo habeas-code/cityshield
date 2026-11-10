@@ -58,6 +58,26 @@ UMA = """
     WHERE id = :id
 """
 
+# Só o que o cenário precisa: os parâmetros (do topo do arquivo) e, de cada
+# área, a solução, a nota, a área e o volume. Vem como dicionário do Python.
+PARA_CENARIO = """
+    SELECT json_build_object(
+        'meta', (SELECT meta FROM camadas_meta WHERE camada = 'areas'),
+        'areas', COALESCE(
+            (SELECT json_agg(
+                        json_build_object(
+                            'id', id,
+                            'solucao', solucao,
+                            'nota', nota,
+                            'area_m2', propriedades -> 'area_m2',
+                            'volume_m3', propriedades -> 'volume_m3'
+                        ) ORDER BY posicao)
+             FROM areas),
+            '[]'::json)
+    )
+"""
+
+
 def areas_geojson(bbox=None, solucao: str | None = None) -> str:
     """Todas as áreas (ou só as do bbox e da solução) como FeatureCollection."""
     return consultar(LISTA, {**parametros_bbox(bbox), "solucao": solucao}, "areas")
@@ -67,3 +87,7 @@ def area_geojson(id_area: str) -> str | None:
     """Uma área como Feature, ou None se o id não existe."""
     return consultar(UMA, {"id": id_area}, "areas")
 
+
+def dados_cenario() -> dict:
+    """Parâmetros e áreas para a conta do cenário (app/cenario.py)."""
+    return consultar(PARA_CENARIO, {}, "areas")
