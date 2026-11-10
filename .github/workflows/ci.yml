@@ -41,4 +41,25 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install ruff
-      - run: ruff check pipeline api --select E9,F63,F7,F82
+      - run: ruff check pipeline api db --select E9,F63,F7,F82
+
+  testes:
+    name: Python (testes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"   # a mesma da imagem da api
+          cache: pip
+          cache-dependency-path: api/requirements*.txt
+      # As dependências da api servem para os dois: a carga usa SQLAlchemy e psycopg.
+      - run: pip install -r api/requirements-dev.txt
+      # Nenhum dos dois precisa de banco: a carga testa a leitura dos arquivos
+      # de docs/dados/, e a api aponta para uma porta sem banco (conftest.py).
+      - name: pytest da carga (db/)
+        working-directory: db
+        run: python -m pytest -q
+      - name: pytest da api (api/)
+        working-directory: api
+        run: python -m pytest -q
