@@ -52,6 +52,7 @@ async def parametro_invalido(request: Request, erro: RequestValidationError) -> 
 
 
 @app.get("/", summary="A API está no ar (sem tocar no banco)")
+@app.head("/", include_in_schema=False)  # o health check do Render usa HEAD
 def raiz():
     """Nome, versão e onde ver a documentação.
 
@@ -59,6 +60,8 @@ def raiz():
     e do ping do GitHub Actions: se eles chamassem a /saude, o banco do Neon
     nunca desligaria e as horas gratuitas do mês acabariam. Para testar o
     banco, use a /saude.
+
+    Aceita também HEAD (mesma resposta, sem o corpo), que é como o Render testa.
     """
     return {"nome": app.title, "versao": app.version, "docs": "/docs", "saude": "/saude"}
 
