@@ -701,6 +701,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="dados/drenagem.geojson" download>Córregos e rios</a><span>drenagem calculada do relevo · ≈ 190 KB</span></li>
           <li><a href="dados/ruas.geojson" download>Ocorrências por rua</a><span>registros da Defesa Civil 2022–2023, um ponto por rua, sem endereço · ≈ 16 KB</span></li>
           <li><a href="dados/validacao.json" download>Validação do mapa de risco</a><span>números da comparação com as ocorrências (JSON) · ≈ 16 KB</span></li>
+          <li><a href="dados/comparacao_carta.json" download>Comparação com a carta oficial</a><span>o mesmo teste com a carta de inundação do IPT/SGB, 2015 (JSON, só números) · ≈ 2 KB</span></li>
           <li><a href="dados/limite_sorocaba.geojson" download>Limite do município</a><span>≈ 12 KB</span></li>
         </ul>
         <p class="sub" style="margin-top:10px">O que cada campo quer dizer: <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#o-que-o-arquivo-traz" target="_blank" rel="noopener">dicionário das áreas</a>. As áreas, ruas e córregos usam o OpenStreetMap (© colaboradores do OpenStreetMap, licença ODbL); o relevo é o ANADEM (Laipelt et al., 2024). Ao usar, cite "CityShield, Habeas Code".</p>
@@ -817,9 +818,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <p><b>74%:</b> dos 223 registros testados, 74% caem em trechos de rua no risco alto. Como o relatório diz a rua e não o ponto exato, os registros de cada rua são divididos pelo comprimento dela em cada faixa.</p>
         <p><b>12%:</b> de todo o comprimento de ruas da cidade (OpenStreetMap), 12% fica no risco alto.</p>
         <p><b>6×:</b> 74% ÷ 12%. Se os alagamentos caíssem em qualquer rua ao acaso, o risco alto teria só 12% deles.</p>
+        <p><b>Carta oficial:</b> fizemos o mesmo teste com a carta de suscetibilidade a inundações do IPT e do Serviço Geológico do Brasil (2015). A classe alta tem 24% dos registros em 2% das ruas (15× o acaso): é mais precisa, mas cobre pouco. Ela foi feita para várzea de rio, e o Plano de Macrodrenagem do SAAE (2025) lembra que não pega bem os vales estreitos. Os dois mapas se completam.</p>
         <p><b>253 → 240 → 223:</b> 253 registros foram transcritos dos relatórios (89 ruas). 240 têm a rua localizada no mapa (79 ruas, os pontos que você vê). 223 tiveram o traçado da rua achado no OpenStreetMap e entram no teste (75 ruas).</p>
       </div>
       <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não é a taxa de acerto de uma previsão.</p>
+      <p class="sub" id="v-carta" style="margin:6px 0 0"><b>E o mapa oficial?</b> A carta de inundação do IPT e do SGB (2015) marca 6% da cidade e acerta muito onde marca, mas 55% dos registros ficam fora dela.</p>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
     </section>
 
@@ -924,6 +927,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
         $('v-ruas').textContent = pct(c.fracao_ruas.alto);
         $('v-vezes').textContent = c.vezes_acima_do_acaso_alto.toFixed(1).replace('.', ',') + '×';
       }).catch(function () { /* mantém os números do HTML */ });
+      fetch('dados/comparacao_carta.json').then(function (r) { return r.json(); }).then(function (k) {
+        var c = k.carta.cidade, a = k.carta.fracao_da_area_do_municipio, h = k.hand.cidade.fracao_registros;
+        var pct = function (x) { return Math.round(x * 100) + '%'; }, alvo = $('v-carta');
+        alvo.textContent = '';
+        var b = document.createElement('b'); b.textContent = 'E o mapa oficial? '; alvo.appendChild(b);
+        alvo.appendChild(document.createTextNode('A carta de inundação do IPT e do SGB (2015) marca ' + pct(1 - a.fora) +
+          ' da cidade e acerta muito onde marca, mas ' + pct(c.fracao_registros.fora) + ' dos registros ficam fora dela. O risco alto do CityShield reúne ' + pct(h.alto) + '.'));
+      }).catch(function () { /* mantém a frase do HTML */ });
 
       // Áreas candidatas a soluções verdes: acima do risco, abaixo dos pontos
       var COR_AREA = ['match', ['get', 'tipo'], 'area_verde', '#4CC38A', 'estacionamento', '#AEB6C2', 'telhado', '#E0B341', '#888'];
