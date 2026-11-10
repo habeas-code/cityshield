@@ -51,6 +51,18 @@ async def parametro_invalido(request: Request, erro: RequestValidationError) -> 
     return JSONResponse(status_code=422, content={"detail": mensagem})
 
 
+@app.get("/", summary="A API está no ar (sem tocar no banco)")
+def raiz():
+    """Nome, versão e onde ver a documentação.
+
+    **Não consulta o banco, de propósito.** É a rota do health check do Render
+    e do ping do GitHub Actions: se eles chamassem a /saude, o banco do Neon
+    nunca desligaria e as horas gratuitas do mês acabariam. Para testar o
+    banco, use a /saude.
+    """
+    return {"nome": app.title, "versao": app.version, "docs": "/docs", "saude": "/saude"}
+
+
 @app.get(
     "/saude",
     responses={503: {"description": "O banco não respondeu"}},
