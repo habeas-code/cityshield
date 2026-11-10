@@ -160,8 +160,12 @@ def _somar(acumulado, contagem):
         acumulado[k] += v
 
 
-def medir(amostrador, refazer=False):
-    """Registros e ruas da cidade (e do piloto) por classe do mapa que o amostrador lê."""
+def medir(amostrador, refazer=False, ruas=None):
+    """Registros e ruas da cidade (e do piloto) por classe do mapa que o amostrador lê.
+
+    ruas: Features (ponto + "rua" + "registros"). Sem ela, lê os registros da Defesa
+    Civil (RUAS). O passo noticias usa a mesma conta com as ruas das notícias.
+    """
     municipio_utm = transform(PARA_UTM, hand._limite())
     piloto_utm = transform(PARA_UTM, Point(PILOTO)).buffer(RAIO_PILOTO_M)
     linhas = _linhas_osm(_baixar_osm(refazer))
@@ -187,8 +191,9 @@ def medir(amostrador, refazer=False):
         if nome:
             por_nome.setdefault(nome, []).append(geom)
 
-    with open(RUAS, encoding="utf-8") as f:
-        ruas = json.load(f)["features"]
+    if ruas is None:
+        with open(RUAS, encoding="utf-8") as f:
+            ruas = json.load(f)["features"]
 
     cidade = vazio(float)
     piloto = vazio(float)

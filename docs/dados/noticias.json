@@ -1,0 +1,729 @@
+{
+ "metodo": "docs/validacao.md#segundo-teste-notícias-de-2024-a-2026",
+ "fonte_registros": "Notícias de alagamento em Sorocaba, 2024–2026 (docs/dados/noticias.csv)",
+ "fonte_ruas": "OpenStreetMap (ODbL)",
+ "registro": "1 registro = 1 via citada em 1 evento de chuva (datas a até 2 dias = mesmo evento)",
+ "eventos": 23,
+ "noticias": 68,
+ "grupos": {
+  "todas": {
+   "hand": {
+    "ruas_total": 58,
+    "ruas_localizadas": 57,
+    "registros_total": 131,
+    "nao_localizadas": [
+     "Avenida Antônio Carlos Campolim"
+    ],
+    "cidade": {
+     "registros_considerados": 130.0,
+     "registros_por_faixa": {
+      "alto": 79.3,
+      "medio": 19.2,
+      "baixo": 31.5
+     },
+     "fracao_registros": {
+      "alto": 0.61,
+      "medio": 0.148,
+      "baixo": 0.242
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 4.95,
+     "vezes_acima_do_acaso_alto_medio": 2.51
+    },
+    "piloto": {
+     "registros_considerados": 18.0,
+     "registros_por_faixa": {
+      "alto": 16.9,
+      "medio": 1.0,
+      "baixo": 0.1
+     },
+     "fracao_registros": {
+      "alto": 0.937,
+      "medio": 0.057,
+      "baixo": 0.006
+     },
+     "fracao_ruas": {
+      "alto": 0.606,
+      "medio": 0.278,
+      "baixo": 0.116
+     },
+     "vezes_acima_do_acaso_alto": 1.55,
+     "vezes_acima_do_acaso_alto_medio": 1.12
+    },
+    "comparacao_ponto_central": {
+     "alto": 0.615,
+     "medio": 0.169,
+     "baixo": 0.215
+    },
+    "ruas": [
+     {
+      "rua": "Avenida Dom Aguirre",
+      "nome_osm": "avenida dom aguirre",
+      "registros": 16,
+      "comprimento_m": 12892,
+      "fracao_alto": 0.998,
+      "fracao_medio": 0.002,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Avenida 15 de Agosto",
+      "nome_osm": "avenida 15 de agosto",
+      "registros": 11,
+      "comprimento_m": 3544,
+      "fracao_alto": 0.9,
+      "fracao_medio": 0.09,
+      "fracao_baixo": 0.009
+     },
+     {
+      "rua": "Avenida Juvenal de Campos",
+      "nome_osm": "avenida juvenal de campos",
+      "registros": 7,
+      "comprimento_m": 2875,
+      "fracao_alto": 0.867,
+      "fracao_medio": 0.133,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Avenida Doutor Afonso Vergueiro",
+      "nome_osm": "avenida doutor afonso vergueiro",
+      "registros": 6,
+      "comprimento_m": 6527,
+      "fracao_alto": 0.748,
+      "fracao_medio": 0.171,
+      "fracao_baixo": 0.08
+     },
+     {
+      "rua": "Parque das Águas do Abaeté Maria Barbosa Silva",
+      "nome_osm": "parque das aguas do abaete maria barbosa silva",
+      "registros": 6,
+      "comprimento_m": 2870,
+      "fracao_alto": 0.994,
+      "fracao_medio": 0.006,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Praça da Bandeira",
+      "nome_osm": "praca da bandeira",
+      "registros": 6,
+      "comprimento_m": 245,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Avenida Comendador Pereira Inácio",
+      "nome_osm": "avenida comendador pereira inacio",
+      "registros": 4,
+      "comprimento_m": 5254,
+      "fracao_alto": 0.427,
+      "fracao_medio": 0.503,
+      "fracao_baixo": 0.07
+     },
+     {
+      "rua": "Avenida Itavuvu",
+      "nome_osm": "avenida itavuvu",
+      "registros": 4,
+      "comprimento_m": 9694,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.133,
+      "fracao_baixo": 0.867
+     },
+     {
+      "rua": "Avenida Antônio Carlos Comitre",
+      "nome_osm": "avenida antonio carlos comitre",
+      "registros": 3,
+      "comprimento_m": 3371,
+      "fracao_alto": 0.609,
+      "fracao_medio": 0.118,
+      "fracao_baixo": 0.274
+     },
+     {
+      "rua": "Avenida Doutor Armando Pannunzio",
+      "nome_osm": "avenida doutor armando pannunzio",
+      "registros": 3,
+      "comprimento_m": 5325,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Avenida General Carneiro",
+      "nome_osm": "avenida general carneiro",
+      "registros": 3,
+      "comprimento_m": 4942,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Avenida Ipanema",
+      "nome_osm": "avenida ipanema",
+      "registros": 3,
+      "comprimento_m": 12880,
+      "fracao_alto": 0.015,
+      "fracao_medio": 0.2,
+      "fracao_baixo": 0.785
+     },
+     {
+      "rua": "Avenida São Paulo",
+      "nome_osm": "avenida sao paulo",
+      "registros": 3,
+      "comprimento_m": 8870,
+      "fracao_alto": 0.169,
+      "fracao_medio": 0.254,
+      "fracao_baixo": 0.577
+     },
+     {
+      "rua": "Avenida Washington Luiz",
+      "nome_osm": "avenida washington luiz",
+      "registros": 2,
+      "comprimento_m": 4275,
+      "fracao_alto": 0.326,
+      "fracao_medio": 0.333,
+      "fracao_baixo": 0.341
+     },
+     {
+      "rua": "Praça Dom Tadeu Strunck",
+      "nome_osm": "praca dom tadeu strunck",
+      "registros": 2,
+      "comprimento_m": 221,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rodovia Raposo Tavares",
+      "nome_osm": "rodovia raposo tavares",
+      "registros": 2,
+      "comprimento_m": 30654,
+      "fracao_alto": 0.152,
+      "fracao_medio": 0.113,
+      "fracao_baixo": 0.735
+     },
+     {
+      "rua": "Rua Antônio Furtado Lopes",
+      "nome_osm": "rua antonio furtado lopes",
+      "registros": 2,
+      "comprimento_m": 1035,
+      "fracao_alto": 0.469,
+      "fracao_medio": 0.531,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Antônio de Andrade",
+      "nome_osm": "rua antonio de andrade",
+      "registros": 2,
+      "comprimento_m": 295,
+      "fracao_alto": 0.686,
+      "fracao_medio": 0.314,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Capitão Alfredo Cardoso",
+      "nome_osm": "rua capitao alfredo cardoso",
+      "registros": 2,
+      "comprimento_m": 322,
+      "fracao_alto": 0.795,
+      "fracao_medio": 0.205,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Doutor Campos Salles",
+      "nome_osm": "rua doutor campos salles",
+      "registros": 2,
+      "comprimento_m": 1290,
+      "fracao_alto": 0.947,
+      "fracao_medio": 0.053,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Doutor Álvaro Soares",
+      "nome_osm": "rua doutor alvaro soares",
+      "registros": 2,
+      "comprimento_m": 822,
+      "fracao_alto": 0.147,
+      "fracao_medio": 0.385,
+      "fracao_baixo": 0.468
+     },
+     {
+      "rua": "Rua Karim Jamal",
+      "nome_osm": "rua karim jamal",
+      "registros": 2,
+      "comprimento_m": 488,
+      "fracao_alto": 0.232,
+      "fracao_medio": 0.321,
+      "fracao_baixo": 0.446
+     },
+     {
+      "rua": "Rua Padre Madureira",
+      "nome_osm": "rua padre madureira",
+      "registros": 2,
+      "comprimento_m": 886,
+      "fracao_alto": 0.407,
+      "fracao_medio": 0.327,
+      "fracao_baixo": 0.265
+     },
+     {
+      "rua": "Rua Professor João Doretto",
+      "nome_osm": "rua professor joao doretto",
+      "registros": 2,
+      "comprimento_m": 616,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.458,
+      "fracao_baixo": 0.542
+     },
+     {
+      "rua": "Avenida Armando Sales de Oliveira",
+      "nome_osm": "avenida doutor armando sales de oliveira",
+      "registros": 1,
+      "comprimento_m": 973,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.083,
+      "fracao_baixo": 0.917
+     },
+     {
+      "rua": "Avenida Barão de Tatuí",
+      "nome_osm": "avenida barao de tatui",
+      "registros": 1,
+      "comprimento_m": 2991,
+      "fracao_alto": 0.505,
+      "fracao_medio": 0.085,
+      "fracao_baixo": 0.409
+     },
+     {
+      "rua": "Avenida Engenheiro Carlos Reinaldo Mendes",
+      "nome_osm": "avenida engenheiro carlos reinaldo mendes",
+      "registros": 1,
+      "comprimento_m": 8582,
+      "fracao_alto": 0.34,
+      "fracao_medio": 0.249,
+      "fracao_baixo": 0.411
+     },
+     {
+      "rua": "Avenida Londres",
+      "nome_osm": "avenida londres",
+      "registros": 1,
+      "comprimento_m": 1531,
+      "fracao_alto": 0.575,
+      "fracao_medio": 0.387,
+      "fracao_baixo": 0.039
+     },
+     {
+      "rua": "Avenida Oswaldo Cruz",
+      "nome_osm": "avenida oswaldo cruz",
+      "registros": 1,
+      "comprimento_m": 942,
+      "fracao_alto": 0.12,
+      "fracao_medio": 0.068,
+      "fracao_baixo": 0.812
+     },
+     {
+      "rua": "Ponte Salomão Pavlovsky",
+      "nome_osm": "ponte salomao pavlovsky",
+      "registros": 1,
+      "comprimento_m": 100,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Praça Professor Masaharu Taniguchi",
+      "nome_osm": "praca professor masaharu taniguchi",
+      "registros": 1,
+      "comprimento_m": 204,
+      "fracao_alto": 0.172,
+      "fracao_medio": 0.793,
+      "fracao_baixo": 0.034
+     },
+     {
+      "rua": "Rodovia Emerenciano Prestes de Barros",
+      "nome_osm": "rodovia emerenciano prestes de barros",
+      "registros": 1,
+      "comprimento_m": 8208,
+      "fracao_alto": 0.058,
+      "fracao_medio": 0.057,
+      "fracao_baixo": 0.885
+     },
+     {
+      "rua": "Rua Ananias Pires do Amaral",
+      "nome_osm": "rua ananias pires do amaral",
+      "registros": 1,
+      "comprimento_m": 298,
+      "fracao_alto": 0.447,
+      "fracao_medio": 0.263,
+      "fracao_baixo": 0.289
+     },
+     {
+      "rua": "Rua Antônio Osório Lima",
+      "nome_osm": "rua osorio antonio de lima",
+      "registros": 1,
+      "comprimento_m": 243,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Assunção",
+      "nome_osm": "rua assuncao",
+      "registros": 1,
+      "comprimento_m": 555,
+      "fracao_alto": 0.309,
+      "fracao_medio": 0.235,
+      "fracao_baixo": 0.456
+     },
+     {
+      "rua": "Rua Chile",
+      "nome_osm": "rua chile",
+      "registros": 1,
+      "comprimento_m": 1825,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.5,
+      "fracao_baixo": 0.5
+     },
+     {
+      "rua": "Rua Dom Antônio",
+      "nome_osm": "rua dom antonio alvarenga",
+      "registros": 1,
+      "comprimento_m": 362,
+      "fracao_alto": 0.464,
+      "fracao_medio": 0.482,
+      "fracao_baixo": 0.054
+     },
+     {
+      "rua": "Rua Doutor Heitor Ferreira Prestes",
+      "nome_osm": "rua doutor heitor ferreira prestes",
+      "registros": 1,
+      "comprimento_m": 192,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Elza Salvestro Bonilha",
+      "nome_osm": "rua professora elza salvestro bonilha",
+      "registros": 1,
+      "comprimento_m": 519,
+      "fracao_alto": 0.857,
+      "fracao_medio": 0.143,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Francisco Scarpa",
+      "nome_osm": "rua francisco scarpa",
+      "registros": 1,
+      "comprimento_m": 410,
+      "fracao_alto": 0.375,
+      "fracao_medio": 0.536,
+      "fracao_baixo": 0.089
+     },
+     {
+      "rua": "Rua Francisco Siedler",
+      "nome_osm": "rua francisco siedler",
+      "registros": 1,
+      "comprimento_m": 234,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Francisco de Andrade",
+      "nome_osm": "rua vereador joao francisco de andrade",
+      "registros": 1,
+      "comprimento_m": 423,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.469,
+      "fracao_baixo": 0.531
+     },
+     {
+      "rua": "Rua Francisco de Souza Lima",
+      "nome_osm": "rua francisco de souza lima",
+      "registros": 1,
+      "comprimento_m": 435,
+      "fracao_alto": 0.918,
+      "fracao_medio": 0.082,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Gustavo Monteiro Filho",
+      "nome_osm": "rua gustavo monteiro filho",
+      "registros": 1,
+      "comprimento_m": 114,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua José Martinez Peres",
+      "nome_osm": "rua jose martinez peres",
+      "registros": 1,
+      "comprimento_m": 2571,
+      "fracao_alto": 0.387,
+      "fracao_medio": 0.214,
+      "fracao_baixo": 0.399
+     },
+     {
+      "rua": "Rua João Mendes Gomes",
+      "nome_osm": "rua joao mendes gomes",
+      "registros": 1,
+      "comprimento_m": 215,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Laura Maiello Kook",
+      "nome_osm": "rua laura maiello kook",
+      "registros": 1,
+      "comprimento_m": 6544,
+      "fracao_alto": 0.049,
+      "fracao_medio": 0.038,
+      "fracao_baixo": 0.913
+     },
+     {
+      "rua": "Rua Maciel Baião",
+      "nome_osm": "rua maciel baiao",
+      "registros": 1,
+      "comprimento_m": 687,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Marechal Castelo Branco",
+      "nome_osm": "rua marechal castelo branco",
+      "registros": 1,
+      "comprimento_m": 437,
+      "fracao_alto": 0.685,
+      "fracao_medio": 0.315,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Mascarenhas Camelo",
+      "nome_osm": "rua mascarenhas camelo",
+      "registros": 1,
+      "comprimento_m": 1271,
+      "fracao_alto": 0.222,
+      "fracao_medio": 0.354,
+      "fracao_baixo": 0.424
+     },
+     {
+      "rua": "Rua Ministro Salgado Filho",
+      "nome_osm": "rua ministro salgado filho",
+      "registros": 1,
+      "comprimento_m": 1949,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Professor José Odin de Arruda",
+      "nome_osm": "rua professor jose odin de arruda",
+      "registros": 1,
+      "comprimento_m": 160,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Professor Luiz Amaral Wagner",
+      "nome_osm": "rua professor luiz amaral wagner",
+      "registros": 1,
+      "comprimento_m": 122,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Saliba Motta",
+      "nome_osm": "rua saliba motta",
+      "registros": 1,
+      "comprimento_m": 622,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Sylvio Fernandes de Oliveira",
+      "nome_osm": "rua sylvio fernandes de oliveira",
+      "registros": 1,
+      "comprimento_m": 151,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Vicente de Carvalho",
+      "nome_osm": "rua vicente de carvalho",
+      "registros": 1,
+      "comprimento_m": 145,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.471,
+      "fracao_baixo": 0.529
+     },
+     {
+      "rua": "Rua da Penha",
+      "nome_osm": "rua da penha",
+      "registros": 1,
+      "comprimento_m": 1586,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.01,
+      "fracao_baixo": 0.99
+     }
+    ]
+   },
+   "carta": {
+    "ruas_total": 58,
+    "ruas_localizadas": 57,
+    "registros_total": 131,
+    "nao_localizadas": [
+     "Avenida Antônio Carlos Campolim"
+    ],
+    "cidade": {
+     "registros_considerados": 130.0,
+     "registros_por_faixa": {
+      "alta": 31.9,
+      "media": 21.6,
+      "baixa": 5.4,
+      "fora": 71.1
+     },
+     "fracao_registros": {
+      "alta": 0.246,
+      "media": 0.166,
+      "baixa": 0.041,
+      "fora": 0.547
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 15.47,
+     "vezes_acima_do_acaso_alta_media": 13.59
+    }
+   }
+  },
+  "novas": {
+   "hand": {
+    "ruas_total": 35,
+    "ruas_localizadas": 34,
+    "registros_total": 50,
+    "nao_localizadas": [
+     "Avenida Antônio Carlos Campolim"
+    ],
+    "cidade": {
+     "registros_considerados": 49.0,
+     "registros_por_faixa": {
+      "alto": 16.4,
+      "medio": 10.7,
+      "baixo": 21.9
+     },
+     "fracao_registros": {
+      "alto": 0.335,
+      "medio": 0.218,
+      "baixo": 0.446
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 2.72,
+     "vezes_acima_do_acaso_alto_medio": 1.84
+    }
+   },
+   "carta": {
+    "ruas_total": 35,
+    "ruas_localizadas": 34,
+    "registros_total": 50,
+    "nao_localizadas": [
+     "Avenida Antônio Carlos Campolim"
+    ],
+    "cidade": {
+     "registros_considerados": 49.0,
+     "registros_por_faixa": {
+      "alta": 5.7,
+      "media": 1.2,
+      "baixa": 0.6,
+      "fora": 41.4
+     },
+     "fracao_registros": {
+      "alta": 0.117,
+      "media": 0.025,
+      "baixa": 0.013,
+      "fora": 0.846
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 7.34,
+     "vezes_acima_do_acaso_alta_media": 4.66
+    }
+   }
+  },
+  "ja_na_defesa_civil": {
+   "hand": {
+    "ruas_total": 23,
+    "ruas_localizadas": 23,
+    "registros_total": 81,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 81.0,
+     "registros_por_faixa": {
+      "alto": 62.9,
+      "medio": 8.5,
+      "baixo": 9.6
+     },
+     "fracao_registros": {
+      "alto": 0.776,
+      "medio": 0.105,
+      "baixo": 0.119
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 6.3,
+     "vezes_acima_do_acaso_alto_medio": 2.92
+    }
+   },
+   "carta": {
+    "ruas_total": 23,
+    "ruas_localizadas": 23,
+    "registros_total": 81,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 81.0,
+     "registros_por_faixa": {
+      "alta": 26.2,
+      "media": 20.4,
+      "baixa": 4.7,
+      "fora": 29.6
+     },
+     "fracao_registros": {
+      "alta": 0.324,
+      "media": 0.252,
+      "baixa": 0.058,
+      "fora": 0.366
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 20.39,
+     "vezes_acima_do_acaso_alta_media": 18.99
+    }
+   }
+  }
+ }
+}
