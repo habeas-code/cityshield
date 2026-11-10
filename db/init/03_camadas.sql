@@ -13,12 +13,14 @@
 -- quando o banco é criado; a carga (db/carga.py) também roda este arquivo
 -- antes de inserir, para funcionar num banco que já existia e no Neon.
 
--- Manchas de risco pelo HAND (risco_hand.geojson).
+-- Manchas de risco pelo HAND (risco_hand.geojson). Hoje são todas Polygon,
+-- mas uma mancha em vários pedaços viria como MultiPolygon: as duas entram.
 CREATE TABLE IF NOT EXISTS risco (
     id           serial PRIMARY KEY,  -- ordem do arquivo
     classe       text NOT NULL,       -- alto, medio...
     propriedades jsonb NOT NULL,
-    geom         geometry(Polygon, 4326) NOT NULL
+    geom         geometry(Geometry, 4326) NOT NULL
+        CHECK (GeometryType(geom) IN ('POLYGON', 'MULTIPOLYGON'))
 );
 CREATE INDEX IF NOT EXISTS risco_geom_idx ON risco USING gist (geom);
 
@@ -44,14 +46,16 @@ CREATE TABLE IF NOT EXISTS ruas (
 );
 CREATE INDEX IF NOT EXISTS ruas_geom_idx ON ruas USING gist (geom);
 
--- Áreas candidatas a solução verde (recomendacoes.geojson).
+-- Áreas candidatas a solução verde (recomendacoes.geojson). Polygon ou
+-- MultiPolygon (no OSM, uma área pode ter vários pedaços).
 CREATE TABLE IF NOT EXISTS areas (
     id           text PRIMARY KEY,         -- ex.: way-48448685 (do OSM)
     solucao      text NOT NULL,            -- parque_inundavel, jardim_chuva...
     nota         integer NOT NULL,
     posicao      integer NOT NULL UNIQUE,  -- 1 = mais indicada
     propriedades jsonb NOT NULL,
-    geom         geometry(Polygon, 4326) NOT NULL
+    geom         geometry(Geometry, 4326) NOT NULL
+        CHECK (GeometryType(geom) IN ('POLYGON', 'MULTIPOLYGON'))
 );
 CREATE INDEX IF NOT EXISTS areas_geom_idx ON areas USING gist (geom);
 

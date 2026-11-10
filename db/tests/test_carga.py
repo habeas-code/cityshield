@@ -95,6 +95,28 @@ def test_drenagem_mantem_multilinestring():
     assert linha["propriedades"] == "{}"
 
 
+MULTIPOLIGONO = {
+    "type": "MultiPolygon",
+    "coordinates": [
+        POLIGONO["coordinates"],
+        [[[-47.43, -23.47], [-47.42, -23.47], [-47.42, -23.46], [-47.43, -23.47]]],
+    ],
+}
+
+
+def test_risco_mantem_multipolygon():
+    linha = carga.linha_risco(feicao(MULTIPOLIGONO, classe="alto"))
+
+    assert json.loads(linha["geom"]) == MULTIPOLIGONO
+    assert linha["classe"] == "alto"
+
+
+def test_area_mantem_multipolygon():
+    linha = carga.linha_areas(feicao(MULTIPOLIGONO, id="way-2", solucao="x", nota=1, posicao=1))
+
+    assert json.loads(linha["geom"]) == MULTIPOLIGONO
+
+
 def test_acentos_ficam_legiveis_no_jsonb():
     linha = carga.linha_ruas(feicao(PONTO, rua="Rua São João", registros=3))
 
