@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, Response
 
 from app import banco, camadas
@@ -23,6 +24,11 @@ app.add_middleware(
     allow_methods=["GET"],
 )
 
+# GZip: comprime as respostas grandes (a camada de risco tem ~1,8 MB de texto)
+# para quem aceita (todo navegador). Respostas pequenas, como a /saude, vão
+# sem comprimir.
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
 
 @app.get(
     "/saude",
@@ -42,6 +48,10 @@ def saude():
 # ---------------------------------------------------------------- camadas
 
 GEOJSON = "application/geo+json"
+
+# As camadas só mudam quando o pipeline e a carga rodam de novo (D7): o
+# navegador pode reaproveitar a resposta por 5 minutos sem pedir outra vez.
+CACHE_CAMADAS = "public, max-age=300"
 
 Bbox = Annotated[
     str | None,
@@ -95,7 +105,9 @@ def responder_camada(nome: str, bbox: str | None) -> Response:
             content={"erro": "camada indisponível, tente de novo em instantes"},
             headers={"Cache-Control": "no-store"},  # erro não fica guardado no navegador
         )
-    return Response(content=geojson, media_type=GEOJSON)
+    return Response(
+        content=geojson, media_type=GEOJSON, headers={"Cache-Control": CACHE_CAMADAS}
+    )
 
 
 @app.get(
