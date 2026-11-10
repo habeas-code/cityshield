@@ -52,7 +52,7 @@ async def parametro_invalido(request: Request, erro: RequestValidationError) -> 
 
 
 @app.get("/", summary="A API está no ar (sem tocar no banco)")
-@app.head("/", include_in_schema=False)  # o health check do Render usa HEAD
+@app.head("/", include_in_schema=False)  # monitores e o HEAD do início do deploy no Render
 def raiz():
     """Nome, versão e onde ver a documentação.
 
@@ -61,7 +61,9 @@ def raiz():
     nunca desligaria e as horas gratuitas do mês acabariam. Para testar o
     banco, use a /saude.
 
-    Aceita também HEAD (mesma resposta, sem o corpo), que é como o Render testa.
+    Aceita também HEAD (mesma resposta, sem o corpo): o health check do Render
+    é GET, mas monitores costumam usar HEAD, e um HEAD aparece no log do Render
+    no início do deploy (antes dava 405).
     """
     return {"nome": app.title, "versao": app.version, "docs": "/docs", "saude": "/saude"}
 

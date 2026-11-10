@@ -35,8 +35,8 @@ def test_raiz_aparece_no_openapi(cliente):
     assert "/" in cliente.get("/openapi.json").json()["paths"]
 
 
-def test_raiz_aceita_head_como_o_health_check_do_render(cliente, monkeypatch):
-    # O Render testa com HEAD: tem que dar 200, sem corpo e sem tocar no banco.
+def test_raiz_aceita_head(cliente, monkeypatch):
+    # Monitores e o início do deploy no Render usam HEAD: 200, sem corpo e sem banco.
     def proibido(*args, **kwargs):
         raise AssertionError("a rota / não pode abrir conexão com o banco")
 
