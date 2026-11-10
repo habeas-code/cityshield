@@ -30,22 +30,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Endereço da API preenchido?
-        id: url
-        run: |
-          if [[ "$API_URL" == *PREENCHER-DEPOIS-DO-DEPLOY* ]]; then
-            echo "::notice::API_URL ainda é o marcador: nada a fazer até o deploy."
-            echo "pronto=nao" >> "$GITHUB_OUTPUT"
-          else
-            echo "pronto=sim" >> "$GITHUB_OUTPUT"
-          fi
-
-      # O Render leva ~1 min para acordar: até 4 novas tentativas, 20 s entre elas.
+      # O Render leva ~1 min para acordar: até 4 novas tentativas, 20 s entre elas,
+      # e até 60 s cada. Pior caso: 5 × 60 + 4 × 20 = 380 s, dentro dos 8 min do job.
       - name: GET /
-        if: steps.url.outputs.pronto == 'sim'
         run: |
           curl --fail --silent --show-error \
-            --retry 4 --retry-delay 20 --retry-all-errors --max-time 90 \
+            --retry 4 --retry-delay 20 --retry-all-errors --max-time 60 \
             "$API_URL/"
           echo
 
@@ -55,21 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Endereço da API preenchido?
-        id: url
-        run: |
-          if [[ "$API_URL" == *PREENCHER-DEPOIS-DO-DEPLOY* ]]; then
-            echo "::notice::API_URL ainda é o marcador: nada a fazer até o deploy."
-            echo "pronto=nao" >> "$GITHUB_OUTPUT"
-          else
-            echo "pronto=sim" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: GET /saude tem que dar 200
-        if: steps.url.outputs.pronto == 'sim'
         run: |
           codigo=$(curl --silent --show-error \
-            --retry 4 --retry-delay 20 --retry-all-errors --max-time 90 \
+            --retry 4 --retry-delay 20 --retry-all-errors --max-time 60 \
             --output resposta.json --write-out '%{http_code}' \
             "$API_URL/saude" || true)
           cat resposta.json 2>/dev/null; echo
