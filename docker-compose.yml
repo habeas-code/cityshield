@@ -34,7 +34,11 @@ services:
       db: { condition: service_healthy }
       carga: { condition: service_completed_successfully }  # só sobe com as camadas no banco
     ports: ["8000:8000"]
-    volumes: ["./api:/app"]
+    volumes:
+      - ./api:/app
+      # Só para rodar o pytest dentro do container: os testes do cenário
+      # conferem a conta com docs/dados/recomendacoes.geojson. A API não lê.
+      - ./docs/dados:/docs/dados:ro
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   pipeline:
