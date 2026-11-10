@@ -33,15 +33,13 @@ def escrever(pasta, nome, conteudo):
 # ---------------------------------------------------------------- arquivos reais
 
 
-def test_arquivos_de_docs_dados_batem_com_as_contagens():
+def test_arquivos_de_docs_dados_viram_uma_linha_por_feicao():
     camadas = carga.montar_camadas()
 
-    assert {c: len(d["linhas"]) for c, d in camadas.items()} == {
-        "risco": 777,
-        "drenagem": 543,
-        "ruas": 79,
-        "areas": 48,
-    }
+    assert camadas.keys() == {"risco", "drenagem", "ruas", "areas"}
+    for camada, arquivo in carga.ARQUIVOS.items():
+        feicoes = carga.ler_geojson(carga.PASTA_DADOS / arquivo)["features"]
+        assert len(camadas[camada]["linhas"]) == len(feicoes) >= 1
 
 
 def test_meta_das_recomendacoes_guarda_fonte_aviso_e_parametros():
@@ -132,12 +130,35 @@ def test_feicao_sem_geometria_e_recusada():
 # ---------------------------------------------------------------- contagens
 
 
-def test_contagem_errada_explica_o_que_aconteceu(tmp_path, monkeypatch):
+def test_quantidade_nova_de_feicoes_nao_quebra_a_carga(tmp_path, monkeypatch):
+    # O pipeline mudou e agora gera 2 ruas: a carga acompanha o arquivo.
     monkeypatch.setattr(carga, "ARQUIVOS", {"ruas": "ruas.geojson"})
-    escrever(tmp_path, "ruas.geojson", colecao(feicao(PONTO, rua="A", registros=1)))
+    escrever(
+        tmp_path,
+        "ruas.geojson",
+        colecao(feicao(PONTO, rua="A", registros=1), feicao(PONTO, rua="B", registros=2)),
+    )
 
-    with pytest.raises(ErroCarga, match="esperava 79 feições e achou 1"):
+    assert len(carga.montar_camadas(tmp_path)["ruas"]["linhas"]) == 2
+
+
+def test_arquivo_sem_feicoes_e_recusado(tmp_path, monkeypatch):
+    monkeypatch.setattr(carga, "ARQUIVOS", {"ruas": "ruas.geojson"})
+    escrever(tmp_path, "ruas.geojson", colecao())
+
+    with pytest.raises(ErroCarga, match="ruas.geojson não tem nenhuma feição"):
         carga.montar_camadas(tmp_path)
+
+
+def test_banco_com_linhas_a_menos_ou_a_mais_e_recusado():
+    with pytest.raises(ErroCarga, match="o arquivo tem 79 feições, mas o banco ficou com 78"):
+        carga.conferir_banco("ruas", no_banco=78, no_arquivo=79)
+    with pytest.raises(ErroCarga, match="ficou com 80"):
+        carga.conferir_banco("ruas", no_banco=80, no_arquivo=79)
+
+
+def test_banco_igual_ao_arquivo_passa():
+    carga.conferir_banco("ruas", no_banco=79, no_arquivo=79)
 
 
 def test_propriedade_que_falta_diz_qual_e(tmp_path, monkeypatch):

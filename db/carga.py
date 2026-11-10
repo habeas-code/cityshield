@@ -5,11 +5,12 @@ db/init/03_camadas.sql. Roda sozinho no "docker compose up" (serviço "carga"),
 antes da API subir.
 
 Como funciona:
-  1. lê os quatro arquivos e confere quantas feições cada um tem;
+  1. lê os quatro arquivos e confere que nenhum está vazio;
   2. numa transação só ("tudo ou nada"): cria as tabelas se faltarem, apaga o
      conteúdo antigo (TRUNCATE) e insere o novo;
-  3. confere as contagens no banco antes de confirmar. Se algo não bater, o
-     banco desfaz tudo e as camadas antigas continuam lá.
+  3. confere, antes de confirmar, que cada tabela ficou com uma linha por
+     feição do arquivo. Se algo não bater, o banco desfaz tudo e as camadas
+     antigas continuam lá.
 
 Rodar duas vezes dá o mesmo resultado. Toda consulta é parametrizada: os
 valores vão separados do SQL, nunca colados no texto do comando.
@@ -28,10 +29,6 @@ from sqlalchemy.exc import SQLAlchemyError
 PASTA_DB = Path(__file__).resolve().parent
 PASTA_DADOS = PASTA_DB.parent / "docs" / "dados"
 SQL_TABELAS = PASTA_DB / "init" / "03_camadas.sql"
-
-# Quantas feições cada arquivo tem hoje. Se o pipeline gerar camadas novas,
-# atualize aqui de propósito: a carga falha em vez de gravar algo inesperado.
-ESPERADO = {"risco": 777, "drenagem": 543, "ruas": 79, "areas": 48}
 
 ARQUIVOS = {
     "risco": "risco_hand.geojson",
@@ -160,12 +157,22 @@ MONTAR = {
 }
 
 
-def conferir_contagem(camada: str, encontrado: int, onde: str) -> None:
-    esperado = ESPERADO[camada]
-    if encontrado != esperado:
+def conferir_arquivo(arquivo: str, feicoes: int) -> None:
+    """Um arquivo sem feições apagaria a camada do mapa: quase sempre é erro."""
+    if feicoes < 1:
+        raise ErroCarga(f"{arquivo} não tem nenhuma feição. Rode o pipeline de novo.")
+
+
+def conferir_banco(camada: str, no_banco: int, no_arquivo: int) -> None:
+    """O banco tem que ter uma linha por feição do arquivo: nem menos, nem mais.
+
+    Não há número fixo: se o pipeline gerar mais ou menos feições, a carga
+    acompanha o arquivo.
+    """
+    if no_banco != no_arquivo:
         raise ErroCarga(
-            f"Camada {camada}: esperava {esperado} feições e achou {encontrado} ({onde}). "
-            "Se o pipeline mudou de propósito, atualize ESPERADO em db/carga.py."
+            f"Camada {camada}: o arquivo tem {no_arquivo} feições, "
+            f"mas o banco ficou com {no_banco} linhas."
         )
 
 
@@ -181,7 +188,7 @@ def montar_camadas(pasta: Path = PASTA_DADOS) -> dict:
             linhas = [MONTAR[camada](f) for f in colecao["features"]]
         except KeyError as falta:
             raise ErroCarga(f"{arquivo}: falta a propriedade {falta} numa feição.") from None
-        conferir_contagem(camada, len(linhas), arquivo)
+        conferir_arquivo(arquivo, len(linhas))
         camadas[camada] = {"linhas": linhas, "meta": meta_do_topo(colecao)}
     return camadas
 
@@ -201,9 +208,9 @@ def gravar(conexao, camadas: dict) -> dict:
             {"camada": camada, "meta": json.dumps(dados["meta"], ensure_ascii=False)},
         )
     contagens = {}
-    for camada, consulta in CONTAR.items():
-        contagens[camada] = conexao.execute(text(consulta)).scalar_one()
-        conferir_contagem(camada, contagens[camada], "no banco")
+    for camada in camadas:
+        contagens[camada] = conexao.execute(text(CONTAR[camada])).scalar_one()
+        conferir_banco(camada, contagens[camada], len(camadas[camada]["linhas"]))
     return contagens
 
 
