@@ -20,8 +20,8 @@ on:
 permissions: {}
 
 env:
-  # Endereço público da API no Render (não é segredo). Troque depois do deploy.
-  API_URL: https://PREENCHER-DEPOIS-DO-DEPLOY.onrender.com
+  # Endereço público da API no Render (não é segredo).
+  API_URL: https://cityshield-s2lq.onrender.com
 
 jobs:
   acordada:
