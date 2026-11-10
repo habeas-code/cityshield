@@ -16,6 +16,10 @@ Rodar duas vezes dá o mesmo resultado. Toda consulta é parametrizada: os
 valores vão separados do SQL, nunca colados no texto do comando.
 
 Só lê docs/dados/. Nada de dados_privados/ entra no banco público.
+
+Também roda contra o Neon (docs/deploy.md): cria a extensão PostGIS se faltar
+e usa conexão criptografada (sslmode=require). Use o usuário dono do banco;
+a API usa outro, só de leitura.
 """
 
 import json
@@ -23,12 +27,22 @@ import os
 import sys
 from pathlib import Path
 
-from sqlalchemy import create_engine, text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import URL, create_engine, make_url, text
+from sqlalchemy.exc import ArgumentError, SQLAlchemyError
 
 PASTA_DB = Path(__file__).resolve().parent
 PASTA_DADOS = PASTA_DB.parent / "docs" / "dados"
-SQL_TABELAS = PASTA_DB / "init" / "03_camadas.sql"
+
+# Rodados antes de cada carga, nesta ordem (os dois podem rodar de novo):
+# a extensão PostGIS e depois as tabelas. No Docker eles já rodam quando o
+# banco é criado; no Neon o banco nasce vazio.
+SQL_INICIAIS = (
+    PASTA_DB / "init" / "01_postgis.sql",
+    PASTA_DB / "init" / "03_camadas.sql",
+)
+
+# Bancos que rodam no próprio computador (ou no docker compose), sem SSL.
+BANCOS_LOCAIS = {"localhost", "127.0.0.1", "::1", "db"}
 
 ARQUIVOS = {
     "risco": "risco_hand.geojson",
@@ -199,7 +213,8 @@ def montar_camadas(pasta: Path = PASTA_DADOS) -> dict:
 def gravar(conexao, camadas: dict) -> dict:
     """Grava tudo numa transação já aberta e devolve as contagens do banco."""
     conexao.execute(text(FOLGA))
-    conexao.exec_driver_sql(SQL_TABELAS.read_text(encoding="utf-8"))
+    for arquivo in SQL_INICIAIS:
+        conexao.exec_driver_sql(arquivo.read_text(encoding="utf-8"))
     conexao.execute(text(APAGAR))
     for camada, dados in camadas.items():
         conexao.execute(text(INSERIR[camada]), dados["linhas"])
@@ -214,10 +229,40 @@ def gravar(conexao, camadas: dict) -> dict:
     return contagens
 
 
+def preparar_url(texto: str) -> URL:
+    """Ajusta a DATABASE_URL para o driver da API e, fora do computador, para SSL.
+
+    - O Neon mostra "postgresql://...": para o SQLAlchemy isso é o driver
+      psycopg2, que não instalamos. Vira "postgresql+psycopg://...".
+    - Um banco que não é local (o Neon) passa pela internet: sem sslmode na
+      URL, entra sslmode=require (conexão criptografada; o Neon exige).
+      O banco do docker compose não tem SSL e fica como está.
+    """
+    url = make_url(texto)
+    if url.drivername in ("postgresql", "postgres"):
+        url = url.set(drivername="postgresql+psycopg")
+    if url.host not in BANCOS_LOCAIS and "sslmode" not in url.query:
+        url = url.update_query_dict({"sslmode": "require"})
+    return url
+
+
+def _sem_senha(mensagem: str, url: URL | None) -> str:
+    """Tira a senha de uma mensagem de erro, por garantia."""
+    if url is not None and url.password:
+        mensagem = mensagem.replace(str(url.password), "***")
+    return mensagem
+
+
 def main() -> int:
-    url = os.environ.get("DATABASE_URL")
-    if not url:
+    texto = os.environ.get("DATABASE_URL")
+    if not texto:
         print("Falta a variável DATABASE_URL. Copie o .env.example para .env.", file=sys.stderr)
+        return 1
+    try:
+        url = preparar_url(texto)
+    except ArgumentError:
+        # O erro do SQLAlchemy repete a URL inteira, com a senha: não mostramos.
+        print("Carga cancelada: DATABASE_URL não é um endereço de banco válido.", file=sys.stderr)
         return 1
 
     try:
@@ -229,8 +274,8 @@ def main() -> int:
         print(f"Carga cancelada: {erro}", file=sys.stderr)
         return 1
     except SQLAlchemyError as erro:
-        # Só o tipo e a primeira linha: o endereço do banco não vai para o log.
-        motivo = str(getattr(erro, "orig", erro)).splitlines()[0]
+        # Só o tipo e a primeira linha, e nunca a senha.
+        motivo = _sem_senha(str(getattr(erro, "orig", erro)).splitlines()[0], url)
         print(f"Carga cancelada: erro no banco ({erro.__class__.__name__}): {motivo}", file=sys.stderr)
         return 1
 

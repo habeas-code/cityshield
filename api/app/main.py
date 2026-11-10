@@ -51,6 +51,23 @@ async def parametro_invalido(request: Request, erro: RequestValidationError) -> 
     return JSONResponse(status_code=422, content={"detail": mensagem})
 
 
+@app.get("/", summary="A API está no ar (sem tocar no banco)")
+@app.head("/", include_in_schema=False)  # monitores e o HEAD do início do deploy no Render
+def raiz():
+    """Nome, versão e onde ver a documentação.
+
+    **Não consulta o banco, de propósito.** É a rota do health check do Render
+    e do ping do GitHub Actions: se eles chamassem a /saude, o banco do Neon
+    nunca desligaria e as horas gratuitas do mês acabariam. Para testar o
+    banco, use a /saude.
+
+    Aceita também HEAD (mesma resposta, sem o corpo): o health check do Render
+    é GET, mas monitores costumam usar HEAD, e um HEAD aparece no log do Render
+    no início do deploy (antes dava 405).
+    """
+    return {"nome": app.title, "versao": app.version, "docs": "/docs", "saude": "/saude"}
+
+
 @app.get(
     "/saude",
     responses={503: {"description": "O banco não respondeu"}},
