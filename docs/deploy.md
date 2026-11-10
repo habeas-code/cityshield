@@ -18,7 +18,7 @@ Os dois serviços são gratuitos e **dormem** quando ninguém usa:
 
 | | Limite do plano gratuito | Fonte |
 |---|---|---|
-| **Neon** (banco) | **100 CU-horas** por mês. O banco gratuito roda com **0,25 CU** e **desliga depois de 5 min parado** (não dá para mudar). Acorda sozinho na próxima consulta, em menos de 1 s. | [Neon, planos](https://neon.com/docs/introduction/plans) |
+| **Neon** (banco) | **100 CU-horas** por mês. O banco gratuito roda com **0,25 CU** e **desliga depois de 5 min parado** (não dá para mudar). Acorda sozinho na próxima consulta, em menos de 1 s. **5 GB de transferência** por mês. Se as CU-horas **ou** a transferência acabarem, o banco fica **suspenso até o mês seguinte**. | [Neon, planos](https://neon.com/docs/introduction/plans); [Neon, limites do plano gratuito](https://neon.com/faqs/free-plan-limits-and-quotas) |
 | **Render** (API) | **Dorme depois de 15 min sem acesso** e leva **cerca de 1 min** para acordar. **750 horas** por mês por workspace; se acabarem, todos os serviços gratuitos ficam suspensos até o mês seguinte. | [Render, plano gratuito](https://render.com/docs/free) |
 
 **CU-hora** é o tamanho do banco vezes o tempo ligado. Pela conta do Neon, 0,25 CU por 4 horas = 1 CU-hora. Então:
@@ -31,7 +31,13 @@ Os dois serviços são gratuitos e **dormem** quando ninguém usa:
 - **`GET /`** (não toca no banco) é o health check do Render e o ping a cada 10 min. Mantém a **API** acordada e deixa o **banco** desligar.
 - **`GET /saude`** (testa o banco) roda só **a cada 6 h**: 4 vezes por dia × ~5 min ligado = ~10 h por mês = **~2,5 CU-horas**. Sobra quase tudo para as visitas de verdade.
 
-No Render, o ping a cada 10 min deixa a API ligada o mês todo: 30 × 24 = **720 horas** (744 num mês de 31 dias), dentro das 750, **desde que seja o único serviço gratuito do workspace**.
+O health check do Render é um **`GET /`** a cada poucos segundos ([Render, health checks](https://render.com/docs/health-checks)); como a `/` não toca no banco, ele também não acorda o Neon.
+
+No Render, o ping a cada 10 min deixa a API **quase sempre** acordada: 30 × 24 = **720 horas** (744 num mês de 31 dias), dentro das 750, **desde que seja o único serviço gratuito do workspace**. "Quase" porque o GitHub pode atrasar ou pular agendamentos: se passarem 15 min sem nenhum acesso, o Render dorme, e a próxima visita espera **cerca de 1 min**.
+
+### Transferência: 5 GB por mês
+
+O Neon também conta o que **sai do banco**. A `/camadas/risco` sem bbox tira **~1,8 MB** do banco por chamada (a camada inteira), então **~2.800 chamadas** (5.000 MB ÷ 1,8 MB) gastam os 5 GB do mês. O GZip da API não ajuda aqui: ele comprime a resposta para o navegador, mas o que conta no Neon é o que vai do banco para a API. Com bbox (a área visível do mapa), cada chamada tira bem menos. O site lê os arquivos estáticos de `docs/dados/` (D10), então as visitas ao site não gastam essa transferência; só quem chama a API.
 
 ## 1. Neon: projeto e extensão
 
@@ -132,7 +138,7 @@ Ou seja: lê, não apaga, não grava, não é `neon_superuser` e tem o limite de
    | Dockerfile Path | **`./Dockerfile`** (dentro de `api/`) |
    | Region | **Virginia (US East)** |
    | Instance Type | **Free** |
-   | Health Check Path (em *Advanced*) | **`/`** (nunca `/saude`: veja "As contas" acima). O Render testa com `HEAD`, que a `/` aceita |
+   | Health Check Path (em *Advanced*) | **`/`** (nunca `/saude`: veja "As contas" acima). O health check é `GET`; a `/` também aceita `HEAD`, para monitores e para o `HEAD` que aparece no log no início do deploy |
    | Auto-Deploy | **Off** |
 
 4. **Environment Variables**:
@@ -167,10 +173,10 @@ Depois do merge: aba **Actions** → **Ping da API** → **Run workflow**. Os do
 
 O que ele faz:
 
-- **a cada 10 min, `GET /`**: mantém a API acordada sem acordar o banco. Tenta de novo até 4 vezes (20 s entre elas) enquanto o Render acorda.
+- **a cada 10 min, `GET /`**: mantém a API quase sempre acordada, sem acordar o banco. Tenta de novo até 4 vezes (20 s entre elas, até 60 s cada) enquanto o Render acorda.
 - **a cada 6 h, `GET /saude`**: acorda o banco e confere. Se não vier 200, o job fica vermelho e o GitHub manda e-mail.
 
-Não precisa de segredo no GitHub: o endereço da API é público. Os agendamentos só rodam a partir da `main`, podem atrasar alguns minutos, e o GitHub desliga agendamentos de repositórios públicos sem atividade por 60 dias.
+Não precisa de segredo no GitHub: o endereço da API é público. Os agendamentos só rodam a partir da `main`, podem atrasar ou ser pulados (aí a API pode dormir e a próxima visita espera ~1 min), e o GitHub desliga agendamentos de repositórios públicos sem atividade por 60 dias.
 
 ## Onde fica cada coisa
 
