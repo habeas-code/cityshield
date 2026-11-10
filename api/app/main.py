@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, Response
@@ -26,6 +27,28 @@ app.add_middleware(
 # para quem aceita (todo navegador). Respostas pequenas, como a /saude, vão
 # sem comprimir.
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+
+@app.exception_handler(RequestValidationError)
+async def parametro_invalido(request: Request, erro: RequestValidationError) -> JSONResponse:
+    """422 em português e no mesmo formato das outras validações da API.
+
+    Quando a própria FastAPI recusa um parâmetro (faltou, ou não é número),
+    ela responde em inglês e com uma lista. Aqui vira {"detail": "..."},
+    igual às mensagens do bbox, da solução e do cenário.
+    """
+    primeiro = erro.errors()[0]
+    campo = primeiro["loc"][-1]
+    tipo = primeiro["type"]
+    if tipo == "missing":
+        mensagem = f"falta o parâmetro obrigatório {campo}."
+    elif tipo == "int_parsing":
+        mensagem = f"{campo} tem que ser um número inteiro."
+    elif tipo == "float_parsing":
+        mensagem = f"{campo} tem que ser um número."
+    else:
+        mensagem = f"parâmetro {campo} inválido."
+    return JSONResponse(status_code=422, content={"detail": mensagem})
 
 
 @app.get(
