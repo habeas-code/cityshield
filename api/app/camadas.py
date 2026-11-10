@@ -84,16 +84,27 @@ class CamadaIndisponivel(Exception):
     """O banco não respondeu (fora do ar, lento demais ou sem as tabelas)."""
 
 
-def camada_geojson(nome: str, bbox: tuple[float, float, float, float] | None = None) -> str:
-    """Devolve a camada como texto GeoJSON, inteira ou só dentro do bbox."""
-    xmin, ymin, xmax, ymax = bbox or MUNDO
+def consultar(sql: str, parametros: dict, nome: str):
+    """Roda uma consulta que devolve um valor só (ou nada, se não houver linha).
+
+    Qualquer falha do banco vira CamadaIndisponivel, que a rota transforma em
+    503. Usada pelas camadas e pelas áreas (app/areas.py).
+    """
     try:
         with engine.connect() as conexao:
-            return conexao.execute(
-                text(CONSULTAS[nome]),
-                {"xmin": xmin, "ymin": ymin, "xmax": xmax, "ymax": ymax},
-            ).scalar_one()
+            return conexao.execute(text(sql), parametros).scalar_one_or_none()
     except SQLAlchemyError as erro:
         # O detalhe vai só para o log do servidor, nunca para quem chamou a API.
-        log.warning("Camada %s indisponível: %s", nome, erro.__class__.__name__)
+        log.warning("%s indisponível: %s", nome, erro.__class__.__name__)
         raise CamadaIndisponivel(nome) from None
+
+
+def parametros_bbox(bbox: tuple[float, float, float, float] | None) -> dict:
+    """Os quatro números do retângulo; sem bbox, o mundo inteiro."""
+    xmin, ymin, xmax, ymax = bbox or MUNDO
+    return {"xmin": xmin, "ymin": ymin, "xmax": xmax, "ymax": ymax}
+
+
+def camada_geojson(nome: str, bbox: tuple[float, float, float, float] | None = None) -> str:
+    """Devolve a camada como texto GeoJSON, inteira ou só dentro do bbox."""
+    return consultar(CONSULTAS[nome], parametros_bbox(bbox), nome)

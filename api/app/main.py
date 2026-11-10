@@ -1,13 +1,12 @@
-from typing import Annotated
-
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, Response
 
-from app import banco, camadas
-from app.bbox import BboxInvalido, ler_bbox
+from app import banco, camadas, respostas, rotas_areas
 from app.config import origens_cors
+from app.respostas import Bbox
 
 app = FastAPI(
     title="CityShield API",
@@ -30,6 +29,28 @@ app.add_middleware(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 
+@app.exception_handler(RequestValidationError)
+async def parametro_invalido(request: Request, erro: RequestValidationError) -> JSONResponse:
+    """422 em português e no mesmo formato das outras validações da API.
+
+    Quando a própria FastAPI recusa um parâmetro (faltou, ou não é número),
+    ela responde em inglês e com uma lista. Aqui vira {"detail": "..."},
+    igual às mensagens do bbox, da solução e do cenário.
+    """
+    primeiro = erro.errors()[0]
+    campo = primeiro["loc"][-1]
+    tipo = primeiro["type"]
+    if tipo == "missing":
+        mensagem = f"falta o parâmetro obrigatório {campo}."
+    elif tipo == "int_parsing":
+        mensagem = f"{campo} tem que ser um número inteiro."
+    elif tipo == "float_parsing":
+        mensagem = f"{campo} tem que ser um número."
+    else:
+        mensagem = f"parâmetro {campo} inválido."
+    return JSONResponse(status_code=422, content={"detail": mensagem})
+
+
 @app.get(
     "/saude",
     responses={503: {"description": "O banco não respondeu"}},
@@ -47,67 +68,18 @@ def saude():
 
 # ---------------------------------------------------------------- camadas
 
-GEOJSON = "application/geo+json"
-
-# As camadas só mudam quando o pipeline e a carga rodam de novo (D7): o
-# navegador pode reaproveitar a resposta por 5 minutos sem pedir outra vez.
-CACHE_CAMADAS = "public, max-age=300"
-
-Bbox = Annotated[
-    str | None,
-    Query(
-        description=(
-            "Retângulo da área visível do mapa: `xmin,ymin,xmax,ymax` "
-            "(oeste, sul, leste, norte), em graus de longitude e latitude "
-            "(SRID 4326). Devolve só as feições que encostam nele. "
-            "Sem bbox, devolve a camada inteira, igual ao arquivo de `docs/dados/`."
-        ),
-        examples=["-47.455,-23.478,-47.439,-23.463"],
-    ),
-]
-
-RESPOSTAS = {
-    200: {
-        "description": "FeatureCollection no mesmo formato dos arquivos de `docs/dados/`.",
-        "content": {GEOJSON: {}},
-    },
-    422: {
-        "description": "bbox inválido. A mensagem diz o motivo.",
-        "content": {
-            "application/json": {
-                "example": {"detail": "latitude do bbox fora de -90 a 90."}
-            }
-        },
-    },
-    503: {
-        "description": "O banco não respondeu. O site usa os arquivos estáticos (D10).",
-        "content": {
-            "application/json": {
-                "example": {"erro": "camada indisponível, tente de novo em instantes"}
-            }
-        },
-    },
-}
+RESPOSTAS_CAMADA = respostas.respostas(
+    "FeatureCollection no mesmo formato dos arquivos de `docs/dados/`."
+)
 
 
 def responder_camada(nome: str, bbox: str | None) -> Response:
     """Valida o bbox, lê a camada no banco e devolve o GeoJSON."""
+    retangulo = respostas.retangulo(bbox)
     try:
-        retangulo = ler_bbox(bbox) if bbox is not None else None
-    except BboxInvalido as erro:
-        raise HTTPException(status_code=422, detail=str(erro)) from None
-
-    try:
-        geojson = camadas.camada_geojson(nome, retangulo)
+        return respostas.geojson(camadas.camada_geojson(nome, retangulo))
     except camadas.CamadaIndisponivel:
-        return JSONResponse(
-            status_code=503,
-            content={"erro": "camada indisponível, tente de novo em instantes"},
-            headers={"Cache-Control": "no-store"},  # erro não fica guardado no navegador
-        )
-    return Response(
-        content=geojson, media_type=GEOJSON, headers={"Cache-Control": CACHE_CAMADAS}
-    )
+        return respostas.indisponivel()
 
 
 @app.get(
@@ -115,7 +87,7 @@ def responder_camada(nome: str, bbox: str | None) -> Response:
     tags=["camadas"],
     summary="Manchas de risco de enchente",
     response_class=Response,
-    responses=RESPOSTAS,
+    responses=RESPOSTAS_CAMADA,
 )
 def camada_risco(bbox: Bbox = None):
     """Manchas de risco de enchente calculadas pelo HAND (altura acima da
@@ -133,7 +105,7 @@ def camada_risco(bbox: Bbox = None):
     tags=["camadas"],
     summary="Registros de alagamento por rua",
     response_class=Response,
-    responses=RESPOSTAS,
+    responses=RESPOSTAS_CAMADA,
 )
 def camada_registros(bbox: Bbox = None):
     """Registros de alagamento e inundação da Defesa Civil, somados por rua:
@@ -145,3 +117,8 @@ def camada_registros(bbox: Bbox = None):
     Exemplo, só a área piloto: `/camadas/registros?bbox=-47.455,-23.478,-47.439,-23.463`
     """
     return responder_camada("registros", bbox)
+
+
+# ---------------------------------------------------------------- áreas e cenário
+
+app.include_router(rotas_areas.rotas)
