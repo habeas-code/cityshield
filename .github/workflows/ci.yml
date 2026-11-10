@@ -64,6 +64,23 @@ jobs:
         working-directory: api
         run: python -m pytest -q
 
+  pipeline:
+    name: Pipeline (testes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"   # a mesma da imagem do pipeline
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+      - run: pip install -r pipeline/requirements.txt pytest==9.2.0
+      # Só as contas (volumes, alertas, sensibilidade, nomes de rua), com dados
+      # montados nos testes: não baixa nada e não roda o pipeline inteiro.
+      - name: pytest do pipeline
+        working-directory: pipeline
+        run: python -m pytest -q
+
   site:
     name: Site (navegador)
     runs-on: ubuntu-latest

@@ -52,6 +52,8 @@ pip install -r api/requirements-dev.txt
 (cd db && python -m pytest -q)
 (cd api && python -m pytest -q)
 pip install ruff && ruff check pipeline api db --select E9,F63,F7,F82
+# Contas do pipeline (volumes, alertas, sensibilidade): sem internet, sem rodar o pipeline
+pip install -r pipeline/requirements.txt && (cd pipeline && python -m pytest -q)
 # Site no navegador (Playwright): quatro abas sem erro no console, também em 390 px
 pip install -r tests/site/requirements.txt && python -m playwright install --with-deps chromium
 python -m pytest -q tests/site
@@ -86,7 +88,7 @@ O pipeline baixa dados públicos na primeira vez (ANADEM por partes, OpenStreetM
 
 ## Antes de abrir o PR
 
-- [ ] CI local: `ruff` e os dois `pytest` passam
+- [ ] CI local: `ruff` e os `pytest` de `db/`, `api/` e `pipeline/` passam
 - [ ] site testado no navegador, sem erro no console, também em 390 px (se mexeu em `docs/`)
 - [ ] números novos têm fonte escrita junto
 - [ ] documentação atualizada se algo mudou para quem usa (`README.md`, `docs/*.md`)
