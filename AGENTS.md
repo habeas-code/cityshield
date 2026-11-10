@@ -52,6 +52,9 @@ pip install -r api/requirements-dev.txt
 (cd db && python -m pytest -q)
 (cd api && python -m pytest -q)
 pip install ruff && ruff check pipeline api db --select E9,F63,F7,F82
+# Site no navegador (Playwright): quatro abas sem erro no console, também em 390 px
+pip install -r tests/site/requirements.txt && python -m playwright install --with-deps chromium
+python -m pytest -q tests/site
 
 # Site: HTML puro, sem build. Sirva a pasta docs/ e abra no navegador
 python -m http.server 8080 -d docs   # http://localhost:8080/mapa.html

@@ -1,0 +1,3 @@
+# Teste do site no navegador (tests/site/). Depois: python -m playwright install --with-deps chromium
+pytest==9.2.0
+playwright==1.65.0
