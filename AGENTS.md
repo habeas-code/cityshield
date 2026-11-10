@@ -32,7 +32,7 @@ Prazos: congelamento em 26/11/2026 e entrega em 29/11/2026. Prefira estabilidade
 | `pipeline/` | Python que gera as camadas (relevo, HAND, validação, áreas, recomendações, sensibilidade, carta). Roda no Docker. | Lucas |
 | `docs/` | **O site** publicado no GitHub Pages: `index.html` (página inicial), `mapa.html` (plataforma), `comum.js`, `dados/` (camadas que o site lê), `vendor/` (MapLibre 4.7.1) e documentação (`decisoes.md`, `validacao.md`, `recomendacoes.md`, `CRONOGRAMA.md`) | Lucas |
 | `web/public/dados/` | Saída do pipeline. É copiada para `docs/dados/` | Lucas |
-| `api/` | FastAPI que lê o PostGIS (`/saude`, `/camadas/...`) | Rafael |
+| `api/` | FastAPI que lê o PostGIS: `/saude`, `/camadas/risco`, `/camadas/registros`, `/areas`, `/areas/{id}`, `/cenario` (lista completa em http://localhost:8000/docs) | Rafael |
 | `db/` | SQL das tabelas (`db/init/`) e carga dos GeoJSON (`db/carga.py`) | Rafael |
 
 ## Comandos
