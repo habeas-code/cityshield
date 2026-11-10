@@ -81,19 +81,19 @@ A API só lê (D7), então ela entra com um usuário que **só pode fazer SELECT
    Ela só tem letras, números, `-` e `_`, então entra na URL sem precisar de ajuste.
 2. No **SQL Editor**, conectado com o usuário **dono**, troque `SENHA-GERADA` e `NOME-DO-BANCO`:
    ```sql
-   CREATE ROLE cityshield_leitura WITH LOGIN PASSWORD 'SENHA-GERADA';
-   GRANT CONNECT ON DATABASE "NOME-DO-BANCO" TO cityshield_leitura;
-   GRANT USAGE ON SCHEMA public TO cityshield_leitura;
-   GRANT SELECT ON ALL TABLES IN SCHEMA public TO cityshield_leitura;
+   CREATE ROLE cityshield_api WITH LOGIN PASSWORD 'SENHA-GERADA';
+   GRANT CONNECT ON DATABASE "NOME-DO-BANCO" TO cityshield_api;
+   GRANT USAGE ON SCHEMA public TO cityshield_api;
+   GRANT SELECT ON ALL TABLES IN SCHEMA public TO cityshield_api;
    -- tabelas que a carga criar no futuro também ficam legíveis
-   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO cityshield_leitura;
-   ALTER ROLE cityshield_leitura SET statement_timeout = '5s';
+   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO cityshield_api;
+   ALTER ROLE cityshield_api SET statement_timeout = '5s';
    ```
    Rode depois da carga (passo 2), para as tabelas já existirem.
 
 **Por que 5 s (`statement_timeout`):** uma consulta presa é cancelada em 5 s em vez de travar a API. O limite fica no usuário, e não na conexão, porque o endereço com pooler do Neon recusa o parâmetro `options` (erro *unsupported startup parameter*, [Neon, erros de conexão](https://neon.com/docs/connect/connection-errors)). No Docker, isso já acontece sozinho pelo `db/init/02_statement_timeout.sql`.
 
-**Conferir**, no SQL Editor conectado como `cityshield_leitura`:
+**Conferir**, no SQL Editor conectado como `cityshield_api`:
 
 ```sql
 SHOW statement_timeout;          -- 5s
@@ -103,47 +103,56 @@ DELETE FROM areas;               -- tem que dar "permission denied"
 
 ## 4. Render: a API
 
-1. Em [dashboard.render.com](https://dashboard.render.com), **New** → **Web Service** → conecte o repositório `habeas-code/cityshield`.
-2. Preencha:
+1. **Monte a `DATABASE_URL` do `cityshield_api`.** O *Connect* do Neon não lista usuários criados por SQL, então:
+   - no Neon, **Connect** → usuário **dono**, com **Connection pooling** ligado (o endereço tem `-pooler`) → copie a URL;
+   - troque o **usuário** e a **senha** do dono por `cityshield_api` e a senha gerada no passo 3;
+   - mantenha o final `?sslmode=require&channel_binding=require`;
+   - troque o começo `postgresql://` por **`postgresql+psycopg://`** (o driver que a API usa; a carga faz isso sozinha, a API não).
+
+   Fica assim: `postgresql+psycopg://cityshield_api:SENHA@HOST-pooler/NOME-DO-BANCO?sslmode=require&channel_binding=require`
+2. Em [dashboard.render.com](https://dashboard.render.com), **New** → **Web Service** → **Public Git Repository** → `https://github.com/habeas-code/cityshield`.
+3. Preencha:
 
    | Campo | Valor |
    |---|---|
    | Language | **Docker** |
-   | Branch | `main` |
-   | Root Directory | **`api`** (o Render usa o `api/Dockerfile`) |
+   | Branch | `main` (para testar uma branch antes do PR, escolha a branch e volte para `main` depois do merge) |
+   | Root Directory | **`api`** |
+   | Dockerfile Path | **`./Dockerfile`** (dentro de `api/`) |
    | Region | **Virginia (US East)** |
    | Instance Type | **Free** |
-   | Health Check Path (em *Advanced*) | **`/`** (nunca `/saude`: veja "As contas" acima) |
+   | Health Check Path (em *Advanced*) | **`/`** (nunca `/saude`: veja "As contas" acima). O Render testa com `HEAD`, que a `/` aceita |
+   | Auto-Deploy | **Off** |
 
-3. **Environment Variables**:
+4. **Environment Variables**:
 
    | Nome | Valor |
    |---|---|
-   | `DATABASE_URL` | URL do usuário **`cityshield_leitura`**, com pooler, começando com **`postgresql+psycopg://`**: `postgresql+psycopg://cityshield_leitura:SENHA@HOST-pooler/NOME-DO-BANCO?sslmode=require` |
-   | `CORS_ORIGINS` | `https://habeas-code.github.io` |
+   | `DATABASE_URL` | a URL do passo 1 |
+   | `CORS_ORIGINS` | `http://localhost:5173,https://habeas-code.github.io` |
 
-   - Troque o começo `postgresql://` que o Neon mostra por `postgresql+psycopg://` (o driver que a API usa). A carga faz isso sozinha; a API não.
-   - **Não** crie `PORT`: o Render define sozinho, e a API escuta nela (`api/Dockerfile`).
-4. **Create Web Service**. O primeiro build leva alguns minutos. Depois disso, cada merge na `main` faz um deploy novo sozinho.
+   **Não** crie `PORT`: o Render define sozinho, e a API escuta nela (`api/Dockerfile`).
+5. **Create Web Service**. O primeiro build leva alguns minutos.
 
-**Conferir**, trocando pelo endereço que o Render deu (algo como `https://cityshield-api.onrender.com`):
+**Atualizar a API:** com o Auto-Deploy desligado, um merge na `main` **não** publica sozinho. Depois do merge, no Render: **Manual Deploy** → **Deploy latest commit**. Assim nada muda no ar sem alguém decidir (por exemplo, perto da avaliação).
+
+**Conferir** (o endereço da API é `https://cityshield-s2lq.onrender.com`):
 
 ```powershell
-curl.exe -s https://SEU-ENDERECO.onrender.com/                     # nome e versão
-curl.exe -s https://SEU-ENDERECO.onrender.com/saude                # {"status":"ok","banco":"ok"}
-curl.exe -s "https://SEU-ENDERECO.onrender.com/cenario?chuva_mm=50" # chega_m3, retida_m3...
-curl.exe -s -D - -o NUL -H "Origin: https://habeas-code.github.io" https://SEU-ENDERECO.onrender.com/
+curl.exe -s https://cityshield-s2lq.onrender.com/                     # nome e versão
+curl.exe -s https://cityshield-s2lq.onrender.com/saude                # {"status":"ok","banco":"ok"}
+curl.exe -s "https://cityshield-s2lq.onrender.com/cenario?chuva_mm=50" # chega_m3, retida_m3...
+curl.exe -s -D - -o NUL -H "Origin: https://habeas-code.github.io" https://cityshield-s2lq.onrender.com/
 #   tem que ter: access-control-allow-origin: https://habeas-code.github.io
 ```
 
-Também dá para abrir `https://SEU-ENDERECO.onrender.com/docs` no navegador.
+Também dá para abrir `https://cityshield-s2lq.onrender.com/docs` no navegador.
 
 ## 5. Ping no GitHub Actions
 
-O `.github/workflows/ping.yml` já está pronto, com um marcador no lugar do endereço:
+O `.github/workflows/ping.yml` já aponta para a API (`API_URL: https://cityshield-s2lq.onrender.com`). Se o endereço mudar, troque ali num PR.
 
-1. Num PR, troque `https://PREENCHER-DEPOIS-DO-DEPLOY.onrender.com` pelo endereço do Render em `API_URL`.
-2. Depois do merge: aba **Actions** → **Ping da API** → **Run workflow**. Os dois jobs têm que ficar verdes.
+Depois do merge: aba **Actions** → **Ping da API** → **Run workflow**. Os dois jobs têm que ficar verdes.
 
 O que ele faz:
 
@@ -157,7 +166,7 @@ Não precisa de segredo no GitHub: o endereço da API é público. Os agendament
 | O quê | Onde | No git? |
 |---|---|---|
 | URL do Neon com o usuário dono | só no terminal, na hora da carga | não |
-| URL do Neon com `cityshield_leitura` | painel do Render (`DATABASE_URL`) | não |
+| URL do Neon com `cityshield_api` | painel do Render (`DATABASE_URL`) | não |
 | `CORS_ORIGINS` | painel do Render | não (o valor está neste guia, não é segredo) |
 | Endereço público da API | `.github/workflows/ping.yml` | sim (não é segredo) |
 | `.env` do Docker local | seu computador (`.gitignore`) | não |
@@ -165,8 +174,9 @@ Não precisa de segredo no GitHub: o endereço da API é público. Os agendament
 ## Checklist (#23)
 
 - [ ] Neon: projeto na AWS US East 1, PostGIS ativo, carga com `Carga ok`
-- [ ] Neon: `cityshield_leitura` criado por SQL, com `SELECT` e `statement_timeout` de 5 s
-- [ ] Render: Docker, raiz `api`, Virginia, health check em `/`
-- [ ] Render: `DATABASE_URL` (leitura) e `CORS_ORIGINS` com `https://habeas-code.github.io`
+- [ ] Neon: `cityshield_api` criado por SQL, com `SELECT` e `statement_timeout` de 5 s
+- [ ] Render: Docker, raiz `api`, `./Dockerfile`, Virginia, health check em `/`, Auto-Deploy Off
+- [ ] Render: `DATABASE_URL` do `cityshield_api` e `CORS_ORIGINS` com `http://localhost:5173,https://habeas-code.github.io`
+- [ ] Render: Branch `main` depois do merge
 - [ ] `/`, `/saude` e o CORS conferidos no endereço do Render
 - [ ] `ping.yml` com o endereço real e os dois jobs verdes
