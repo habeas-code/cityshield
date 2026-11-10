@@ -189,3 +189,72 @@ def test_propriedade_que_falta_diz_qual_e(tmp_path, monkeypatch):
 
     with pytest.raises(ErroCarga, match="registros"):
         carga.montar_camadas(tmp_path)
+
+
+# ---------------------------------------------------------------- Neon (#23)
+
+SENHA = "s3nh4-n40-p0d3-v4z4r"
+
+
+def test_url_do_neon_ganha_driver_da_api_e_mantem_o_ssl():
+    # Formato que o painel do Neon mostra.
+    url = carga.preparar_url(
+        f"postgresql://dono:{SENHA}@ep-x.us-east-1.aws.neon.tech/cityshield"
+        "?sslmode=require&channel_binding=require"
+    )
+
+    assert url.drivername == "postgresql+psycopg"
+    assert url.query["sslmode"] == "require"
+    assert url.query["channel_binding"] == "require"
+    assert url.password == SENHA
+
+
+def test_banco_fora_do_computador_sem_sslmode_ganha_require():
+    url = carga.preparar_url(f"postgresql+psycopg://dono:{SENHA}@ep-x.neon.tech/cityshield")
+
+    assert url.query["sslmode"] == "require"
+
+
+def test_sslmode_que_ja_veio_na_url_e_respeitado():
+    url = carga.preparar_url("postgresql://u:p@ep-x.neon.tech/c?sslmode=verify-full")
+
+    assert url.query["sslmode"] == "verify-full"
+
+
+@pytest.mark.parametrize("host", ["db", "localhost", "127.0.0.1"])
+def test_banco_local_continua_sem_ssl(host):
+    url = carga.preparar_url(f"postgresql+psycopg://cityshield:x@{host}:5432/cityshield")
+
+    assert "sslmode" not in url.query
+    assert url.drivername == "postgresql+psycopg"
+
+
+def test_postgres_curto_tambem_vira_psycopg():
+    assert carga.preparar_url("postgres://u:p@db/c").drivername == "postgresql+psycopg"
+
+
+def test_extensao_postgis_roda_antes_das_tabelas():
+    nomes = [arquivo.name for arquivo in carga.SQL_INICIAIS]
+
+    assert nomes == ["01_postgis.sql", "03_camadas.sql"]
+    assert "CREATE EXTENSION IF NOT EXISTS postgis" in carga.SQL_INICIAIS[0].read_text()
+    assert all(arquivo.is_file() for arquivo in carga.SQL_INICIAIS)
+
+
+def test_url_invalida_nao_mostra_a_senha(monkeypatch, capsys):
+    monkeypatch.setenv("DATABASE_URL", f"isto não é url {SENHA}")
+
+    assert carga.main() == 1
+    saida = capsys.readouterr()
+    assert "não é um endereço de banco válido" in saida.err
+    assert SENHA not in saida.err + saida.out
+
+
+def test_banco_inacessivel_nao_mostra_a_senha(monkeypatch, capsys):
+    # Porta 1 do próprio computador: nunca há banco ali, a conexão falha na hora.
+    monkeypatch.setenv("DATABASE_URL", f"postgresql://dono:{SENHA}@127.0.0.1:1/cityshield")
+
+    assert carga.main() == 1
+    saida = capsys.readouterr()
+    assert "Carga cancelada: erro no banco" in saida.err
+    assert SENHA not in saida.err + saida.out
