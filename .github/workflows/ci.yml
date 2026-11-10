@@ -63,3 +63,19 @@ jobs:
       - name: pytest da api (api/)
         working-directory: api
         run: python -m pytest -q
+
+  site:
+    name: Site (navegador)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: tests/site/requirements.txt
+      - run: pip install -r tests/site/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      # Abre docs/mapa.html no Chromium (computador e celular 390x844) e falha
+      # com qualquer erro no console ou exceção na página.
+      - run: python -m pytest -q tests/site
