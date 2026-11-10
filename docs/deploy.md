@@ -93,13 +93,24 @@ A API só lê (D7), então ela entra com um usuário que **só pode fazer SELECT
 
 **Por que 5 s (`statement_timeout`):** uma consulta presa é cancelada em 5 s em vez de travar a API. O limite fica no usuário, e não na conexão, porque o endereço com pooler do Neon recusa o parâmetro `options` (erro *unsupported startup parameter*, [Neon, erros de conexão](https://neon.com/docs/connect/connection-errors)). No Docker, isso já acontece sozinho pelo `db/init/02_statement_timeout.sql`.
 
-**Conferir**, no SQL Editor conectado como `cityshield_api`:
+**Conferir**, no SQL Editor (que roda como o dono; o `cityshield_api` não aparece na lista de usuários do Neon):
 
 ```sql
-SHOW statement_timeout;          -- 5s
-SELECT count(*) FROM areas;      -- 48
-DELETE FROM areas;               -- tem que dar "permission denied"
+SELECT
+    has_table_privilege('cityshield_api', 'areas', 'SELECT')    AS pode_ler,
+    has_table_privilege('cityshield_api', 'areas', 'DELETE')    AS pode_apagar,
+    has_table_privilege('cityshield_api', 'risco', 'INSERT')    AS pode_gravar,
+    pg_has_role('cityshield_api', 'neon_superuser', 'MEMBER')   AS e_superusuario,
+    (SELECT rolconfig FROM pg_roles WHERE rolname = 'cityshield_api') AS config;
 ```
+
+Resultado esperado:
+
+| pode_ler | pode_apagar | pode_gravar | e_superusuario | config |
+|---|---|---|---|---|
+| `t` | `f` | `f` | `f` | `{statement_timeout=5s}` |
+
+Ou seja: lê, não apaga, não grava, não é `neon_superuser` e tem o limite de 5 s.
 
 ## 4. Render: a API
 
