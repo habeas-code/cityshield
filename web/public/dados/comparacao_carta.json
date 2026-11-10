@@ -1,0 +1,114 @@
+{
+ "metodo": "docs/validacao.md#comparação-com-a-carta-oficial",
+ "fonte_carta": "Instituto de Pesquisas Tecnológicas (IPT) e CPRM/Serviço Geológico do Brasil, Carta de suscetibilidade a movimentos gravitacionais de massa e inundações: município de Sorocaba - SP, 2015",
+ "pagina_carta": "https://rigeo.sgb.gov.br/items/cb9a8ac7-dda7-45e0-9dbe-7e8664b6b665",
+ "fonte_registros": "Defesa Civil de Sorocaba, relatórios 2022–2023 (agregado por rua)",
+ "classes": {
+  "alta": "suscetibilidade alta",
+  "media": "média",
+  "baixa": "baixa",
+  "fora": "fora das áreas de inundação da carta"
+ },
+ "ruas_localizadas": 75,
+ "carta": {
+  "cidade": {
+   "registros_considerados": 223.0,
+   "registros_por_faixa": {
+    "alta": 54.3,
+    "media": 40.2,
+    "baixa": 5.5,
+    "fora": 123.0
+   },
+   "fracao_registros": {
+    "alta": 0.243,
+    "media": 0.18,
+    "baixa": 0.025,
+    "fora": 0.552
+   },
+   "fracao_ruas": {
+    "alta": 0.016,
+    "media": 0.014,
+    "baixa": 0.006,
+    "fora": 0.963
+   },
+   "vezes_acima_do_acaso_alta": 15.32,
+   "vezes_acima_do_acaso_alta_media": 13.98
+  },
+  "piloto": {
+   "registros_considerados": 48.0,
+   "registros_por_faixa": {
+    "alta": 17.8,
+    "media": 9.0,
+    "baixa": 1.6,
+    "fora": 19.5
+   },
+   "fracao_registros": {
+    "alta": 0.372,
+    "media": 0.188,
+    "baixa": 0.033,
+    "fora": 0.406
+   },
+   "fracao_ruas": {
+    "alta": 0.228,
+    "media": 0.139,
+    "baixa": 0.048,
+    "fora": 0.585
+   },
+   "vezes_acima_do_acaso_alta": 1.63,
+   "vezes_acima_do_acaso_alta_media": 1.52
+  },
+  "fracao_da_area_do_municipio": {
+   "alta": 0.031,
+   "media": 0.024,
+   "baixa": 0.009,
+   "fora": 0.937
+  }
+ },
+ "hand": {
+  "cidade": {
+   "registros_considerados": 223.0,
+   "registros_por_faixa": {
+    "alto": 164.1,
+    "medio": 32.5,
+    "baixo": 26.3
+   },
+   "fracao_registros": {
+    "alto": 0.736,
+    "medio": 0.146,
+    "baixo": 0.118
+   },
+   "fracao_ruas": {
+    "alto": 0.123,
+    "medio": 0.179,
+    "baixo": 0.698
+   },
+   "vezes_acima_do_acaso_alto": 5.98,
+   "vezes_acima_do_acaso_alto_medio": 2.92
+  },
+  "piloto": {
+   "registros_considerados": 48.0,
+   "registros_por_faixa": {
+    "alto": 37.5,
+    "medio": 4.9,
+    "baixo": 5.6
+   },
+   "fracao_registros": {
+    "alto": 0.782,
+    "medio": 0.102,
+    "baixo": 0.116
+   },
+   "fracao_ruas": {
+    "alto": 0.606,
+    "medio": 0.278,
+    "baixo": 0.116
+   },
+   "vezes_acima_do_acaso_alto": 1.29,
+   "vezes_acima_do_acaso_alto_medio": 1.0
+  },
+  "fracao_da_area_do_municipio": {
+   "alto": 0.177,
+   "medio": 0.179,
+   "baixo": 0.644
+  }
+ }
+}

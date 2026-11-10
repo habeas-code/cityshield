@@ -52,6 +52,22 @@ Não é um teste estatístico (são dois eventos noticiados, não um registro co
 
 Fontes: [Band, 22/09/2026](https://www.band.com.br/nacional/sp/xv-de-agosto-sorocaba) · [Band, 16/10/2026](https://www.band.com.br/nacional/sp/chuva-interdicoes-sorocaba)
 
+## Comparação com a carta oficial
+
+Sorocaba já tem um mapa oficial: a **carta de suscetibilidade a inundações** do IPT e do Serviço Geológico do Brasil (2015, escala 1:25.000, [repositório do SGB](https://rigeo.sgb.gov.br/items/cb9a8ac7-dda7-45e0-9dbe-7e8664b6b665)). Fizemos com ela **exatamente o mesmo teste** (mesmas ruas, mesma divisão dos registros, mesma comparação com todas as ruas). Para refazer: `docker compose run --rm pipeline python -m pipeline carta`. Resultado em `comparacao_carta.json`.
+
+| Mapa | Área do município marcada | Registros da Defesa Civil | Ruas da cidade | Vezes o acaso |
+|---|---|---|---|---|
+| Carta oficial, classe **alta** | 3% | 24% | 2% | 15× |
+| Carta oficial, alta + média + baixa | 6% | 45% | 4% | 12× |
+| CityShield, risco **alto** (HAND 0–5 m) | 18% | **74%** | 12% | 6× |
+| CityShield, alto + médio | 36% | 88% | 30% | 2,9× |
+
+- **A carta é mais precisa; o CityShield é mais completo.** Onde a carta marca, a chance de ter registro é maior (15×), mas ela marca pouco: **55% dos registros ficam fora de qualquer classe dela**. O nosso risco alto reúne 74%.
+- **Por quê:** a carta foi feita para inundação de rio em várzea. A revisão do Plano Diretor de Macrodrenagem (SAAE, 2025) diz que ela tem mais precisão "em planícies aluviais bem definidas" e não contempla bem os **vales estreitos**, comuns na zona urbana. Os registros da Defesa Civil também incluem alagamento por drenagem nesses vales. O HAND mede a altura sobre qualquer córrego, grande ou pequeno.
+- **Os dois se completam.** Para escolher onde agir, a carta diz onde o rio transborda com certeza; o CityShield acrescenta os fundos de vale que também alagam.
+- **Só a camada de inundação foi lida.** O passo `carta` lê, de dentro do pacote SIG do SGB (199 MB), só os quatro arquivos dela (~0,9 MB, por partes). A geometria da carta não vai para o repositório nem para o site; publicamos só os números.
+
 ## Limitações
 
 - **Ruas, não pontos.** Uma avenida longa como a Dom Aguirre (12,9 km no mapa) recebe os registros distribuídos ao longo dela toda. É uma aproximação.
@@ -66,3 +82,4 @@ Fontes: [Band, 22/09/2026](https://www.band.com.br/nacional/sp/xv-de-agosto-soro
 - OpenStreetMap (ODbL), via Overpass API.
 - HAND: Nobre, A. D. et al. (2011). *Height Above the Nearest Drainage – a hydrologically relevant new terrain model*. Journal of Hydrology 404, 13–29. https://doi.org/10.1016/j.jhydrol.2011.03.051
 - Relevo: ANADEM v1, Laipelt et al. (2024). https://doi.org/10.3390/rs16132321
+- Carta oficial: Instituto de Pesquisas Tecnológicas (IPT) e CPRM/Serviço Geológico do Brasil (2015). *Carta de suscetibilidade a movimentos gravitacionais de massa e inundações: município de Sorocaba - SP*. https://rigeo.sgb.gov.br/items/cb9a8ac7-dda7-45e0-9dbe-7e8664b6b665

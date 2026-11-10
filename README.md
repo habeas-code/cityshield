@@ -54,6 +54,7 @@ Sorocaba já tem mapa de suscetibilidade a inundação (Serviço Geológico, 201
 
 - A comparação é com **todas as ruas da cidade**, não com a área total, para não inflar o resultado (ruas tendem a ficar nos vales).
 - Nenhum parâmetro foi ajustado para melhorar o número.
+- **E o mapa oficial?** A carta de inundação do IPT e do Serviço Geológico (2015) marca 6% da cidade. Onde marca alta, acerta muito (24% dos registros em 2% das ruas, 15× o acaso), mas **55% dos registros ficam fora dela**. O risco alto do CityShield reúne 74%. Os dois se completam: a carta é precisa nas várzeas largas; o relevo pega também os vales estreitos ([comparação](docs/validacao.md#comparação-com-a-carta-oficial)).
 - **Eventos de 2026, que o mapa nunca viu:** as avenidas interditadas por alagamento em setembro e outubro (XV de Agosto e Dom Aguirre) estão 90% e 99,8% no risco alto.
 
 **Onde agir no piloto:** 48 áreas candidatas, somando 58 ha. Os três maiores parques junto ao rio (Porto das Águas, Parque das Águas do Abaeté e Parque Linear do Rio Sorocaba, ~44 ha) estão inteiros no risco alto: candidatos naturais a **parque inundável**.

@@ -114,7 +114,13 @@ def _linhas_osm(dados):
 
 
 class Amostrador:
-    """Lê a faixa do HAND (alto/medio/baixo) em pontos ao longo de linhas."""
+    """Lê a faixa do HAND (alto/medio/baixo) em pontos ao longo de linhas.
+
+    Outro mapa pode ser testado do mesmo jeito (carta.py): basta ter CLASSES, faixa_ponto
+    e faixas. A primeira classe é a de maior risco (é ela que vira "vezes o acaso").
+    """
+
+    CLASSES = ("alto", "medio", "baixo")
 
     def __init__(self):
         with rasterio.open(hand.HAND_TIF) as fonte:
@@ -154,20 +160,16 @@ def _somar(acumulado, contagem):
         acumulado[k] += v
 
 
-def validar(refazer=False):
-    hand.calcular()  # garante HAND (e relevo)
-    if SAIDA_JSON.exists() and not refazer:
-        print(f"validacao: já existe {SAIDA_JSON} (use --refazer para refazer)")
-        return
-
+def medir(amostrador, refazer=False):
+    """Registros e ruas da cidade (e do piloto) por classe do mapa que o amostrador lê."""
     municipio_utm = transform(PARA_UTM, hand._limite())
     piloto_utm = transform(PARA_UTM, Point(PILOTO)).buffer(RAIO_PILOTO_M)
     linhas = _linhas_osm(_baixar_osm(refazer))
-    amostrador = Amostrador()
+    vazio = lambda tipo: {k: tipo() for k in amostrador.CLASSES}  # noqa: E731
 
     # Comparação justa: todas as vias do município e do piloto
-    base_cidade = {"alto": 0, "medio": 0, "baixo": 0}
-    base_piloto = {"alto": 0, "medio": 0, "baixo": 0}
+    base_cidade = vazio(int)
+    base_piloto = vazio(int)
     for _, eh_via, geom in linhas:
         if not eh_via:
             continue
@@ -188,9 +190,9 @@ def validar(refazer=False):
     with open(RUAS, encoding="utf-8") as f:
         ruas = json.load(f)["features"]
 
-    cidade = {"alto": 0.0, "medio": 0.0, "baixo": 0.0}
-    piloto = {"alto": 0.0, "medio": 0.0, "baixo": 0.0}
-    centroide = {"alto": 0, "medio": 0, "baixo": 0}
+    cidade = vazio(float)
+    piloto = vazio(float)
+    centroide = vazio(int)
     detalhe, nao_achadas = [], []
     for rua in ruas:
         props = rua["properties"]
@@ -212,7 +214,7 @@ def validar(refazer=False):
             continue
         geom = unary_union(candidatas)
         # praça ou parque: usa o contorno (a área alagada fica dentro ou em volta)
-        contagem = {"alto": 0, "medio": 0, "baixo": 0}
+        contagem = vazio(int)
         for parte in getattr(geom, "geoms", [geom]):
             _somar(contagem, amostrador.faixas(parte))
         prop = _proporcao(contagem)
@@ -228,6 +230,8 @@ def validar(refazer=False):
                         "comprimento_m": round(geom.length),
                         **{f"fracao_{k}": round(v, 3) for k, v in prop.items()}})
 
+    um, dois = amostrador.CLASSES[:2]
+
     def resumo(registros, base):
         reg = _proporcao(registros)
         bas = _proporcao(base)
@@ -236,30 +240,42 @@ def validar(refazer=False):
             "registros_por_faixa": {k: round(v, 1) for k, v in registros.items()},
             "fracao_registros": {k: round(v, 3) for k, v in reg.items()},
             "fracao_ruas": {k: round(v, 3) for k, v in bas.items()},
-            "vezes_acima_do_acaso_alto": round(reg["alto"] / bas["alto"], 2) if bas["alto"] else None,
-            "vezes_acima_do_acaso_alto_medio": round((reg["alto"] + reg["medio"]) / (bas["alto"] + bas["medio"]), 2),
+            f"vezes_acima_do_acaso_{um}": round(reg[um] / bas[um], 2) if bas[um] else None,
+            f"vezes_acima_do_acaso_{um}_{dois}": round((reg[um] + reg[dois]) / (bas[um] + bas[dois]), 2),
         }
 
-    total_reg = sum(r["properties"]["registros"] for r in ruas)
-    resultado = {
-        "metodo": "docs/validacao.md",
-        "fonte_registros": "Defesa Civil de Sorocaba, relatórios 2022–2023 (agregado por rua)",
-        "fonte_ruas": "OpenStreetMap (ODbL)",
-        "faixas": {"alto": "HAND 0–5 m", "medio": "HAND 5–15 m", "baixo": "HAND > 15 m"},
+    return {
         "ruas_total": len(ruas),
         "ruas_localizadas": len(detalhe),
-        "registros_total": total_reg,
+        "registros_total": sum(r["properties"]["registros"] for r in ruas),
         "nao_localizadas": nao_achadas,
         "cidade": resumo(cidade, base_cidade),
         "piloto": resumo(piloto, base_piloto),
         "comparacao_ponto_central": {k: round(v / sum(centroide.values()), 3) for k, v in centroide.items()},
         "ruas": sorted(detalhe, key=lambda d: -d["registros"]),
     }
+
+
+def validar(refazer=False):
+    hand.calcular()  # garante HAND (e relevo)
+    if SAIDA_JSON.exists() and not refazer:
+        print(f"validacao: já existe {SAIDA_JSON} (use --refazer para refazer)")
+        return
+
+    medido = medir(Amostrador(), refazer)
+    detalhe, ruas_total, nao_achadas = medido["ruas"], medido["ruas_total"], medido["nao_localizadas"]
+    resultado = {
+        "metodo": "docs/validacao.md",
+        "fonte_registros": "Defesa Civil de Sorocaba, relatórios 2022–2023 (agregado por rua)",
+        "fonte_ruas": "OpenStreetMap (ODbL)",
+        "faixas": {"alto": "HAND 0–5 m", "medio": "HAND 5–15 m", "baixo": "HAND > 15 m"},
+        **medido,
+    }
     SAIDA_JSON.parent.mkdir(parents=True, exist_ok=True)
     SAIDA_JSON.write_text(json.dumps(resultado, ensure_ascii=False, indent=1), encoding="utf-8")
 
     c, p = resultado["cidade"], resultado["piloto"]
-    print(f"validacao: {len(detalhe)}/{len(ruas)} ruas localizadas no OSM")
+    print(f"validacao: {len(detalhe)}/{ruas_total} ruas localizadas no OSM")
     print(f"validacao: CIDADE {c['fracao_registros']['alto']:.0%} dos registros no risco alto, "
           f"onde estão {c['fracao_ruas']['alto']:.0%} das ruas ({c['vezes_acima_do_acaso_alto']}x o acaso)")
     print(f"validacao: CIDADE alto+médio {c['fracao_registros']['alto'] + c['fracao_registros']['medio']:.0%} "
