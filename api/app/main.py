@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, Response
 
-from app import banco, camadas, respostas
+from app import banco, camadas, respostas, rotas_areas
 from app.config import origens_cors
 from app.respostas import Bbox
 
@@ -94,3 +94,8 @@ def camada_registros(bbox: Bbox = None):
     Exemplo, só a área piloto: `/camadas/registros?bbox=-47.455,-23.478,-47.439,-23.463`
     """
     return responder_camada("registros", bbox)
+
+
+# ---------------------------------------------------------------- áreas e cenário
+
+app.include_router(rotas_areas.rotas)
