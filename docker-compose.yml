@@ -7,7 +7,10 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d:ro
     ports: ["5432:5432"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      # -h 127.0.0.1: testa pela rede. Enquanto roda db/init/, o Postgres sobe
+      # um servidor temporário só local; sem -h ele já pareceria pronto e a
+      # carga tentaria conectar antes da hora.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       retries: 10
 
