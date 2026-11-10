@@ -85,6 +85,7 @@ Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é 
 - **As 6 primeiras ficam no top 10 em todos os cenários.** Abaeté, Parque Linear e Porto das Águas são o top 3 em três dos quatro. Com registros em dobro, o Porto das Águas cede o 3º lugar a uma área verde com mais ocorrências por perto.
 - **Quem entra e sai são áreas do meio da fila**, do 7º ao 16º, com notas de 7 a 17. A que mais cai é uma área verde com risco 0,77: quando o risco pesa o dobro, as muitas áreas com risco 1,0 passam na frente dela.
 - **Por que mantemos a multiplicação:** na soma, uma área sem nenhuma ocorrência perto ainda pode subir só pelo risco e pelo tamanho. Na multiplicação, ela precisa dos três. É uma escolha de projeto (começar onde já alagou), e o teste mostra que ela não muda quem lidera a fila.
+- **No site:** em Oportunidades, "Ordenar por" tem o grupo **E se os pesos fossem outros?**, com os quatro cenários acima. A fila é refeita na hora com os mesmos pesos do `sensibilidade.json` (empate: fica a ordem da nossa fila) e cada área mostra a posição que tem na nossa fila. A nota não muda. A ideia de deixar os pesos como parâmetro vem de [Carvalho et al., 2026](https://doi.org/10.1016/j.ufug.2026.129622), que prioriza soluções verdes numa cidade brasileira com poucos dados.
 
 ## Quanta água cada solução segura (#17)
 

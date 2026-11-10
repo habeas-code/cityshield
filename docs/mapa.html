@@ -306,6 +306,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .filtro-sol button:hover{color:var(--ink)}
 .filtro-sol button[aria-pressed="true"]{background:rgba(76,155,240,.16);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(76,155,240,.55)}
 .ordem{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:12.5px;color:var(--ink-2)}
+.fila-cenario{margin:-4px 0 10px;font-size:12px;line-height:1.45;color:var(--ink-2)}
+.fila .era{color:var(--ink-2);font-size:11.5px}
 .ordem select{width:auto;padding:5px 8px;font-size:12.5px;background:var(--panel-2);border-color:transparent;border-radius:6px}
 .fila .prio{font-size:11px;font-weight:600}
 .fila .prio.alta{color:#6FCB9F} .fila .prio.media{color:var(--warn)} .fila .prio.baixa{color:var(--muted)}
@@ -597,6 +599,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
             <option value="agua">Água que segura</option>
           </select>
         </label>
+        <p class="fila-cenario" id="fila-cenario" hidden></p>
         <ol class="fila" id="fila"><li class="sub">Carregando as áreas…</li></ol>
         <button type="button" class="fila-mais" id="fila-mais" hidden>Ver todas</button>
         <p class="sub fila-nota">Prioridade = risco × ocorrências por perto × tamanho. Clique numa oportunidade para ver a ficha e destacá-la no mapa.</p>
@@ -704,6 +707,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <h3>Referências</h3>
         <ul class="links-lista">
           <li><a href="https://doi.org/10.1016/j.jenvman.2024.120999" target="_blank" rel="noopener">Alves et al. (2024)</a>: seleção de locais para soluções verdes com SIG e análise multicritério, em Londrina (PR). É o mesmo tipo de método da nossa prioridade.</li>
+          <li><a href="https://doi.org/10.1016/j.ufug.2026.129622" target="_blank" rel="noopener">Carvalho et al. (2026)</a>: prioridade de soluções verdes em cidade brasileira com poucos dados, só com dados abertos (relevo, drenagem, uso do solo, ruas) e pesos que podem mudar. É o caso de Sorocaba, e o motivo do teste "E se os pesos fossem outros?" em Oportunidades.</li>
           <li><a href="https://doi.org/10.2166/wst.2009.186" target="_blank" rel="noopener">Yang et al. (2009)</a>: jardim de chuva em campo, chuva de 180 mm, volume escoado ≈42% menor e pico ≈70% menor.</li>
           <li><a href="https://www.epa.gov/system/files/documents/2023-11/bioretentiondesignhandbook_plainnov2023.pdf" target="_blank" rel="noopener">EPA, Bioretention Design Handbook (2023)</a>: manual de jardim de chuva. Confirma a lâmina de 15 cm e o jardim com 5% a 10% da área que drena para ele.</li>
           <li><a href="https://www.eghn.org/en/enghaveparken/" target="_blank" rel="noopener">Enghaveparken, Copenhague</a>: parque que guarda 22.600 m³ de chuva e continua sendo parque.</li>
@@ -896,6 +900,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
       // Teste de sensibilidade da nota (pipeline sensibilidade): vira uma frase no ⓘ da prioridade
       fetch('dados/sensibilidade.json').then(function (r) { return r.json(); }).then(function (s) {
         var r = s.resumo, n = Object.keys(s.cenarios).length;
+        CENARIOS = s.cenarios;
+        var grupo = document.createElement('optgroup');
+        grupo.label = 'E se os pesos fossem outros?';
+        Object.keys(CENARIO_ROTULO).forEach(function (k) {
+          if (!CENARIOS[k]) return;
+          var o = document.createElement('option'); o.value = 'cen:' + k; o.textContent = CENARIO_ROTULO[k];
+          grupo.appendChild(o);
+        });
+        if (grupo.children.length) $('fila-ordem').appendChild(grupo);
         SENSIBILIDADE = 'E se a conta fosse outra? Refizemos a fila somando os critérios com ' + n + ' conjuntos de pesos (WLC): o top ' + s.topo +
           ' manteve pelo menos ' + r.top10_em_comum_minimo + ' das ' + s.topo + ' áreas.';
       }).catch(function () { /* sem a frase, o ⓘ continua igual */ });
@@ -961,6 +974,27 @@ label.campo .l b{color:var(--ink);font-weight:600}
     telhado_verde: 'Cobertura vegetada que retém parte da chuva antes de ela chegar à rua. Depende de avaliação da estrutura do prédio.'
   };
   var SENSIBILIDADE = null; // frase do teste de pesos, preenchida quando sensibilidade.json carrega
+  // Cenários de pesos do teste de sensibilidade: a fila refeita somando os fatores (WLC).
+  // Os pesos vêm de sensibilidade.json; a nota oficial (o produto) não muda.
+  var CENARIOS = null;
+  var CENARIO_ROTULO = {
+    risco_em_dobro: 'Risco pesando o dobro',
+    registros_em_dobro: 'Ocorrências pesando o dobro',
+    tamanho_em_dobro: 'Tamanho pesando o dobro',
+    iguais: 'Os três com o mesmo peso'
+  };
+  function rankCenario(nome) {
+    // Posição de cada área (id -> 1, 2, ...) somando os fatores com os pesos do cenário.
+    // Empate: fica a ordem da nossa fila, como no pipeline (sensibilidade.py).
+    var w = CENARIOS[nome].pesos, soma = function (p) {
+      return Math.round((w.risco * p.fator_risco + w.registros * p.fator_registros + w.tamanho * p.fator_tamanho) * 1e6);
+    };
+    var rank = {};
+    areasDados.features.map(function (f) { return f.properties; })
+      .sort(function (a, b) { return soma(b) - soma(a) || a.posicao - b.posicao; })
+      .forEach(function (p, i) { rank[p.id] = i + 1; });
+    return rank;
+  }
   var CHUVA_16_10_MM = 52;  // 16/10/2026: Av. Dom Aguirre e XV de Agosto interditadas
   // Parque: com quantos mm de chuva enche só com a enxurrada das ruas em volta (pipeline contribuicao)
   // Vindo do mapa, listas chegam como texto; vindo do arquivo, como lista
@@ -1587,6 +1621,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
       tamanho: function (a, b) { return b.properties.area_m2 - a.properties.area_m2; },
       agua: function (a, b) { return (b.properties.volume_m3 || 0) - (a.properties.volume_m3 || 0); }
     };
+    var cen = filaOrdem.indexOf('cen:') === 0 && CENARIOS ? filaOrdem.slice(4) : null;
+    var rank = cen ? rankCenario(cen) : null, aviso = $('fila-cenario');
+    if (rank) ORDEM[filaOrdem] = function (a, b) { return rank[a.properties.id] - rank[b.properties.id]; };
+    aviso.hidden = !rank;
+    if (rank) {
+      var c = CENARIOS[cen], pc = function (x) { return Math.round(x * 100) + '%'; };
+      aviso.textContent = 'Teste: fila refeita somando os critérios (risco ' + pc(c.pesos.risco) + ', ocorrências ' + pc(c.pesos.registros) +
+        ', tamanho ' + pc(c.pesos.tamanho) + '). ' + c.top10_em_comum + ' das 10 primeiras continuam no top 10. A nota não muda: é sempre a da nossa conta.';
+    }
     var lista = areasDados.features.filter(function (f) { return filaFiltro === 'todas' || f.properties.solucao === filaFiltro; })
       .sort(ORDEM[filaOrdem] || ORDEM.prioridade);
     $('fila-conta').textContent = lista.length + (lista.length === 1 ? ' encontrada' : ' encontradas');
@@ -1596,8 +1639,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var cor = p.nota >= 50 ? '#419D83' : p.nota >= 10 ? '#D6A04A' : '#6B737D';
       var li = document.createElement('li'), b = document.createElement('button');
       b.type = 'button';
-      b.setAttribute('aria-label', p.posicao + 'º: ' + (temNome ? p.nome : p.rotulo) + ', ' + p.solucao_rotulo + ', prioridade ' + p.nota);
-      var pos = document.createElement('span'); pos.className = 'pos'; pos.textContent = p.posicao + 'º';
+      b.setAttribute('aria-label', (rank ? rank[p.id] : p.posicao) + 'º: ' + (temNome ? p.nome : p.rotulo) + ', ' + p.solucao_rotulo + ', prioridade ' + p.nota);
+      var pos = document.createElement('span'); pos.className = 'pos'; pos.textContent = (rank ? rank[p.id] : p.posicao) + 'º';
       var nome = document.createElement('span'); nome.className = 'nome';
       var nb = document.createElement('b'); nb.textContent = temNome ? p.nome : p.rotulo + ' sem nome';
       var faixaP = p.nota >= 50 ? 'alta' : p.nota >= 10 ? 'media' : 'baixa';
@@ -1607,6 +1650,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var nivel = (p.fracao_alto || 0) >= 0.5 ? 'Risco alto' : (p.fracao_alto || 0) + (p.fracao_medio || 0) >= 0.5 ? 'Risco médio' : 'Risco baixo';
       var tam = p.area_m2 >= 10000 ? (p.area_m2 / 10000).toFixed(1).replace('.', ',') + ' ha' : Math.round(p.area_m2).toLocaleString('pt-BR') + ' m²';
       var nm = document.createElement('small'); nm.textContent = nivel + ' · ' + p.registros_perto + (p.registros_perto === 1 ? ' ocorrência' : ' ocorrências') + ' · ' + tam;
+      if (rank && rank[p.id] !== p.posicao) { var era = document.createElement('span'); era.className = 'era'; era.textContent = ' · na nossa fila: ' + p.posicao + 'º'; nm.appendChild(era); }
       if (p.alerta && p.alerta !== 'null') { var am = document.createElement('small'); am.className = 'alerta-m'; am.textContent = '⚠ ' + (p.alerta_curto && p.alerta_curto !== 'null' ? p.alerta_curto : 'conferir antes de projetar'); nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); nome.appendChild(am); }
       else { nome.appendChild(nb); nome.appendChild(pr); nome.appendChild(ns); nome.appendChild(nm); }
       if (p.id === areaSel) b.className = 'sel';
