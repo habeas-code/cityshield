@@ -103,6 +103,10 @@ Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é 
 | Telhado verde | área × 50 mm × 47% | retém **47%** da chuva (limite de baixo da faixa 47–62%; em chuva forte é menos) | Vacari et al., 2019, *E&S Engineering and Science*, UFMT |
 | Parque inundável | volume entre o terreno e uma lâmina de **1 m** acima do fundo | capacidade de armazenamento, pelo relevo | cálculo do CityShield sobre o ANADEM v1 (30 m) |
 
+**A chuva de 16/10 foi chuva comum.** Pela equação de chuva de Sorocaba da revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025; i = 751,458·T^0,201 / (t + 9,221)^0,707, com i em mm/h, T em anos e t em minutos), 52 mm em 1 hora é a chuva que volta, em média, a cada 5 anos; espalhados em 24 h, bem menos que isso (a de 5 anos em 24 h é 145 mm). A Simulação mostra essa frase para a chuva escolhida. A tabela do plano vai de 5 a 100 anos, então abaixo de 5 o site diz só "menos de 5 anos".
+
+**A conta é da área, não da bacia.** A água retida da Simulação é da chuva que cai nas áreas candidatas (e nas ruas em volta, nos jardins). Na bacia inteira o efeito é menor: [Barbosa (Unesp, 2026)](https://repositorio.unesp.br/entities/publication/a69fa453-26fe-477c-8201-1c6e729e7b66) simulou no HEC-HMS a bacia do Córrego Supiriri com telhado verde em 15% dos prédios e piso permeável em 25% do asfalto, e o volume na foz caiu 5,1% (2 anos), 3,6% (10 anos) e 2,7% (100 anos). O site mostra esse aviso abaixo dos números.
+
 **Premissas nossas** (estão no começo de `pipeline/pipeline/volumes.py` e saem no campo `parametros` do arquivo):
 
 - **Jardins ocupam 10% da área verde.** Uma praça não vira um jardim de chuva inteiro: ela continua sendo praça, com canteiros rebaixados. Com 10%, a conta fica conservadora.

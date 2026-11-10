@@ -253,6 +253,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .sp-chuva span{font-size:12.5px;color:var(--ink-2)}
 .sp-chuva b{font-size:22px;font-weight:600;line-height:1.1}
 .sp-chuva small{font-size:11.5px;color:var(--muted);line-height:1.35}
+.sp-chuva .sp-volta{color:var(--ink-2)}
+.sp-obs{margin:10px 0 0;font-size:12px;line-height:1.45;color:var(--muted)}
 .sp-sols{border:0;margin:0;padding:0;display:grid;gap:7px}
 .sp-sols legend{padding:0;margin-bottom:6px;font-size:12.5px;color:var(--ink-2)}
 .sp-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
@@ -708,6 +710,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <ul class="links-lista">
           <li><a href="https://doi.org/10.1016/j.jenvman.2024.120999" target="_blank" rel="noopener">Alves et al. (2024)</a>: seleção de locais para soluções verdes com SIG e análise multicritério, em Londrina (PR). É o mesmo tipo de método da nossa prioridade.</li>
           <li><a href="https://doi.org/10.1016/j.ufug.2026.129622" target="_blank" rel="noopener">Carvalho et al. (2026)</a>: prioridade de soluções verdes em Sobral (CE), cidade média com poucos dados, com pesos que podem mudar e teste de ±20% nos pesos. Inspirou o "E se os pesos fossem outros?" em Oportunidades.</li>
+          <li><a href="https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf" target="_blank" rel="noopener">SAAE, Plano Diretor de Macrodrenagem de Sorocaba (revisão, 2025)</a>: equação de chuva usada na Simulação. Pede georreferenciar as ocorrências de alagamento e integrar com a Defesa Civil, que é o que o CityShield faz.</li>
+          <li><a href="https://repositorio.unesp.br/entities/publication/a69fa453-26fe-477c-8201-1c6e729e7b66" target="_blank" rel="noopener">Barbosa (Unesp, 2026)</a>: telhados verdes e piso permeável simulados na bacia do Córrego Supiriri. Numa aplicação realista, o volume na foz caiu 3% a 5%: soluções verdes completam a drenagem, não a substituem.</li>
           <li><a href="https://doi.org/10.2166/wst.2009.186" target="_blank" rel="noopener">Yang et al. (2009)</a>: jardim de chuva em campo, chuva de 180 mm, volume escoado ≈42% menor e pico ≈70% menor.</li>
           <li><a href="https://www.epa.gov/system/files/documents/2023-11/bioretentiondesignhandbook_plainnov2023.pdf" target="_blank" rel="noopener">EPA, Bioretention Design Handbook (2023)</a>: manual de jardim de chuva. Confirma a lâmina de 15 cm e o jardim com 5% a 10% da área que drena para ele.</li>
           <li><a href="https://www.eghn.org/en/enghaveparken/" target="_blank" rel="noopener">Enghaveparken, Copenhague</a>: parque que guarda 22.600 m³ de chuva e continua sendo parque.</li>
@@ -758,6 +762,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <label class="sp-chuva"><span>Chuva</span><b class="n" id="c-chuva-val">50 mm</b>
             <input type="range" id="c-chuva" min="10" max="120" step="5" value="50" aria-describedby="c-chuva-ref">
             <small id="c-chuva-ref">16/10/2026: 52 mm, Dom Aguirre e XV interditadas</small>
+            <small class="sp-volta" id="c-chuva-volta"></small>
           </label>
           <fieldset class="sp-sols" id="c-sol">
             <legend>Soluções aplicadas</legend>
@@ -774,6 +779,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <div class="sp-mapa"><div id="mini-depois" class="sp-mini"></div><span class="sp-tag depois">Depois</span></div>
         </div>
         <div class="sp-kpis" id="c-kpis"></div>
+        <p class="sp-obs">A conta é só da chuva que cai nessas áreas (e, nos jardins, nas ruas em volta), não da bacia inteira. Numa simulação da bacia do Córrego Supiriri, telhado verde em 15% dos prédios e piso permeável em 25% do asfalto reduziram em 3% a 5% a água que chega ao rio (Barbosa, Unesp, 2026). As soluções verdes completam galerias e reservatórios, não os substituem.</p>
       </div>
     </section>
   </main>
@@ -1430,6 +1436,20 @@ label.campo .l b{color:var(--ink);font-weight:600}
   var cen = { chuva: 50, sol: { jardim_chuva: true, piso_permeavel: true, telhado_verde: true, parque_inundavel: true }, quais: 'todas' };
   var milharC = function (x) { return Math.round(x).toLocaleString('pt-BR'); };
 
+  // Equação de chuva de Sorocaba (SAAE, Plano Diretor de Macrodrenagem, revisão 2025):
+  // i = a·T^b / (t + c)^d, i em mm/h, T em anos, t em minutos. Conferida com o Quadro 02 do
+  // plano (1 h, T = 5 anos: 51,9 mm/h). Aqui invertida para dizer de quantos em quantos anos,
+  // em média, vem uma chuva de `mm` milímetros em 1 hora. A tabela do plano vai de 5 a 100 anos:
+  // abaixo de 5 dizemos só "menos de 5 anos", acima de 100, "mais rara que a de 100 anos".
+  var IDF = { a: 751.458, b: 0.201, c: 9.221, d: 0.707 };
+  function chuvaVolta(mm) {
+    var T = Math.pow(mm * Math.pow(60 + IDF.c, IDF.d) / IDF.a, 1 / IDF.b);
+    var arred = T < 10 ? Math.round(T) : T < 30 ? Math.round(T / 5) * 5 : Math.round(T / 10) * 10;
+    var quando = T < 5 ? 'chuva frequente, que volta em menos de 5 anos'
+      : T > 100 ? 'mais rara que a chuva de 100 anos'
+      : 'chuva que volta, em média, a cada ' + arred + ' anos';
+    return 'Se cair em 1 hora: ' + quando + '. Espalhada pelo dia, é bem mais comum (equação de chuva do SAAE, 2025).';
+  }
   function aguaArea(p, mm, par) {
     var m = mm / 1000, A = p.area_m2;
     if (p.solucao === 'piso_permeavel') return { chega: A * m, ret: A * Math.min(mm, par.piso_capacidade_mm) / 1000 };
@@ -1504,6 +1524,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     if (!areasDados) return;
     var par = areasDados.parametros, mm = cen.chuva;
     $('c-chuva-val').textContent = mm + ' mm';
+    $('c-chuva-volta').textContent = chuvaVolta(mm);
     var tot = { chega: 0, ret: 0, n: 0 }, porSol = {}, parques = { n: 0, cap: 0 };
     areasDados.features.forEach(function (f) {
       var p = f.properties;

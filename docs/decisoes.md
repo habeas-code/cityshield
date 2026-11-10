@@ -22,7 +22,7 @@ Cada decisão nova entra no fim, com número, data e as alternativas que conside
 
 **Decisão:** a função principal é indicar **onde** e **qual** solução baseada na natureza estudar (jardim de chuva, piso permeável, parque inundável, telhado verde).
 
-**Por quê:** Sorocaba já tem mapa de risco (carta de suscetibilidade do Serviço Geológico, 2014). Mostrar risco de novo não acrescenta. O que falta é sair do "aqui alaga" para o "aqui dá para fazer isso". Também conversa com o PL Cidade-Esponja apresentado na Câmara em 19/11/2024.
+**Por quê:** Sorocaba já tem mapa de risco (carta de suscetibilidade do IPT e do Serviço Geológico do Brasil, 2015). Mostrar risco de novo não acrescenta. O que falta é sair do "aqui alaga" para o "aqui dá para fazer isso". Também conversa com o PL Cidade-Esponja apresentado na Câmara em 19/11/2024.
 
 ## D3. Área piloto: núcleo Norte, raio de 800 m
 

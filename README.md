@@ -27,7 +27,7 @@ Sorocaba (SP) alaga todo verão, e quase sempre nos mesmos lugares. Os relatóri
 
 A cidade já discute soluções baseadas na natureza (a "cidade-esponja"): jardins de chuva, piso permeável, telhados verdes, parques que podem alagar. Há até um projeto de lei sobre isso na Câmara (2024). Mas falta responder uma pergunta prática: **em qual terreno vale a pena estudar qual solução primeiro?**
 
-Sorocaba já tem mapa de suscetibilidade a inundação (Serviço Geológico, 2014). Ele mostra **onde** é perigoso, mas não diz **o que fazer** em cada lugar. É essa lacuna que o CityShield ocupa.
+Sorocaba já tem mapa de suscetibilidade a inundação (IPT e Serviço Geológico do Brasil, 2015). Ele mostra **onde** é perigoso, mas não diz **o que fazer** em cada lugar. É essa lacuna que o CityShield ocupa.
 
 ## O que o CityShield faz
 
