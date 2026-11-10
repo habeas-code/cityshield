@@ -85,7 +85,12 @@ Spearman compara as duas filas inteiras das 48 áreas: 1 é a mesma ordem, 0 é 
 - **As 6 primeiras ficam no top 10 em todos os cenários.** Abaeté, Parque Linear e Porto das Águas são o top 3 em três dos quatro. Com registros em dobro, o Porto das Águas cede o 3º lugar a uma área verde com mais ocorrências por perto.
 - **Quem entra e sai são áreas do meio da fila**, do 7º ao 16º, com notas de 7 a 17. A que mais cai é uma área verde com risco 0,77: quando o risco pesa o dobro, as muitas áreas com risco 1,0 passam na frente dela.
 - **Por que mantemos a multiplicação:** na soma, uma área sem nenhuma ocorrência perto ainda pode subir só pelo risco e pelo tamanho. Na multiplicação, ela precisa dos três. É uma escolha de projeto (começar onde já alagou), e o teste mostra que ela não muda quem lidera a fila.
-- **No site:** em Oportunidades, "Ordenar por" tem o grupo **E se os pesos fossem outros?**, com os quatro cenários acima. A fila é refeita na hora com os mesmos pesos do `sensibilidade.json` (empate: fica a ordem da nossa fila) e cada área mostra a posição que tem na nossa fila. A nota não muda. A ideia de deixar os pesos como parâmetro vem de [Carvalho et al., 2026](https://doi.org/10.1016/j.ufug.2026.129622), que prioriza soluções verdes numa cidade brasileira com poucos dados.
+- **No site:** em Oportunidades, "Ordenar por" tem o grupo **E se os pesos fossem outros?**, com os quatro cenários acima. A fila é refeita na hora com os mesmos pesos do `sensibilidade.json` (empate: fica a ordem da nossa fila) e cada área mostra a posição que tem na nossa fila. A nota não muda. A ideia de deixar os pesos como parâmetro vem de [Carvalho et al., 2026](https://doi.org/10.1016/j.ufug.2026.129622), que prioriza soluções verdes em Sobral (CE), cidade média com poucos dados.
+- **O que esse artigo reforça na nossa escolha:**
+  - Eles usam soma (WLC) e reconhecem como limitação que ela é *compensatória*: um critério alto cobre outro baixo. A nossa multiplicação não tem esse problema, e é por isso que a mantemos.
+  - O teste deles (±20% nos pesos) deu 92,6% a 98,1% das microbacias na mesma classe. O nosso (pesos em dobro, uma mudança maior) manteve 8 a 9 das 10 primeiras.
+  - Eles não conseguiram usar o histórico de alagamentos ("historical flood density") por falta de dados. Nós usamos: são os registros da Defesa Civil, no fator ocorrências e na validação.
+  - Eles avisam que relevo grosso (o nosso ANADEM tem 30 m; o deles, de drone, tem 0,5 m) serve para triagem por bacia, não para escolher o lugar exato na rua. É o mesmo aviso que o site já dá: ferramenta de triagem, não projeto.
 
 ## Quanta água cada solução segura (#17)
 
