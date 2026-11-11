@@ -132,6 +132,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 .fila-mais:hover{color:var(--ink);border-color:var(--accent)}
 .fila-nota{margin:8px 0 0}
 .sol{margin:0 18px 10px;padding:12px 14px;border-radius:8px;background:var(--panel-2);display:grid;gap:5px}
+.sol-leg{margin:0 18px 8px}
 .sol-t{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .sol-t b{font-weight:600}
 .status{font-size:11px;padding:2px 7px;border-radius:3px;white-space:nowrap}
@@ -530,7 +531,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
               <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
               <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
             </button>
-            <span class="camada-nome"><b>Risco pelo relevo (HAND)</b><span>Altura acima do córrego mais próximo · ANADEM 30 m</span></span>
+            <span class="camada-nome"><b>Risco pelo relevo (HAND)</b><span>Quanto o terreno está acima do córrego mais próximo. Quanto mais baixo, mais fácil a água chegar.</span></span>
           </div>
           <div class="camada-leg">
             <span class="it"><i class="q" style="background:rgba(214,69,93,.6)"></i>Alto: até 5 m acima do córrego</span>
@@ -543,7 +544,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
               <svg class="aberto" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
               <svg class="fechado" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></svg>
             </button>
-            <span class="camada-nome"><b>Córregos calculados</b><span>Onde se juntam mais de 0,5 km² de chuva</span></span>
+            <span class="camada-nome"><b>Córregos calculados</b><span>Por onde a água da chuva escorre, calculado pelo relevo</span></span>
           </div>
         </div>
           </div>
@@ -606,6 +607,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <button type="button" class="fila-mais" id="fila-mais" hidden>Ver todas</button>
         <p class="sub fila-nota">Prioridade = risco × ocorrências por perto × tamanho. Clique numa oportunidade para ver a ficha e destacá-la no mapa.</p>
       </div>
+      <p class="sub sol-leg"><b>Investigar:</b> os dados já mostram que faz sentido aqui. <b>Hipótese:</b> a ideia é boa, mas ainda falta evidência.</p>
       <div class="sol">
         <div class="sol-t"><b>Jardim de chuva</b><span class="status inv">Investigar</span></div>
         <p>Pode receber parte do escoamento das ruas próximas e infiltrá-lo no solo.</p>
@@ -614,14 +616,14 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <button data-simular="jardim">Simular</button>
       </div>
       <div class="sol">
-        <div class="sol-t"><b>Pavimento permeável</b><span class="status inv">Investigar</span></div>
+        <div class="sol-t"><b>Piso permeável</b><span class="status inv">Investigar</span></div>
         <p>Estacionamentos e calçadas que deixam a água passar para uma camada de brita.</p>
         <p class="aqui"><b>Por que aqui:</b> 7 estacionamentos abertos no raio de 800 m, somando cerca de 2,0 ha de área impermeável; 4 deles têm metade ou mais da área no risco alto.</p>
         <p class="fonte-l">Fonte: OpenStreetMap, consultado em 07/11/2026; risco: HAND</p>
         <button data-simular="piso">Simular</button>
       </div>
       <div class="sol">
-        <div class="sol-t"><b>Parque alagável</b><span class="status hip">Hipótese</span></div>
+        <div class="sol-t"><b>Parque inundável</b><span class="status hip">Hipótese</span></div>
         <p>Área verde para guardar água temporariamente. Um parque alagar não comprova que ele sirva para armazenamento controlado; precisa de avaliação de viabilidade.</p>
         <p class="aqui"><b>Por que aqui:</b> 35 áreas verdes no raio, somando 53,6 ha. Os três maiores parques (Porto das Águas, Parque das Águas do Abaeté e Parque Linear do Rio Sorocaba) estão inteiros no risco alto, junto do rio.</p>
         <p class="fonte-l">Fonte: OpenStreetMap, consultado em 07/11/2026; risco: HAND</p>
@@ -654,7 +656,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
 
     <div class="rolar" id="a-sim" hidden>
       <div class="aba-sub"><b>Avaliar cenários</b><span>O que muda depois da intervenção</span></div>
-      <div class="bloco"><p><b>Cenário da área piloto:</b> escolha a chuva e as soluções no painel sobre o mapa. Aqui ficam os detalhes: quanto cada solução segura, os parques e as premissas. Estimativa com valores publicados, não modelagem hidráulica.</p></div>
+      <div class="bloco"><p><b>Cenário da área piloto:</b> escolha a chuva e as soluções no painel sobre o mapa. Aqui ficam os detalhes: quanto cada solução segura, os parques e as premissas. Estimativa com valores publicados, não uma simulação do caminho da água na cidade.</p></div>
       <div class="bloco">
         <h3>Detalhes do cenário</h3>
         <div id="c-res"><p class="sub" style="margin:0">Carregando as áreas…</p></div>
@@ -718,7 +720,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="https://www.eghn.org/en/enghaveparken/" target="_blank" rel="noopener">Enghaveparken, Copenhague</a>: parque que guarda 22.600 m³ de chuva e continua sendo parque.</li>
         </ul>
       </div>
-      <p class="aviso">Ferramenta de triagem para orientar estudos técnicos, não modelagem hidráulica nem projeto de obra.</p>
+      <p class="aviso">Ferramenta para escolher onde estudar primeiro, não uma simulação do caminho da água nem projeto de obra.</p>
     </div>
   </aside>
 
@@ -733,11 +735,11 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
     </div>
     <div class="leg-mapa" id="leg-mapa" aria-label="Legenda do mapa">
-      <div><b>Nível de risco</b>
+      <div><b>Risco pelo relevo</b>
         <span><i class="q" style="background:rgba(214,69,93,.6)"></i>Alto</span>
         <span><i class="q" style="background:rgba(214,69,93,.25)"></i>Médio</span>
       </div>
-      <div><b>Outros</b>
+      <div><b>Registros e córregos</b>
         <span><i style="background:var(--alag)"></i>Alagamento</span>
         <span><i style="background:var(--inund)"></i>Inundação</span>
         <span><i class="l" style="background:#7FC8F8"></i>Córregos</span>
@@ -801,7 +803,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <p class="fonte-l" id="d-fonte" style="margin:-4px 0 12px">Fontes: Defesa Civil 2022–2023; OpenStreetMap</p>
       <div id="d-sol">
         <p class="rot">Soluções a investigar</p>
-        <div class="tags"><span>Jardim de chuva</span><span>Pavimento permeável</span><span class="h">Parque alagável</span></div>
+        <div class="tags"><span>Jardim de chuva</span><span>Piso permeável</span><span class="h">Parque inundável</span></div>
         <div class="botoes"><button class="bt pri bt-grande" data-aba-ir="sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5L8 5.5Z"/></svg>Simular intervenção</button><button class="bt" data-aba-ir="oport">Ver oportunidades</button></div>
       </div>
     </section>
@@ -821,7 +823,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         <p><b>Carta oficial:</b> fizemos o mesmo teste com a carta de suscetibilidade a inundações do IPT e do Serviço Geológico do Brasil (2015). A classe alta tem 24% dos registros em 2% das ruas (15× o acaso): é mais precisa, mas cobre pouco. Ela foi feita para várzea de rio, e o Plano de Macrodrenagem do SAAE (2025) lembra que não pega bem os vales estreitos. Os dois mapas se completam.</p>
         <p><b>253 → 240 → 223:</b> 253 registros foram transcritos dos relatórios (89 ruas). 240 têm a rua localizada no mapa (79 ruas, os pontos que você vê). 223 tiveram o traçado da rua achado no OpenStreetMap e entram no teste (75 ruas).</p>
       </div>
-      <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não é a taxa de acerto de uma previsão.</p>
+      <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não quer dizer que o mapa prevê a próxima enchente.</p>
       <p class="sub" id="v-carta" style="margin:6px 0 0"><b>E o mapa oficial?</b> A carta de inundação do IPT e do SGB (2015) marca 6% da cidade e acerta muito onde marca, mas 55% dos registros ficam fora dela.</p>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
     </section>
@@ -1149,7 +1151,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       });
     }
     risco.appendChild(leg);
-    corpo.appendChild(linha('risco', 'Risco de alagamento', risco, null, 'o quanto o terreno fica exposto à água', [
+    corpo.appendChild(linha('risco', 'Risco pelo relevo', risco, null, 'o quanto o terreno fica exposto à água', [
       'Medido pela altura do terreno acima do córrego mais próximo (método HAND), calculada sobre o relevo ANADEM de 30 m.',
       'Alto: até 5 m acima do córrego. Médio: de 5 a 15 m. Baixo: acima de 15 m.',
       '"0 m acima do córrego" quer dizer que o terreno está no mesmo nível do córrego. Não é profundidade de água nem previsão de enchente.'
@@ -1180,7 +1182,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       var conta = el('p', 'pa-conta', '100 × ' + f2(p.fator_risco) + ' × ' + f2(p.fator_registros) + ' × ' + f2(p.fator_tamanho) + ' = ' + p.nota);
       corpo.appendChild(linha('nota', 'Prioridade', pri, null, 'por onde começar: risco × ocorrências × tamanho', [
         'Nota = 100 × risco × ocorrências × tamanho. Cada critério vai de 0 a 1 e todos têm o mesmo peso: é uma multiplicação, então a área só chega ao topo se for bem nos três.',
-        'Risco: parte do terreno em risco alto, mais metade da parte em risco médio. Ocorrências: registros da Defesa Civil em ruas a até 300 m, comparados com a área que tem mais. Tamanho: em escala logarítmica, para um parque grande não apagar as praças.',
+        'Risco: parte do terreno em risco alto, mais metade da parte em risco médio. Ocorrências: registros da Defesa Civil em ruas a até 300 m, comparados com a área que tem mais. Tamanho: numa escala que cresce devagar, para um parque grande não apagar as praças.',
         'Nesta área:', fatoresBarras(p), conta
       ].concat(SENSIBILIDADE ? [SENSIBILIDADE] : [])));
 
