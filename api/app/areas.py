@@ -11,10 +11,14 @@ decimais. O padrão do PostGIS (9 casas) arredondaria a nona casa (~0,1 mm);
 com 15, saem exatamente como no arquivo.
 
 SQL fixo; os valores vão como parâmetros.
+
+A lista inteira (sem bbox e sem solução) fica guardada em memória por 30
+minutos (app/cache.py, #109). Filtrada, a ficha e o cenário vão sempre ao banco.
 """
 
 import re
 
+from app import cache
 from app.camadas import consultar, parametros_bbox
 
 # Códigos das soluções (docs/recomendacoes.md, "O que o arquivo traz").
@@ -79,7 +83,14 @@ PARA_CENARIO = """
 
 
 def areas_geojson(bbox=None, solucao: str | None = None) -> str:
-    """Todas as áreas (ou só as do bbox e da solução) como FeatureCollection."""
+    """Todas as áreas (ou só as do bbox e da solução) como FeatureCollection.
+
+    Todas, sem filtro, vêm do cache (app/cache.py).
+    """
+    if bbox is None and solucao is None:
+        return cache.lembrar(
+            "areas", lambda: consultar(LISTA, {**parametros_bbox(None), "solucao": None}, "areas")
+        )
     return consultar(LISTA, {**parametros_bbox(bbox), "solucao": solucao}, "areas")
 
 
