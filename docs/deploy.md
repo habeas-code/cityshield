@@ -39,6 +39,8 @@ No Render, o ping a cada 10 min deixa a API **quase sempre** acordada: 30 × 24 
 
 O Neon também conta o que **sai do banco**. A `/camadas/risco` sem bbox tira **~1,8 MB** do banco por chamada (a camada inteira), então **~2.800 chamadas** (5.000 MB ÷ 1,8 MB) gastam os 5 GB do mês. O GZip da API não ajuda aqui: ele comprime a resposta para o navegador, mas o que conta no Neon é o que vai do banco para a API. Com bbox (a área visível do mapa), cada chamada tira bem menos. O site lê os arquivos estáticos de `docs/dados/` (D10), então as visitas ao site não gastam essa transferência; só quem chama a API.
 
+**Cache da API (#109):** as respostas inteiras (`/camadas/risco`, `/camadas/registros` e `/areas`, sem bbox e sem filtro) ficam guardadas na memória da API por **30 minutos** (`api/app/cache.py`). Assim, cada uma sai do banco no máximo 2 vezes por hora, mesmo com muitas chamadas. No pior caso (alguém chamando sem parar o mês inteiro): 2 × 24 × 30 = 1.440 leituras × ~1,88 MB (as três juntas) = **~2,7 GB**, dentro dos 5 GB. Com 5 minutos seriam ~16 GB. Com bbox, com filtro, a ficha de uma área, o `/cenario` e a `/saude` continuam indo ao banco toda vez. Quando a resposta sai do cache, o Neon nem acorda. O cache ocupa ~1,9 MB, menos de 1 % dos 512 MB do Render.
+
 ## 1. Neon: projeto e extensão
 
 1. Em [console.neon.tech](https://console.neon.tech), **New Project**:
@@ -67,6 +69,7 @@ A carga é o mesmo `db/carga.py` do Docker: cria as tabelas se faltarem, apaga o
    ```
    (No Git Bash: `read -rs DATABASE_URL && export DATABASE_URL`, o mesmo `docker compose run` e depois `unset DATABASE_URL`.)
 3. Tem que aparecer `Carga ok: risco 777, drenagem 543, ruas 79, areas 48.` (os números acompanham os arquivos).
+4. A API mostra a carga nova **em até 30 minutos**, sem reiniciar (o cache vence sozinho; veja "Transferência: 5 GB por mês"). Para ver na hora, reinicie a API no Render (por exemplo, **Manual Deploy** → **Deploy latest commit**): o cache fica só na memória e some.
 
 Por que assim:
 
