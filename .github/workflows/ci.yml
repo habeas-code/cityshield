@@ -96,3 +96,69 @@ jobs:
       # Abre docs/mapa.html no Chromium (computador e celular 390x844) e falha
       # com qualquer erro no console ou exceção na página.
       - run: python -m pytest -q tests/site
+
+  banco:
+    name: Banco de verdade (PostGIS)
+    runs-on: ubuntu-latest
+    # Um PostGIS de verdade, a mesma imagem do docker-compose.yml. Usuário e
+    # senha só existem aqui dentro, como os do .env.example: não são segredo.
+    services:
+      postgis:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: cityshield
+          POSTGRES_USER: cityshield
+          POSTGRES_PASSWORD: cityshield
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U cityshield -d cityshield"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGHOST: 127.0.0.1
+      PGUSER: cityshield
+      PGPASSWORD: cityshield
+      PGDATABASE: cityshield
+      DATABASE_URL: postgresql+psycopg://cityshield:cityshield@127.0.0.1:5432/cityshield
+      SENHA_API: senha-so-do-ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"   # a mesma da imagem da api
+          cache: pip
+          cache-dependency-path: api/requirements*.txt
+      - run: pip install -r api/requirements-dev.txt
+
+      # O service não monta pastas do repositório: aplica db/init/ aqui, na
+      # ordem, como o Docker faz sozinho no docker compose.
+      - name: Aplica db/init/
+        run: |
+          for arquivo in db/init/*.sql; do
+            echo "== $arquivo"
+            psql -v ON_ERROR_STOP=1 -q -f "$arquivo"
+          done
+
+      # Rodar de novo tem que dar o mesmo resultado (db/carga.py).
+      - name: Carga duas vezes, com as mesmas contagens
+        run: |
+          primeira=$(python db/carga.py)
+          echo "1ª: $primeira"
+          segunda=$(python db/carga.py)
+          echo "2ª: $segunda"
+          if [ "$primeira" != "$segunda" ]; then
+            echo "As duas cargas deram contagens diferentes."
+            exit 1
+          fi
+
+      # O SQL vem do docs/deploy.md (seção 3), não de uma cópia: se o guia
+      # mudar, o CI testa o guia novo. Sem o bloco, o passo falha e diz por quê.
+      - name: Cria o cityshield_api com o SQL do guia
+        run: python tests/banco/usuario_api.py
+
+      - name: Rotas com o cityshield_api e permissões
+        env:
+          URL_API: postgresql+psycopg://cityshield_api:senha-so-do-ci@127.0.0.1:5432/cityshield
+          URL_DONO: postgresql+psycopg://cityshield:cityshield@127.0.0.1:5432/cityshield
+        run: python -m pytest -q tests/banco
