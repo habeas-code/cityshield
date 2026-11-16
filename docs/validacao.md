@@ -95,10 +95,31 @@ Pedimos à Prefeitura, pela Lei de Acesso à Informação, os registros de alaga
 
 **Cuidado ao ler:**
 
-- **Uma bacia só.** A planilha cobre a Bacia do Itanguá, não a cidade inteira.
+- **Uma região só.** A planilha cobre o que a Defesa Civil chama de Bacia do Itanguá, não a cidade inteira. A comparação com as ruas da própria região está logo abaixo.
 - **Um evento concentrado.** Os registros de depois do mapa vêm quase todos de uma chuva e de três ruas da Vila Mineirão. É um caso real e independente, mas não é uma amostra da cidade.
 - **Um chamado por casa.** Uma rua com muitas casas atingidas soma muitos registros. Isso pesa a favor das ruas com mais moradores na várzea.
 - **25 registros de fora:** 13 sem rua, 12 em vielas do Jardim Itapemirim (Viela 203, Viela 148 e outras) e uma "Rua 2" sem bairro, que não existem com esse nome no OpenStreetMap. Mais três vias com ponto (duas "Rua 2" e a Rua Três do Itapemirim, 6 registros) não foram achadas pela conta da validação.
+
+### Comparação local: o teste mais duro
+
+**A pergunta:** os registros vêm de uma região de vale. Uma região assim tem mais ruas baixas que a média da cidade. Comparar com as ruas da **cidade inteira** pode inflar o resultado. E se a comparação for só com as ruas **da própria região**?
+
+**Primeiro achado: a "Bacia do Itanguá" da Defesa Civil não é a bacia do relevo.** Desenhamos a bacia do Córrego Itanguá pelo relevo (`python -m pipeline bacia`: tudo o que drena até a foz do córrego no Rio Sorocaba, 41 km², arquivo `bacia_itangua.geojson`). Só **89 dos 340** registros com a rua localizada caem dentro dela, e a Vila Mineirão, o Centro, a Vila Barcelona e o Além Ponte ficam fora. A "bacia" da planilha é uma **região de trabalho** da Defesa Civil, não uma bacia hidrográfica.
+
+Por isso fizemos a comparação local de dois jeitos:
+
+| Comparação | Registros | Risco alto | Ruas no alto | Vezes o acaso | Alto + médio | Ruas no alto + médio | Vezes o acaso |
+|---|---|---|---|---|---|---|---|
+| **Depois do mapa, cidade inteira** (a tabela acima) | 102 | 47% | 12% | 3,8× | 89% | 30% | 3,0× |
+| **Depois do mapa, só ruas da região** (a até 1 km de alguma via da planilha) | 102 | 47% | 16% | **3,0×** | **89%** | **35%** | **2,6×** |
+| Todos, só ruas da região | 334 | 64% | 16% | 4,1× | 92% | 35% | 2,6× |
+| Todos, só ruas da bacia do relevo (os 87 de dentro) | 87 | 67% | 7% | 10× | 86% | 21% | 4,0× |
+
+- **A região tem mesmo mais ruas baixas:** 35% das ruas dela estão no risco alto ou médio, contra 30% na cidade. A preocupação procede.
+- **Mesmo assim, o resultado continua forte.** Comparando só com as ruas vizinhas, os chamados de depois do mapa caem no risco alto ou médio **2,6 vezes** mais do que se caíssem em qualquer rua da região, e no risco alto, **3 vezes** mais.
+- **A carta oficial, na mesma comparação local,** marca 7% das ruas da região e pega 33% dos chamados de depois do mapa.
+- **Dentro da bacia do relevo** o número sobe (10× no risco alto), porque a bacia inteira, com as cabeceiras altas, tem poucas ruas baixas. Mas lá só entram 87 registros e só 1 de depois do mapa, então esse grupo não serve para o teste de depois do mapa.
+- **Qual número usar:** para falar com a banca, o mais justo é o da região: **89% dos chamados de depois do mapa no risco alto ou médio, que reúne 35% das ruas da região (2,6×)**. Os números de todas as comparações estão em `lai_defesa_civil.json`, no campo `comparacao_local`.
 
 ## Comparação com a carta oficial
 

@@ -23,12 +23,16 @@ import csv
 import json
 from collections import defaultdict
 
-from pipeline import carta, hand, validacao
+from shapely.geometry import Point
+from shapely.ops import transform, unary_union
+
+from pipeline import bacia, carta, hand, validacao
 from pipeline.caminhos import REFERENCIA, SAIDA
 
 ENTRADA = REFERENCIA / "lai_defesa_civil.csv"
 SAIDA_JSON = SAIDA / "lai_defesa_civil.json"
 MAPA_PRONTO = "2026-11-08"  # registros a partir desta data vieram depois do mapa
+RAIO_REGIAO_M = 1000  # comparação local: ruas a até 1 km de alguma via da planilha
 PEDIDO = "Fala.BR nº 03959.2026.000348-13 (Prefeitura de Sorocaba, SEMOB/Defesa Civil, 16/11/2026)"
 
 FILTROS = {
@@ -64,6 +68,40 @@ def _resumo(medido):
     return {k: medido[k] for k in ("ruas_total", "ruas_localizadas", "registros_total", "nao_localizadas", "cidade")}
 
 
+def regiao(linhas):
+    """Região dos registros: ruas a até RAIO_REGIAO_M de alguma via da planilha."""
+    pontos = [transform(validacao.PARA_UTM, Point(float(linha["lon"]), float(linha["lat"])))
+              for linha in linhas if linha["lon"]]
+    return transform(validacao.PARA_GRAUS, unary_union([p.buffer(RAIO_REGIAO_M) for p in pontos]))
+
+
+def _comparacao_local(linhas, amostradores, refazer):
+    """O teste mais duro: comparar com as ruas da própria região, não da cidade inteira.
+
+    Uma região de vale tem mais ruas baixas que a média da cidade; comparar só com elas
+    mostra se os registros caem no risco mais do que as ruas vizinhas.
+
+    - regiao: ruas a até RAIO_REGIAO_M de alguma via da planilha (HAND e carta).
+    - bacia_relevo: a bacia do Córrego Itanguá desenhada pelo relevo (bacia.py). A
+      "Bacia do Itanguá" da Defesa Civil é uma região de trabalho e não coincide com a
+      bacia do relevo; por isso o resultado diz quantos registros caem fora dela. Só HAND:
+      a carta quase não tem área dentro da bacia, e a conta dela perde o sentido.
+    """
+    limites = {"regiao": (regiao(linhas), amostradores),
+               "bacia_relevo": (bacia.desenhar(), {"hand": amostradores["hand"]})}
+    saida = {"raio_regiao_m": RAIO_REGIAO_M}
+    for nome_limite, (limite, amos) in limites.items():
+        saida[nome_limite] = {}
+        for grupo in ("todas", "depois_do_mapa"):
+            lista = ruas(linhas, FILTROS[grupo])
+            saida[nome_limite][grupo] = {}
+            for nome, amostrador in amos.items():
+                medido = validacao.medir(amostrador, refazer, ruas=lista, limite=limite)
+                saida[nome_limite][grupo][nome] = {
+                    **_resumo(medido), "registros_fora_do_limite": medido["registros_fora_do_limite"]}
+    return saida
+
+
 def testar(refazer=False):
     hand.calcular()
     if SAIDA_JSON.exists() and not refazer:
@@ -89,6 +127,7 @@ def testar(refazer=False):
         for nome, amostrador in amostradores.items():
             medido = validacao.medir(amostrador, refazer, ruas=lista)
             resultado["grupos"][grupo][nome] = medido if (grupo == "todas" and nome == "hand") else _resumo(medido)
+    resultado["comparacao_local"] = _comparacao_local(linhas, amostradores, refazer)
 
     SAIDA_JSON.parent.mkdir(parents=True, exist_ok=True)
     SAIDA_JSON.write_text(json.dumps(resultado, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -101,3 +140,11 @@ def testar(refazer=False):
               f"{h['fracao_registros']['alto'] + h['fracao_registros']['medio']:.0%}; carta alta "
               f"{c['fracao_registros']['alta']:.0%} ({c['vezes_acima_do_acaso_alta']}x), qualquer classe "
               f"{1 - c['fracao_registros'].get('fora', 0):.0%}")
+    for nome_limite in ("regiao", "bacia_relevo"):
+        for grupo, por_mapa in resultado["comparacao_local"][nome_limite].items():
+            h = por_mapa["hand"]["cidade"]
+            print(f"lai: local {nome_limite} {grupo}: {h['registros_considerados']:.0f} registros "
+                  f"({por_mapa['hand']['registros_fora_do_limite']} fora); HAND alto+médio "
+                  f"{h['fracao_registros']['alto'] + h['fracao_registros']['medio']:.0%} em "
+                  f"{h['fracao_ruas']['alto'] + h['fracao_ruas']['medio']:.0%} das ruas "
+                  f"({h['vezes_acima_do_acaso_alto_medio']}x)")
