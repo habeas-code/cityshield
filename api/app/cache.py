@@ -6,13 +6,16 @@ gratuito: https://neon.com/faqs/free-plan-limits-and-quotas). A camada de risco
 inteira tira ~1,8 MB por chamada (1.797.535 bytes medidos na #11). As camadas só
 mudam quando a carga roda (D7), então a API pode reaproveitar o mesmo texto.
 
-Só entram respostas inteiras (sem bbox e sem filtro). Erro nunca entra: quem
-pede de novo tenta o banco outra vez.
+Só entram respostas inteiras: sem bbox ou com um bbox que contém o município
+todo (app/bbox.py, cobre_tudo), e sem filtro. Erro nunca entra: quem pede de
+novo tenta o banco outra vez.
 
 Validade de 30 minutos: é o menor valor em que o pior caso cabe nos 5 GB. Com
-alguém chamando sem parar o mês todo, as três respostas (~1,88 MB juntas) saem
-do banco no máximo 2 vezes por hora: 2 x 24 x 30 = 1.440 leituras x 1,88 MB =
-~2,7 GB. Com 5 minutos seriam ~16 GB. Uma carga nova aparece na API em até 30
+alguém chamando sem parar o mês todo (sem bbox ou com bbox do município todo),
+as três respostas (~1,88 MB juntas) saem do banco no máximo 2 vezes por hora:
+2 x 24 x 30 = 1.440 leituras x 1,88 MB = ~2,7 GB. Com 5 minutos seriam ~16 GB.
+Um bbox que cobre quase tudo, mas não o município inteiro, vai ao banco toda
+vez e fica fora dessa conta (docs/deploy.md). Uma carga nova aparece na API em até 30
 minutos, sem reiniciar; reiniciar o serviço no Render apaga o cache na hora
 (docs/deploy.md).
 
