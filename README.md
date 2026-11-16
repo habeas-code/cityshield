@@ -9,7 +9,7 @@
 
 Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com), trilha **Meio Ambiente**.
 
-🗺️ **[Abrir a plataforma](https://habeas-code.github.io/cityshield/mapa.html)** · 🌐 [Página do projeto](https://habeas-code.github.io/cityshield/) · 📋 [Quadro de tarefas](https://github.com/orgs/habeas-code/projects/1) · 📅 [Cronograma](docs/CRONOGRAMA.md) · 🧭 [Decisões](docs/decisoes.md) · ✅ [Validação](docs/validacao.md) · 🌱 [Recomendações](docs/recomendacoes.md)
+🗺️ **[Abrir a plataforma](https://habeas-code.github.io/cityshield/mapa.html)** · 🌐 [Página do projeto](https://habeas-code.github.io/cityshield/) · 📋 [Quadro de tarefas](https://github.com/orgs/habeas-code/projects/1) · 📅 [Cronograma](docs/CRONOGRAMA.md) · 🧭 [Decisões](docs/decisoes.md) · ✅ [Validação](docs/validacao.md) · 🌱 [Recomendações](docs/recomendacoes.md) · ❓ [Perguntas da banca](docs/perguntas-da-banca.md)
 
 > **🇬🇧 In English**
 >
