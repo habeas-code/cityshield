@@ -702,6 +702,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="dados/ruas.geojson" download>Ocorrências por rua</a><span>registros da Defesa Civil 2022–2023, um ponto por rua, sem endereço · ≈ 16 KB</span></li>
           <li><a href="dados/validacao.json" download>Validação do mapa de risco</a><span>números da comparação com as ocorrências (JSON) · ≈ 16 KB</span></li>
           <li><a href="dados/comparacao_carta.json" download>Comparação com a carta oficial</a><span>o mesmo teste com a carta de inundação do IPT/SGB, 2015 (JSON, só números) · ≈ 2 KB</span></li>
+          <li><a href="dados/lai_defesa_civil.csv" download>Registros oficiais 2021–2026 (Bacia do Itanguá)</a><span>Defesa Civil via Lei de Acesso à Informação; data, rua, bairro, tipo e nº de registros, sem endereço · ≈ 15 KB</span></li>
+          <li><a href="dados/lai_defesa_civil.json" download>Teste com os registros de 2021–2026</a><span>mesma conta da validação, incluindo os chamados de depois do mapa pronto (JSON) · ≈ 19 KB</span></li>
           <li><a href="dados/limite_sorocaba.geojson" download>Limite do município</a><span>≈ 12 KB</span></li>
         </ul>
         <p class="sub" style="margin-top:10px">O que cada campo quer dizer: <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#o-que-o-arquivo-traz" target="_blank" rel="noopener">dicionário das áreas</a>. As áreas, ruas e córregos usam o OpenStreetMap (© colaboradores do OpenStreetMap, licença ODbL); o relevo é o ANADEM (Laipelt et al., 2024). Ao usar, cite "CityShield, Habeas Code".</p>
@@ -823,6 +825,21 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
       <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não é a taxa de acerto de uma previsão.</p>
       <p class="sub" id="v-carta" style="margin:6px 0 0"><b>E o mapa oficial?</b> A carta de inundação do IPT e do SGB (2015) marca 6% da cidade e acerta muito onde marca, mas 55% dos registros ficam fora dela.</p>
+      <div id="v-lai" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+        <div class="w-cab" style="margin-bottom:6px"><h3 style="font-size:13px">E depois que o mapa ficou pronto?</h3><span class="sub">Bacia do Itanguá</span></div>
+        <div class="kpi">
+          <div><b class="n" id="l-reg">89%</b><span>dos <span id="l-n">102</span> chamados caíram no risco alto ou médio</span></div>
+          <div><b class="n" id="l-carta">33%</b><span>caíram em alguma classe da carta oficial</span></div>
+        </div>
+        <p class="sub" style="margin:8px 0 0">O mapa ficou pronto em 07/11/2026. De 8 a 12/11, uma chuva gerou <span id="l-n2">102</span> chamados à Defesa Civil, a maioria na Vila Mineirão. O risco alto ou médio reúne <span id="l-ruas">30%</span> das ruas da cidade.
+          <button type="button" class="pa-info" id="l-info-bt" aria-expanded="false" aria-controls="l-info" aria-label="De onde vêm estes números">i</button></p>
+        <div class="pa-info-txt" id="l-info" hidden>
+          <p><b>Fonte:</b> registros oficiais da Defesa Civil da Bacia do Itanguá, de 2021 a 12/11/2026, recebidos pela Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13, 16/11/2026).</p>
+          <p><b>Por que "depois do mapa":</b> esses chamados aconteceram depois de o mapa estar pronto. O mapa não tinha como tê-los visto.</p>
+          <p id="l-novas"><b>Ruas novas:</b> nas ruas que não estavam nos relatórios de 2022–2023, 72% dos registros caem no risco alto, que tem 12% das ruas (5,8× o acaso).</p>
+          <p><b>Cuidado:</b> é uma bacia só, e quase tudo veio de uma chuva em três ruas da Vila Mineirão. É um caso real, não uma média da cidade.</p>
+        </div>
+      </div>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
     </section>
 
@@ -935,6 +952,21 @@ label.campo .l b{color:var(--ink);font-weight:600}
         alvo.appendChild(document.createTextNode('A carta de inundação do IPT e do SGB (2015) marca ' + pct(1 - a.fora) +
           ' da cidade e acerta muito onde marca, mas ' + pct(c.fracao_registros.fora) + ' dos registros ficam fora dela. O risco alto do CityShield reúne ' + pct(h.alto) + '.'));
       }).catch(function () { /* mantém a frase do HTML */ });
+      fetch('dados/lai_defesa_civil.json').then(function (r) { return r.json(); }).then(function (l) {
+        var pct = function (x) { return Math.round(x * 100) + '%'; };
+        var d = l.grupos.depois_do_mapa, h = d.hand.cidade, c = d.carta.cidade;
+        var n = Math.round(h.registros_considerados);
+        $('l-reg').textContent = pct(h.fracao_registros.alto + h.fracao_registros.medio);
+        $('l-carta').textContent = pct(1 - c.fracao_registros.fora);
+        $('l-ruas').textContent = pct(h.fracao_ruas.alto + h.fracao_ruas.medio);
+        $('l-n').textContent = n; $('l-n2').textContent = n;
+        var nv = l.grupos.novas.hand.cidade, alvo = $('l-novas');
+        alvo.textContent = '';
+        var b = document.createElement('b'); b.textContent = 'Ruas novas: '; alvo.appendChild(b);
+        alvo.appendChild(document.createTextNode('nas ruas que não estavam nos relatórios de 2022–2023, ' + pct(nv.fracao_registros.alto) +
+          ' dos registros caem no risco alto, que tem ' + pct(nv.fracao_ruas.alto) + ' das ruas (' +
+          nv.vezes_acima_do_acaso_alto.toFixed(1).replace('.', ',') + '× o acaso).'));
+      }).catch(function () { /* mantém os números do HTML */ });
 
       // Áreas candidatas a soluções verdes: acima do risco, abaixo dos pontos
       var COR_AREA = ['match', ['get', 'tipo'], 'area_verde', '#4CC38A', 'estacionamento', '#AEB6C2', 'telhado', '#E0B341', '#888'];
@@ -1864,6 +1896,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
   // ⓘ do quadro de validação
   $('v-info-bt').addEventListener('click', function () {
     var c = $('v-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
+  });
+  $('l-info-bt').addEventListener('click', function () {
+    var c = $('l-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
   });
 
   // Carrega as áreas sem depender do mapa: o cenário funciona mesmo se o mapa não abrir.
