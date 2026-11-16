@@ -212,3 +212,25 @@ def test_links_de_baixar_os_dados_existem(site):
     for caminho in links:
         with urllib.request.urlopen(f"{site}/{caminho}", timeout=5) as resposta:
             assert resposta.status == 200, caminho
+
+
+def test_pagina_inicial_mostra_os_numeros_da_validacao(site, navegador):
+    """A seção "O mapa acerta?" do index.html lê os mesmos arquivos do mapa."""
+    contexto = navegador.new_context(viewport=TELAS["computador"])
+    contexto.route(lambda url: de_fora(url), lambda rota: rota.abort())
+    pagina = contexto.new_page()
+    erros = []
+    pagina.on("pageerror", lambda e: erros.append(f"exceção: {e}"))
+    try:
+        pagina.goto(site + "/index.html")
+        cidade = _json("validacao.json")["cidade"]
+        expect(pagina.locator("#i-v-reg")).to_have_text(_pct(cidade["fracao_registros"]["alto"]))
+        lai = _json("lai_defesa_civil.json")
+        h = lai["grupos"]["depois_do_mapa"]["hand"]["cidade"]
+        expect(pagina.locator("#i-l-reg")).to_have_text(_pct(h["fracao_registros"]["alto"] + h["fracao_registros"]["medio"]))
+        local = lai["comparacao_local"]["regiao"]["depois_do_mapa"]["hand"]["cidade"]
+        vezes = f"{local['vezes_acima_do_acaso_alto_medio']:.1f}".replace(".", ",") + "×"
+        expect(pagina.locator("#i-l-local")).to_have_text(vezes)
+        assert not erros, "\n".join(erros)
+    finally:
+        contexto.close()
