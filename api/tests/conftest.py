@@ -22,3 +22,13 @@ from app.main import app  # noqa: E402
 def cliente():
     """Um "navegador de mentira" que chama a API sem precisar subir o servidor."""
     return TestClient(app)
+
+
+@pytest.fixture(autouse=True)
+def cache_vazio():
+    """Cada teste começa com o cache vazio (app/cache.py), para um não vazar no outro."""
+    from app import cache
+
+    cache.limpar()
+    yield
+    cache.limpar()

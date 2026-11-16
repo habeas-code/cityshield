@@ -17,6 +17,10 @@ pergunta que o índice GIST responde rápido. Sem bbox, o retângulo é o mundo
 inteiro: a mesma consulta devolve a camada toda.
 
 SQL fixo; os quatro números do retângulo vão como parâmetros.
+
+A camada inteira (sem bbox, ou com um bbox que contém o município todo) fica
+guardada em memória por 30 minutos (app/cache.py, #109), para não tirar
+~1,8 MB do banco a cada chamada.
 """
 
 import logging
@@ -24,7 +28,9 @@ import logging
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
+from app import cache
 from app.banco import engine
+from app.bbox import cobre_tudo
 
 log = logging.getLogger(__name__)
 
@@ -106,5 +112,13 @@ def parametros_bbox(bbox: tuple[float, float, float, float] | None) -> dict:
 
 
 def camada_geojson(nome: str, bbox: tuple[float, float, float, float] | None = None) -> str:
-    """Devolve a camada como texto GeoJSON, inteira ou só dentro do bbox."""
+    """Devolve a camada como texto GeoJSON, inteira ou só dentro do bbox.
+
+    Inteira (sem bbox ou com bbox que contém o município), vem do cache
+    (app/cache.py); com um bbox menor, vai ao banco.
+    """
+    if cobre_tudo(bbox):
+        return cache.lembrar(
+            f"camada:{nome}", lambda: consultar(CONSULTAS[nome], parametros_bbox(None), nome)
+        )
     return consultar(CONSULTAS[nome], parametros_bbox(bbox), nome)
