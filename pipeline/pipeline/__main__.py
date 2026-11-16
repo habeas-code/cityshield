@@ -7,6 +7,7 @@
     python -m pipeline validacao  testa o HAND contra os registros da Defesa Civil
     python -m pipeline carta      o mesmo teste com a carta oficial de inundação (IPT/SGB, 2015)
     python -m pipeline noticias   segundo teste: ruas noticiadas como alagadas em 2024–2026
+    python -m pipeline lai        terceiro teste: registros oficiais da Defesa Civil 2021–2026 (LAI)
     python -m pipeline areas      áreas candidatas a soluções verdes no piloto
     python -m pipeline recomendacoes  solução e nota de prioridade de cada área
     python -m pipeline sensibilidade  a fila muda se a nota usar outra conta (WLC)?
@@ -14,7 +15,7 @@
 
 import argparse
 
-from pipeline import areas, carta, hand, noticias, recomendacoes, relevo, sensibilidade, validacao
+from pipeline import areas, carta, hand, lai, noticias, recomendacoes, relevo, sensibilidade, validacao
 
 PASSOS = {
     "relevo": relevo.recortar,
@@ -22,6 +23,7 @@ PASSOS = {
     "validacao": validacao.validar,
     "carta": carta.comparar,
     "noticias": noticias.testar,
+    "lai": lai.testar,
     "areas": areas.extrair,
     "recomendacoes": recomendacoes.recomendar,
     "sensibilidade": sensibilidade.analisar,

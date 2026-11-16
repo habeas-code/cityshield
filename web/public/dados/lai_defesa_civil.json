@@ -1,0 +1,793 @@
+{
+ "metodo": "docs/validacao.md#terceiro-teste-registros-oficiais-de-2021-a-2026",
+ "fonte_registros": "Defesa Civil de Sorocaba, Bacia do Itanguá, 2021–2026. Pedido Fala.BR nº 03959.2026.000348-13 (Prefeitura de Sorocaba, SEMOB/Defesa Civil, 16/11/2026)",
+ "fonte_ruas": "OpenStreetMap (ODbL)",
+ "mapa_pronto_em": "2026-11-08",
+ "registros_na_planilha": 365,
+ "registros_sem_via_localizada": 25,
+ "grupos": {
+  "todas": {
+   "hand": {
+    "ruas_total": 59,
+    "ruas_localizadas": 56,
+    "registros_total": 340,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 334.0,
+     "registros_por_faixa": {
+      "alto": 214.8,
+      "medio": 90.7,
+      "baixo": 28.5
+     },
+     "fracao_registros": {
+      "alto": 0.643,
+      "medio": 0.272,
+      "baixo": 0.085
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 5.22,
+     "vezes_acima_do_acaso_alto_medio": 3.03
+    },
+    "piloto": {
+     "registros_considerados": 2.0,
+     "registros_por_faixa": {
+      "alto": 1.9,
+      "medio": 0.1,
+      "baixo": 0.0
+     },
+     "fracao_registros": {
+      "alto": 0.95,
+      "medio": 0.045,
+      "baixo": 0.005
+     },
+     "fracao_ruas": {
+      "alto": 0.606,
+      "medio": 0.278,
+      "baixo": 0.116
+     },
+     "vezes_acima_do_acaso_alto": 1.57,
+     "vezes_acima_do_acaso_alto_medio": 1.13
+    },
+    "comparacao_ponto_central": {
+     "alto": 0.455,
+     "medio": 0.416,
+     "baixo": 0.129
+    },
+    "ruas": [
+     {
+      "rua": "Rua Antônio Furtado Lopes",
+      "nome_osm": "rua antonio furtado lopes",
+      "registros": 73,
+      "comprimento_m": 1035,
+      "fracao_alto": 0.469,
+      "fracao_medio": 0.531,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Abner Pedroso de Alcântara",
+      "nome_osm": "rua abner pedroso de alcantara",
+      "registros": 34,
+      "comprimento_m": 1132,
+      "fracao_alto": 0.507,
+      "fracao_medio": 0.493,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Oscar Harder",
+      "nome_osm": "rua oscar harder",
+      "registros": 27,
+      "comprimento_m": 296,
+      "fracao_alto": 0.97,
+      "fracao_medio": 0.03,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Pedro Lombardi",
+      "nome_osm": "rua pedro lombardi",
+      "registros": 22,
+      "comprimento_m": 1249,
+      "fracao_alto": 0.257,
+      "fracao_medio": 0.361,
+      "fracao_baixo": 0.382
+     },
+     {
+      "rua": "Rua José Vieira Barrada",
+      "nome_osm": "rua jose vieira barrada",
+      "registros": 20,
+      "comprimento_m": 1511,
+      "fracao_alto": 0.597,
+      "fracao_medio": 0.403,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Barão de Tibagy",
+      "nome_osm": "rua barao de tibagy",
+      "registros": 18,
+      "comprimento_m": 394,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Jorge Bacelli",
+      "nome_osm": "rua jorge bacelli",
+      "registros": 16,
+      "comprimento_m": 237,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Doutor Campos Salles",
+      "nome_osm": "rua doutor campos salles",
+      "registros": 13,
+      "comprimento_m": 1290,
+      "fracao_alto": 0.947,
+      "fracao_medio": 0.053,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Dois",
+      "nome_osm": "rua dois",
+      "registros": 10,
+      "comprimento_m": 1170,
+      "fracao_alto": 0.539,
+      "fracao_medio": 0.064,
+      "fracao_baixo": 0.397
+     },
+     {
+      "rua": "Rua Guilherme Tersi",
+      "nome_osm": "rua guilherme tersi",
+      "registros": 8,
+      "comprimento_m": 193,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua José Parra Sanches",
+      "nome_osm": "rua jose parra sanches",
+      "registros": 7,
+      "comprimento_m": 295,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Manoel Alves de Camargo",
+      "nome_osm": "rua manoel alves de camargo",
+      "registros": 6,
+      "comprimento_m": 130,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Faustino Rodrigues Martins",
+      "nome_osm": "rua faustino rodrigues martins",
+      "registros": 5,
+      "comprimento_m": 575,
+      "fracao_alto": 0.54,
+      "fracao_medio": 0.46,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Pedro Peres",
+      "nome_osm": "rua pedro peres",
+      "registros": 5,
+      "comprimento_m": 207,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Eugênio Caserta",
+      "nome_osm": "rua eugenio caserta",
+      "registros": 4,
+      "comprimento_m": 507,
+      "fracao_alto": 0.074,
+      "fracao_medio": 0.167,
+      "fracao_baixo": 0.759
+     },
+     {
+      "rua": "Rua Alpheu Castro Santos",
+      "nome_osm": "rua alpheu castro santos",
+      "registros": 3,
+      "comprimento_m": 998,
+      "fracao_alto": 0.42,
+      "fracao_medio": 0.092,
+      "fracao_baixo": 0.489
+     },
+     {
+      "rua": "Rua Americo Pimenta Vaz Guimarares",
+      "nome_osm": "rua americo pimenta vaz guimarares",
+      "registros": 3,
+      "comprimento_m": 688,
+      "fracao_alto": 0.169,
+      "fracao_medio": 0.296,
+      "fracao_baixo": 0.535
+     },
+     {
+      "rua": "Rua Capitão Alfredo Cardoso",
+      "nome_osm": "rua capitao alfredo cardoso",
+      "registros": 3,
+      "comprimento_m": 322,
+      "fracao_alto": 0.795,
+      "fracao_medio": 0.205,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Ermolau Del Cístia",
+      "nome_osm": "rua ermolau del cistia",
+      "registros": 3,
+      "comprimento_m": 1813,
+      "fracao_alto": 0.178,
+      "fracao_medio": 0.315,
+      "fracao_baixo": 0.508
+     },
+     {
+      "rua": "Rua Eugênia de Oliveira Cirne",
+      "nome_osm": "rua eugenia de oliveira cirne",
+      "registros": 3,
+      "comprimento_m": 1567,
+      "fracao_alto": 0.204,
+      "fracao_medio": 0.796,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Lourenço Marins",
+      "nome_osm": "rua lourenco marins",
+      "registros": 3,
+      "comprimento_m": 206,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Professor José Odin de Arruda",
+      "nome_osm": "rua professor jose odin de arruda",
+      "registros": 3,
+      "comprimento_m": 160,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Antônio de Andrade",
+      "nome_osm": "rua antonio de andrade",
+      "registros": 2,
+      "comprimento_m": 295,
+      "fracao_alto": 0.686,
+      "fracao_medio": 0.314,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Antônio de Andrade",
+      "nome_osm": "rua antonio de andrade",
+      "registros": 2,
+      "comprimento_m": 295,
+      "fracao_alto": 0.686,
+      "fracao_medio": 0.314,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Bernardo Ferraz de Almeida",
+      "nome_osm": "rua bernardo ferraz de almeida",
+      "registros": 2,
+      "comprimento_m": 523,
+      "fracao_alto": 0.955,
+      "fracao_medio": 0.045,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Cuba",
+      "nome_osm": "rua cuba",
+      "registros": 2,
+      "comprimento_m": 451,
+      "fracao_alto": 0.615,
+      "fracao_medio": 0.385,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Eugênia de Oliveira Cirne",
+      "nome_osm": "rua eugenia de oliveira cirne",
+      "registros": 2,
+      "comprimento_m": 1567,
+      "fracao_alto": 0.204,
+      "fracao_medio": 0.796,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Eugênia de Oliveira Cirne",
+      "nome_osm": "rua eugenia de oliveira cirne",
+      "registros": 2,
+      "comprimento_m": 1567,
+      "fracao_alto": 0.204,
+      "fracao_medio": 0.796,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua José Angelo Alvarenga",
+      "nome_osm": "rua jose angelo alvarenga",
+      "registros": 2,
+      "comprimento_m": 186,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua João Francisco Neves",
+      "nome_osm": "rua joao francisco neves",
+      "registros": 2,
+      "comprimento_m": 130,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Karim Jamal",
+      "nome_osm": "rua karim jamal",
+      "registros": 2,
+      "comprimento_m": 488,
+      "fracao_alto": 0.232,
+      "fracao_medio": 0.321,
+      "fracao_baixo": 0.446
+     },
+     {
+      "rua": "Rua Oscar Harder",
+      "nome_osm": "rua oscar harder",
+      "registros": 2,
+      "comprimento_m": 296,
+      "fracao_alto": 0.97,
+      "fracao_medio": 0.03,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Professor José Odin de Arruda",
+      "nome_osm": "rua professor jose odin de arruda",
+      "registros": 2,
+      "comprimento_m": 160,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Avenida 15 de Agosto",
+      "nome_osm": "avenida 15 de agosto",
+      "registros": 1,
+      "comprimento_m": 3544,
+      "fracao_alto": 0.9,
+      "fracao_medio": 0.09,
+      "fracao_baixo": 0.009
+     },
+     {
+      "rua": "Avenida Dom Aguirre",
+      "nome_osm": "avenida dom aguirre",
+      "registros": 1,
+      "comprimento_m": 9496,
+      "fracao_alto": 0.997,
+      "fracao_medio": 0.003,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Cravos",
+      "nome_osm": "alameda dos cravos",
+      "registros": 1,
+      "comprimento_m": 774,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.082,
+      "fracao_baixo": 0.918
+     },
+     {
+      "rua": "Rua Abner Pedroso de Alcântara",
+      "nome_osm": "rua abner pedroso de alcantara",
+      "registros": 1,
+      "comprimento_m": 1132,
+      "fracao_alto": 0.507,
+      "fracao_medio": 0.493,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Adolpho Goldman",
+      "nome_osm": "rua adolpho goldman",
+      "registros": 1,
+      "comprimento_m": 513,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Barão de Piratininga",
+      "nome_osm": "rua barao de piratininga",
+      "registros": 1,
+      "comprimento_m": 701,
+      "fracao_alto": 0.303,
+      "fracao_medio": 0.225,
+      "fracao_baixo": 0.472
+     },
+     {
+      "rua": "Rua Capitão Alfredo Cardoso",
+      "nome_osm": "rua capitao alfredo cardoso",
+      "registros": 1,
+      "comprimento_m": 322,
+      "fracao_alto": 0.795,
+      "fracao_medio": 0.205,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Domingues Rafael Pinnotti",
+      "nome_osm": "rua domingues rafael pinnotti",
+      "registros": 1,
+      "comprimento_m": 349,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Eugênio Caserta",
+      "nome_osm": "rua eugenio caserta",
+      "registros": 1,
+      "comprimento_m": 507,
+      "fracao_alto": 0.074,
+      "fracao_medio": 0.167,
+      "fracao_baixo": 0.759
+     },
+     {
+      "rua": "Rua Eulófia Môra Vieira",
+      "nome_osm": "rua eulofia mora vieira",
+      "registros": 1,
+      "comprimento_m": 245,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Flavio Leite",
+      "nome_osm": "rua flavio leite",
+      "registros": 1,
+      "comprimento_m": 48,
+      "fracao_alto": 0.0,
+      "fracao_medio": 1.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Guido José Del Cístia",
+      "nome_osm": "rua guido jose del cistia",
+      "registros": 1,
+      "comprimento_m": 129,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Humberto de Campos",
+      "nome_osm": "rua humberto de campos",
+      "registros": 1,
+      "comprimento_m": 1920,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Jairo Meniconi",
+      "nome_osm": "rua jairo meniconi",
+      "registros": 1,
+      "comprimento_m": 488,
+      "fracao_alto": 0.767,
+      "fracao_medio": 0.233,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Júlio Magalhães Júnior",
+      "nome_osm": "rua julio magalhaes junior",
+      "registros": 1,
+      "comprimento_m": 884,
+      "fracao_alto": 0.167,
+      "fracao_medio": 0.271,
+      "fracao_baixo": 0.562
+     },
+     {
+      "rua": "Rua Laura Maiello Kook",
+      "nome_osm": "rua laura maiello kook",
+      "registros": 1,
+      "comprimento_m": 3599,
+      "fracao_alto": 0.086,
+      "fracao_medio": 0.067,
+      "fracao_baixo": 0.847
+     },
+     {
+      "rua": "Rua Lourenço Marins",
+      "nome_osm": "rua lourenco marins",
+      "registros": 1,
+      "comprimento_m": 206,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Marquês de Itu",
+      "nome_osm": "rua marques de itu",
+      "registros": 1,
+      "comprimento_m": 432,
+      "fracao_alto": 0.857,
+      "fracao_medio": 0.143,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Quatro",
+      "nome_osm": "rua quatro",
+      "registros": 1,
+      "comprimento_m": 55,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Roberval Peres Ataíde",
+      "nome_osm": "rua roberval peres ataide",
+      "registros": 1,
+      "comprimento_m": 64,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Santo Micheletti",
+      "nome_osm": "rua santo micheletti",
+      "registros": 1,
+      "comprimento_m": 443,
+      "fracao_alto": 0.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 1.0
+     },
+     {
+      "rua": "Rua Silva Jardim",
+      "nome_osm": "rua silva jardim",
+      "registros": 1,
+      "comprimento_m": 141,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     },
+     {
+      "rua": "Rua Um",
+      "nome_osm": "rua um",
+      "registros": 1,
+      "comprimento_m": 363,
+      "fracao_alto": 1.0,
+      "fracao_medio": 0.0,
+      "fracao_baixo": 0.0
+     }
+    ]
+   },
+   "carta": {
+    "ruas_total": 59,
+    "ruas_localizadas": 56,
+    "registros_total": 340,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 334.0,
+     "registros_por_faixa": {
+      "alta": 33.6,
+      "media": 53.4,
+      "baixa": 7.0,
+      "fora": 240.0
+     },
+     "fracao_registros": {
+      "alta": 0.101,
+      "media": 0.16,
+      "baixa": 0.021,
+      "fora": 0.718
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 6.34,
+     "vezes_acima_do_acaso_alta_media": 8.6
+    }
+   }
+  },
+  "depois_do_mapa": {
+   "hand": {
+    "ruas_total": 11,
+    "ruas_localizadas": 11,
+    "registros_total": 102,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 102.0,
+     "registros_por_faixa": {
+      "alto": 48.0,
+      "medio": 43.1,
+      "baixo": 10.8
+     },
+     "fracao_registros": {
+      "alto": 0.471,
+      "medio": 0.423,
+      "baixo": 0.106
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 3.82,
+     "vezes_acima_do_acaso_alto_medio": 2.96
+    }
+   },
+   "carta": {
+    "ruas_total": 11,
+    "ruas_localizadas": 11,
+    "registros_total": 102,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 102.0,
+     "registros_por_faixa": {
+      "alta": 14.6,
+      "media": 16.2,
+      "baixa": 2.5,
+      "fora": 68.8
+     },
+     "fracao_registros": {
+      "alta": 0.143,
+      "media": 0.158,
+      "baixa": 0.024,
+      "fora": 0.674
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 9.02,
+     "vezes_acima_do_acaso_alta_media": 9.95
+    }
+   }
+  },
+  "2024_a_2026": {
+   "hand": {
+    "ruas_total": 58,
+    "ruas_localizadas": 55,
+    "registros_total": 322,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 317.0,
+     "registros_por_faixa": {
+      "alto": 203.0,
+      "medio": 86.7,
+      "baixo": 27.3
+     },
+     "fracao_registros": {
+      "alto": 0.64,
+      "medio": 0.274,
+      "baixo": 0.086
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 5.2,
+     "vezes_acima_do_acaso_alto_medio": 3.03
+    }
+   },
+   "carta": {
+    "ruas_total": 58,
+    "ruas_localizadas": 55,
+    "registros_total": 322,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 317.0,
+     "registros_por_faixa": {
+      "alta": 33.6,
+      "media": 47.4,
+      "baixa": 6.0,
+      "fora": 229.9
+     },
+     "fracao_registros": {
+      "alta": 0.106,
+      "media": 0.15,
+      "baixa": 0.019,
+      "fora": 0.725
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 6.68,
+     "vezes_acima_do_acaso_alta_media": 8.43
+    }
+   }
+  },
+  "novas": {
+   "hand": {
+    "ruas_total": 38,
+    "ruas_localizadas": 35,
+    "registros_total": 112,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 106.0,
+     "registros_por_faixa": {
+      "alto": 75.8,
+      "medio": 10.7,
+      "baixo": 19.5
+     },
+     "fracao_registros": {
+      "alto": 0.715,
+      "medio": 0.101,
+      "baixo": 0.184
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 5.8,
+     "vezes_acima_do_acaso_alto_medio": 2.7
+    }
+   },
+   "carta": {
+    "ruas_total": 38,
+    "ruas_localizadas": 35,
+    "registros_total": 112,
+    "nao_localizadas": [
+     "Rua 2",
+     "Rua 2",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 106.0,
+     "registros_por_faixa": {
+      "alta": 5.3,
+      "media": 13.0,
+      "baixa": 0.3,
+      "fora": 87.5
+     },
+     "fracao_registros": {
+      "alta": 0.05,
+      "media": 0.122,
+      "baixa": 0.002,
+      "fora": 0.825
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 3.15,
+     "vezes_acima_do_acaso_alta_media": 5.68
+    }
+   }
+  }
+ }
+}
