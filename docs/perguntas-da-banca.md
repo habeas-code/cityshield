@@ -1,6 +1,6 @@
 # Perguntas da banca: o método em uma página
 
-As perguntas que mais aparecem sobre a matemática do CityShield, com a resposta curta, de onde ela vem e o limite. Os detalhes estão em [validacao.md](validacao.md) e [recomendacoes.md](recomendacoes.md).
+As perguntas que mais aparecem sobre a matemática do CityShield (1 a 6) e sobre o uso no mundo real (7 a 11), com a resposta curta, de onde ela vem e o limite. Os detalhes estão em [validacao.md](validacao.md) e [recomendacoes.md](recomendacoes.md).
 
 ## 1. Por que jardim de chuva aqui e piso permeável ali?
 
@@ -68,3 +68,48 @@ Nos relatórios de 2022–2023, o núcleo Norte (Parque das Águas, Jd. Maria do
 ## 6. Vocês publicam dados de moradores?
 
 **Não.** Os relatórios e a planilha da Defesa Civil têm o número da casa de cada chamado. Eles ficam fora do repositório, e o CI bloqueia a pasta privada. O site, a API e os arquivos para baixar só têm **rua, bairro, data e contagem**. Um teste automático falha se o CSV público ganhar outra coluna. [Decisão D4](decisoes.md#d4-registros-tratados-por-rua-nunca-por-endereço)
+
+## 7. Por que não usaram só os dados históricos?
+
+**Porque o histórico só mostra onde alguém chamou a Defesa Civil.** Rua sem registro não quer dizer rua que não alaga: pode ser lugar onde ninguém ligou, ou onde ainda não choveu forte o bastante. O relevo cobre **a cidade inteira**, com ou sem registro.
+
+Os dois se completam, e um testa o outro: o mapa do relevo foi feito **sem olhar os registros** e depois conferido contra eles três vezes ([validação](validacao.md)). Os registros entram na nota de prioridade, para começar por onde já alagou.
+
+## 8. Como vocês evitam falsos positivos?
+
+**Não evitamos todos, e dizemos isso.** O risco alto reúne 12% das ruas da cidade, e muitas delas não têm nenhum registro. Parte disso é falta de registro (pergunta 7); parte é lugar baixo que tem drenagem boa. O relevo não enxerga galerias e bueiros.
+
+O que fizemos para que isso não vire decisão errada:
+
+- **A nota exige ocorrência por perto.** Como ela é uma multiplicação, uma área no risco alto sem nenhum registro a até 300 m fica com nota 0 e vai para o fim da fila.
+- **A recomendação é "estudar aqui", não "obra aqui".** A ficha de cada área começa os próximos passos com visita e sondagem.
+- **Os erros ficam publicados.** O [segundo teste](validacao.md#segundo-teste-notícias-de-2024-a-2026) lista vias que alagaram fora do risco alto (alagamento de bueiro em terreno alto), que o HAND não pega.
+
+## 9. E se os dados ficarem desatualizados?
+
+**Tudo é refeito com um comando.** O pipeline baixa de novo o OpenStreetMap e refaz risco, validação, áreas, notas e volumes (`docker compose run --rm pipeline`); rodando do zero, ele gera os mesmos arquivos que estão no repositório.
+
+Os **registros novos** vêm da Defesa Civil. Já mostramos o caminho: pedimos pela Lei de Acesso à Informação e recebemos 365 registros até 12/11/2026, que viraram o terceiro teste. O ideal, que a própria revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025) recomenda, é a Defesa Civil georreferenciar as ocorrências e integrar com a drenagem.
+
+O **relevo** quase não muda. Uma obra grande (canalização, aterro) muda o terreno no lugar dela, e o modelo de 30 m não a enxerga até sair uma versão nova do ANADEM.
+
+## 10. Serve para outras cidades?
+
+**O método serve; os dados locais precisam ser buscados.**
+
+| O que o pipeline usa | Para outra cidade |
+|---|---|
+| Relevo ANADEM (30 m) | já cobre o Brasil inteiro |
+| OpenStreetMap (ruas, parques, estacionamentos, prédios) | já cobre; a qualidade varia de cidade para cidade |
+| Limite do município | trocar o arquivo `limite_sorocaba.geojson` |
+| Área piloto | trocar o ponto e o raio (`PILOTO` em `validacao.py`) |
+| Registros de alagamento | **pedir à Defesa Civil local**: sem eles não há validação nem o fator de ocorrências da nota |
+| Equação de chuva | trocar pela da cidade (costuma estar no plano de drenagem do município) |
+
+A parte cara de um projeto assim é juntar e limpar os registros. É também o que torna o resultado confiável.
+
+## 11. Qual o custo de implantação e manutenção?
+
+**Do sistema: hoje, zero.** O site fica no GitHub Pages, a API no Render e o banco no Neon, todos em planos gratuitos. A plataforma lê arquivos estáticos e funciona mesmo se a API sair do ar ([D10](decisoes.md#d10-plano-b-geojson-estático)). Para uma prefeitura, o custo é o de alguém rodar o pipeline quando chegarem registros novos.
+
+**Das obras: não estimamos, de propósito.** O custo de um jardim de chuva ou de um piso permeável depende do projeto de engenharia de cada área (solo, drenagem existente, desapropriação, manutenção). Pôr um preço sem esse projeto seria inventar um número. O CityShield entrega **onde estudar primeiro e quanta água cada opção pode segurar**, que é o que a prefeitura precisa para decidir onde gastar o estudo.
