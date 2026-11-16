@@ -35,3 +35,11 @@ def test_ruas_soma_por_via_e_respeita_o_filtro():
     depois = lai.ruas(linhas, lai.FILTROS["depois_do_mapa"])
     assert depois[0]["properties"]["registros"] == 3
     assert lai.ruas(linhas, lai.FILTROS["novas"]) == []
+
+
+def test_regiao_cobre_todas_as_vias_com_ponto():
+    from shapely.geometry import Point
+
+    linhas = _csv()
+    area = lai.regiao(linhas)
+    assert all(area.contains(Point(float(x["lon"]), float(x["lat"]))) for x in linhas if x["lon"])

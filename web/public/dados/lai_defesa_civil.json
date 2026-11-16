@@ -789,5 +789,198 @@
     }
    }
   }
+ },
+ "comparacao_local": {
+  "raio_regiao_m": 1000,
+  "regiao": {
+   "todas": {
+    "hand": {
+     "ruas_total": 59,
+     "ruas_localizadas": 56,
+     "registros_total": 340,
+     "nao_localizadas": [
+      "Rua 2",
+      "Rua 2",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 334.0,
+      "registros_por_faixa": {
+       "alto": 214.8,
+       "medio": 90.7,
+       "baixo": 28.5
+      },
+      "fracao_registros": {
+       "alto": 0.643,
+       "medio": 0.272,
+       "baixo": 0.085
+      },
+      "fracao_ruas": {
+       "alto": 0.157,
+       "medio": 0.191,
+       "baixo": 0.652
+      },
+      "vezes_acima_do_acaso_alto": 4.1,
+      "vezes_acima_do_acaso_alto_medio": 2.63
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 59,
+     "ruas_localizadas": 56,
+     "registros_total": 340,
+     "nao_localizadas": [
+      "Rua 2",
+      "Rua 2",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 334.0,
+      "registros_por_faixa": {
+       "alta": 33.6,
+       "media": 53.4,
+       "baixa": 7.0,
+       "fora": 240.0
+      },
+      "fracao_registros": {
+       "alta": 0.101,
+       "media": 0.16,
+       "baixa": 0.021,
+       "fora": 0.718
+      },
+      "fracao_ruas": {
+       "alta": 0.035,
+       "media": 0.027,
+       "baixa": 0.01,
+       "fora": 0.928
+      },
+      "vezes_acima_do_acaso_alta": 2.86,
+      "vezes_acima_do_acaso_alta_media": 4.21
+     },
+     "registros_fora_do_limite": 0
+    }
+   },
+   "depois_do_mapa": {
+    "hand": {
+     "ruas_total": 11,
+     "ruas_localizadas": 11,
+     "registros_total": 102,
+     "nao_localizadas": [],
+     "cidade": {
+      "registros_considerados": 102.0,
+      "registros_por_faixa": {
+       "alto": 48.0,
+       "medio": 43.1,
+       "baixo": 10.8
+      },
+      "fracao_registros": {
+       "alto": 0.471,
+       "medio": 0.423,
+       "baixo": 0.106
+      },
+      "fracao_ruas": {
+       "alto": 0.157,
+       "medio": 0.191,
+       "baixo": 0.652
+      },
+      "vezes_acima_do_acaso_alto": 3.0,
+      "vezes_acima_do_acaso_alto_medio": 2.57
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 11,
+     "ruas_localizadas": 11,
+     "registros_total": 102,
+     "nao_localizadas": [],
+     "cidade": {
+      "registros_considerados": 102.0,
+      "registros_por_faixa": {
+       "alta": 14.6,
+       "media": 16.2,
+       "baixa": 2.5,
+       "fora": 68.8
+      },
+      "fracao_registros": {
+       "alta": 0.143,
+       "media": 0.158,
+       "baixa": 0.024,
+       "fora": 0.674
+      },
+      "fracao_ruas": {
+       "alta": 0.035,
+       "media": 0.027,
+       "baixa": 0.01,
+       "fora": 0.928
+      },
+      "vezes_acima_do_acaso_alta": 4.06,
+      "vezes_acima_do_acaso_alta_media": 4.87
+     },
+     "registros_fora_do_limite": 0
+    }
+   }
+  },
+  "bacia_relevo": {
+   "todas": {
+    "hand": {
+     "ruas_total": 59,
+     "ruas_localizadas": 16,
+     "registros_total": 340,
+     "nao_localizadas": [
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 87.0,
+      "registros_por_faixa": {
+       "alto": 58.0,
+       "medio": 17.0,
+       "baixo": 12.0
+      },
+      "fracao_registros": {
+       "alto": 0.666,
+       "medio": 0.195,
+       "baixo": 0.138
+      },
+      "fracao_ruas": {
+       "alto": 0.066,
+       "medio": 0.147,
+       "baixo": 0.787
+      },
+      "vezes_acima_do_acaso_alto": 10.12,
+      "vezes_acima_do_acaso_alto_medio": 4.04
+     },
+     "registros_fora_do_limite": 251
+    }
+   },
+   "depois_do_mapa": {
+    "hand": {
+     "ruas_total": 11,
+     "ruas_localizadas": 1,
+     "registros_total": 102,
+     "nao_localizadas": [],
+     "cidade": {
+      "registros_considerados": 1.0,
+      "registros_por_faixa": {
+       "alto": 0.0,
+       "medio": 0.1,
+       "baixo": 0.9
+      },
+      "fracao_registros": {
+       "alto": 0.0,
+       "medio": 0.082,
+       "baixo": 0.918
+      },
+      "fracao_ruas": {
+       "alto": 0.066,
+       "medio": 0.147,
+       "baixo": 0.787
+      },
+      "vezes_acima_do_acaso_alto": 0.0,
+      "vezes_acima_do_acaso_alto_medio": 0.39
+     },
+     "registros_fora_do_limite": 101
+    }
+   }
+  }
  }
 }

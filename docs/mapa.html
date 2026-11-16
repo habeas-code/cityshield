@@ -706,6 +706,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="dados/comparacao_carta.json" download>Comparação com a carta oficial</a><span>o mesmo teste com a carta de inundação do IPT/SGB, 2015 (JSON, só números) · ≈ 2 KB</span></li>
           <li><a href="dados/lai_defesa_civil.csv" download>Registros oficiais 2021–2026 (Bacia do Itanguá)</a><span>Defesa Civil via Lei de Acesso à Informação; data, rua, bairro, tipo e nº de registros, sem endereço · ≈ 15 KB</span></li>
           <li><a href="dados/lai_defesa_civil.json" download>Teste com os registros de 2021–2026</a><span>mesma conta da validação, incluindo os chamados de depois do mapa pronto (JSON) · ≈ 19 KB</span></li>
+          <li><a href="dados/bacia_itangua.geojson" download>Bacia do Córrego Itanguá</a><span>desenhada pelo relevo, usada na comparação local do teste com os registros oficiais · ≈ 37 KB</span></li>
           <li><a href="dados/limite_sorocaba.geojson" download>Limite do município</a><span>≈ 12 KB</span></li>
         </ul>
         <p class="sub" style="margin-top:10px">O que cada campo quer dizer: <a href="https://github.com/habeas-code/cityshield/blob/main/docs/recomendacoes.md#o-que-o-arquivo-traz" target="_blank" rel="noopener">dicionário das áreas</a>. As áreas, ruas e córregos usam o OpenStreetMap (© colaboradores do OpenStreetMap, licença ODbL); o relevo é o ANADEM (Laipelt et al., 2024). Ao usar, cite "CityShield, Habeas Code".</p>
@@ -839,7 +840,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <p><b>Fonte:</b> registros oficiais da Defesa Civil da Bacia do Itanguá, de 2021 a 12/11/2026, recebidos pela Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13, 16/11/2026).</p>
           <p><b>Por que "depois do mapa":</b> esses chamados aconteceram depois de o mapa estar pronto. O mapa não tinha como tê-los visto.</p>
           <p id="l-novas"><b>Ruas novas:</b> nas ruas que não estavam nos relatórios de 2022–2023, 72% dos registros caem no risco alto, que tem 12% das ruas (5,8× o acaso).</p>
-          <p><b>Cuidado:</b> é uma bacia só, e quase tudo veio de uma chuva em três ruas da Vila Mineirão. É um caso real, não uma média da cidade.</p>
+          <p id="l-local"><b>Comparando só com as ruas vizinhas:</b> a região dos registros tem mais ruas baixas que a cidade (35% no risco alto ou médio, contra 30%). Mesmo assim, 89% dos chamados caem nessas faixas: 2,6× o acaso.</p>
+          <p><b>Cuidado:</b> é uma região só, e quase tudo veio de uma chuva em três ruas da Vila Mineirão. É um caso real, não uma média da cidade.</p>
         </div>
       </div>
       <p class="fonte-l" style="margin-top:8px"><a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a></p>
@@ -968,6 +970,15 @@ label.campo .l b{color:var(--ink);font-weight:600}
         alvo.appendChild(document.createTextNode('nas ruas que não estavam nos relatórios de 2022–2023, ' + pct(nv.fracao_registros.alto) +
           ' dos registros caem no risco alto, que tem ' + pct(nv.fracao_ruas.alto) + ' das ruas (' +
           nv.vezes_acima_do_acaso_alto.toFixed(1).replace('.', ',') + '× o acaso).'));
+        if (l.comparacao_local) {
+          var rl = l.comparacao_local.regiao.depois_do_mapa.hand.cidade, lo = $('l-local');
+          var am = function (x) { return x.alto + x.medio; };
+          lo.textContent = '';
+          var bl = document.createElement('b'); bl.textContent = 'Comparando só com as ruas vizinhas: '; lo.appendChild(bl);
+          lo.appendChild(document.createTextNode('a região dos registros tem mais ruas baixas que a cidade (' + pct(am(rl.fracao_ruas)) +
+            ' no risco alto ou médio, contra ' + pct(am(h.fracao_ruas)) + '). Mesmo assim, ' + pct(am(rl.fracao_registros)) +
+            ' dos chamados caem nessas faixas: ' + rl.vezes_acima_do_acaso_alto_medio.toFixed(1).replace('.', ',') + '× o acaso.'));
+        }
       }).catch(function () { /* mantém os números do HTML */ });
 
       // Áreas candidatas a soluções verdes: acima do risco, abaixo dos pontos

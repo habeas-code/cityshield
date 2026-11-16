@@ -160,13 +160,16 @@ def _somar(acumulado, contagem):
         acumulado[k] += v
 
 
-def medir(amostrador, refazer=False, ruas=None):
+def medir(amostrador, refazer=False, ruas=None, limite=None):
     """Registros e ruas da cidade (e do piloto) por classe do mapa que o amostrador lê.
 
     ruas: Features (ponto + "rua" + "registros"). Sem ela, lê os registros da Defesa
     Civil (RUAS). O passo noticias usa a mesma conta com as ruas das notícias.
+    limite: geometria em graus (ex.: uma bacia). Com ele, a comparação ("cidade" no
+    resultado) usa só as ruas dentro do limite, e só entram os registros de ruas cujo
+    ponto fica dentro dele. Sem ele, o limite é o município.
     """
-    municipio_utm = transform(PARA_UTM, hand._limite())
+    municipio_utm = transform(PARA_UTM, limite if limite is not None else hand._limite())
     piloto_utm = transform(PARA_UTM, Point(PILOTO)).buffer(RAIO_PILOTO_M)
     linhas = _linhas_osm(_baixar_osm(refazer))
     vazio = lambda tipo: {k: tipo() for k in amostrador.CLASSES}  # noqa: E731
@@ -198,10 +201,15 @@ def medir(amostrador, refazer=False, ruas=None):
     cidade = vazio(float)
     piloto = vazio(float)
     centroide = vazio(int)
-    detalhe, nao_achadas = [], []
+    detalhe, nao_achadas, fora_do_limite = [], [], []
+    registros_fora = 0
     for rua in ruas:
         props = rua["properties"]
         ponto = transform(PARA_UTM, shape(rua["geometry"]))
+        if limite is not None and not municipio_utm.contains(ponto):
+            fora_do_limite.append(props["rua"])
+            registros_fora += props["registros"]
+            continue
         nome = _normalizar(props["rua"])
         nome_osm = nome
         candidatas = [g for g in por_nome.get(nome, []) if g.distance(ponto) <= RAIO_BUSCA_M]
@@ -249,7 +257,7 @@ def medir(amostrador, refazer=False, ruas=None):
             f"vezes_acima_do_acaso_{um}_{dois}": round((reg[um] + reg[dois]) / (bas[um] + bas[dois]), 2),
         }
 
-    return {
+    resultado = {
         "ruas_total": len(ruas),
         "ruas_localizadas": len(detalhe),
         "registros_total": sum(r["properties"]["registros"] for r in ruas),
@@ -259,6 +267,10 @@ def medir(amostrador, refazer=False, ruas=None):
         "comparacao_ponto_central": {k: round(v / sum(centroide.values()), 3) for k, v in centroide.items()},
         "ruas": sorted(detalhe, key=lambda d: -d["registros"]),
     }
+    if limite is not None:  # só com limite, para os arquivos de antes não mudarem
+        resultado["ruas_fora_do_limite"] = fora_do_limite
+        resultado["registros_fora_do_limite"] = registros_fora
+    return resultado
 
 
 def validar(refazer=False):

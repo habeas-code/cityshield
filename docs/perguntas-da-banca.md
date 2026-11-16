@@ -59,7 +59,7 @@ O **benefício** (quanta água cada área segura) é calculado **à parte** e ap
 - A comparação é com **as ruas da cidade**, não com a área, para não inflar o número (ruas tendem a ficar nos vales).
 - É **associação** com o que já aconteceu, não taxa de acerto de previsão.
 
-O teste mais próximo de uma previsão é o terceiro: **depois de o mapa ficar pronto**, 89% dos 102 chamados oficiais de 8 a 12/11/2026 caíram no risco alto ou médio (30% das ruas). A carta oficial marcou 33%. Mas é uma bacia e uma chuva só. [Validação](validacao.md)
+O teste mais próximo de uma previsão é o terceiro: **depois de o mapa ficar pronto**, 89% dos 102 chamados oficiais de 8 a 12/11/2026 caíram no risco alto ou médio (30% das ruas). A carta oficial marcou 33%. E se a comparação for só com as ruas da própria região, que tem mais ruas baixas que a cidade (35% no risco alto ou médio)? Os 89% continuam: 2,6× o acaso. Mas é uma região e uma chuva só. [Validação](validacao.md)
 
 ## 5. Por que o piloto é o núcleo Norte e não o Centro?
 
