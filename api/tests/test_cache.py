@@ -5,6 +5,7 @@ relógio do cache também é trocado, para simular a passagem do tempo.
 """
 
 import json
+import threading
 
 import pytest
 
@@ -194,3 +195,60 @@ def test_ficha_e_cenario_nao_usam_o_cache(cliente, banco):
 
     assert len(banco.chamadas) == 2
     assert cache._guardado == {}
+
+
+# ---------------------------------------------------------------- travas
+
+
+def test_dois_pedidos_juntos_na_mesma_chave_vao_ao_banco_uma_vez():
+    entrou = threading.Event()
+    soltar = threading.Event()
+    idas = []
+
+    def buscar_devagar():
+        idas.append(1)
+        entrou.set()
+        soltar.wait(5)  # o banco "acordando"
+        return GRANDE
+
+    respostas = []
+    primeiro = threading.Thread(target=lambda: respostas.append(cache.lembrar("risco", buscar_devagar)))
+    primeiro.start()
+    assert entrou.wait(5)
+    # O segundo chega enquanto o primeiro ainda está no banco.
+    segundo = threading.Thread(target=lambda: respostas.append(cache.lembrar("risco", buscar_devagar)))
+    segundo.start()
+    segundo.join(0.2)
+    assert segundo.is_alive()  # esperando o primeiro, não foi ao banco
+
+    soltar.set()
+    primeiro.join(5)
+    segundo.join(5)
+
+    assert len(idas) == 1
+    assert respostas == [GRANDE, GRANDE]
+
+
+def test_chave_diferente_nao_espera_a_outra():
+    entrou = threading.Event()
+    soltar = threading.Event()
+
+    def risco_devagar():
+        entrou.set()
+        soltar.wait(5)
+        return GRANDE
+
+    preso = threading.Thread(target=lambda: cache.lembrar("risco", risco_devagar))
+    preso.start()
+    try:
+        assert entrou.wait(5)
+        respostas = []
+        outra = threading.Thread(target=lambda: respostas.append(cache.lembrar("registros", lambda: "ok")))
+        outra.start()
+        outra.join(1)
+
+        assert not outra.is_alive(), "registros ficou esperando risco"
+        assert respostas == ["ok"]
+    finally:
+        soltar.set()
+        preso.join(5)

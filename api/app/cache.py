@@ -31,9 +31,19 @@ VALIDADE_SEGUNDOS = 30 * 60
 
 # chave -> (texto, momento em que foi lido do banco)
 _guardado: dict[str, tuple[str, float]] = {}
-# Uma trava só: se dois pedidos chegam juntos com o cache vazio, o segundo
-# espera o primeiro e reaproveita o texto, em vez de ir ao banco também.
-_trava = threading.Lock()
+# Uma trava por chave: se dois pedidos da mesma camada chegam juntos com o
+# cache vazio, o segundo espera o primeiro e reaproveita o texto, em vez de ir
+# ao banco também. Camadas diferentes não se esperam: a /camadas/registros não
+# fica parada atrás da /camadas/risco enquanto o Neon acorda.
+_travas: dict[str, threading.Lock] = {}
+# Protege só o dicionário de travas (criar a trava de uma chave nova); fica
+# presa por um instante, nunca durante a consulta ao banco.
+_trava_das_travas = threading.Lock()
+
+
+def _trava(chave: str) -> threading.Lock:
+    with _trava_das_travas:
+        return _travas.setdefault(chave, threading.Lock())
 
 
 def lembrar(chave: str, buscar: Callable[[], str]) -> str:
@@ -42,7 +52,7 @@ def lembrar(chave: str, buscar: Callable[[], str]) -> str:
     Se `buscar` levantar erro (banco fora), o erro passa adiante e nada é
     guardado.
     """
-    with _trava:
+    with _trava(chave):
         item = _guardado.get(chave)
         agora = time.monotonic()
         if item is not None and agora - item[1] < VALIDADE_SEGUNDOS:
@@ -56,5 +66,6 @@ def lembrar(chave: str, buscar: Callable[[], str]) -> str:
 
 def limpar() -> None:
     """Esquece tudo (usado nos testes)."""
-    with _trava:
+    with _trava_das_travas:
         _guardado.clear()
+        _travas.clear()
