@@ -18,8 +18,9 @@ inteiro: a mesma consulta devolve a camada toda.
 
 SQL fixo; os quatro números do retângulo vão como parâmetros.
 
-A camada inteira (sem bbox) fica guardada em memória por 30 minutos
-(app/cache.py, #109), para não tirar ~1,8 MB do banco a cada chamada.
+A camada inteira (sem bbox, ou com um bbox que contém o município todo) fica
+guardada em memória por 30 minutos (app/cache.py, #109), para não tirar
+~1,8 MB do banco a cada chamada.
 """
 
 import logging
@@ -29,6 +30,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app import cache
 from app.banco import engine
+from app.bbox import cobre_tudo
 
 log = logging.getLogger(__name__)
 
@@ -112,9 +114,10 @@ def parametros_bbox(bbox: tuple[float, float, float, float] | None) -> dict:
 def camada_geojson(nome: str, bbox: tuple[float, float, float, float] | None = None) -> str:
     """Devolve a camada como texto GeoJSON, inteira ou só dentro do bbox.
 
-    Inteira, vem do cache (app/cache.py); com bbox, vai sempre ao banco.
+    Inteira (sem bbox ou com bbox que contém o município), vem do cache
+    (app/cache.py); com um bbox menor, vai ao banco.
     """
-    if bbox is None:
+    if cobre_tudo(bbox):
         return cache.lembrar(
             f"camada:{nome}", lambda: consultar(CONSULTAS[nome], parametros_bbox(None), nome)
         )

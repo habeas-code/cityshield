@@ -7,6 +7,11 @@ oeste, sul, leste, norte. Exemplo (área piloto):
 
 ORDEM = "use xmin,ymin,xmax,ymax (oeste,sul,leste,norte) em graus"
 
+# Retângulo do município de Sorocaba, o mesmo maxBounds do mapa do site
+# (docs/comum.js): xmin, ymin, xmax, ymax em lon/lat. Todas as feições das
+# camadas ficam dentro dele (api/tests/test_municipio.py).
+MUNICIPIO = (-47.82, -23.84, -47.05, -23.10)
+
 
 class BboxInvalido(ValueError):
     """O texto não é um retângulo válido. A mensagem diz o motivo."""
@@ -31,3 +36,17 @@ def ler_bbox(texto: str) -> tuple[float, float, float, float]:
     if not ymin < ymax:
         raise BboxInvalido(f"no bbox, ymin tem que ser menor que ymax: {ORDEM}.")
     return xmin, ymin, xmax, ymax
+
+
+def cobre_tudo(bbox: tuple[float, float, float, float] | None) -> bool:
+    """O bbox contém o município inteiro (ou não há bbox)?
+
+    Nesse caso a resposta é a camada inteira, igual à sem bbox, e pode vir do
+    cache (app/cache.py, #109). Um bbox que cobre quase tudo, mas não o
+    município inteiro, não conta: vai ao banco.
+    """
+    if bbox is None:
+        return True
+    xmin, ymin, xmax, ymax = bbox
+    mxmin, mymin, mxmax, mymax = MUNICIPIO
+    return xmin <= mxmin and ymin <= mymin and xmax >= mxmax and ymax >= mymax
