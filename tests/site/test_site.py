@@ -1,4 +1,5 @@
-"""Teste do site no navegador: as quatro abas do mapa.html sem erro no console.
+"""Teste do site no navegador: as quatro abas do mapa.html sem erro no console,
+e os números que aparecem na tela iguais aos dos arquivos de docs/dados/.
 
 Rodar da raiz do repositório:
     pip install -r tests/site/requirements.txt
@@ -6,6 +7,9 @@ Rodar da raiz do repositório:
     python -m pytest -q tests/site
 """
 
+import json
+import math
+import re
 import socket
 import subprocess
 import sys
@@ -117,3 +121,94 @@ def test_quatro_abas_sem_erro(site, navegador, tela):
         assert not erros, "\n".join(erros)
     finally:
         contexto.close()
+
+
+# ---------------------------------------------------------------- números da tela
+
+DADOS = DOCS / "dados"
+
+
+def _json(nome):
+    return json.loads((DADOS / nome).read_text(encoding="utf-8"))
+
+
+def _pct(x):
+    """Igual ao site: Math.round(x * 100) + '%' (Math.round arredonda .5 para cima)."""
+    return f"{math.floor(x * 100 + 0.5)}%"
+
+
+def _milhar(x):
+    """Igual ao site: Math.round(x).toLocaleString('pt-BR')."""
+    return f"{math.floor(x + 0.5):,}".replace(",", ".")
+
+
+def _cenario_50mm():
+    """A conta da Simulação com 50 mm, refeita aqui a partir dos parâmetros do arquivo
+    (docs/recomendacoes.md, "Cenário antes e depois"), sem usar o código do site."""
+    g = _json("recomendacoes.geojson")
+    par, mm = g["parametros"], 50
+    chega = retida = 0.0
+    for f in g["features"]:
+        p, a = f["properties"], f["properties"]["area_m2"]
+        if p["solucao"] == "piso_permeavel":
+            c, r = a * mm / 1000, a * min(mm, par["piso_capacidade_mm"]) / 1000
+        elif p["solucao"] == "telhado_verde":
+            c = a * mm / 1000
+            r = c * par["telhado_retencao"]
+        elif p["solucao"] == "jardim_chuva":
+            j = a * par["jardim_fracao_da_area"]
+            c = j * par["jardim_area_que_escoa"] * mm / 1000
+            r = min(c, j * par["jardim_lamina_m"])
+        else:
+            continue  # parque: capacidade, fora da conta
+        chega += c
+        retida += r
+    return chega, retida, g
+
+
+def test_numeros_do_site_batem_com_os_arquivos(site, navegador):
+    """O que a pessoa lê na tela é o que está nos arquivos de docs/dados/."""
+    contexto = navegador.new_context(viewport=TELAS["computador"])
+    contexto.route(lambda url: de_fora(url), lambda rota: rota.abort())
+    pagina = contexto.new_page()
+    try:
+        pagina.goto(site + "/mapa.html")
+        expect(pagina.locator("#mapa canvas.maplibregl-canvas")).to_be_visible(timeout=20_000)
+
+        # Quadro "O mapa bate com a realidade?": validação de 2022-2023
+        cidade = _json("validacao.json")["cidade"]
+        expect(pagina.locator("#v-reg")).to_have_text(_pct(cidade["fracao_registros"]["alto"]))
+        expect(pagina.locator("#v-ruas")).to_have_text(_pct(cidade["fracao_ruas"]["alto"]))
+
+        # ... e o bloco de depois do mapa pronto (registros oficiais, LAI)
+        depois = _json("lai_defesa_civil.json")["grupos"]["depois_do_mapa"]
+        h, c = depois["hand"]["cidade"], depois["carta"]["cidade"]
+        expect(pagina.locator("#l-reg")).to_have_text(_pct(h["fracao_registros"]["alto"] + h["fracao_registros"]["medio"]))
+        expect(pagina.locator("#l-carta")).to_have_text(_pct(1 - c["fracao_registros"]["fora"]))
+        expect(pagina.locator("#l-n")).to_have_text(str(round(h["registros_considerados"])))
+
+        # Fila: a 1ª da lista é a de maior nota, e a ficha mostra a mesma conta
+        chega, retida, recs = _cenario_50mm()
+        maior = max(f["properties"]["nota"] for f in recs["features"])
+        abas = pagina.locator("header .abas")
+        abas.get_by_role("tab", name="Oportunidades").click()
+        pagina.locator("#fila li button").first.click()
+        expect(pagina.locator("#det-area .pa-conta").first).to_have_text(re.compile(rf"= {maior}$"))
+
+        # Simulação, chuva padrão de 50 mm: água que chega e retida
+        abas.get_by_role("tab", name="Simulação").click()
+        kpis = pagina.locator("#c-kpis")
+        expect(kpis).to_contain_text(f"{_milhar(chega)} m³")
+        expect(kpis).to_contain_text(f"{_milhar(retida)} m³({math.floor(retida / chega * 100 + 0.5)}%)")
+    finally:
+        contexto.close()
+
+
+def test_links_de_baixar_os_dados_existem(site):
+    """Todo arquivo da lista "Baixar os dados" (aba Sobre) existe no site publicado."""
+    html = (DOCS / "mapa.html").read_text(encoding="utf-8")
+    links = re.findall(r'<a href="(dados/[^"]+)" download>', html)
+    assert len(links) >= 5
+    for caminho in links:
+        with urllib.request.urlopen(f"{site}/{caminho}", timeout=5) as resposta:
+            assert resposta.status == 200, caminho
