@@ -23,6 +23,7 @@
     <div class="nav-links">
       <a href="#dados">Dados</a>
       <a href="#piloto">Piloto</a>
+      <a href="#validacao">Validação</a>
       <a href="#solucoes">Soluções</a>
       <a href="#metodo">Metodologia</a>
       <a href="#fontes">Fontes</a>
@@ -35,7 +36,7 @@
   <div class="hero-txt">
     <span class="pilula"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Sorocaba · SP</span>
     <h1>A água volta sempre para as <span class="verde">mesmas ruas.</span></h1>
-    <p class="sub">Em dois anos, a Defesa Civil anotou <b>253 alagamentos e inundações</b> em Sorocaba. A Av. Dom Aguirre apareceu 23 vezes. Queremos descobrir onde a cidade consegue segurar essa água antes de ela chegar lá.</p>
+    <p class="sub">Em dois anos, a Defesa Civil anotou <b>253 alagamentos e inundações</b> em Sorocaba. A Av. Dom Aguirre apareceu 23 vezes. O CityShield mostra onde a cidade pode segurar essa água antes de ela chegar lá, e por onde começar.</p>
     <div class="acoes">
       <a class="bt" href="mapa.html"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/></svg>Ver o mapa →</a>
       <a class="bt contorno" href="#dados"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-5m5 5V7m5 9v-8"/></svg>Conheça os dados</a>
@@ -117,6 +118,20 @@
   </div>
 </section>
 
+<section id="validacao">
+  <div class="largura">
+    <p class="rotulo">O mapa acerta?</p>
+    <h2>Testamos o mapa contra o que já aconteceu. <span class="verde">Três vezes.</span></h2>
+    <div class="fatos" style="margin-top:28px">
+      <div class="fato"><b class="n" id="i-v-reg">74%</b><p>dos registros da Defesa Civil de 2022–2023 caem no <strong>risco alto</strong> calculado pelo relevo, que reúne só <span id="i-v-ruas">12%</span> das ruas da cidade: <span id="i-v-vezes">6,0</span> vezes o acaso.</p></div>
+      <div class="fato"><b class="n" id="i-l-reg">89%</b><p>dos <span id="i-l-n">102</span> chamados de 8 a 12 de novembro de 2026, <strong>depois de o mapa ficar pronto</strong>, caíram no risco alto ou médio. A carta oficial de inundação (IPT/SGB, 2015) marcou <span id="i-l-carta">33%</span> deles.</p></div>
+      <div class="fato"><b class="n" id="i-l-local">2,6×</b><p>o acaso, <strong>mesmo comparando só com as ruas vizinhas</strong>, que já são mais baixas que a média da cidade (<span id="i-l-local-ruas">35%</span> delas no risco alto ou médio).</p></div>
+    </div>
+    <p class="nota">É a coincidência entre o relevo e onde alagou, não a previsão da próxima enchente. Os chamados de novembro vieram da Prefeitura, pela Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13), e cobrem uma região da cidade: é um caso real, não uma média de Sorocaba. <a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a>.</p>
+    <p class="fonte">Fontes: Defesa Civil de Sorocaba (relatórios 2022–2023 e registros 2021–2026 via LAI); IPT e Serviço Geológico do Brasil, carta de suscetibilidade a inundações (2015); OpenStreetMap.</p>
+  </div>
+</section>
+
 <section id="solucoes">
   <div class="largura">
     <p class="rotulo">O que dá pra fazer</p>
@@ -151,6 +166,7 @@
       <ol class="cadeia">
         <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span><div><b>Registros por rua</b><span>Transcrevemos os relatórios da Defesa Civil e contamos as ocorrências de cada rua.</span></div></li>
         <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 6-9 4 5 3-4 5 8H3Z"/></svg></span><div><b>Relevo</b><span>Com o modelo ANADEM (30 m), calculamos a altura de cada ponto em relação ao córrego ou rio mais próximo (HAND).</span></div></li>
+        <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>Conferido contra a realidade</b><span>O risco foi testado contra registros da Defesa Civil, notícias e os chamados de depois do mapa pronto, e comparado com a carta oficial. Acertos e erros ficam publicados.</span></div></li>
         <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><div><b>Áreas candidatas</b><span>Praças, estacionamentos, terrenos e telhados do OpenStreetMap perto dos pontos críticos.</span></div></li>
         <li><span class="i"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 16v-4m5 4V8m5 8v-6"/></svg></span><div><b>Prioridade e retenção</b><span>Nota = risco × registros × área. Retenção estimada com valores publicados, cada um com a fonte.</span></div></li>
       </ol>
@@ -164,7 +180,9 @@
     <div class="fontes" id="fontes">
       <h3>Fontes</h3>
       <ul>
-        <li><b>Defesa Civil de Sorocaba</b>: relatórios COMPDEC 2022–2023, via TCC de M. C. Vargem (Unesp, 2024)</li>
+        <li><b>Defesa Civil de Sorocaba</b>: relatórios COMPDEC 2022–2023, via TCC de M. C. Vargem (Unesp, 2024); registros 2021–2026 da região do Itanguá, via Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13)</li>
+        <li><b>IPT e Serviço Geológico do Brasil</b>: carta de suscetibilidade a inundações (2015), usada para comparação</li>
+        <li><b>Notícias de alagamento 2024–2026</b>: G1, Cruzeiro do Sul, Agência de Notícias da Prefeitura e outros (lista com links no repositório)</li>
         <li><b>ANA</b>: modelo de relevo ANADEM, 30 m</li>
         <li><b>OpenStreetMap</b>: limite do município, ruas, rios, praças, estacionamentos e prédios</li>
         <li><b>SAAE Sorocaba</b>: Plano Diretor de Macrodrenagem (revisão de 2025), equação de chuva da cidade</li>
@@ -211,6 +229,26 @@
     li.querySelector('i').style.background = '#3D6B95';
     ul.appendChild(li);
   });
+
+  // "O mapa acerta?": números lidos dos mesmos arquivos do mapa (se falhar, ficam os do HTML)
+  var pct = function (x) { return Math.round(x * 100) + '%'; };
+  var vez = function (x) { return x.toFixed(1).replace('.', ','); };
+  var por = function (id, t) { var e = document.getElementById(id); if (e) e.textContent = t; };
+  fetch('dados/validacao.json').then(function (r) { return r.json(); }).then(function (v) {
+    var c = v.cidade;
+    por('i-v-reg', pct(c.fracao_registros.alto)); por('i-v-ruas', pct(c.fracao_ruas.alto));
+    por('i-v-vezes', vez(c.vezes_acima_do_acaso_alto));
+  }).catch(function () {});
+  fetch('dados/lai_defesa_civil.json').then(function (r) { return r.json(); }).then(function (l) {
+    var am = function (x) { return x.alto + x.medio; };
+    var d = l.grupos.depois_do_mapa, h = d.hand.cidade, k = d.carta.cidade;
+    por('i-l-reg', pct(am(h.fracao_registros))); por('i-l-n', Math.round(h.registros_considerados));
+    por('i-l-carta', pct(1 - k.fracao_registros.fora));
+    if (l.comparacao_local) {
+      var rl = l.comparacao_local.regiao.depois_do_mapa.hand.cidade;
+      por('i-l-local', vez(rl.vezes_acima_do_acaso_alto_medio) + '×'); por('i-l-local-ruas', pct(am(rl.fracao_ruas)));
+    }
+  }).catch(function () {});
 
   // Satélite Esri World Imagery (imagem de alta resolução; créditos no botão ⓘ)
   var SATELITE = {
