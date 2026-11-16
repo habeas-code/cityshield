@@ -109,7 +109,7 @@ pipeline/  (Python: rasterio, pysheds, shapely, pyproj)
         └──► PostGIS (Neon) ──► api/ (FastAPI, Render)
 ```
 
-A plataforma lê os arquivos GeoJSON publicados; se a API sair do ar, o site continua funcionando ([D10](docs/decisoes.md)). A API serve as mesmas camadas para quem quiser integrar: `/camadas/risco`, `/camadas/registros`, `/areas`, `/areas/{id}` e `/cenario` ([documentação ao vivo](https://cityshield-s2lq.onrender.com/docs); no plano gratuito, a primeira chamada pode demorar enquanto o servidor acorda).
+A plataforma lê os arquivos GeoJSON publicados; se a API sair do ar, o site continua funcionando ([D10](docs/decisoes.md#d10-plano-b-geojson-estático)). A API serve as mesmas camadas para quem quiser integrar: `/camadas/risco`, `/camadas/registros`, `/areas`, `/areas/{id}` e `/cenario` ([documentação ao vivo](https://cityshield-s2lq.onrender.com/docs); no plano gratuito, a primeira chamada pode demorar enquanto o servidor acorda).
 
 | Pasta | O que tem |
 |---|---|
