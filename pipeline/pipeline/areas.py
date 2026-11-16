@@ -8,12 +8,15 @@ da área piloto (docs/decisoes.md, D3):
     telhado         prédios com mais de 1.000 m²        (telhado verde)
 
 Para cada área calcula o tamanho e quanto dela está em cada faixa de risco do HAND.
-A escolha da solução e a nota de prioridade são o próximo passo (#16).
+A escolha da solução, a nota de prioridade e os volumes vêm no passo seguinte
+(recomendacoes.py), que lê este arquivo.
 
 Áreas do OSM são CANDIDATAS A ESTUDO, não terrenos disponíveis: o mapeamento de prédios
 em Sorocaba é parcial e uma praça pode já ter outro uso.
 
-Saída: web/public/dados/areas_candidatas.geojson
+Saída: pipeline/dados/areas/areas_candidatas.geojson. É um arquivo intermediário, fora do
+git (como o resto de pipeline/dados/): o site e a API usam recomendacoes.geojson, que
+traz estas mesmas áreas com solução, nota e volumes.
 """
 
 import json
@@ -28,11 +31,11 @@ from shapely.geometry import LineString, Point, mapping
 from shapely.ops import polygonize, transform, unary_union
 
 from pipeline import hand
-from pipeline.caminhos import DADOS, SAIDA
+from pipeline.caminhos import DADOS
 from pipeline.validacao import OVERPASS, PARA_GRAUS, PARA_UTM, PILOTO, RAIO_PILOTO_M
 
 CACHE = DADOS / "osm" / "areas_piloto.json"
-SAIDA_GEOJSON = SAIDA / "areas_candidatas.geojson"
+SAIDA_GEOJSON = DADOS / "areas" / "areas_candidatas.geojson"  # intermediário, não publicado
 
 TELHADO_MINIMO_M2 = 1000
 AREA_MINIMA_M2 = 200         # menor que isso não comporta uma solução útil
