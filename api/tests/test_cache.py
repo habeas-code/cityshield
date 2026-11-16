@@ -84,6 +84,47 @@ def test_com_filtro_vai_sempre_ao_banco(cliente, banco, rota, params):
     assert len(banco.chamadas) == 2
 
 
+MUNDO = "-180,-90,180,90"
+# Cobre quase tudo, mas deixa de fora uma tira de 0,01° no oeste do município.
+QUASE = "-47.81,-23.84,-47.05,-23.10"
+
+
+@pytest.mark.parametrize("rota", ROTAS_INTEIRAS)
+def test_bbox_do_mundo_usa_o_cache(cliente, banco, rota):
+    primeira = cliente.get(rota, params={"bbox": MUNDO})
+    segunda = cliente.get(rota, params={"bbox": MUNDO})
+
+    assert len(banco.chamadas) == 1
+    assert primeira.text == segunda.text == GRANDE
+
+
+def test_bbox_do_mundo_e_sem_bbox_dividem_o_mesmo_lugar(cliente, banco):
+    cliente.get("/camadas/risco")
+    cliente.get("/camadas/risco", params={"bbox": MUNDO})
+    cliente.get("/camadas/risco", params={"bbox": "-47.82,-23.84,-47.05,-23.10"})
+
+    assert len(banco.chamadas) == 1
+    # O que foi ao banco foi a camada inteira, não o bbox pedido.
+    _, parametros = banco.chamadas[0]
+    assert parametros["xmin"] == -180.0 and parametros["ymax"] == 90.0
+
+
+@pytest.mark.parametrize("rota", ROTAS_INTEIRAS)
+def test_bbox_quase_do_municipio_vai_ao_banco(cliente, banco, rota):
+    cliente.get(rota, params={"bbox": QUASE})
+    cliente.get(rota, params={"bbox": QUASE})
+
+    assert len(banco.chamadas) == 2
+    assert banco.chamadas[0][1]["xmin"] == -47.81
+
+
+def test_areas_com_solucao_e_bbox_do_mundo_vai_ao_banco(cliente, banco):
+    for _ in range(2):
+        cliente.get("/areas", params={"bbox": MUNDO, "solucao": "jardim_chuva"})
+
+    assert len(banco.chamadas) == 2
+
+
 def test_filtro_nao_usa_nem_estraga_a_resposta_inteira(cliente, banco):
     cliente.get("/camadas/risco")
     banco.texto = '{"type": "FeatureCollection", "features": []}'
