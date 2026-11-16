@@ -5,12 +5,14 @@ on:
   push:
     branches: [main]
 
+# Versões fixas: ubuntu-24.04 (não "latest", que muda sozinho) e actions com Node 24
+# (checkout@v7, setup-python@v7). Atualizar de propósito, num PR.
 jobs:
   padrao:
     name: Padrão do time
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Nada de dados privados, .env ou rasters
         run: |
@@ -34,10 +36,10 @@ jobs:
 
   python:
     name: Python (lint)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: pip install ruff
@@ -45,10 +47,10 @@ jobs:
 
   testes:
     name: Python (testes)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"   # a mesma da imagem da api
           cache: pip
@@ -66,10 +68,10 @@ jobs:
 
   pipeline:
     name: Pipeline (testes)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"   # a mesma da imagem do pipeline
           cache: pip
@@ -83,10 +85,10 @@ jobs:
 
   site:
     name: Site (navegador)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -99,7 +101,7 @@ jobs:
 
   banco:
     name: Banco de verdade (PostGIS)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Um PostGIS de verdade, a mesma imagem do docker-compose.yml. Usuário e
     # senha só existem aqui dentro, como os do .env.example: não são segredo.
     services:
@@ -123,8 +125,8 @@ jobs:
       DATABASE_URL: postgresql+psycopg://cityshield:cityshield@127.0.0.1:5432/cityshield
       SENHA_API: senha-so-do-ci
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"   # a mesma da imagem da api
           cache: pip
