@@ -27,7 +27,7 @@ jobs:
   acordada:
     name: API acordada (GET /)
     if: github.event.schedule != '7 */6 * * *'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       # O Render leva ~1 min para acordar: até 4 novas tentativas, 20 s entre elas,
@@ -42,7 +42,7 @@ jobs:
   saude:
     name: API e banco (GET /saude)
     if: github.event.schedule == '7 */6 * * *' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - name: GET /saude tem que dar 200
