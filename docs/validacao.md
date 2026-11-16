@@ -64,7 +64,41 @@ O teste acima usa registros de 2022–2023. Para ver se o mapa acerta **em anos 
 
 **Nada do texto das notícias entra no projeto.** `docs/dados/noticias.csv` guarda só a data, a via, o veículo e o link de cada citação.
 
-**Cuidado ao ler:** notícia mostra só o que virou notícia. Avenidas grandes e o Centro aparecem mais do que ruas de bairro. Por isso este é um **segundo teste**, não uma prova. O registro oficial completo de 2024–2026 continua pedido (tarefa #13).
+**Cuidado ao ler:** notícia mostra só o que virou notícia. Avenidas grandes e o Centro aparecem mais do que ruas de bairro. Por isso este é um **segundo teste**, não uma prova. Os registros oficiais de 2024–2026 chegaram depois, só da Bacia do Itanguá: veja o [terceiro teste](#terceiro-teste-registros-oficiais-de-2021-a-2026).
+
+## Terceiro teste: registros oficiais de 2021 a 2026
+
+Pedimos à Prefeitura, pela Lei de Acesso à Informação, os registros de alagamento, inundação e enxurrada de 2024 a 2026 (tarefa #13). A resposta chegou em **16/11/2026** (Fala.BR nº 03959.2026.000348-13, SEMOB / Coordenadoria Municipal de Proteção e Defesa Civil), com uma planilha **só da Bacia do Itanguá**: **365 registros, de agosto de 2021 a 12 de novembro de 2026** (296 deles de 2026). Fizemos **a mesma conta** da validação. Para refazer: `docker compose run --rm pipeline python -m pipeline lai`. Resultado em `lai_defesa_civil.json`.
+
+**O teste mais limpo é o dos registros de depois de o mapa ficar pronto.** O mapa de risco e a validação foram juntados ao projeto em **07/11/2026**. De 8 a 12 de novembro, uma chuva forte gerou **102 registros** na bacia, a maioria na Vila Mineirão. O mapa não tinha como ter visto esses registros.
+
+| Grupo | Vias | Registros | No risco **alto** (12% das ruas) | Vezes o acaso | Alto + médio (30% das ruas) | Carta oficial, qualquer classe (4% das ruas) |
+|---|---|---|---|---|---|---|
+| **Depois do mapa pronto** (8–12/11/2026) | 11 | 102 | **47%** | **3,8×** | **89%** | 33% |
+| Todos (2021–2026) | 56 | 334 | 64% | 5,2× | 92% | 28% |
+| Só 2024–2026 | 55 | 317 | 64% | 5,2× | 91% | 28% |
+| **Só vias novas** (fora dos relatórios de 2022–2023) | 35 | 106 | **72%** | **5,8×** | 82% | 18% |
+
+- **O mapa acertou o que veio depois.** Dos 102 registros de 8 a 12 de novembro, **89% caíram no risco alto ou médio**, faixas que reúnem 30% das ruas da cidade. A carta oficial marcou 33% deles; os outros 67% ficam fora de qualquer classe da carta.
+- **Por que "alto ou médio" e não só "alto".** As ruas mais atingidas da Vila Mineirão (Antônio Furtado Lopes, Abner Pedroso de Alcântara, Pedro Lombardi) ficam metade no risco alto e metade no médio. Foi uma inundação grande, que subiu além da faixa mais baixa do vale. O risco médio (HAND de 5 a 15 m) existe para isso.
+- **As vias novas confirmam o teste das notícias, com mais força.** Vias que não estavam nos relatórios de 2022–2023 caem no risco alto 5,8 vezes mais do que ao acaso (72% dos registros em 12% das ruas). Nas notícias, eram 2,7×; a diferença é que estes são registros oficiais de bairro, não só de avenidas que viram notícia.
+- **A carta continua precisa onde marca, e marca pouco.** Na classe alta, 10% dos registros em 1,6% das ruas (6,3×). Mas 72% dos registros ficam fora de qualquer classe dela.
+
+### Como foi feito
+
+1. **Transcrição.** A planilha veio em PDF. Lemos as colunas pela posição de cada palavra na página e conferimos a contagem página por página. A última página repete os registros do Jardim Marli e ficou de fora.
+2. **Limpeza.** Grafias diferentes da mesma via viram um nome só ("Dr Campos Salles" e "Doutor Campos Salles"; "Alfeu" e "Alpheu Castro Santos"), e o mesmo para os bairros ("Jd Marly", "MARLI, JD"). 13 registros vieram sem rua ("-", "vários endereços").
+3. **Ponto de cada via.** A via é procurada pelo nome no OpenStreetMap; quando o nome existe em vários lugares da cidade (como "Rua Dois"), fica a mais perto do centro do bairro informado, até 2,5 km. Grafias diferentes no OpenStreetMap ("Jorge Bacelli", "Karim Jamal") são aceitas pela semelhança. Sem achar, tentamos o Nominatim (OpenStreetMap).
+4. **Mesma conta da validação.** Cada chamado conta, como nos relatórios de 2022–2023, e os registros de uma via se dividem pela extensão dela em cada faixa de risco.
+
+**Nenhum dado pessoal entra no projeto.** A planilha da Prefeitura traz o número da casa de cada chamado. `docs/dados/lai_defesa_civil.csv` guarda só a data, a via, o bairro, o tipo e o número de registros. A planilha original fica fora do repositório.
+
+**Cuidado ao ler:**
+
+- **Uma bacia só.** A planilha cobre a Bacia do Itanguá, não a cidade inteira.
+- **Um evento concentrado.** Os registros de depois do mapa vêm quase todos de uma chuva e de três ruas da Vila Mineirão. É um caso real e independente, mas não é uma amostra da cidade.
+- **Um chamado por casa.** Uma rua com muitas casas atingidas soma muitos registros. Isso pesa a favor das ruas com mais moradores na várzea.
+- **25 registros de fora:** 13 sem rua, 12 em vielas do Jardim Itapemirim (Viela 203, Viela 148 e outras) e uma "Rua 2" sem bairro, que não existem com esse nome no OpenStreetMap. Mais três vias com ponto (duas "Rua 2" e a Rua Três do Itapemirim, 6 registros) não foram achadas pela conta da validação.
 
 ## Comparação com a carta oficial
 
@@ -87,13 +121,14 @@ Sorocaba já tem um mapa oficial: a **carta de suscetibilidade a inundações** 
 - **Ruas, não pontos.** Uma avenida longa como a Dom Aguirre (12,9 km no mapa) recebe os registros distribuídos ao longo dela toda. É uma aproximação.
 - **Quatro ruas ficaram de fora** (17 registros): Rua Projetada II (Guadalupe), Rua Três e Rua Nove (Itapemirim) e Rua Láurico. Não existem no OpenStreetMap com esse nome perto do lugar indicado, e preferimos deixá-las de fora a adivinhar.
 - **Registros dependem de quem registra.** Lugares onde alaga mas ninguém chama a Defesa Civil não aparecem. O teste mede se o mapa acerta onde **houve registro**, não onde **não alaga**.
-- **Dois anos de registros oficiais** (2022–2023). Os relatórios de 2024–2026 foram pedidos (tarefa #13). Enquanto não chegam, o [segundo teste](#segundo-teste-notícias-de-2024-a-2026) usa notícias desses anos.
+- **Registros oficiais da cidade inteira só de 2022–2023.** Os de 2021–2026 chegaram só da Bacia do Itanguá ([terceiro teste](#terceiro-teste-registros-oficiais-de-2021-a-2026)). Para o resto da cidade nesses anos, o [segundo teste](#segundo-teste-notícias-de-2024-a-2026) usa notícias.
 - **Alagamento por drenagem.** O HAND mede a altura sobre os córregos. Alagamento de bueiro em terreno alto, como o de algumas vias do segundo teste, fica fora do risco alto.
 - **Limiar fixo.** O córrego começa em 0,5 km² drenados e as faixas seguem Nobre et al. (2011). Esses valores **não foram ajustados** para melhorar este resultado.
 
 ## Fontes
 
 - Defesa Civil de Sorocaba: relatórios de ocorrências 2022–2023 (anexo do TCC de M. C. Vargem, Unesp, 2024).
+- Defesa Civil de Sorocaba: registros de alagamento, inundação e enxurrada da Bacia do Itanguá, 2021–2026. Resposta ao pedido de acesso à informação Fala.BR nº 03959.2026.000348-13 (Prefeitura de Sorocaba, SEMOB, 16/11/2026). Agregado por via em `docs/dados/lai_defesa_civil.csv`.
 - OpenStreetMap (ODbL), via Overpass API.
 - Notícias de 2024–2026 (G1, Jornal Cruzeiro do Sul, Agência de Notícias da Prefeitura, Band, TV Sorocaba, Jornal Z Norte, Portal Porque e outros): lista completa, com links, em `docs/dados/noticias.csv`. Busca e leitura com Firecrawl; pontos das vias novas pelo Nominatim (OpenStreetMap).
 - HAND: Nobre, A. D. et al. (2011). *Height Above the Nearest Drainage – a hydrologically relevant new terrain model*. Journal of Hydrology 404, 13–29. https://doi.org/10.1016/j.jhydrol.2011.03.051
