@@ -248,6 +248,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
 /* Painel de simulação sobre o mapa */
 .sim-painel{position:absolute;left:12px;right:12px;bottom:12px;margin:0 auto;max-width:900px;z-index:3;background:var(--panel);border-radius:10px;padding:14px 16px 16px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .sp-cab{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.sp-x{margin-left:auto;flex:none;width:30px;height:30px;border-radius:6px;font-size:22px;line-height:1;color:var(--ink-2)}
+.sp-x:hover{background:var(--hover);color:var(--ink)}
 .sp-cab svg{width:20px;height:20px;flex:none;margin-top:1px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sp-cab b{display:block;font-size:15px;font-weight:600}
 .sp-cab span{display:block;font-size:12.5px;color:var(--ink-2)}
@@ -778,6 +780,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
       <div class="sp-cab">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 3 4-6 5 5"/></svg>
         <div><b>Simulação de cenários</b><span>Quanto da chuva as soluções verdes seguram na área-piloto Norte.</span></div>
+        <button type="button" class="sp-x" id="sp-fechar" aria-label="Fechar a simulação e voltar" title="Fechar (Esc)">×</button>
       </div>
       <div class="sp-corpo">
         <div class="sp-ctrl">
@@ -1331,6 +1334,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
     document.querySelectorAll('.abas button').forEach(function (b) { b.setAttribute('aria-selected', b.dataset.aba === a ? 'true' : 'false'); });
     Object.keys(abas).forEach(function (k) { abas[k].hidden = k !== a; });
     destacarCenario(a === 'sim');
+    if (a === 'sim' && abaAtual !== 'sim') abaAntesSim = abaAtual;
     abaAtual = a;
     modoOportunidades(a === 'oport');
     var sim = a === 'sim';
@@ -1771,7 +1775,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
   $('fila-ordem').addEventListener('change', function () { filaOrdem = this.value; montarFila(); });
 
   // ---------- Oportunidade selecionada: mapa + ficha no painel direito ----------
-  var filaFiltro = 'todas', filaOrdem = 'prioridade', areaSel = null, abaAtual = 'diag';
+  var filaFiltro = 'todas', filaOrdem = 'prioridade', areaSel = null, abaAtual = 'diag', abaAntesSim = 'diag';
   // Ficha no painel direito só quando ele está ao lado do mapa (desktop); no celular ele fica no fim da página.
   function painelDireito() { var d = document.querySelector('.dir'); return window.innerWidth > 760 && d && getComputedStyle(d).display !== 'none'; }
   function areaPorId(id) {
@@ -1932,6 +1936,10 @@ label.campo .l b{color:var(--ink);font-weight:600}
   $('v-info-bt').addEventListener('click', function () {
     var c = $('v-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
   });
+  // × da Simulação (e Esc): volta para a aba de onde a pessoa veio
+  function fecharSim() { if (abaAtual === 'sim') irPara(abaAntesSim || 'diag'); }
+  $('sp-fechar').addEventListener('click', fecharSim);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && abaAtual === 'sim') fecharSim(); });
   $('l-info-bt').addEventListener('click', function () {
     var c = $('l-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
   });

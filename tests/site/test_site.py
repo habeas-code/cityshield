@@ -234,3 +234,24 @@ def test_pagina_inicial_mostra_os_numeros_da_validacao(site, navegador):
         assert not erros, "\n".join(erros)
     finally:
         contexto.close()
+
+
+def test_x_fecha_a_simulacao_e_volta_para_a_aba_anterior(site, navegador):
+    contexto = navegador.new_context(viewport=TELAS["computador"])
+    contexto.route(lambda url: de_fora(url), lambda rota: rota.abort())
+    pagina = contexto.new_page()
+    try:
+        pagina.goto(site + "/mapa.html")
+        abas = pagina.locator("header .abas")
+        abas.get_by_role("tab", name="Oportunidades").click()
+        abas.get_by_role("tab", name="Simulação").click()
+        expect(pagina.locator("#sim-painel")).to_be_visible()
+        pagina.locator("#sp-fechar").click()
+        expect(pagina.locator("#sim-painel")).to_be_hidden()
+        expect(abas.get_by_role("tab", name="Oportunidades")).to_have_attribute("aria-selected", "true")
+        # Esc também fecha
+        abas.get_by_role("tab", name="Simulação").click()
+        pagina.keyboard.press("Escape")
+        expect(pagina.locator("#sim-painel")).to_be_hidden()
+    finally:
+        contexto.close()
