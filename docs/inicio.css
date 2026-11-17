@@ -38,7 +38,7 @@ svg.ico{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stro
 .hero-txt{display:grid;align-content:center;gap:26px;padding:56px 0 64px max(40px,calc((100vw - 1280px)/2 + 40px));padding-right:24px;position:relative;z-index:2}
 .pilula{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--verde-claro);color:var(--verde-escuro);font-weight:600;font-size:14.5px;padding:8px 14px;border-radius:8px}
 .pilula svg{width:16px;height:16px;fill:var(--verde-escuro);stroke:none}
-h1{margin:0;font:800 clamp(46px,5.6vw,84px)/1 var(--fonte);letter-spacing:-.035em}
+h1{margin:0;font:800 clamp(46px,5.6vw,84px)/1 var(--fonte);letter-spacing:-.035em;text-wrap:balance}
 h1 .verde{display:block}
 .sub{margin:0;font-size:19px;color:var(--texto-2);max-width:44ch}
 .sub b{color:var(--texto);font-weight:600}
@@ -110,7 +110,7 @@ h2{margin:0;font:800 clamp(32px,3.8vw,52px)/1.08 var(--fonte);letter-spacing:-.0
 .solucoes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
 .sol{display:grid;grid-template-rows:auto 1fr;background:var(--branco);border:1px solid var(--linha);border-radius:14px;overflow:hidden;text-decoration:none;transition:border-color .2s,transform .2s}
 .sol:hover{border-color:var(--verde);transform:translateY(-3px)}
-.sol img{aspect-ratio:4/3;object-fit:cover}
+.sol img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 .sol div{padding:18px 20px 20px;display:grid;gap:8px;align-content:start}
 .sol h3{margin:0;display:flex;align-items:center;gap:10px;font:700 19px/1.2 var(--fonte)}
 .sol h3 svg{width:22px;height:22px;color:var(--verde);flex:none}
@@ -152,6 +152,8 @@ footer a{color:var(--texto-2)}
 /* Mapa */
 .maplibregl-ctrl-attrib{font-size:11px}
 .maplibregl-ctrl-group{border-radius:8px!important}
+/* Mapas da página inicial são só ilustração (não interativos): sem botões de zoom */
+#mapa-hero .maplibregl-ctrl-group,#mapa-piloto .maplibregl-ctrl-group{display:none}
 .rotulo-piloto{background:#fff;border:2px solid var(--verde);border-radius:6px;padding:4px 9px;display:grid;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .rotulo-piloto b{font:700 12.5px/1.3 var(--fonte);color:var(--verde-escuro)}
 .rotulo-piloto span{font-size:11.5px;color:var(--texto-2)}
