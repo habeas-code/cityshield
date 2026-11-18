@@ -129,7 +129,7 @@ Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decis�
 |---|---|---|---|---|---|---|
 | Registros | 3 | 58 | 81 | **1.046** | 10 | 296 |
 
-**A cheia de janeiro de 2024.** De 20 a 29 de janeiro de 2024, o Rio Sorocaba e seus córregos transbordaram e a Defesa Civil registrou cerca de mil chamados (908 com a rua localizada). O mapa foi conferido só com os relatórios de 2022–2023: **nenhum registro de 2024 entrou na construção nem na conferência dele**.
+**A cheia de janeiro de 2024.** De 20 a 29 de janeiro de 2024, a Defesa Civil registrou cerca de mil chamados (908 com a rua localizada), quase todos de "inundação por cheia de curso d'água". O mapa foi conferido só com os relatórios de 2022–2023: **nenhum registro de 2024 entrou na construção nem na conferência dele**.
 
 | Grupo | Vias | Registros | No risco **alto** (12% das ruas) | Vezes o acaso | Alto + médio (30% das ruas) | Carta oficial, qualquer classe (4% das ruas) |
 |---|---|---|---|---|---|---|

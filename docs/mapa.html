@@ -859,7 +859,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <button type="button" class="pa-info" id="cid-info-bt" aria-expanded="false" aria-controls="cid-info" aria-label="De onde vêm estes números">i</button></p>
         <div class="pa-info-txt" id="cid-info" hidden>
           <p><b>Fonte:</b> planilha da Defesa Civil do município inteiro, recebida pela Lei de Acesso à Informação no recurso do pedido Fala.BR nº 03959.2026.000348-13 (17/11/2026). Juntamos com a da Bacia do Itanguá sem contar duas vezes: <span id="cid-total">1.494</span> registros, <span id="cid-n2">1.386</span> com a rua achada no mapa.</p>
-          <p id="cid-cheia-txt"><b>A cheia de janeiro de 2024:</b> de 20 a 29/01/2024 o Rio Sorocaba e os córregos transbordaram. Dos 908 chamados com a rua achada, 80% caem no risco alto e 91% no alto ou médio.</p>
+          <p id="cid-cheia-txt"><b>A cheia de janeiro de 2024:</b> de 20 a 29/01/2024 a Defesa Civil registrou cerca de mil chamados, quase todos de inundação por cheia de curso d'água. Dos 908 chamados com a rua achada, 80% caem no risco alto e 91% no alto ou médio.</p>
           <p id="cid-carta"><b>Carta oficial:</b> 28% dos chamados caem em alguma classe da carta do IPT e do SGB.</p>
           <p id="cid-local"><b>Comparando só com as ruas vizinhas</b> (a até 1 km de algum chamado): 14% delas estão no risco alto, e ele pega 73% dos chamados: 5,1× o acaso.</p>
           <p><b>Cuidado:</b> mais da metade dos chamados vem de uma semana e de poucos bairros, e uma rua com muitas casas atingidas soma muitos chamados. 2025 veio com só 10 registros.</p>
@@ -1008,7 +1008,7 @@ label.campo .l b{color:var(--ink);font-weight:600}
         $('cid-novas').textContent = pct(nv.fracao_registros.alto);
         $('cid-n').textContent = mil(t.registros_considerados); $('cid-n2').textContent = mil(t.registros_considerados);
         $('cid-total').textContent = mil(l.registros_na_planilha);
-        texto('cid-cheia-txt', 'A cheia de janeiro de 2024: ', 'de 20 a 29/01/2024 o Rio Sorocaba e os córregos transbordaram. Dos ' +
+        texto('cid-cheia-txt', 'A cheia de janeiro de 2024: ', 'de 20 a 29/01/2024 a Defesa Civil registrou cerca de mil chamados, quase todos de inundação por cheia de curso d\'água. Dos ' +
           mil(ch.registros_considerados) + ' chamados com a rua achada, ' + pct(ch.fracao_registros.alto) + ' caem no risco alto e ' +
           pct(ch.fracao_registros.alto + ch.fracao_registros.medio) + ' no alto ou médio.');
         texto('cid-carta', 'Carta oficial: ', pct(1 - g.todas.carta.cidade.fracao_registros.fora) +

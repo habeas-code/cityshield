@@ -18,7 +18,7 @@ Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com
 > **Working today:** flood risk computed from the terrain for the whole city (HAND method on the ANADEM 30 m terrain model), tested four times against reality:
 >
 > - **2022–2023 Civil Defense records:** 74% fall in the high-risk zones, which hold only 12% of the city's streets (6× chance).
-> - **1,386 official Civil Defense calls from 2021–2026, citywide,** which the map never saw (obtained through a freedom-of-information request): **73% fall in the high-risk zones (5.9× chance); 80% during the January 2024 flood** of the Sorocaba River.
+> - **1,386 official Civil Defense calls from 2021–2026, citywide,** which the map never saw (obtained through a freedom-of-information request): **73% fall in the high-risk zones (5.9× chance); 80% during the January 2024 flood**.
 > - **Floods that happened after the map was finished:** official Civil Defense data, obtained through a freedom-of-information request, list 102 flood calls between 8 and 12 Nov 2026, the days right after the map was built. **89% of them fell in high or medium risk zones (30% of the streets); the official 2015 flood map covered 33%.**
 > - **Streets the map had never seen** (not in the 2022–2023 reports): 72% of their official records fall in the high-risk zones (5.8× chance).
 >
