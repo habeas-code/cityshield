@@ -121,13 +121,13 @@
 <section id="validacao">
   <div class="largura">
     <p class="rotulo">O mapa acerta?</p>
-    <h2>Testamos o mapa contra o que já aconteceu. <span class="verde">Três vezes.</span></h2>
+    <h2>Testamos o mapa contra o que já aconteceu. <span class="verde">Até com chamados que ele nunca viu.</span></h2>
     <div class="fatos" style="margin-top:28px">
       <div class="fato"><b class="n" id="i-v-reg">74%</b><p>dos registros da Defesa Civil de 2022–2023 caem no <strong>risco alto</strong> calculado pelo relevo, que reúne só <span id="i-v-ruas">12%</span> das ruas da cidade: <span id="i-v-vezes">6,0</span> vezes o acaso.</p></div>
+      <div class="fato"><b class="n" id="i-c-reg">73%</b><p>dos <span id="i-c-n">1.386</span> chamados oficiais de 2021 a 2026 da <strong>cidade inteira</strong> caíram no risco alto. O mapa só tinha sido conferido com os de 2022–2023. Na <strong>cheia de janeiro de 2024</strong>, <span id="i-c-cheia">80%</span>.</p></div>
       <div class="fato"><b class="n" id="i-l-reg">89%</b><p>dos <span id="i-l-n">102</span> chamados de 8 a 12 de novembro de 2026, <strong>depois de o mapa ficar pronto</strong>, caíram no risco alto ou médio. A carta oficial de inundação (IPT/SGB, 2015) marcou <span id="i-l-carta">33%</span> deles.</p></div>
-      <div class="fato"><b class="n" id="i-l-local">2,6×</b><p>o acaso, <strong>mesmo comparando só com as ruas vizinhas</strong>, que já são mais baixas que a média da cidade (<span id="i-l-local-ruas">35%</span> delas no risco alto ou médio).</p></div>
     </div>
-    <p class="nota">É a coincidência entre o relevo e onde alagou, não a previsão da próxima enchente. Os chamados de novembro vieram da Prefeitura, pela Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13), e cobrem uma região da cidade: é um caso real, não uma média de Sorocaba. <a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a>.</p>
+    <p class="nota">É a coincidência entre o relevo e onde alagou, não a previsão da próxima enchente. Os chamados de 2021–2026 vieram da Prefeitura, pela Lei de Acesso à Informação (Fala.BR nº 03959.2026.000348-13). Mesmo comparando só com as ruas vizinhas aos chamados, que já são mais baixas que a média da cidade, o risco alto pega <span id="i-c-local">5,1</span> vezes mais chamados que o acaso. <a href="https://github.com/habeas-code/cityshield/blob/main/docs/validacao.md">Como foi feito e limitações</a>.</p>
     <p class="fonte">Fontes: Defesa Civil de Sorocaba (relatórios 2022–2023 e registros 2021–2026 via LAI); IPT e Serviço Geológico do Brasil, carta de suscetibilidade a inundações (2015); OpenStreetMap.</p>
   </div>
 </section>
@@ -239,15 +239,17 @@
     por('i-v-reg', pct(c.fracao_registros.alto)); por('i-v-ruas', pct(c.fracao_ruas.alto));
     por('i-v-vezes', vez(c.vezes_acima_do_acaso_alto));
   }).catch(function () {});
+  fetch('dados/lai_defesa_civil_cidade.json').then(function (r) { return r.json(); }).then(function (l) {
+    var t = l.grupos.todas.hand.cidade;
+    por('i-c-reg', pct(t.fracao_registros.alto)); por('i-c-n', Math.round(t.registros_considerados).toLocaleString('pt-BR'));
+    por('i-c-cheia', pct(l.grupos.cheia_jan_2024.hand.cidade.fracao_registros.alto));
+    por('i-c-local', vez(l.comparacao_local.regiao.todas.hand.cidade.vezes_acima_do_acaso_alto));
+  }).catch(function () {});
   fetch('dados/lai_defesa_civil.json').then(function (r) { return r.json(); }).then(function (l) {
     var am = function (x) { return x.alto + x.medio; };
     var d = l.grupos.depois_do_mapa, h = d.hand.cidade, k = d.carta.cidade;
     por('i-l-reg', pct(am(h.fracao_registros))); por('i-l-n', Math.round(h.registros_considerados));
     por('i-l-carta', pct(1 - k.fracao_registros.fora));
-    if (l.comparacao_local) {
-      var rl = l.comparacao_local.regiao.depois_do_mapa.hand.cidade;
-      por('i-l-local', vez(rl.vezes_acima_do_acaso_alto_medio) + '×'); por('i-l-local-ruas', pct(am(rl.fracao_ruas)));
-    }
   }).catch(function () {});
 
   // Satélite Esri World Imagery (imagem de alta resolução; créditos no botão ⓘ)

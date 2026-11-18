@@ -1,0 +1,532 @@
+data,via_planilha,bairro,tipo,registros,via_osm,lon,lat,no_relatorio_2022_23
+2021-08-28,José Vieira Barrada,Jardim Itapemirim,inundação,2,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2021-12-31,"Viela 1 , 2, 3 e 8",Jardim Itapemirim,inundação,1,,,,
+2022-01-01,Alpheu Castro Santos,,inundação,1,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2022-01-01,Eugênia de Oliveira Cirne,Jardim Itapemirim,inundação,2,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2022-01-01,Oscar Harder,Jardim Marli,inundação,3,Rua Oscar Harder,-47.512121,-23.469062,sim
+2022-01-01,Rua Dois,Jardim Itapemirim,inundação,1,Rua Dois,-47.503263,-23.480882,nao
+2022-01-01,Rua Três,Jardim Itapemirim,inundação,1,Rua Três,-47.504701,-23.480474,nao
+2022-01-02,Anisio de Almeida,Vila Joao Romao,inundação,1,Rua Anísio de Almeida,-47.434335,-23.520144,nao
+2022-01-02,José Angelo Fazano,Parque Esmeralda,inundação,1,Rua José Ângelo Fazano,-47.496103,-23.49273,sim
+2022-01-03,João Francisco Neves,Vila Barcelona,inundação,1,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2022-01-03,Santa Cruz,Jardim Vera Cruz,inundação,1,Avenida Santa Cruz,-47.492945,-23.514214,nao
+2022-01-04,Eugênia de Oliveira Cirne,Jardim Itapemirim,inundação,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2022-01-04,João Francisco Neves,,alagamento,1,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2022-01-06,Bandeirantes,Brigadeiro Tobias,inundação,1,Avenida Bandeirantes,-47.369259,-23.507089,nao
+2022-01-06,Paulino Correa,Brigadeiro Tobias,inundação,1,Rua Paulino Côrrea,-47.370322,-23.507102,nao
+2022-01-06,Rodolfo Garcia,Brigadeiro Tobias,inundação,1,Rua Rodolfo Garcia,-47.370488,-23.502829,nao
+2022-01-06,Viela 203,Jardim Itapemirim,inundação,2,,,,
+2022-01-13,Rua Dois,Jardim Itapemirim,inundação,2,Rua Dois,-47.503263,-23.480882,nao
+2022-01-13,Viela 03,Jardim Itapemirim,inundação,1,,,,
+2022-01-13,Viela 203,Jardim Itapemirim,inundação,3,,,,
+2022-01-24,Rua Dezesseis,Vila Barao,inundação,1,Rua Dezesseis,-47.488833,-23.489126,nao
+2022-02-02,Doutor José Prestes,Vila Carvalho,inundação,1,,,,
+2022-02-02,Viela 203,Jardim Itapemirim,inundação,2,,,,
+2022-02-04,Viela 148,Jardim Itapemirim,inundação,1,,,,
+2022-03-07,Paulino Correa,Brigadeiro Tobias,inundação,1,Rua Paulino Côrrea,-47.370322,-23.507102,nao
+2022-03-12,Barão de Tibagy,Parque dos Espanhois,inundação,1,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2022-03-12,Dom Aguirre,Centro,inundação,1,Avenida Dom Aguirre,-47.452365,-23.501802,sim
+2022-03-12,Jorge Baccelli,Vila Rica,inundação,2,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2022-03-12,Láurico,Jardim Nova Esperanca,inundação,1,,,,
+2022-03-12,Mario Soave,Jardim Sao Marcos,inundação,1,Rua Mario Soave,-47.506561,-23.510027,nao
+2022-03-12,Nelson Augusto Gomes,Jardim Sao Paulo,inundação,1,Rua Nelson Augusto Gomes,-47.496335,-23.52609,sim
+2022-03-12,Tchecoslovaquia,Jardim Europa,inundação,1,Rua Tchecoslováquia,-47.485812,-23.513618,nao
+2022-03-13,Manoel Alves de Camargo,Vila Assis,inundação,3,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2022-03-15,Viterbina Cesar de Castro,Jardim Celeste,inundação,1,Rua Viterbina Cesar de Castro,-47.494227,-23.487954,nao
+2022-12-02,Maria das Graças Rodrigues dos Santos,Vila Minerao,inundação,1,Rua Maria das Graças Rodrigues dos Santos,-47.463863,-23.462723,nao
+2022-12-02,Oscar Harder,Jardim Marli,inundação,4,Rua Oscar Harder,-47.512121,-23.469062,sim
+2022-12-02,Professor João Doretto,Parque Esmeralda,inundação,1,Rua Professor João Doretto,-47.494451,-23.496357,sim
+2022-12-02,Viterbina Cesar de Castro,Jardim Aeroporto,inundação,2,Rua Viterbina Cesar de Castro,-47.494227,-23.487954,nao
+2022-12-03,Firmino Minelli,Jardim Hungares,inundação,1,Rua Firmino Minelli,-47.466902,-23.46877,sim
+2022-12-04,José Vieira Barrada,Jardim Itapemirim,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2022-12-13,Viterbina Cesar de Castro,Jardim Aeroporto,inundação,1,Rua Viterbina Cesar de Castro,-47.494227,-23.487954,nao
+2022-12-19,Viterbina Cesar de Castro,Jardim Aeroporto,inundação,1,Rua Viterbina Cesar de Castro,-47.494227,-23.487954,nao
+2022-12-28,Dinorah,Horto Florestal,alagamento,2,Dinorah,-47.50497,-23.445672,nao
+2022-12-28,Lindolfo Galvão,Vila Helena,alagamento,1,Rua Lindolfo Galvão,-47.495108,-23.471467,nao
+2023-01-10,Antidio de Oliveira Santos,Jardim Jatoba,enxurrada,9,Rua Antidio de Oliveira Santos,-47.414912,-23.414737,nao
+2023-01-10,Renato Gatti,Jardim Jatoba,enxurrada,1,Rua Renato Gatti,-47.413436,-23.41258,nao
+2023-01-23,João Malatesta,Brigadeiro Tobias,enxurrada,1,Rua João Malatesta,-47.365817,-23.507699,nao
+2023-01-23,Paulino Correa,Brigadeiro Tobias,enxurrada,2,Rua Paulino Côrrea,-47.370322,-23.507102,nao
+2023-01-24,Banho Turco,Brigadeiro Tobias,enxurrada,1,Banho Turco,-47.381159,-23.503439,nao
+2023-01-30,Antonio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2023-01-30,Reinaldo de Oliveira,Jardim Abaete,alagamento,1,Rua Reinaldo de Oliveira,-47.450557,-23.471693,sim
+2023-01-31,Antonio Gomes,Vila Mineirão,inundação,1,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2023-01-31,Antonio de Andrade,Jardim Faculdade,alagamento,1,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2023-01-31,Jorge Baccelli,Jardim Mathilde,alagamento,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2023-01-31,Jorge Baccelli,Jardim Mathilde,inundação,2,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2023-01-31,Lourenço Marins,Vila Rica,inundação,1,Rua Lourenço Marins,-47.435658,-23.486272,nao
+2023-01-31,Luiz Amaral Wagner,Jardim Mathilde,alagamento,2,Rua Professor Luiz Amaral Wagner,-47.440502,-23.49197,sim
+2023-01-31,Luiz Amaral Wagner,Jardim Pelegrino,inundação,1,Rua Professor Luiz Amaral Wagner,-47.440502,-23.49197,sim
+2023-02-01,Alfredo Fernandes,Brigadeiro Tobias,inundação,1,Rua Alfredo Fernandes,-47.373911,-23.507684,nao
+2023-02-01,João Mendes Gomes,Jardim Maria do Carmo,inundação,3,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2023-02-02,Júlio Alves Filho,Jardim Betania,inundação,1,Rua Julio Alves Filho,-47.506543,-23.45984,nao
+2023-02-06,Aparecida,Santa Rosalia,inundação,3,Rua Aparecida,-47.449373,-23.484094,nao
+2023-02-06,Lauro Pacheco,Jardim Mathilde,inundação,2,Rua Lauro Pacheco,-47.432197,-23.485648,sim
+2023-02-06,Marcello Scotto,Jardim Mathilde,inundação,2,Rua Marcelo Scotto,-47.432343,-23.485087,sim
+2023-02-06,Pedro Peres,Jardim Piratininga,inundação,2,Rua Pedro Peres,-47.431057,-23.493733,sim
+2023-02-12,Castelo Branco,Jardim Sandra,alagamento,1,Castelo Branco,-47.453517,-23.512532,nao
+2023-02-12,Pedro Lombardi,Vila Mineirão,alagamento,1,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2023-02-13,Maria Augusta da Silva,Brigadeiro Tobias,inundação,8,Rua Maria Augusta da Silva,-47.363617,-23.507749,sim
+2023-03-06,José Fontoura Costa,Caguacu,inundação,1,,,,
+2023-03-06,Manequinho Berto,Mato Dentro,inundação,1,,,,
+2023-03-10,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2023-03-10,Júlio Magalhães Junior,Vila Mineirão,enxurrada,1,Rua Júlio Magalhães Júnior,-47.463379,-23.468817,sim
+2023-03-10,Maria do Carmo Mendes,Jardim Marco Antonio,inundação,1,Rua Maria do Carmo Mendes,-47.44429,-23.470124,sim
+2023-03-10,Moreira Cesar,Jardim Los Angeles,inundação,1,Avenida Moreira César,-47.463604,-23.504851,nao
+2023-03-10,Oscar Pedroso Horta,Jardim Hungares,enxurrada,1,Rua Oscar Pedroso Horta,-47.466689,-23.470229,sim
+2023-03-10,Pedro Pegoretti,Jardim Hungares,inundação,3,Rua Pedro Pegoretti,-47.467976,-23.468548,sim
+2023-03-10,Pedro Peres,Jardim Piratininga,inundação,1,Rua Pedro Peres,-47.431057,-23.493733,sim
+2023-03-10,Tala Miguel,Jardim Juliana,enxurrada,3,Rua Tala Miguel,-47.459889,-23.482715,nao
+2023-03-10,Thomaz Cortez,Jardim Juliana,enxurrada,5,Avenida Doutor Thomaz Cortez,-47.46268,-23.48539,sim
+2023-03-14,,Vila Pinheiro,alagamento,1,,,,
+2023-03-14,Antonio Silva Saladino,Parque Vitoria Regia,inundação,1,Avenida Antonio Silva Saladino,-47.461113,-23.433923,nao
+2023-03-14,Gustavo Monteiro Filho,Jardim Pelegrino,alagamento,1,Rua Gustavo Monteiro Filho,-47.440136,-23.490599,sim
+2023-03-14,Maria do Carmo Mendes,Jardim Marco Antonio,inundação,1,Rua Maria do Carmo Mendes,-47.44429,-23.470124,sim
+2023-03-14,Professor José Odin de Arruda,Jardim Faculdade,alagamento,1,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2023-03-14,Saliba Motta,Jardim Pelegrino,alagamento,1,Rua Saliba Motta,-47.441312,-23.491216,nao
+2023-03-20,Egli dos Santos Moraes,Jardim Dois Coracoes,enxurrada,1,Rua Egli dos Santos Moraes,-47.438393,-23.464597,nao
+2023-04-14,Oscar Harder,Jardim Marli,inundação,1,Rua Oscar Harder,-47.512121,-23.469062,sim
+2023-04-18,Thomaz Cortez,Jardim Juliana,inundação,2,Avenida Doutor Thomaz Cortez,-47.46268,-23.48539,sim
+2023-10-07,Antidio de Oliveira Santos,Jardim Jatoba,inundação,1,Rua Antidio de Oliveira Santos,-47.414912,-23.414737,nao
+2023-10-07,Hortência Gonçalves da Cruz,Vila Dalmatas,inundação,1,Rua Hortência Gonçalves da Cruz,-47.375965,-23.39488,nao
+2023-10-08,Paulino Correa,Brigadeiro Tobias,inundação,1,Rua Paulino Côrrea,-47.370322,-23.507102,nao
+2024,,,inundação,3,,,,
+2024,Abner Pedroso de Alcantara,Jardim Guadalupe,inundação,1,Rua Abner Pedroso de Alcântara,-47.464313,-23.463805,sim
+2024,João Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01,,,inundação,1,,,,
+2024-01,,Jardim Guadalupe,inundação,9,,,,
+2024-01,,Jardim Itapemirim,inundação,1,,,,
+2024-01,,Jardim Marli,inundação,1,,,,
+2024-01,,Jardim Refugio,inundação,1,,,,
+2024-01,,Vila Joao Romao,inundação,2,,,,
+2024-01,Abner Pedroso de Alcantara,Vila Mineirão,inundação,2,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2024-01,Abílio Moyses,Vila Assis,inundação,1,Rua Abílio Moysés,-47.450536,-23.507196,nao
+2024-01,Adão Carolino,Jardim Itangua,inundação,1,Viela Adão Carolino,-47.504386,-23.50403,nao
+2024-01,Alpheu Castro Santos,Lopes de Oliveira,inundação,2,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2024-01,Angelo Henrique Dorelli,Jardim Guadalupe,inundação,1,Rua Ângelo Henrique Dorelli,-47.465045,-23.462487,nao
+2024-01,Antero José da Rosa,Vila Mineirão,inundação,1,Rua Antero José da Rosa,-47.462557,-23.467775,nao
+2024-01,Antonio Gomes,Jardim Antonio Gomes,inundação,2,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-01,Antonio Gomes,Jardim Marco Antonio,inundação,1,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-01,Artur Bernardes,Jardim Maria do Carmo,inundação,6,Avenida Doutor Artur Bernardes,-47.446316,-23.475229,nao
+2024-01,Artur Bernardes,Vila Gabriel,inundação,1,Avenida Doutor Artur Bernardes,-47.449466,-23.47958,nao
+2024-01,Atílio Silvano,Jardim Pacaembu,inundação,1,Rua Atílio Silvano,-47.480705,-23.46238,nao
+2024-01,Barão Vl R/10,Vila Barcelona,inundação,1,,,,
+2024-01,Barão de Tibagy,Vila Barcelona,inundação,6,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2024-01,Benedicto Wenceslau Mendes,Jardim Sao Paulo,inundação,2,Rua Benedicto Wenceslau Mendes,-47.492505,-23.525382,nao
+2024-01,Carlos Spanghero,Além Ponte,inundação,1,,,,
+2024-01,Carlos Spanghero,Jardim Mathilde,inundação,1,,,,
+2024-01,Castelo Branco,Jardim Sandra,inundação,6,Castelo Branco,-47.453517,-23.512532,nao
+2024-01,Diolindo Alves de Luz,Bairro dos Morros,inundação,2,Rua Diolindo Alves de Luz,-47.428349,-23.516914,nao
+2024-01,Dom Aguirre,Centro,inundação,1,Avenida Dom Aguirre,-47.452365,-23.501802,sim
+2024-01,Doutor Campos Salles,Vila Assis,inundação,2,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01,Elias Abud Dib,Jardim Marcelo Augusto,inundação,1,Rua Elias Abud Dib,-47.501361,-23.476535,nao
+2024-01,Elza Salvestro Bonilha,Jardim Mathilde,inundação,3,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2024-01,Eugênia de Oliveira Cirne,Lopes de Oliveira,inundação,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2024-01,Francisco Pintor Miranda,Vila Barcelona,inundação,1,Avenida Francisco Pintor Miranda,-47.442378,-23.518515,nao
+2024-01,Francisco Siedler,Parque Vitoria Regia,inundação,1,Rua Francisco Siedler,-47.452216,-23.432681,nao
+2024-01,Guido José Del Cistia,Jardim Abaete,inundação,1,Rua Guido José Del Cístia,-47.450384,-23.471171,sim
+2024-01,Heitor Ferreira Prestes,Parque Vitoria Regia,inundação,1,Rua Heitor Ferreira Prestes,-47.450699,-23.431586,sim
+2024-01,Heitor Ferreira Prestes,Parque Vitoria Regia Iii,inundação,1,Rua Heitor Ferreira Prestes,-47.450637,-23.431489,sim
+2024-01,Humberto Del Cistia,Vila Mineirão,inundação,1,Rua Humberto Del Cístia,-47.464777,-23.47232,nao
+2024-01,Ingracia Angrisani Gomes,Jardim Antonio Gomes,inundação,1,Rua Ingrácia Angrisani Gomes,-47.441634,-23.468643,sim
+2024-01,Ingracia Angrisani Gomes,Jardim Marco Antonio,inundação,2,Rua Ingrácia Angrisani Gomes,-47.441634,-23.468643,sim
+2024-01,Ingracia Angrisani Gomes,Jardim Maria do Carmo,inundação,4,Rua Ingrácia Angrisani Gomes,-47.441634,-23.468643,sim
+2024-01,Itu,Vila Barcelona,inundação,1,Itu,-47.441028,-23.517238,nao
+2024-01,Joaquim Ferreira Barbosa,Jardim Maria do Carmo,inundação,1,Rua Joaquim Ferreira Barbosa,-47.44798,-23.473426,sim
+2024-01,Jorge Baccelli,Além Ponte,inundação,2,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01,Jorge Tibiriçá de Piratininga,Vila Progresso,inundação,1,Rua Jorge Tibiriçá Piratininga,-47.449669,-23.482503,nao
+2024-01,José Angelo Alvarenga,Vila Assis,inundação,2,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2024-01,José Martinez Peres,Parque Vitoria Regia,inundação,2,Rua José Martinez Peres,-47.462371,-23.433172,sim
+2024-01,José Martinez Peres,Parque Vitoria Regia Iii,inundação,1,Rua José Martinez Peres,-47.450265,-23.431238,sim
+2024-01,José Mendes Gomes,Jardim Antonio Gomes,inundação,4,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01,José Mendes Gomes,Jardim Marco Antonio,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01,José Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01,José Parra Sanches,Lopes de Oliveira,inundação,2,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2024-01,José Vieira Barrada,Jardim Itapemirim,inundação,2,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-01,José Vieira Barrada,Jardim Tupinamba,inundação,1,Rua José Vieira Barrada,-47.498405,-23.483071,sim
+2024-01,João Francisco Neves,Vila Barcelona,inundação,2,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2024-01,João Gabriel Mendes,Jardim Maria do Carmo,inundação,3,Rua João Gabriel Mendes,-47.446679,-23.473423,sim
+2024-01,João Guariglia,Além Ponte,inundação,1,Rua João Guariglia,-47.434301,-23.486228,nao
+2024-01,João Mendes Gomes,Jardim Marco Antonio,inundação,1,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01,Lauro Pacheco,Além Ponte,inundação,1,Rua Lauro Pacheco,-47.432197,-23.485648,sim
+2024-01,Lauro Pacheco,Jardim Mathilde,inundação,1,Rua Lauro Pacheco,-47.432197,-23.485648,sim
+2024-01,Lauro Pacheco,Vila Rica,inundação,2,Rua Lauro Pacheco,-47.432197,-23.485648,sim
+2024-01,Lourenço Marins,Além Ponte,inundação,1,Rua Lourenço Marins,-47.435658,-23.486272,nao
+2024-01,Luiz,Centro,inundação,1,Luiz,-47.458716,-23.501203,nao
+2024-01,Luiz Amaral Wagner,Além Ponte,inundação,1,Rua Professor Luiz Amaral Wagner,-47.440502,-23.49197,sim
+2024-01,Manoel Alves de Camargo,Vila Assis,inundação,2,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2024-01,Maria do Carmo Mendes,Jardim Antonio Gomes,inundação,1,Rua Maria do Carmo Mendes,-47.443083,-23.470928,sim
+2024-01,Maria do Carmo Mendes,Jardim Maria do Carmo,inundação,3,Rua Maria do Carmo Mendes,-47.443083,-23.470928,sim
+2024-01,Miranda Azevedo,Centro,inundação,1,Rua Miranda Azevedo,-47.460999,-23.500643,nao
+2024-01,Olinda Alves Mendes,Jardim Antonio Gomes,inundação,1,Olinda Alves Mendes,-47.44184,-23.469627,nao
+2024-01,Orselio Pereira,Parque Vitoria Regia,inundação,1,Rua Orsélio Pereira,-47.457037,-23.432879,sim
+2024-01,Oscar Harder,Jardim Marli,inundação,7,Rua Oscar Harder,-47.512121,-23.469062,sim
+2024-01,Osório Antonio de Lima,Parque Vitoria Regia,inundação,2,Rua Osório Antônio de Lima,-47.45068,-23.433588,nao
+2024-01,Pedro Peres,Jardim Piratininga,inundação,6,Rua Pedro Peres,-47.431057,-23.493733,sim
+2024-01,Plautilia Sampogna da S. Angelotti,Jardim Abaete,inundação,1,Rua Playtilia Sampogna da Silva Angelotti,-47.450751,-23.472848,nao
+2024-01,Protassio de Camargo Sampaio,Lopes de Oliveira,inundação,1,Rua Protássio de Camargo Sampaio,-47.50014,-23.478581,sim
+2024-01,Santa Cruz,Centro,inundação,1,Rua Santa Cruz,-47.453068,-23.503705,nao
+2024-01,Silva Jardim,Vila Assis,inundação,3,Rua Silva Jardim,-47.449334,-23.512172,nao
+2024-01,Tatuí,Centro,inundação,1,,,,
+2024-01,Tatuí,Jardim Vergueiro,inundação,2,,,,
+2024-01-12,Mário Francisco de Paula,Vila Colorau 2,enxurrada,1,,,,
+2024-01-20,,Jardim Itapemirim,inundação,1,,,,
+2024-01-20,Castelo Branco,Jardim Sandra,alagamento,1,Castelo Branco,-47.453517,-23.512532,nao
+2024-01-20,Castelo Branco,Jardim Sandra,inundação,16,Castelo Branco,-47.453517,-23.512532,nao
+2024-01-20,Cândido Gravi de Freitas,Vila Joao Romao,enxurrada,1,Rua Cândido Gravi de Freitas,-47.430478,-23.521823,nao
+2024-01-20,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2024-01-20,Jorge Baccelli,Jardim Mathilde,alagamento,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01-20,João Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01-20,Orville Correia de Toledo,Jardim Abaete,alagamento,1,Rua Orville Correia de Toledo,-47.449862,-23.472822,sim
+2024-01-20,Oscar Harder,Jardim Marli,inundação,2,Rua Oscar Harder,-47.512121,-23.469062,sim
+2024-01-21,Diniz Góes da Silva,Parque Vitoria Regia Iii,inundação,1,Rua Diniz Goes da Silva,-47.459643,-23.42638,nao
+2024-01-21,Eugênia de Oliveira Cirne,Lopes de Oliveira,inundação,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2024-01-21,Heitor Ferreira Prestes,Parque Vitoria Regia Iii,inundação,1,Rua Heitor Ferreira Prestes,-47.450637,-23.431489,sim
+2024-01-21,Saliba Motta,Jardim Pelegrino,inundação,1,Rua Saliba Motta,-47.441312,-23.491216,nao
+2024-01-22,Antonio Furtado Lopes,Vila Mineirão,alagamento,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2024-01-22,Antonio Silva Saladino,Parque Vitoria Regia,inundação,18,Avenida Antonio Silva Saladino,-47.461113,-23.433923,nao
+2024-01-22,Antonio Silva Saladino,Parque Vitoria Regia Iii,inundação,1,Avenida Antonio Silva Saladino,-47.453806,-23.432927,nao
+2024-01-22,Artur Bernardes,Vila Gabriel,inundação,1,Avenida Doutor Artur Bernardes,-47.449466,-23.47958,nao
+2024-01-22,Castelo Branco,Jardim Sandra,inundação,1,Castelo Branco,-47.453517,-23.512532,nao
+2024-01-22,Cândido Rosa Ferreira,Jardim Novo Horizonte,inundação,1,Rua Cândido Rosa Ferreira,-47.488902,-23.464263,nao
+2024-01-22,D'abreu Medeiros,Além Ponte,inundação,2,Rua D'Abreu de Medeiros,-47.446549,-23.499344,nao
+2024-01-22,Eugênia de Oliveira Cirne,Jardim Marli,alagamento,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2024-01-22,Faria Lima,Jardim dos Estados,alagamento,1,Faria Lima,-47.475776,-23.521598,nao
+2024-01-22,Francisco Siedler,Parque Vitoria Regia Iii,inundação,13,Rua Francisco Siedler,-47.452216,-23.432681,nao
+2024-01-22,Heitor Ferreira Prestes,Parque Vitoria Regia Iii,inundação,8,Rua Heitor Ferreira Prestes,-47.450637,-23.431489,sim
+2024-01-22,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01-22,João Mendes Gomes,Jardim Maria do Carmo,alagamento,1,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01-22,Leopoldo Vieira,Vila Porcel,inundação,1,Rua Leopoldo Vieira,-47.443028,-23.48114,nao
+2024-01-22,Manoel Alves de Camargo,Vila Assis,alagamento,1,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2024-01-22,Orselio Pereira,Parque Vitoria Regia,inundação,9,Rua Orsélio Pereira,-47.457037,-23.432879,sim
+2024-01-22,Orselio Pereira,Parque Vitoria Regia Iii,inundação,2,Rua Orsélio Pereira,-47.452326,-23.432097,sim
+2024-01-22,Osório Antonio de Lima,Parque Vitoria Regia Iii,inundação,9,Rua Osório Antônio de Lima,-47.45068,-23.433588,nao
+2024-01-22,Victorio Escabia,Parque Vitoria Regia Iii,inundação,26,Rua Victorio Escabia,-47.45211,-23.433237,nao
+2024-01-23,,Além Ponte,inundação,1,,,,
+2024-01-23,Doutor Campos Salles,Vila Assis,inundação,2,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01-23,Jorge Baccelli,Além Ponte,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01-23,Washington Luiz,Jardim Faculdade,alagamento,1,Avenida Washington Luiz,-47.463167,-23.514466,nao
+2024-01-24,,Jardim Guadalupe,inundação,1,,,,
+2024-01-24,Abner Pedroso de Alcantara,Vila Mineirão,inundação,1,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2024-01-24,Abraham Lincoln,Jardim dos Estados,inundação,1,Avenida Abraham Lincoln,-47.476958,-23.519403,nao
+2024-01-24,Adolpho Goldman,Parque Vitoria Regia Ii,inundação,1,Rua Adolpho Goldman,-47.450235,-23.426611,nao
+2024-01-24,Antonio Furtado Lopes,Vila Mineirão,inundação,8,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2024-01-24,Antonio Silva Saladino,Parque Vitoria Regia,inundação,12,Avenida Antonio Silva Saladino,-47.461113,-23.433923,nao
+2024-01-24,Barão de Tibagy,Vila Barcelona,inundação,39,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2024-01-24,Doutor Campos Salles,Vila Assis,inundação,35,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01-24,Elza Salvestro Bonilha,Vila Rica,inundação,1,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2024-01-24,Eugênio Marte,Jardim Abaete,inundação,2,Rua Eugênio Marte,-47.451029,-23.474764,sim
+2024-01-24,Francisco Martins Cabrera,Jardim Abaete,inundação,3,Rua Francisco Matins Cabrera,-47.449809,-23.471864,nao
+2024-01-24,Francisco Pintor Miranda,Vila Barcelona,inundação,3,Avenida Francisco Pintor Miranda,-47.442378,-23.518515,nao
+2024-01-24,Francisco Siedler,Parque Vitoria Regia Iii,inundação,2,Rua Francisco Siedler,-47.452216,-23.432681,nao
+2024-01-24,Heitor Ferreira Prestes,Parque Vitoria Regia,inundação,1,Rua Heitor Ferreira Prestes,-47.450699,-23.431586,sim
+2024-01-24,Heitor Ferreira Prestes,Parque Vitoria Regia Iii,inundação,38,Rua Heitor Ferreira Prestes,-47.450637,-23.431489,sim
+2024-01-24,José Angelo Alvarenga,Vila Barcelona,inundação,5,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2024-01-24,José Martinez Peres,Parque Vitoria Regia,inundação,7,Rua José Martinez Peres,-47.462371,-23.433172,sim
+2024-01-24,José Mendes,Jardim Maria do Carmo,inundação,2,Rua José Mendes,-47.453754,-23.478594,nao
+2024-01-24,João Clóvis Cunha,Jardim Abaete,inundação,10,Rua João Clóvis Cunha,-47.448985,-23.471848,nao
+2024-01-24,João Francisco Neves,Vila Barcelona,inundação,4,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2024-01-24,Manoel Alves de Camargo,Vila Assis,alagamento,1,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2024-01-24,Orselio Pereira,Parque Vitoria Regia,inundação,6,Rua Orsélio Pereira,-47.457037,-23.432879,sim
+2024-01-24,Osório Antonio de Lima,Parque Vitoria Regia,inundação,4,Rua Osório Antônio de Lima,-47.45068,-23.433588,nao
+2024-01-24,Plautilia Sampogna da S. Angelotti,Jardim Abaete,inundação,1,Rua Playtilia Sampogna da Silva Angelotti,-47.450751,-23.472848,nao
+2024-01-24,Victorio Escabia,Parque Vitoria Regia Iii,inundação,2,Rua Victorio Escabia,-47.45211,-23.433237,nao
+2024-01-25,,Jardim Abaete,inundação,1,,,,
+2024-01-25,,Jardim Guadalupe,inundação,16,,,,
+2024-01-25,,Jardim Marli,inundação,2,,,,
+2024-01-25,Alpheu Castro Santos,Lopes de Oliveira,inundação,1,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2024-01-25,Antonio Furtado Lopes,Vila Mineirão,inundação,2,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2024-01-25,Antonio Gomes,Jardim Marco Antonio,inundação,1,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-01-25,Antonio Gomes,Jardim Maria do Carmo,inundação,12,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-01-25,Antonio de Andrade,Jardim Faculdade,inundação,3,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2024-01-25,Artur Bernardes,Jardim Maria do Carmo,inundação,21,Avenida Doutor Artur Bernardes,-47.446316,-23.475229,nao
+2024-01-25,Barão de Tibagy,Vila Barcelona,inundação,5,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2024-01-25,Benedito Cirino da Silva Filho,Vila Barao,inundação,1,Rua Benedicto Cirino Silva Filho,-47.484046,-23.488564,nao
+2024-01-25,Bernardino José de Barros,Jardim Maria do Carmo,inundação,1,Rua Bernardino José de Barros,-47.447909,-23.477408,nao
+2024-01-25,Castelo Branco,Jardim Sandra,inundação,6,Castelo Branco,-47.453517,-23.512532,nao
+2024-01-25,Doutor Campos Salles,Vila Assis,inundação,2,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01-25,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2024-01-25,Eugênio Marte,Jardim Abaete,inundação,19,Rua Eugênio Marte,-47.451029,-23.474764,sim
+2024-01-25,Francisco Martins Cabrera,Jardim Abaete,inundação,2,Rua Francisco Matins Cabrera,-47.449809,-23.471864,nao
+2024-01-25,Francisco Pintor Miranda,Vila Barcelona,inundação,10,Avenida Francisco Pintor Miranda,-47.442378,-23.518515,nao
+2024-01-25,Francisco Siedler,Parque Vitoria Regia,inundação,1,Rua Francisco Siedler,-47.452216,-23.432681,nao
+2024-01-25,Francisco Siedler,Parque Vitoria Regia Iii,inundação,1,Rua Francisco Siedler,-47.452216,-23.432681,nao
+2024-01-25,Guilherme Tersi,Vila Mineirão,inundação,1,Rua Guilherme Tersi,-47.461355,-23.462524,nao
+2024-01-25,Itu,Vila Barcelona,inundação,6,Itu,-47.441028,-23.517238,nao
+2024-01-25,Joaquim Ferreira Barbosa,Jardim Maria do Carmo,inundação,3,Rua Joaquim Ferreira Barbosa,-47.44798,-23.473426,sim
+2024-01-25,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01-25,José Angelo Alvarenga,Vila Assis,inundação,1,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2024-01-25,José Angelo Alvarenga,Vila Barcelona,inundação,2,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2024-01-25,José Martinez Peres,Parque Vitoria Regia,inundação,3,Rua José Martinez Peres,-47.462371,-23.433172,sim
+2024-01-25,José Mendes,Jardim Maria do Carmo,inundação,14,Rua José Mendes,-47.453754,-23.478594,nao
+2024-01-25,José Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01-25,José Vieira Barrada,Jardim Itapemirim,inundação,5,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-01-25,João Clóvis Cunha,Jardim Abaete,inundação,10,Rua João Clóvis Cunha,-47.448985,-23.471848,nao
+2024-01-25,João Gabriel Mendes,Jardim Maria do Carmo,inundação,16,Rua João Gabriel Mendes,-47.446679,-23.473423,sim
+2024-01-25,João Mendes Gomes,Jardim Maria do Carmo,inundação,23,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01-25,Lauro Pacheco,Além Ponte,inundação,2,Rua Lauro Pacheco,-47.432197,-23.485648,sim
+2024-01-25,Lourenço Marins,Além Ponte,inundação,4,Rua Lourenço Marins,-47.435658,-23.486272,nao
+2024-01-25,Manoel Alves de Camargo,Vila Assis,inundação,3,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2024-01-25,Maria do Carmo Mendes,Jardim Maria do Carmo,inundação,8,Rua Maria do Carmo Mendes,-47.443083,-23.470928,sim
+2024-01-25,Marilda de Oliveira,Jardim Maria do Carmo,inundação,1,Rua Marilda de Oliveira,-47.444693,-23.470679,sim
+2024-01-25,Orselio Pereira,Parque Vitoria Regia,inundação,3,Rua Orsélio Pereira,-47.457037,-23.432879,sim
+2024-01-25,Orville Correia de Toledo,Jardim Abaete,inundação,29,Rua Orville Correia de Toledo,-47.449862,-23.472822,sim
+2024-01-25,Osório Antonio de Lima,Parque Vitoria Regia,inundação,2,Rua Osório Antônio de Lima,-47.45068,-23.433588,nao
+2024-01-25,Pedro Lombardi,Vila Mineirão,inundação,1,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2024-01-25,Piratininga,Jardim Faculdade,inundação,1,Piratininga,-47.461168,-23.511771,nao
+2024-01-25,Plautilia Sampogna da S. Angelotti,Jardim Abaete,inundação,29,Rua Playtilia Sampogna da Silva Angelotti,-47.450751,-23.472848,nao
+2024-01-25,Professor José Odin de Arruda,Jardim Faculdade,inundação,1,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2024-01-25,Reinaldo de Oliveira,Jardim Abaete,inundação,21,Rua Reinaldo de Oliveira,-47.450557,-23.471693,sim
+2024-01-25,Rua Quatro,Jardim Itapemirim,inundação,1,Rua Quatro,-47.498372,-23.483043,nao
+2024-01-25,Schirley Garcia da Silva,Jardim Abaete,inundação,28,Rua Schirley Garcia da Silva,-47.450857,-23.473406,nao
+2024-01-25,Tatuí,Jardim Faculdade,inundação,1,Tatuí,-47.465668,-23.51479,nao
+2024-01-25,Victorio Escabia,Parque Vitoria Regia Iii,inundação,4,Rua Victorio Escabia,-47.45211,-23.433237,nao
+2024-01-26,,Jardim Guadalupe,inundação,19,,,,
+2024-01-26,,Jardim Marco Antonio,inundação,1,,,,
+2024-01-26,Abner Pedroso de Alcantara,Jardim Guadalupe,inundação,1,Rua Abner Pedroso de Alcântara,-47.464313,-23.463805,sim
+2024-01-26,Abílio Moyses,Vila Assis,inundação,1,Rua Abílio Moysés,-47.450536,-23.507196,nao
+2024-01-26,Adolpho Goldman,Parque Vitoria Regia Ii,inundação,16,Rua Adolpho Goldman,-47.450235,-23.426611,nao
+2024-01-26,Adão Carolino,Jardim Itangua,inundação,1,Viela Adão Carolino,-47.504386,-23.50403,nao
+2024-01-26,Alpheu Castro Santos,Lopes de Oliveira,inundação,2,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2024-01-26,Antonio Furtado Lopes,Vila Mineirão,inundação,5,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2024-01-26,Antonio Gatto da Fonseca,Parque Vitoria Regia Ii,inundação,1,Rua Antônio Gatto da Fonseca,-47.45068,-23.426206,nao
+2024-01-26,Antonio de Andrade,Jardim Faculdade,inundação,2,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2024-01-26,Barão de Tibagy,Vila Barcelona,inundação,7,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2024-01-26,Capitão Alfredo Cardoso,Jardim Faculdade,inundação,1,Rua Capitão Alfredo Cardoso,-47.455596,-23.508389,nao
+2024-01-26,Castelo Branco,Jardim Sandra,inundação,2,Castelo Branco,-47.453517,-23.512532,nao
+2024-01-26,Cândido Rosa Ferreira,Jardim Novo Horizonte,inundação,1,Rua Cândido Rosa Ferreira,-47.488902,-23.464263,nao
+2024-01-26,Damásio Salvador da Silva,Bairro dos Morros,inundação,1,Rua Damasio Salvador da Silva,-47.427351,-23.518485,nao
+2024-01-26,Doutor Campos Salles,Vila Assis,inundação,4,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01-26,Eugênia de Oliveira Cirne,Lopes de Oliveira,inundação,2,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2024-01-26,Eugênio Marte,Jardim Abaete,inundação,16,Rua Eugênio Marte,-47.451029,-23.474764,sim
+2024-01-26,Faria Lima,Jardim dos Estados,inundação,1,Faria Lima,-47.475776,-23.521598,nao
+2024-01-26,Faustino Rodrigues Martins,Vila Mineirão,inundação,2,Rua Faustino Rodrigues Martins,-47.463161,-23.467307,nao
+2024-01-26,Guido José Del Cistia,Jardim Abaete,inundação,20,Rua Guido José Del Cístia,-47.450384,-23.471171,sim
+2024-01-26,Ingracia Angrisani Gomes,Jardim Marco Antonio,inundação,1,Rua Ingrácia Angrisani Gomes,-47.441634,-23.468643,sim
+2024-01-26,Jorge Baccelli,Jardim Mathilde,inundação,2,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-01-26,José Angelo Alvarenga,Vila Assis,inundação,2,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2024-01-26,José Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01-26,José Parra Sanches,Lopes de Oliveira,inundação,1,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2024-01-26,José Vieira Barrada,Jardim Itapemirim,inundação,3,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-01-26,João Francisco Neves,Vila Barcelona,inundação,1,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2024-01-26,João Mendes Gomes,,inundação,1,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01-26,João Mendes Gomes,Jardim Maria do Carmo,inundação,5,Rua João Mendes Gomes,-47.442336,-23.469755,sim
+2024-01-26,Lázaro Lopes de Oliveira,Jacutinga,inundação,1,,,,
+2024-01-26,Manoel Alves de Camargo,Vila Assis,inundação,1,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2024-01-26,Marcilio Dias,Vila Assis,inundação,1,Rua Marcilio Dias,-47.449272,-23.512336,nao
+2024-01-26,Nancy Rodrigues,Jardim Abaete,inundação,1,Rua Nancy Rodrigues,-47.451639,-23.474457,nao
+2024-01-26,Orville Correia de Toledo,Jardim Abaete,inundação,6,Rua Orville Correia de Toledo,-47.449862,-23.472822,sim
+2024-01-26,Oscar Harder,Jardim Marli,inundação,1,Rua Oscar Harder,-47.512121,-23.469062,sim
+2024-01-26,Professor José Odin de Arruda,Jardim Faculdade,inundação,2,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2024-01-26,Reinaldo de Oliveira,Jardim Abaete,inundação,8,Rua Reinaldo de Oliveira,-47.450557,-23.471693,sim
+2024-01-26,Rua Dois,Jardim Itapemirim,inundação,1,Rua Dois,-47.503263,-23.480882,nao
+2024-01-26,Silva Jardim,Vila Assis,inundação,1,Rua Silva Jardim,-47.449334,-23.512172,nao
+2024-01-26,Tobias Avino,Central Parque,inundação,1,Rua Doutor Tobias Avino,-47.501806,-23.512793,nao
+2024-01-27,,Jardim Aeroporto,inundação,1,,,,
+2024-01-27,Adão Carolino,Jardim Itangua,inundação,1,Viela Adão Carolino,-47.504386,-23.50403,nao
+2024-01-27,Antonio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2024-01-27,Benedito Mário Calazans,Jardim Nova Esperanca,inundação,1,Rua Monsenhor Benedito Mario Calazans,-47.491422,-23.491126,nao
+2024-01-27,Cícero,Bairro dos Morros,inundação,1,,,,
+2024-01-27,Dom Aguirre,Além Ponte,inundação,1,Avenida Dom Aguirre,-47.441932,-23.490783,sim
+2024-01-27,Dorothy de Oliveira,Jardim Ipe,inundação,1,Rua Dorothy de Oliveira,-47.421574,-23.489919,nao
+2024-01-27,Faria Lima,Jardim dos Estados,inundação,1,Faria Lima,-47.475776,-23.521598,nao
+2024-01-27,Felippe Moyses Betti Filho,Ipanema do Meio,inundação,1,Rua Felippe Moyses Betti Filho,-47.548002,-23.521423,nao
+2024-01-27,Itanguá,Vila Barao,inundação,1,Rua Itanguá,-47.485455,-23.497466,nao
+2024-01-27,José Mendes Gomes,Jardim Marco Antonio,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01-27,José Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-01-27,José Vieira Barrada,Jardim Itapemirim,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-01-27,Leopoldo Vieira,Vila Porcel,inundação,1,Rua Leopoldo Vieira,-47.443028,-23.48114,nao
+2024-01-27,Leopoldo Vieira,Vila Progresso,inundação,1,Rua Leopoldo Vieira,-47.443028,-23.48114,nao
+2024-01-27,Manoel de Camargo Sampaio,Vila Helena,inundação,1,Avenida Manoel de Camargo Sampaio,-47.495984,-23.474445,nao
+2024-01-27,Maria Augusta da Silva,Brigadeiro Tobias,inundação,2,Rua Maria Augusta da Silva,-47.363617,-23.507749,sim
+2024-01-27,Pedro Lombardi,Vila Mineirão,inundação,1,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2024-01-27,Professor João Doretto,Parque Esmeralda,inundação,1,Rua Professor João Doretto,-47.494451,-23.496357,sim
+2024-01-29,Adão Carolino,Jardim Itangua,enxurrada,1,Viela Adão Carolino,-47.504386,-23.50403,nao
+2024-01-29,Antonio de Andrade,Jardim Pamorama,inundação,1,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2024-01-29,Banho Turco,Brigadeiro Tobias,enxurrada,1,Banho Turco,-47.381159,-23.503439,nao
+2024-01-29,Chile,Vila Barcelona,inundação,1,Rua Chile,-47.440603,-23.520377,nao
+2024-01-29,Doutor Campos Salles,Vila Assis,inundação,1,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2024-01-29,Elza Salvestro Bonilha,Jardim Mathilde,inundação,1,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2024-01-29,José Vieira Barrada,Jardim Itapemirim,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-01-29,Jundiai,Jardim Saira,inundação,1,Jundiai,-47.434631,-23.481838,nao
+2024-01-30,Itu,Vila Barcelona,inundação,1,Itu,-47.441028,-23.517238,nao
+2024-02-01,,Vila Uniao,inundação,1,,,,
+2024-02-02,Alfredo Fernandes,Brigadeiro Tobias,inundação,1,Rua Alfredo Fernandes,-47.373911,-23.507684,nao
+2024-02-03,Reinaldo de Oliveira,Jardim Abaete,inundação,1,Rua Reinaldo de Oliveira,-47.450557,-23.471693,sim
+2024-02-03,Rua Dois,Jardim Itapemirim,inundação,1,Rua Dois,-47.503263,-23.480882,nao
+2024-02-10,Luiz Amaral Wagner,Jardim Pelegrino,inundação,1,Rua Professor Luiz Amaral Wagner,-47.440502,-23.49197,sim
+2024-02-10,Pedro Peres,Jardim Piratininga,inundação,1,Rua Pedro Peres,-47.431057,-23.493733,sim
+2024-02-10,Piratininga,Jardim Faculdade,inundação,1,Piratininga,-47.461168,-23.511771,nao
+2024-02-12,Elza Salvestro Bonilha,Além Ponte,inundação,1,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2024-02-12,Henrique Dias,Vila Hortencia,inundação,1,Rua Henrique Dias,-47.450537,-23.50526,nao
+2024-02-15,Benedicto Wenceslau Mendes,Jardim Nova Manchester,inundação,2,Rua Benedicto Wenceslau Mendes,-47.492505,-23.525382,nao
+2024-02-17,Ananias Pires do Amaral,Vila Sao Pedro,inundação,1,Rua Ananias Pires do Amaral,-47.424187,-23.488279,nao
+2024-02-21,Rua Dois,Jardim Itapemirim,inundação,2,Rua Dois,-47.503263,-23.480882,nao
+2024-02-22,Artur Bernardes,Jardim Maria do Carmo,alagamento,1,Avenida Doutor Artur Bernardes,-47.446316,-23.475229,nao
+2024-02-22,José Mendes Gomes,Jardim Santo Antonio,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-02-22,João Clóvis Cunha,Jardim Abaete,inundação,1,Rua João Clóvis Cunha,-47.448985,-23.471848,nao
+2024-02-22,João Gabriel Mendes,Jardim Maria do Carmo,alagamento,1,Rua João Gabriel Mendes,-47.446679,-23.473423,sim
+2024-02-22,Leopoldo Vieira,Vila Progresso,alagamento,1,Rua Leopoldo Vieira,-47.443028,-23.48114,nao
+2024-02-25,Elza Salvestro Bonilha,Jardim Mathilde,inundação,1,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2024-02-26,Abílio Moyses,Além Ponte,inundação,1,Rua Abílio Moysés,-47.450536,-23.507196,nao
+2024-02-28,,Jardim Guadalupe,inundação,1,,,,
+2024-02-29,,Jacutinga,inundação,1,,,,
+2024-02-29,,Jardim Guadalupe,inundação,1,,,,
+2024-02-29,Alpheu Castro Santos,Lopes de Oliveira,inundação,2,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2024-02-29,José Vieira Barrada,Jardim Itapemirim,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-02-29,Oscar Harder,Jardim Marli,inundação,1,Rua Oscar Harder,-47.512121,-23.469062,sim
+2024-02-29,Rua Sete,Jacutinga,inundação,1,Travessa Sete,-47.525036,-23.460555,nao
+2024-03-05,João de Oliveira Cassu,Eden,enxurrada,1,Rua João de Oliveira Cassu,-47.418789,-23.419715,nao
+2024-03-06,Antonio Gomes,Jardim Antonio Gomes,inundação,1,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-03-13,Rua Três,Jardim Itapemirim,inundação,1,Rua Três,-47.504701,-23.480474,nao
+2024-03-21,Maria do Carmo Mendes,Jardim Marco Antonio,inundação,1,Rua Maria do Carmo Mendes,-47.44429,-23.470124,sim
+2024-04-02,José Vieira Barrada,,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-04-03,,Jardim Guadalupe,inundação,1,,,,
+2024-05-21,José Martinez Peres,Parque Vitoria Regia Iii,inundação,1,Rua José Martinez Peres,-47.450265,-23.431238,sim
+2024-06-04,José Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-10-23,Ananias Pires do Amaral,Vila Sao Pedro,enxurrada,1,Rua Ananias Pires do Amaral,-47.424187,-23.488279,nao
+2024-10-23,Eugênia de Oliveira Cirne,Jardim Marli,enxurrada,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2024-10-23,Josè Martins Peres,Parque Vitoria Regia,enxurrada,1,Rua José Martinez Peres,-47.462371,-23.433172,sim
+2024-10-23,Marcello Scotto,Jardim Mathilde,enxurrada,1,Rua Marcelo Scotto,-47.432343,-23.485087,sim
+2024-10-23,Maria das Graças Rodrigues dos Santos,Jardim Guadalupe,enxurrada,1,Rua Maria das Graças Rodrigues dos Santos,-47.463863,-23.462723,nao
+2024-10-23,Pedro Peres,Jardim Piratininga,enxurrada,1,Rua Pedro Peres,-47.431057,-23.493733,sim
+2024-10-23,Projetada I,Parque Sao Bento Ii,enxurrada,1,Projetada I,-47.505749,-23.426307,nao
+2024-11-05,Fernão Dias,Vila Barao,enxurrada,1,Rua Fernão Dias,-47.488195,-23.492561,nao
+2024-11-05,São Roquinho,Brigadeiro Tobias,enxurrada,1,São Roquinho,-47.343724,-23.503038,nao
+2024-11-07,Josè Vieira Barrada,Jardim Itapemirim,inundação,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2024-11-08,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-11-08,Josè Mendes Gomes,Jardim Maria do Carmo,inundação,1,Rua José Mendes Gomes,-47.441986,-23.469164,sim
+2024-11-08,Oscar Harder,Jardim Marli,inundação,2,Rua Oscar Harder,-47.512121,-23.469062,sim
+2024-11-09,Carlos Eduardo Scherman,Parque Vitoria Regia,alagamento,1,Rua Doutor Carlos Eduardo Schermann,-47.456813,-23.431825,nao
+2024-11-09,Jorge Baccelli,Jardim Mathilde,alagamento,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-11-09,Maria do Carmo Mendes,Jardim Maria do Carmo,alagamento,1,Rua Maria do Carmo Mendes,-47.443083,-23.470928,sim
+2024-11-09,Pedro Lombardi,Vila Mineirão,alagamento,2,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2024-11-11,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2024-11-12,Sylvio Fernandes de Oliveira,Parque Vitoria Regia Ii,inundação,1,Rua Sylvio Fernandes de Oliveira,-47.447848,-23.424391,nao
+2024-12-09,Antônio Gomes,Jardim Marco Antonio,inundação,1,Rua Antônio Gomes,-47.442812,-23.470292,sim
+2024-12-10,Cândido Figueiredo,Vila Hortencia,enxurrada,1,Rua Candido Figueiredo,-47.442166,-23.510793,nao
+2024-12-21,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2024-12-21,Guapiara,Vila Jardini,enxurrada,1,Rua Guapiara,-47.477542,-23.512044,nao
+2024-12-21,Jaçana,Vila Jardini,enxurrada,1,Rua Jaçana,-47.475417,-23.511121,nao
+2024-12-22,Guapiara,Vila Jardini,enxurrada,1,Rua Guapiara,-47.477542,-23.512044,nao
+2024-12-22,Jaçana,Vila Jardini,enxurrada,1,Rua Jaçana,-47.475417,-23.511121,nao
+2024-12-22,Lindholfo Silva Barros,Campininha,inundação,1,,,,
+2025-01-28,Jaçana,Vila Jardini,enxurrada,1,Rua Jaçana,-47.475417,-23.511121,nao
+2025-01-28,Jorge Baccelli,Jardim Mathilde,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2025-02-02,São Roquinho,Genebra,alagamento,1,São Roquinho,-47.343724,-23.503038,nao
+2025-02-03,Cataludo da Paixão Cearense,Vila Jardini,alagamento,1,Rua Catulo da Paixão Cearense,-47.476925,-23.509704,nao
+2025-02-18,Elza Salvestro Bonilha,Jardim Mathilde,inundação,2,Rua Professora Elza Salvestro Bonilha,-47.431744,-23.484523,nao
+2025-12-02,Antônio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2025-12-09,Humberto Machado,Jardim Humberto de Campos,enxurrada,1,Rua Humberto Machado,-47.485417,-23.498686,nao
+2025-12-09,Profº. João Doretto,Parque Esmeralda,alagamento,1,Rua Professor João Doretto,-47.494451,-23.496357,sim
+2025-12-15,José Vieira Barrada,Jardim Itapemirim,enxurrada,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2026-01-15,Karim Jammal,Jardim Vera Cruz,alagamento,1,Rua Karim Jamal,-47.495534,-23.51565,nao
+2026-01-16,Karim Jammal,Jardim Vera Cruz,alagamento,1,Rua Karim Jamal,-47.495534,-23.51565,nao
+2026-01-16,Laura Maiello Kook,Jardim Novo Mundo,alagamento,1,Rua Laura Maiello Kook,-47.506562,-23.53711,nao
+2026-03-08,,,alagamento,2,,,,
+2026-03-09,Barão de Tibagy,Vila Barcelona,inundação,1,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2026-03-09,Jorge Baccelli,Além Ponte,inundação,11,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2026-03-09,Lourenço Marins,,inundação,1,Rua Lourenço Marins,-47.434936,-23.485498,nao
+2026-03-09,Lourenço Marins,Além Ponte,inundação,3,Rua Lourenço Marins,-47.435658,-23.486272,nao
+2026-03-10,Barão de Tibagy,Vila Barcelona,inundação,16,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2026-03-10,Eulofia Mora Vieira,Vila Jardini,inundação,1,Rua Eulófia Môra Vieira,-47.479617,-23.508087,nao
+2026-03-10,José Ângelo Alvarenga,Vila Assis,inundação,2,Rua José Angelo Alvarenga,-47.443334,-23.516189,nao
+2026-03-10,João Francisco Neves,Vila Barcelona,inundação,2,Rua João Francisco Neves,-47.444045,-23.516145,sim
+2026-03-10,Marquês de Itu,Vila Barcelona,inundação,1,Rua Marquês de Itu,-47.440892,-23.517261,nao
+2026-03-10,Oscar Harder,Jardim Marli,inundação,1,Rua Oscar Harder,-47.512121,-23.469062,sim
+2026-03-10,Silva Jardim,Vila Assis,inundação,1,Rua Silva Jardim,-47.449334,-23.512172,nao
+2026-03-11,,Jardim Itapemirim,inundação,1,,,,
+2026-03-11,,Jardim Marli,inundação,1,,,,
+2026-03-11,Alpheu Castro Santos,Lopes de Oliveira,inundação,3,Rua Alpheu Castro Santos,-47.505526,-23.472438,nao
+2026-03-11,Barão de Tibagy,Vila Barcelona,alagamento,1,Rua Barão de Tibagy,-47.443334,-23.516189,nao
+2026-03-11,Doutor Campos Salles,Vila Assis,inundação,13,Rua Doutor Campos Salles,-47.448664,-23.511306,nao
+2026-03-11,Eugênia de Oliveira Cirne,Lopes de Oliveira,alagamento,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2026-03-11,Eugênia de Oliveira Cirne,Lopes de Oliveira,inundação,1,Rua Eugênia de Oliveira Cirne,-47.512387,-23.470176,sim
+2026-03-11,Eugênio Caserta,Jardim Nogueira,inundação,4,Rua Eugênio Caserta,-47.4948,-23.480542,nao
+2026-03-11,José Parra Sanches,Lopes de Oliveira,inundação,4,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2026-03-11,José Vieira Barrada,Jardim Itapemirim,alagamento,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2026-03-11,Oscar Harder,Jardim Marli,inundação,5,Rua Oscar Harder,-47.512121,-23.469062,sim
+2026-03-11,Oscar Harder,Vila Angelica,inundação,2,Rua Oscar Harder,-47.512121,-23.469062,sim
+2026-03-11,Rua Dois,Jardim Itapemirim,inundação,2,Rua Dois,-47.503263,-23.480882,nao
+2026-03-11,Rua Um,Jardim Itapemirim,inundação,1,Rua Um,-47.505569,-23.479175,nao
+2026-03-11,Santo Micheletti,Ipiranga,inundação,1,Rua Santo Micheletti,-47.508447,-23.500165,nao
+2026-03-12,,,inundação,1,,,,
+2026-03-12,Eugênio Caserta,Jardim Itapemirim,inundação,1,Rua Eugênio Caserta,-47.4948,-23.480542,nao
+2026-03-12,José Parra Sanches,Lopes de Oliveira,inundação,1,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2026-03-12,Rua Dois,Jardim Itapemirim,inundação,1,Rua Dois,-47.503263,-23.480882,nao
+2026-03-13,Antônio de Andrade,Jardim Faculdade,alagamento,1,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2026-03-13,Antônio de Andrade,Jardim Faculdade,inundação,1,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2026-03-13,Antônio de Andrade,Jardim Santa Lucinda,inundação,2,Rua Antônio de Andrade,-47.454405,-23.508831,sim
+2026-03-13,Barão de Piratininga,Jardim Faculdade,inundação,1,Rua Barão de Piratininga,-47.461038,-23.513486,nao
+2026-03-13,Bernardo Ferraz de Almeida,Jardim Faculdade,alagamento,1,Rua Bernardo Ferraz de Almeida,-47.454144,-23.509535,nao
+2026-03-13,Bernardo Ferraz de Almeida,Jardim Faculdade,inundação,1,Rua Bernardo Ferraz de Almeida,-47.454144,-23.509535,nao
+2026-03-13,Capitão Alfredo Cardoso,Jardim Faculdade,alagamento,1,Rua Capitão Alfredo Cardoso,-47.455596,-23.508389,nao
+2026-03-13,Capitão Alfredo Cardoso,Jardim Santa Lucinda,alagamento,1,Rua Capitão Alfredo Cardoso,-47.454027,-23.508106,nao
+2026-03-13,Capitão Alfredo Cardoso,Jardim Santa Lucinda,inundação,2,Rua Capitão Alfredo Cardoso,-47.454027,-23.508106,nao
+2026-03-13,Dom Aguirre,Centro,inundação,1,Avenida Dom Aguirre,-47.452365,-23.501802,sim
+2026-03-13,José Parra Sanches,Lopes de Oliveira,alagamento,1,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2026-03-13,José Parra Sanches,Lopes de Oliveira,inundação,1,Rua José Parra Sanches,-47.511338,-23.470516,sim
+2026-03-13,José Vieira Barrada,Jardim Itapemirim,alagamento,1,Rua José Vieira Barrada,-47.503731,-23.481517,sim
+2026-03-13,Professor José Odin de Arruda,Jardim Faculdade,inundação,1,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2026-03-13,Professor José Odin de Arruda,Jardim Santa Lucinda,inundação,2,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2026-03-15,Professor José Odin de Arruda,Jardim Faculdade,alagamento,1,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2026-03-16,,Jardim Marli,alagamento,1,,,,
+2026-03-16,Abner Pedroso de Alcântara,Jardim Guadalupe,inundação,1,Rua Abner Pedroso de Alcântara,-47.464313,-23.463805,sim
+2026-03-16,Antonio Furtado Lopes,Vila Mineirão,inundação,3,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-03-16,Antônio Furtado Lopes,Vila Mineirão,inundação,8,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-03-16,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2026-03-16,Faustino Rodrigues Martins,Vila Mineirão,inundação,2,Rua Faustino Rodrigues Martins,-47.463161,-23.467307,nao
+2026-03-16,Humberto de Campos,Jardim Zulmira,inundação,1,Rua Humberto de Campos,-47.481971,-23.500813,nao
+2026-03-16,Pedro Lombardi,Vila Mineirão,alagamento,1,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2026-03-16,Pedro Lombardi,Vila Mineirão,inundação,3,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2026-03-16,Rua Dois,,inundação,1,Viela Dois,-47.491566,-23.489264,nao
+2026-03-16,Rua Dois,Jardim Guadalupe,inundação,3,,,,
+2026-03-16,Rua Dois,Vila Mineirão,inundação,1,,,,
+2026-03-17,,,alagamento,1,,,,
+2026-03-17,Guido José Del Cistia,Jardim Abaete,inundação,1,Rua Guido José Del Cístia,-47.450384,-23.471171,sim
+2026-03-17,Manoel Alves de Camargo,Vila Assis,alagamento,4,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2026-03-17,Manoel Alves de Camargo,Vila Assis,inundação,2,Rua Manoel Alves de Camargo,-47.449672,-23.512593,nao
+2026-03-17,Professor José Odin de Arruda,Jardim Faculdade,alagamento,1,Rua Professor José Odin de Arruda,-47.453641,-23.509076,sim
+2026-03-18,Abner Pedroso de Alcântara,Vila Mineirão,inundação,5,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-03-18,Antônio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-03-18,Roberval Peres de Athaíde,Jardim Guadalupe,inundação,1,Rua Roberval Peres Ataíde,-47.464857,-23.462321,nao
+2026-03-18,Viela 2,Vila Mineirão,inundação,1,,,,
+2026-03-19,Antonio Furtado Lopes,Vila Mineirão,alagamento,2,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-03-20,Antonio Furtado Lopes,Vila Mineirão,alagamento,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-04-18,Pedro Peres,Jardim Piratininga,inundação,2,Rua Pedro Peres,-47.431057,-23.493733,sim
+2026-04-18,Pedro Péres,Jardim Piratininga,inundação,3,Rua Pedro Peres,-47.431057,-23.493733,sim
+2026-04-19,Cuba,Vila Barcelona,inundação,2,Rua Cuba,-47.44223,-23.518609,nao
+2026-04-20,Flávio Leite,Vila Barcelona,alagamento,1,Rua Flavio Leite,-47.439732,-23.516055,nao
+2026-10-08,,Parque Vitoria Regia,alagamento,1,,,,
+2026-10-25,Adolpho Goldman,Parque Vitoria Regia,alagamento,1,Rua Adolpho Goldman,-47.450235,-23.426611,nao
+2026-10-25,Faustino Rodrigues Martins,Vila Mineirão,alagamento,1,Rua Faustino Rodrigues Martins,-47.463161,-23.467307,nao
+2026-10-25,Jorge Baccelli,Além Ponte,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2026-10-26,Abner Pedroso de Alcântara,Vila Mineirão,inundação,1,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-10-26,Antônio Furtado Lopes,Vila Mineirão,inundação,5,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-10-26,Faustino Rodrigues Martins,Vila Mineirão,inundação,2,Rua Faustino Rodrigues Martins,-47.463161,-23.467307,nao
+2026-10-26,Guilherme Tersi,Vila Mineirão,inundação,3,Rua Guilherme Tersi,-47.461355,-23.462524,nao
+2026-10-26,Pedro Lombardi,Vila Mineirão,inundação,3,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2026-11-07,Abner Pedroso de Alcântara,Vila Mineirão,inundação,1,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-11-07,Antônio Furtado Lopes,Vila Mineirão,inundação,11,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-11-07,XV de Agosto,Jardim Leocadia,alagamento,1,XV de Agosto,-47.439692,-23.477451,sim
+2026-11-08,Abner Pedroso de Alcântara,Vila Mineirão,alagamento,2,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-11-08,Abner Pedroso de Alcântara,Vila Mineirão,inundação,19,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-11-08,Antônio Furtado Lopes,Vila Mineirão,inundação,35,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-11-08,Cravos,Jardim Simus,inundação,1,Cravos,-47.494538,-23.505121,nao
+2026-11-08,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2026-11-08,Guilherme Tersi,Vila Mineirão,inundação,5,Rua Guilherme Tersi,-47.461355,-23.462524,nao
+2026-11-08,Júlio Magalhães Júnior,Vila Mineirão,inundação,1,Rua Júlio Magalhães Júnior,-47.463379,-23.468817,sim
+2026-11-08,Pedro Lombardi,Vila Mineirão,inundação,15,Rua Pedro Lombardi,-47.463315,-23.468875,sim
+2026-11-09,Abner Pedroso de Alcântara,Vila Mineirão,inundação,4,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-11-09,Antônio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-11-09,Domingos Rafael Pinotti,Vila Netinho,inundação,1,Rua Domingues Rafael Pinnotti,-47.46405,-23.482304,nao
+2026-11-09,Ermolau Del Cistia,Vila Mineirão,inundação,1,Rua Ermolau Del Cístia,-47.462336,-23.469651,nao
+2026-11-09,Jairo Meniconi,Vila Mineirão,inundação,1,Rua Jairo Meniconi,-47.46202,-23.464547,nao
+2026-11-09,Jorge Baccelli,Além Ponte,inundação,1,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2026-11-10,Antônio Furtado Lopes,Vila Mineirão,inundação,2,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-11-10,Jorge Baccelli,Além Ponte,inundação,3,Rua Jorge Bacelli,-47.433729,-23.485965,sim
+2026-11-11,Abner Pedroso de Alcântara,Vila Mineirão,inundação,2,Rua Abner Pedroso de Alcântara,-47.465992,-23.466476,sim
+2026-11-11,Antônio Furtado Lopes,Vila Mineirão,inundação,3,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
+2026-11-12,Américo Pimenta Vaz Guimarães,Vila Dalmatas,inundação,3,Rua Americo Pimenta Vaz Guimarares,-47.374568,-23.393585,nao
+2026-11-12,Antônio Furtado Lopes,Vila Mineirão,inundação,1,Rua Antônio Furtado Lopes,-47.464023,-23.46749,sim
