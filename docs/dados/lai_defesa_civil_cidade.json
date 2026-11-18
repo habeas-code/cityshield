@@ -73,7 +73,7 @@
       "baixa": 0.006,
       "fora": 0.963
      },
-     "vezes_acima_do_acaso_alta": 9.57,
+     "vezes_acima_do_acaso_alta": 9.56,
      "vezes_acima_do_acaso_alta_media": 8.96
     }
    }
@@ -130,8 +130,8 @@
       "baixa": 0.006,
       "fora": 0.963
      },
-     "vezes_acima_do_acaso_alta": 10.66,
-     "vezes_acima_do_acaso_alta_media": 9.49
+     "vezes_acima_do_acaso_alta": 10.65,
+     "vezes_acima_do_acaso_alta_media": 9.48
     }
    }
   },
@@ -286,8 +286,8 @@
       "medio": 0.179,
       "baixo": 0.698
      },
-     "vezes_acima_do_acaso_alto": 6.28,
-     "vezes_acima_do_acaso_alto_medio": 2.94
+     "vezes_acima_do_acaso_alto": 6.27,
+     "vezes_acima_do_acaso_alto_medio": 2.93
     }
    },
    "carta": {
@@ -387,6 +387,71 @@
       },
       "vezes_acima_do_acaso_alta": 6.08,
       "vezes_acima_do_acaso_alta_media": 6.28
+     },
+     "registros_fora_do_limite": 0
+    }
+   },
+   "2024_a_2026": {
+    "hand": {
+     "ruas_total": 182,
+     "ruas_localizadas": 180,
+     "registros_total": 1263,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1261.0,
+      "registros_por_faixa": {
+       "alto": 941.7,
+       "medio": 196.8,
+       "baixo": 122.5
+      },
+      "fracao_registros": {
+       "alto": 0.747,
+       "medio": 0.156,
+       "baixo": 0.097
+      },
+      "fracao_ruas": {
+       "alto": 0.142,
+       "medio": 0.182,
+       "baixo": 0.676
+      },
+      "vezes_acima_do_acaso_alto": 5.24,
+      "vezes_acima_do_acaso_alto_medio": 2.79
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 182,
+     "ruas_localizadas": 180,
+     "registros_total": 1263,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1261.0,
+      "registros_por_faixa": {
+       "alta": 201.1,
+       "media": 153.0,
+       "baixa": 9.2,
+       "fora": 897.7
+      },
+      "fracao_registros": {
+       "alta": 0.16,
+       "media": 0.121,
+       "baixa": 0.007,
+       "fora": 0.712
+      },
+      "fracao_ruas": {
+       "alta": 0.025,
+       "media": 0.018,
+       "baixa": 0.008,
+       "fora": 0.949
+      },
+      "vezes_acima_do_acaso_alta": 6.38,
+      "vezes_acima_do_acaso_alta_media": 6.49
      },
      "registros_fora_do_limite": 0
     }

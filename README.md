@@ -18,7 +18,7 @@ Projeto do time **Habeas Code** para o [Hack Brasil 2026](https://hackbrasil.com
 > **Working today:** flood risk computed from the terrain for the whole city (HAND method on the ANADEM 30 m terrain model), tested four times against reality:
 >
 > - **2022–2023 Civil Defense records:** 74% fall in the high-risk zones, which hold only 12% of the city's streets (6× chance).
-> - **1,386 official Civil Defense calls from 2021–2026, citywide,** which the map never saw (obtained through a freedom-of-information request): **73% fall in the high-risk zones (5.9× chance); 80% during the January 2024 flood**.
+> - **1,261 official Civil Defense calls from 2024–2026, citywide,** after the data used to check the map (obtained through a freedom-of-information request): **75% fall in the high-risk zones (6.1× chance); 80% during the January 2024 flood**.
 > - **Floods that happened after the map was finished:** official Civil Defense data, obtained through a freedom-of-information request, list 102 flood calls between 8 and 12 Nov 2026, the days right after the map was built. **89% of them fell in high or medium risk zones (30% of the streets); the official 2015 flood map covered 33%.**
 > - **Streets the map had never seen** (not in the 2022–2023 reports): 72% of their official records fall in the high-risk zones (5.8× chance).
 >
@@ -64,10 +64,11 @@ Fizemos **a mesma conta** quatro vezes, com dados diferentes ([método e limita�
 | ↳ **depois de o mapa ficar pronto** (8–12/11/2026) | 102 chamados em 11 ruas | 47% | 3,8× | **89%** | 33% |
 | ↳ só vias novas | 106 registros em 35 vias | **72%** | **5,8×** | 82% | 18% |
 | **4. Registros oficiais 2021–2026, cidade inteira** (recurso da Lei de Acesso à Informação) | 1.386 chamados em 216 vias | **73%** | **5,9×** | 89% | 28% |
+| ↳ **só 2024–2026** (depois dos dados da conferência) | 1.261 chamados em 180 vias | **75%** | **6,1×** | 90% | 29% |
 | ↳ **cheia de janeiro de 2024** | 908 chamados em 129 vias | **80%** | **6,5×** | **91%** | 29% |
 | ↳ só vias novas | 693 chamados em 141 vias | **71%** | **5,8×** | 83% | 15% |
 
-- **O teste maior é o 4.** No recurso do pedido, a Defesa Civil mandou os registros da cidade inteira: 1.494 chamados de 2021 a 2026, mil deles da cheia de janeiro de 2024. O mapa só tinha sido conferido com os relatórios de 2022–2023. Mesmo nas 141 vias que nem estavam nesses relatórios, **71% dos chamados caem no risco alto**, quase o mesmo da validação original ([detalhes](docs/validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026)).
+- **O teste maior é o 4.** No recurso do pedido, a Defesa Civil mandou os registros da cidade inteira: 1.494 chamados de 2021 a 2026, mil deles da cheia de janeiro de 2024. O mapa só tinha sido conferido com os relatórios de 2022–2023; dos chamados de 2024 a 2026, **75% caem no risco alto** (6,1×). Mesmo nas 141 vias que nem estavam nesses relatórios, **71% dos chamados caem no risco alto**, quase o mesmo da validação original ([detalhes](docs/validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026)).
 - **O teste mais honesto é o 3.** O mapa ficou pronto em 07/11/2026. De 8 a 12 de novembro, uma chuva gerou 102 chamados à Defesa Civil, a maioria na Vila Mineirão: **89% caíram no risco alto ou médio; a carta oficial marcou 33%**. Os dados vieram da Prefeitura pelo pedido Fala.BR nº 03959.2026.000348-13 ([detalhes](docs/validacao.md#terceiro-teste-registros-oficiais-de-2021-a-2026)).
 - **É associação, não previsão.** O mapa mostra onde o relevo favorece o acúmulo de água; ele coincide com onde alagou. Nenhum parâmetro foi ajustado para melhorar os números.
 - **E o mapa oficial?** A carta de inundação do IPT e do Serviço Geológico (2015) marca 6% da cidade. Onde marca alta, acerta muito (24% dos registros em 2% das ruas, 15× o acaso), mas **55% dos registros ficam fora dela**. Os dois se completam: a carta é precisa nas várzeas largas; o relevo pega também os vales estreitos ([comparação](docs/validacao.md#comparação-com-a-carta-oficial)).

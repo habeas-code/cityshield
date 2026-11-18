@@ -2,7 +2,7 @@
 
 **Pergunta:** os lugares que de fato alagaram em Sorocaba caem nas áreas que o CityShield marca como risco?
 
-**Resposta curta:** sim. **74% dos registros da Defesa Civil caem no risco alto, que reúne só 12% das ruas da cidade**: seis vezes mais do que se os alagamentos caíssem ao acaso. **No teste com 1.386 chamados oficiais de 2021 a 2026 da cidade inteira** ([quarto teste](#quarto-teste-a-cidade-inteira-2021-a-2026)), que o mapa nunca viu, **73% caem no risco alto**; na cheia de janeiro de 2024, 80%.
+**Resposta curta:** sim. **74% dos registros da Defesa Civil caem no risco alto, que reúne só 12% das ruas da cidade**: seis vezes mais do que se os alagamentos caíssem ao acaso. **No teste com 1.261 chamados oficiais de 2024 a 2026 da cidade inteira** ([quarto teste](#quarto-teste-a-cidade-inteira-2021-a-2026)), depois dos dados usados na conferência, **75% caem no risco alto**; na cheia de janeiro de 2024, 80%.
 
 Para refazer: `docker compose run --rm pipeline python -m pipeline validacao`. O resultado completo, rua por rua, fica em `web/public/dados/validacao.json`.
 
@@ -147,7 +147,8 @@ Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decis�
 
 | Grupo, só ruas da região | Registros | Risco alto | Ruas no alto | Vezes o acaso | Alto + médio | Ruas no alto + médio | Vezes o acaso |
 |---|---|---|---|---|---|---|---|
-| Todos | 1.386 | 73% | 14% | **5,1×** | 89% | 32% | **2,7×** |
+| Todos | 1.386 | 73% | 14% | 5,1× | 89% | 32% | 2,7× |
+| **Só 2024–2026** | 1.261 | 75% | 14% | **5,2×** | 90% | 32% | **2,8×** |
 | Cheia de janeiro de 2024 | 908 | 80% | 14% | 5,6× | 91% | 32% | 2,8× |
 | Só vias novas | 693 | 71% | 14% | 5,0× | 83% | 32% | 2,6× |
 
@@ -163,6 +164,7 @@ Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decis�
 **Cuidado ao ler:**
 
 - **Registros agrupados.** Mais da metade vem de uma semana (janeiro de 2024) e de poucos bairros (Jardim Abaeté, Vila Mineirão, Jardim Maria do Carmo, Vila Barcelona, Vitória Régia). Os chamados não são independentes entre si: uma rua com muitas casas atingidas soma muitos registros.
+- **Qual número usar:** o de **2024–2026 (75%, 6,1×)**. Os chamados de 2022–2023 desta planilha podem ser os mesmos dos relatórios com que o mapa foi conferido; por isso o grupo "todos" serve de comparação, não de número principal.
 - **2025 tem só 10 registros.** Pode ter sido um ano de pouca chuva ou uma falha na planilha; vamos perguntar à Defesa Civil.
 - **108 registros de fora:** 75 sem rua, 29 em vias que não achamos no OpenStreetMap (vielas do Jardim Itapemirim, "Rua Dois" e nomes de um registro só) e 4 em três vias com ponto que a conta da validação não achou (Rua Três, Rua Dezesseis e Projetada I).
 

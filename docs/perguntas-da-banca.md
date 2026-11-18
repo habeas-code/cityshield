@@ -61,7 +61,7 @@ O **benefício** (quanta água cada área segura) é calculado **à parte** e ap
 
 O teste mais próximo de uma previsão é o terceiro: **depois de o mapa ficar pronto**, 89% dos 102 chamados oficiais de 8 a 12/11/2026 caíram no risco alto ou médio (30% das ruas). A carta oficial marcou 33%. E se a comparação for só com as ruas da própria região, que tem mais ruas baixas que a cidade (35% no risco alto ou médio)? Os 89% continuam: 2,6× o acaso. Mas é uma região e uma chuva só.
 
-O teste **maior** é o quarto: 1.386 chamados oficiais de 2021 a 2026 da **cidade inteira**, que o mapa nunca viu. 73% caem no risco alto (5,9× o acaso); na cheia de janeiro de 2024, 80%. Nas ruas que nem estavam nos relatórios de 2022–2023, 71%. Comparando só com as ruas vizinhas aos chamados, o risco alto ainda pega 5,1× o acaso. [Validação](validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026)
+O teste **maior** é o quarto: 1.261 chamados oficiais de 2024 a 2026 da **cidade inteira**, depois dos dados com que conferimos o mapa. 75% caem no risco alto (6,1× o acaso); na cheia de janeiro de 2024, 80%. Nas ruas que nem estavam nos relatórios de 2022–2023, 71%. Comparando só com as ruas vizinhas aos chamados, o risco alto ainda pega 5,2× o acaso. [Validação](validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026)
 
 ## 5. Por que o piloto é o núcleo Norte e não o Centro?
 

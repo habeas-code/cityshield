@@ -50,7 +50,7 @@ FILTROS = {
     "novas": _nova,
     "novas_cheia_jan_2024": lambda linha: _nova(linha) and _cheia(linha),
 }
-GRUPOS_LOCAIS = ("todas", "cheia_jan_2024", "novas")
+GRUPOS_LOCAIS = ("todas", "2024_a_2026", "cheia_jan_2024", "novas")
 
 
 def _linhas():
