@@ -59,7 +59,9 @@ O **benefício** (quanta água cada área segura) é calculado **à parte** e ap
 - A comparação é com **as ruas da cidade**, não com a área, para não inflar o número (ruas tendem a ficar nos vales).
 - É **associação** com o que já aconteceu, não taxa de acerto de previsão.
 
-O teste mais próximo de uma previsão é o terceiro: **depois de o mapa ficar pronto**, 89% dos 102 chamados oficiais de 8 a 12/11/2026 caíram no risco alto ou médio (30% das ruas). A carta oficial marcou 33%. E se a comparação for só com as ruas da própria região, que tem mais ruas baixas que a cidade (35% no risco alto ou médio)? Os 89% continuam: 2,6× o acaso. Mas é uma região e uma chuva só. [Validação](validacao.md)
+O teste mais próximo de uma previsão é o terceiro: **depois de o mapa ficar pronto**, 89% dos 102 chamados oficiais de 8 a 12/11/2026 caíram no risco alto ou médio (30% das ruas). A carta oficial marcou 33%. E se a comparação for só com as ruas da própria região, que tem mais ruas baixas que a cidade (35% no risco alto ou médio)? Os 89% continuam: 2,6× o acaso. Mas é uma região e uma chuva só.
+
+O teste **maior** é o quarto: 1.261 chamados oficiais de 2024 a 2026 da **cidade inteira**, depois dos dados com que conferimos o mapa. 75% caem no risco alto (6,1× o acaso); na cheia de janeiro de 2024, 80%. Nas ruas que nem estavam nos relatórios de 2022–2023, 71%. Comparando só com as ruas vizinhas aos chamados, o risco alto ainda pega 5,2× o acaso. [Validação](validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026)
 
 ## 5. Por que o piloto é o núcleo Norte e não o Centro?
 
@@ -89,7 +91,7 @@ O que fizemos para que isso não vire decisão errada:
 
 **Tudo é refeito com um comando.** O pipeline baixa de novo o OpenStreetMap e refaz risco, validação, áreas, notas e volumes (`docker compose run --rm pipeline`); rodando do zero, ele gera os mesmos arquivos que estão no repositório.
 
-Os **registros novos** vêm da Defesa Civil. Já mostramos o caminho: pedimos pela Lei de Acesso à Informação e recebemos 365 registros até 12/11/2026, que viraram o terceiro teste. O ideal, que a própria revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025) recomenda, é a Defesa Civil georreferenciar as ocorrências e integrar com a drenagem.
+Os **registros novos** vêm da Defesa Civil. Já mostramos o caminho: pedimos pela Lei de Acesso à Informação e recebemos 365 registros da Bacia do Itanguá até 12/11/2026 (terceiro teste); no recurso, a cidade inteira, 1.494 registros de 2021 a 2026 (quarto teste). O ideal, que a própria revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025) recomenda, é a Defesa Civil georreferenciar as ocorrências e integrar com a drenagem.
 
 O **relevo** quase não muda. Uma obra grande (canalização, aterro) muda o terreno no lugar dela, e o modelo de 30 m não a enxerga até sair uma versão nova do ANADEM.
 

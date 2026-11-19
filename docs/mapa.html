@@ -724,6 +724,8 @@ label.campo .l b{color:var(--ink);font-weight:600}
           <li><a href="dados/comparacao_carta.json" download>Comparação com a carta oficial</a><span>o mesmo teste com a carta de inundação do IPT/SGB, 2015 (JSON, só números) · ≈ 2 KB</span></li>
           <li><a href="dados/lai_defesa_civil.csv" download>Registros oficiais 2021–2026 (Bacia do Itanguá)</a><span>Defesa Civil via Lei de Acesso à Informação; data, rua, bairro, tipo e nº de registros, sem endereço · ≈ 15 KB</span></li>
           <li><a href="dados/lai_defesa_civil.json" download>Teste com os registros de 2021–2026</a><span>mesma conta da validação, incluindo os chamados de depois do mapa pronto (JSON) · ≈ 19 KB</span></li>
+          <li><a href="dados/lai_defesa_civil_cidade.csv" download>Registros oficiais 2021–2026 (cidade inteira)</a><span>Defesa Civil via Lei de Acesso à Informação (recurso); data, rua, bairro, tipo e nº de registros, sem endereço · ≈ 55 KB</span></li>
+          <li><a href="dados/lai_defesa_civil_cidade.json" download>Teste com a cidade inteira</a><span>mesma conta da validação, com a cheia de janeiro de 2024 e as ruas novas (JSON) · ≈ 11 KB</span></li>
           <li><a href="dados/bacia_itangua.geojson" download>Bacia do Córrego Itanguá</a><span>desenhada pelo relevo, usada na comparação local do teste com os registros oficiais · ≈ 37 KB</span></li>
           <li><a href="dados/limite_sorocaba.geojson" download>Limite do município</a><span>≈ 12 KB</span></li>
         </ul>
@@ -847,6 +849,22 @@ label.campo .l b{color:var(--ink);font-weight:600}
       </div>
       <p class="sub" style="margin:6px 0 0">Mostra que o risco do relevo coincide com onde já alagou. Não quer dizer que o mapa prevê a próxima enchente.</p>
       <p class="sub" id="v-carta" style="margin:6px 0 0"><b>E o mapa oficial?</b> A carta de inundação do IPT e do SGB (2015) marca 6% da cidade e acerta muito onde marca, mas 55% dos registros ficam fora dela.</p>
+      <div id="v-cid" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+        <div class="w-cab" style="margin-bottom:6px"><h3 style="font-size:13px">E com chamados que o mapa nunca viu?</h3><span class="sub">cidade inteira, 2024–2026</span></div>
+        <div class="kpi">
+          <div><b class="n" id="cid-reg">75%</b><span>dos <span id="cid-n">1.261</span> chamados caíram no risco alto</span></div>
+          <div><b class="n" id="cid-cheia">80%</b><span>na cheia de janeiro de 2024</span></div>
+        </div>
+        <p class="sub" style="margin:8px 0 0">Registros oficiais da Defesa Civil de 2024 a 2026. O mapa foi conferido só com os de 2022–2023. Nas ruas que nem estavam nesses relatórios, <b class="n" id="cid-novas" style="color:var(--ink)">71%</b> caíram no risco alto.
+          <button type="button" class="pa-info" id="cid-info-bt" aria-expanded="false" aria-controls="cid-info" aria-label="De onde vêm estes números">i</button></p>
+        <div class="pa-info-txt" id="cid-info" hidden>
+          <p><b>Fonte:</b> planilha da Defesa Civil do município inteiro, recebida pela Lei de Acesso à Informação no recurso do pedido Fala.BR nº 03959.2026.000348-13 (17/11/2026). Juntamos com a da Bacia do Itanguá sem contar duas vezes: <span id="cid-total">1.494</span> registros, <span id="cid-n2">1.386</span> com a rua achada no mapa, <span id="cid-todas">73%</span> deles no risco alto. O número principal usa só 2024–2026, porque os chamados de 2022–2023 podem ser os mesmos dos relatórios com que o mapa foi conferido.</p>
+          <p id="cid-cheia-txt"><b>A cheia de janeiro de 2024:</b> de 20 a 29/01/2024 a Defesa Civil registrou cerca de mil chamados, quase todos de inundação por cheia de curso d'água. Dos 908 chamados com a rua achada, 80% caem no risco alto e 91% no alto ou médio.</p>
+          <p id="cid-carta"><b>Carta oficial:</b> 29% dos chamados caem em alguma classe da carta do IPT e do SGB.</p>
+          <p id="cid-local"><b>Comparando só com as ruas vizinhas</b> (a até 1 km de algum chamado): 14% delas estão no risco alto, e ele pega 75% dos chamados: 5,2× o acaso.</p>
+          <p><b>Cuidado:</b> mais da metade dos chamados vem de uma semana e de poucos bairros, e uma rua com muitas casas atingidas soma muitos chamados. 2025 veio com só 10 registros.</p>
+        </div>
+      </div>
       <div id="v-lai" style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
         <div class="w-cab" style="margin-bottom:6px"><h3 style="font-size:13px">E depois que o mapa ficou pronto?</h3><span class="sub">Bacia do Itanguá</span></div>
         <div class="kpi">
@@ -975,6 +993,31 @@ label.campo .l b{color:var(--ink);font-weight:600}
         alvo.appendChild(document.createTextNode('A carta de inundação do IPT e do SGB (2015) marca ' + pct(1 - a.fora) +
           ' da cidade e acerta muito onde marca, mas ' + pct(c.fracao_registros.fora) + ' dos registros ficam fora dela. O risco alto do CityShield reúne ' + pct(h.alto) + '.'));
       }).catch(function () { /* mantém a frase do HTML */ });
+      fetch('dados/lai_defesa_civil_cidade.json').then(function (r) { return r.json(); }).then(function (l) {
+        var pct = function (x) { return Math.round(x * 100) + '%'; };
+        var mil = function (x) { return Math.round(x).toLocaleString('pt-BR'); };
+        var g = l.grupos, t = g['2024_a_2026'].hand.cidade, td = g.todas.hand.cidade, ch = g.cheia_jan_2024.hand.cidade, nv = g.novas.hand.cidade;
+        var vez = function (x) { return x.toFixed(1).replace('.', ',') + '×'; };
+        var texto = function (id, titulo, frase) {
+          var alvo = $(id); alvo.textContent = '';
+          var b = document.createElement('b'); b.textContent = titulo; alvo.appendChild(b);
+          alvo.appendChild(document.createTextNode(frase));
+        };
+        $('cid-reg').textContent = pct(t.fracao_registros.alto);
+        $('cid-cheia').textContent = pct(ch.fracao_registros.alto);
+        $('cid-novas').textContent = pct(nv.fracao_registros.alto);
+        $('cid-n').textContent = mil(t.registros_considerados); $('cid-n2').textContent = mil(td.registros_considerados);
+        $('cid-todas').textContent = pct(td.fracao_registros.alto);
+        $('cid-total').textContent = mil(l.registros_na_planilha);
+        texto('cid-cheia-txt', 'A cheia de janeiro de 2024: ', 'de 20 a 29/01/2024 a Defesa Civil registrou cerca de mil chamados, quase todos de inundação por cheia de curso d\'água. Dos ' +
+          mil(ch.registros_considerados) + ' chamados com a rua achada, ' + pct(ch.fracao_registros.alto) + ' caem no risco alto e ' +
+          pct(ch.fracao_registros.alto + ch.fracao_registros.medio) + ' no alto ou médio.');
+        texto('cid-carta', 'Carta oficial: ', pct(1 - g['2024_a_2026'].carta.cidade.fracao_registros.fora) +
+          ' dos chamados caem em alguma classe da carta do IPT e do SGB; nas ruas novas, ' + pct(1 - g.novas.carta.cidade.fracao_registros.fora) + '.');
+        var rl = (l.comparacao_local.regiao['2024_a_2026'] || l.comparacao_local.regiao.todas).hand.cidade;
+        texto('cid-local', 'Comparando só com as ruas vizinhas ', '(a até 1 km de algum chamado): ' + pct(rl.fracao_ruas.alto) +
+          ' delas estão no risco alto, e ele pega ' + pct(rl.fracao_registros.alto) + ' dos chamados: ' + vez(rl.vezes_acima_do_acaso_alto) + ' o acaso.');
+      }).catch(function () { /* mantém os números do HTML */ });
       fetch('dados/lai_defesa_civil.json').then(function (r) { return r.json(); }).then(function (l) {
         var pct = function (x) { return Math.round(x * 100) + '%'; };
         var d = l.grupos.depois_do_mapa, h = d.hand.cidade, c = d.carta.cidade;
@@ -1940,6 +1983,9 @@ label.campo .l b{color:var(--ink);font-weight:600}
   function fecharSim() { if (abaAtual === 'sim') irPara(abaAntesSim || 'diag'); }
   $('sp-fechar').addEventListener('click', fecharSim);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && abaAtual === 'sim') fecharSim(); });
+  $('cid-info-bt').addEventListener('click', function () {
+    var c = $('cid-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
+  });
   $('l-info-bt').addEventListener('click', function () {
     var c = $('l-info'); c.hidden = !c.hidden; this.setAttribute('aria-expanded', String(!c.hidden));
   });

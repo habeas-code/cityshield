@@ -187,6 +187,14 @@ def test_numeros_do_site_batem_com_os_arquivos(site, navegador):
         expect(pagina.locator("#l-carta")).to_have_text(_pct(1 - c["fracao_registros"]["fora"]))
         expect(pagina.locator("#l-n")).to_have_text(str(round(h["registros_considerados"])))
 
+        # ... e o bloco da cidade inteira (recurso LAI): todos, cheia de jan/2024, ruas novas
+        g = _json("lai_defesa_civil_cidade.json")["grupos"]
+        expect(pagina.locator("#cid-reg")).to_have_text(_pct(g["2024_a_2026"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+        expect(pagina.locator("#cid-cheia")).to_have_text(_pct(g["cheia_jan_2024"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+        expect(pagina.locator("#cid-novas")).to_have_text(_pct(g["novas"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+        expect(pagina.locator("#cid-n")).to_have_text(_milhar(g["2024_a_2026"]["hand"]["cidade"]["registros_considerados"]))
+        expect(pagina.locator("#cid-todas")).to_have_text(_pct(g["todas"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+
         # Fila: a 1ª da lista é a de maior nota, e a ficha mostra a mesma conta
         chega, retida, recs = _cenario_50mm()
         maior = max(f["properties"]["nota"] for f in recs["features"])
@@ -228,9 +236,11 @@ def test_pagina_inicial_mostra_os_numeros_da_validacao(site, navegador):
         lai = _json("lai_defesa_civil.json")
         h = lai["grupos"]["depois_do_mapa"]["hand"]["cidade"]
         expect(pagina.locator("#i-l-reg")).to_have_text(_pct(h["fracao_registros"]["alto"] + h["fracao_registros"]["medio"]))
-        local = lai["comparacao_local"]["regiao"]["depois_do_mapa"]["hand"]["cidade"]
-        vezes = f"{local['vezes_acima_do_acaso_alto_medio']:.1f}".replace(".", ",") + "×"
-        expect(pagina.locator("#i-l-local")).to_have_text(vezes)
+        cid = _json("lai_defesa_civil_cidade.json")
+        expect(pagina.locator("#i-c-reg")).to_have_text(_pct(cid["grupos"]["2024_a_2026"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+        expect(pagina.locator("#i-c-cheia")).to_have_text(_pct(cid["grupos"]["cheia_jan_2024"]["hand"]["cidade"]["fracao_registros"]["alto"]))
+        local = cid["comparacao_local"]["regiao"]["2024_a_2026"]["hand"]["cidade"]
+        expect(pagina.locator("#i-c-local")).to_have_text(f"{local['vezes_acima_do_acaso_alto']:.1f}".replace(".", ","))
         assert not erros, "\n".join(erros)
     finally:
         contexto.close()

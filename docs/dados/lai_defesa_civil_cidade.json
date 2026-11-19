@@ -1,0 +1,587 @@
+{
+ "metodo": "docs/validacao.md#quarto-teste-a-cidade-inteira-2021-a-2026",
+ "fonte_registros": "Defesa Civil de Sorocaba, município inteiro, 2021–2026. Pedido Fala.BR nº 03959.2026.000348-13, recurso em 1ª instância (Prefeitura de Sorocaba, Defesa Civil, 17/11/2026)",
+ "fonte_ruas": "OpenStreetMap (ODbL)",
+ "registros_na_planilha": 1494,
+ "registros_sem_via_localizada": 104,
+ "registros_por_ano": {
+  "2021": 3,
+  "2022": 58,
+  "2023": 81,
+  "2024": 1046,
+  "2025": 10,
+  "2026": 296
+ },
+ "grupos": {
+  "todas": {
+   "hand": {
+    "ruas_total": 219,
+    "ruas_localizadas": 216,
+    "registros_total": 1390,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Dezesseis",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 1386.0,
+     "registros_por_faixa": {
+      "alto": 1012.2,
+      "medio": 216.7,
+      "baixo": 157.1
+     },
+     "fracao_registros": {
+      "alto": 0.73,
+      "medio": 0.156,
+      "baixo": 0.113
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 5.93,
+     "vezes_acima_do_acaso_alto_medio": 2.94
+    }
+   },
+   "carta": {
+    "ruas_total": 219,
+    "ruas_localizadas": 216,
+    "registros_total": 1390,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Dezesseis",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 1386.0,
+     "registros_por_faixa": {
+      "alta": 210.6,
+      "media": 166.0,
+      "baixa": 11.1,
+      "fora": 998.3
+     },
+     "fracao_registros": {
+      "alta": 0.152,
+      "media": 0.12,
+      "baixa": 0.008,
+      "fora": 0.72
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 9.56,
+     "vezes_acima_do_acaso_alta_media": 8.96
+    }
+   }
+  },
+  "cheia_jan_2024": {
+   "hand": {
+    "ruas_total": 129,
+    "ruas_localizadas": 129,
+    "registros_total": 908,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 908.0,
+     "registros_por_faixa": {
+      "alto": 723.9,
+      "medio": 106.6,
+      "baixo": 77.5
+     },
+     "fracao_registros": {
+      "alto": 0.797,
+      "medio": 0.117,
+      "baixo": 0.085
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 6.47,
+     "vezes_acima_do_acaso_alto_medio": 3.03
+    }
+   },
+   "carta": {
+    "ruas_total": 129,
+    "ruas_localizadas": 129,
+    "registros_total": 908,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 908.0,
+     "registros_por_faixa": {
+      "alta": 153.7,
+      "media": 107.4,
+      "baixa": 3.9,
+      "fora": 642.9
+     },
+     "fracao_registros": {
+      "alta": 0.169,
+      "media": 0.118,
+      "baixa": 0.004,
+      "fora": 0.708
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 10.65,
+     "vezes_acima_do_acaso_alta_media": 9.48
+    }
+   }
+  },
+  "2024_a_2026": {
+   "hand": {
+    "ruas_total": 182,
+    "ruas_localizadas": 180,
+    "registros_total": 1263,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 1261.0,
+     "registros_por_faixa": {
+      "alto": 941.7,
+      "medio": 196.8,
+      "baixo": 122.5
+     },
+     "fracao_registros": {
+      "alto": 0.747,
+      "medio": 0.156,
+      "baixo": 0.097
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 6.06,
+     "vezes_acima_do_acaso_alto_medio": 2.99
+    }
+   },
+   "carta": {
+    "ruas_total": 182,
+    "ruas_localizadas": 180,
+    "registros_total": 1263,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 1261.0,
+     "registros_por_faixa": {
+      "alta": 201.1,
+      "media": 153.0,
+      "baixa": 9.2,
+      "fora": 897.7
+     },
+     "fracao_registros": {
+      "alta": 0.16,
+      "media": 0.121,
+      "baixa": 0.007,
+      "fora": 0.712
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 10.04,
+     "vezes_acima_do_acaso_alta_media": 9.26
+    }
+   }
+  },
+  "novas": {
+   "hand": {
+    "ruas_total": 144,
+    "ruas_localizadas": 141,
+    "registros_total": 697,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Dezesseis",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 693.0,
+     "registros_por_faixa": {
+      "alto": 491.8,
+      "medio": 81.6,
+      "baixo": 119.6
+     },
+     "fracao_registros": {
+      "alto": 0.71,
+      "medio": 0.118,
+      "baixo": 0.173
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 5.76,
+     "vezes_acima_do_acaso_alto_medio": 2.74
+    }
+   },
+   "carta": {
+    "ruas_total": 144,
+    "ruas_localizadas": 141,
+    "registros_total": 697,
+    "nao_localizadas": [
+     "Projetada I",
+     "Rua Dezesseis",
+     "Rua Três"
+    ],
+    "cidade": {
+     "registros_considerados": 693.0,
+     "registros_por_faixa": {
+      "alta": 51.7,
+      "media": 46.0,
+      "baixa": 2.6,
+      "fora": 592.7
+     },
+     "fracao_registros": {
+      "alta": 0.075,
+      "media": 0.066,
+      "baixa": 0.004,
+      "fora": 0.855
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 4.69,
+     "vezes_acima_do_acaso_alta_media": 4.65
+    }
+   }
+  },
+  "novas_cheia_jan_2024": {
+   "hand": {
+    "ruas_total": 76,
+    "ruas_localizadas": 76,
+    "registros_total": 501,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 501.0,
+     "registros_por_faixa": {
+      "alto": 387.2,
+      "medio": 56.5,
+      "baixo": 57.3
+     },
+     "fracao_registros": {
+      "alto": 0.773,
+      "medio": 0.113,
+      "baixo": 0.114
+     },
+     "fracao_ruas": {
+      "alto": 0.123,
+      "medio": 0.179,
+      "baixo": 0.698
+     },
+     "vezes_acima_do_acaso_alto": 6.27,
+     "vezes_acima_do_acaso_alto_medio": 2.93
+    }
+   },
+   "carta": {
+    "ruas_total": 76,
+    "ruas_localizadas": 76,
+    "registros_total": 501,
+    "nao_localizadas": [],
+    "cidade": {
+     "registros_considerados": 501.0,
+     "registros_por_faixa": {
+      "alta": 38.2,
+      "media": 30.9,
+      "baixa": 2.1,
+      "fora": 429.8
+     },
+     "fracao_registros": {
+      "alta": 0.076,
+      "media": 0.062,
+      "baixa": 0.004,
+      "fora": 0.858
+     },
+     "fracao_ruas": {
+      "alta": 0.016,
+      "media": 0.014,
+      "baixa": 0.006,
+      "fora": 0.963
+     },
+     "vezes_acima_do_acaso_alta": 4.8,
+     "vezes_acima_do_acaso_alta_media": 4.55
+    }
+   }
+  }
+ },
+ "comparacao_local": {
+  "raio_regiao_m": 1000,
+  "regiao": {
+   "todas": {
+    "hand": {
+     "ruas_total": 219,
+     "ruas_localizadas": 216,
+     "registros_total": 1390,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Dezesseis",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1386.0,
+      "registros_por_faixa": {
+       "alto": 1012.2,
+       "medio": 216.7,
+       "baixo": 157.1
+      },
+      "fracao_registros": {
+       "alto": 0.73,
+       "medio": 0.156,
+       "baixo": 0.113
+      },
+      "fracao_ruas": {
+       "alto": 0.142,
+       "medio": 0.182,
+       "baixo": 0.676
+      },
+      "vezes_acima_do_acaso_alto": 5.13,
+      "vezes_acima_do_acaso_alto_medio": 2.74
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 219,
+     "ruas_localizadas": 216,
+     "registros_total": 1390,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Dezesseis",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1386.0,
+      "registros_por_faixa": {
+       "alta": 210.6,
+       "media": 166.0,
+       "baixa": 11.1,
+       "fora": 998.3
+      },
+      "fracao_registros": {
+       "alta": 0.152,
+       "media": 0.12,
+       "baixa": 0.008,
+       "fora": 0.72
+      },
+      "fracao_ruas": {
+       "alta": 0.025,
+       "media": 0.018,
+       "baixa": 0.008,
+       "fora": 0.949
+      },
+      "vezes_acima_do_acaso_alta": 6.08,
+      "vezes_acima_do_acaso_alta_media": 6.28
+     },
+     "registros_fora_do_limite": 0
+    }
+   },
+   "2024_a_2026": {
+    "hand": {
+     "ruas_total": 182,
+     "ruas_localizadas": 180,
+     "registros_total": 1263,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1261.0,
+      "registros_por_faixa": {
+       "alto": 941.7,
+       "medio": 196.8,
+       "baixo": 122.5
+      },
+      "fracao_registros": {
+       "alto": 0.747,
+       "medio": 0.156,
+       "baixo": 0.097
+      },
+      "fracao_ruas": {
+       "alto": 0.142,
+       "medio": 0.182,
+       "baixo": 0.676
+      },
+      "vezes_acima_do_acaso_alto": 5.24,
+      "vezes_acima_do_acaso_alto_medio": 2.79
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 182,
+     "ruas_localizadas": 180,
+     "registros_total": 1263,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 1261.0,
+      "registros_por_faixa": {
+       "alta": 201.1,
+       "media": 153.0,
+       "baixa": 9.2,
+       "fora": 897.7
+      },
+      "fracao_registros": {
+       "alta": 0.16,
+       "media": 0.121,
+       "baixa": 0.007,
+       "fora": 0.712
+      },
+      "fracao_ruas": {
+       "alta": 0.025,
+       "media": 0.018,
+       "baixa": 0.008,
+       "fora": 0.949
+      },
+      "vezes_acima_do_acaso_alta": 6.38,
+      "vezes_acima_do_acaso_alta_media": 6.49
+     },
+     "registros_fora_do_limite": 0
+    }
+   },
+   "cheia_jan_2024": {
+    "hand": {
+     "ruas_total": 129,
+     "ruas_localizadas": 129,
+     "registros_total": 908,
+     "nao_localizadas": [],
+     "cidade": {
+      "registros_considerados": 908.0,
+      "registros_por_faixa": {
+       "alto": 723.9,
+       "medio": 106.6,
+       "baixo": 77.5
+      },
+      "fracao_registros": {
+       "alto": 0.797,
+       "medio": 0.117,
+       "baixo": 0.085
+      },
+      "fracao_ruas": {
+       "alto": 0.142,
+       "medio": 0.182,
+       "baixo": 0.676
+      },
+      "vezes_acima_do_acaso_alto": 5.6,
+      "vezes_acima_do_acaso_alto_medio": 2.82
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 129,
+     "ruas_localizadas": 129,
+     "registros_total": 908,
+     "nao_localizadas": [],
+     "cidade": {
+      "registros_considerados": 908.0,
+      "registros_por_faixa": {
+       "alta": 153.7,
+       "media": 107.4,
+       "baixa": 3.9,
+       "fora": 642.9
+      },
+      "fracao_registros": {
+       "alta": 0.169,
+       "media": 0.118,
+       "baixa": 0.004,
+       "fora": 0.708
+      },
+      "fracao_ruas": {
+       "alta": 0.025,
+       "media": 0.018,
+       "baixa": 0.008,
+       "fora": 0.949
+      },
+      "vezes_acima_do_acaso_alta": 6.77,
+      "vezes_acima_do_acaso_alta_media": 6.65
+     },
+     "registros_fora_do_limite": 0
+    }
+   },
+   "novas": {
+    "hand": {
+     "ruas_total": 144,
+     "ruas_localizadas": 141,
+     "registros_total": 697,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Dezesseis",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 693.0,
+      "registros_por_faixa": {
+       "alto": 491.8,
+       "medio": 81.6,
+       "baixo": 119.6
+      },
+      "fracao_registros": {
+       "alto": 0.71,
+       "medio": 0.118,
+       "baixo": 0.173
+      },
+      "fracao_ruas": {
+       "alto": 0.142,
+       "medio": 0.182,
+       "baixo": 0.676
+      },
+      "vezes_acima_do_acaso_alto": 4.98,
+      "vezes_acima_do_acaso_alto_medio": 2.55
+     },
+     "registros_fora_do_limite": 0
+    },
+    "carta": {
+     "ruas_total": 144,
+     "ruas_localizadas": 141,
+     "registros_total": 697,
+     "nao_localizadas": [
+      "Projetada I",
+      "Rua Dezesseis",
+      "Rua Três"
+     ],
+     "cidade": {
+      "registros_considerados": 693.0,
+      "registros_por_faixa": {
+       "alta": 51.7,
+       "media": 46.0,
+       "baixa": 2.6,
+       "fora": 592.7
+      },
+      "fracao_registros": {
+       "alta": 0.075,
+       "media": 0.066,
+       "baixa": 0.004,
+       "fora": 0.855
+      },
+      "fracao_ruas": {
+       "alta": 0.025,
+       "media": 0.018,
+       "baixa": 0.008,
+       "fora": 0.949
+      },
+      "vezes_acima_do_acaso_alta": 2.98,
+      "vezes_acima_do_acaso_alta_media": 3.26
+     },
+     "registros_fora_do_limite": 0
+    }
+   }
+  }
+ }
+}
