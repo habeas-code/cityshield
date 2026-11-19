@@ -1,6 +1,6 @@
 # Perguntas da banca: o método em uma página
 
-As perguntas que mais aparecem sobre a matemática do CityShield (1 a 6) e sobre o uso no mundo real (7 a 11), com a resposta curta, de onde ela vem e o limite. Os detalhes estão em [validacao.md](validacao.md) e [recomendacoes.md](recomendacoes.md).
+As perguntas que mais aparecem sobre a matemática do CityShield (1 a 6 e 12) e sobre o uso no mundo real (7 a 11 e 13), com a resposta curta, de onde ela vem e o limite. Os detalhes estão em [validacao.md](validacao.md) e [recomendacoes.md](recomendacoes.md).
 
 ## 1. Por que jardim de chuva aqui e piso permeável ali?
 
@@ -115,3 +115,31 @@ A parte cara de um projeto assim é juntar e limpar os registros. É também o q
 **Do sistema: hoje, zero.** O site fica no GitHub Pages, a API no Render e o banco no Neon, todos em planos gratuitos. A plataforma lê arquivos estáticos e funciona mesmo se a API sair do ar ([D10](decisoes.md#d10-plano-b-geojson-estático)). Para uma prefeitura, o custo é o de alguém rodar o pipeline quando chegarem registros novos.
 
 **Das obras: não estimamos, de propósito.** O custo de um jardim de chuva ou de um piso permeável depende do projeto de engenharia de cada área (solo, drenagem existente, desapropriação, manutenção). Pôr um preço sem esse projeto seria inventar um número. O CityShield entrega **onde estudar primeiro e quanta água cada opção pode segurar**, que é o que a prefeitura precisa para decidir onde gastar o estudo.
+
+## 12. Por que usar HAND?
+
+**Porque precisa só do relevo, que é aberto para o Brasil inteiro, e cabe numa frase:** HAND é a altura do terreno acima do córrego mais próximo ([Nobre et al., 2011](https://doi.org/10.1016/j.jhydrol.2011.03.051)). O terreno que fica poucos metros acima do córrego é o primeiro a encher.
+
+- **Por que não um modelo hidráulico (HEC-RAS, SWMM)?** Eles precisam da rede de galerias, da vazão dos córregos e de cheias medidas para calibrar. Sorocaba não tem esses dados abertos. E um modelo calibrado com os registros da Defesa Civil não poderia ser conferido com esses mesmos registros.
+- **Sem ajuste.** O córrego começa em 0,5 km² drenados e as faixas (alto 0–5 m, médio 5–15 m) são as de Nobre et al. Nada foi mexido para melhorar o resultado, e mesmo assim 74% dos registros de 2022–2023 caem no risco alto, que tem 12% das ruas (6× o acaso). O resultado se mantém com chamados que o mapa nunca viu: 75% dos 1.261 de 2024–2026 (6,1×) ([validação](validacao.md)).
+- **E a carta oficial?** A carta do IPT/SGB (2015) é precisa nas várzeas largas, mas 55% dos registros ficam fora dela. O HAND mede a altura sobre qualquer córrego, grande ou pequeno, e pega também os vales estreitos da zona urbana ([comparação](validacao.md#comparação-com-a-carta-oficial)).
+
+**Limite:** o HAND diz **onde** a água tende a se acumular, não **quando** nem **quanta**. Também não enxerga alagamento de bueiro em terreno alto. Saber a altura da água numa chuva específica é trabalho de um modelo hidráulico, o próximo passo natural se a prefeitura quiser projetar uma obra.
+
+## 13. Como a prefeitura usaria isso no dia a dia?
+
+**Para decidir onde gastar o próximo estudo de viabilidade.** Cada parte da plataforma responde a uma pergunta de quem decide ([público, D13](decisoes.md#d13-público-quem-decide-onde-investir-contra-enchentes)):
+
+| Quem | Quando | O que faz na plataforma |
+|---|---|---|
+| Defesa Civil | antes da época de chuva | vê onde o relevo e os próprios registros apontam risco (aba Diagnóstico) |
+| Defesa Civil | depois de uma chuva forte | manda a planilha nova; o pipeline roda com um comando e mostra se os chamados caíram nas áreas marcadas, como no [terceiro teste](validacao.md#terceiro-teste-registros-oficiais-de-2021-a-2026) |
+| Meio Ambiente e Obras | ao montar o orçamento do ano | escolhe na fila "Por onde começar" quais áreas estudar primeiro; a ficha diz o porquê e os próximos passos (visita, sondagem do solo e do lençol, projeto) |
+| Meio Ambiente e Obras | ao comparar opções | usa a Simulação para ver quanta água cada tipo de solução segura, com a chuva da equação do SAAE |
+| Câmara de Vereadores | se o PL Cidade-Esponja (2024) avançar | tem uma lista pública de por onde começar, com fonte em cada número |
+
+**Exemplo:** o Parque das Águas do Abaeté é o 1º da fila (nota 95). A ficha mostra 14,9 ha no risco alto, os registros da Defesa Civil nas ruas em volta e quanto ele pode guardar como parque inundável. O próximo passo indicado não é a obra: é confirmar quem administra a área e fazer o estudo de viabilidade.
+
+A revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025) pede justamente georreferenciar as ocorrências da Defesa Civil e integrá-las à drenagem. É o que o pipeline faz com a planilha deles.
+
+**Limite:** a plataforma não substitui o projeto de engenharia nem a visita de campo. E ainda não foi usada dentro da prefeitura: os registros vieram pela Lei de Acesso à Informação, e o teste com quem decide é o próximo passo.
