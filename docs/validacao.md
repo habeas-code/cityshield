@@ -123,7 +123,7 @@ Por isso fizemos a comparação local de dois jeitos:
 
 ## Quarto teste: a cidade inteira, 2021 a 2026
 
-Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decisão do recurso, em **17/11/2026** (mesmo pedido, Fala.BR nº 03959.2026.000348-13), a Defesa Civil mandou a **planilha complementar do município inteiro**: 1.360 registros. Juntando com a do Itanguá sem contar duas vezes (230 registros vinham nas duas planilhas), são **1.494 registros de 2021 a 2026**. Para refazer: `docker compose run --rm pipeline python -m pipeline lai_cidade`. Resultado em `lai_defesa_civil_cidade.json`.
+Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decisão do recurso, em **17/11/2026** (mesmo pedido, Fala.BR nº 03959.2026.000348-13), a Defesa Civil mandou a **planilha complementar do município inteiro**: 1.360 registros. Juntando com a do Itanguá sem contar duas vezes (230 registros vinham nas duas planilhas), são **1.494 registros de 2021 a 2026**. Desses, **1.386 entram na conta**: 104 não têm rua que dê para achar no mapa (vêm só com o bairro, ou são vielas e ruas sem nome no OpenStreetMap, como "Viela 203" e "Rua Dois") e 4 ficam em 3 vias que não aparecem no mapa de ruas usado no teste. Para refazer: `docker compose run --rm pipeline python -m pipeline lai_cidade`. Resultado em `lai_defesa_civil_cidade.json`.
 
 | Ano | 2021 | 2022 | 2023 | **2024** | 2025 | 2026 |
 |---|---|---|---|---|---|---|

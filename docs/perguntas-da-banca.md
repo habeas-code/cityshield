@@ -89,7 +89,7 @@ O que fizemos para que isso não vire decisão errada:
 
 ## 9. E se os dados ficarem desatualizados?
 
-**Tudo é refeito com um comando.** O pipeline baixa de novo o OpenStreetMap e refaz risco, validação, áreas, notas e volumes (`docker compose run --rm pipeline`); rodando do zero, ele gera os mesmos arquivos que estão no repositório.
+**Tudo é refeito com um comando.** O pipeline baixa de novo o OpenStreetMap e refaz risco, validação, áreas, notas e volumes (`docker compose run --rm pipeline`); rodando do zero, ele chega aos mesmos resultados que estão no repositório. Como o OpenStreetMap é editado todo dia, uma conta pode mudar na segunda casa decimal: no teste do zero de 18/11/2026, 5,98× virou 5,97×. Nenhum número publicado (74%, 6×, 89%) muda.
 
 Os **registros novos** vêm da Defesa Civil. Já mostramos o caminho: pedimos pela Lei de Acesso à Informação e recebemos 365 registros da Bacia do Itanguá até 12/11/2026 (terceiro teste); no recurso, a cidade inteira, 1.494 registros de 2021 a 2026 (quarto teste). O ideal, que a própria revisão do [Plano Diretor de Macrodrenagem](https://www.saaesorocaba.com.br/wp-content/uploads/2025/12/volume-vi-relatorio-sintese-3.pdf) (SAAE, 2025) recomenda, é a Defesa Civil georreferenciar as ocorrências e integrar com a drenagem.
 
