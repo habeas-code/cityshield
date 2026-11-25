@@ -168,6 +168,28 @@ Recorremos da primeira resposta, que veio só com a Bacia do Itanguá. Na decis�
 - **2025 tem só 10 registros.** Pode ter sido um ano de pouca chuva ou uma falha na planilha; vamos perguntar à Defesa Civil.
 - **108 registros de fora:** 75 sem rua, 29 em vias que não achamos no OpenStreetMap (vielas do Jardim Itapemirim, "Rua Dois" e nomes de um registro só) e 4 em três vias com ponto que a conta da validação não achou (Rua Três, Rua Dezesseis e Projetada I).
 
+## Quinto teste: uma chuva depois do mapa pronto (25/11/2026)
+
+O mapa foi fechado na versão [v1.0.0](https://github.com/habeas-code/cityshield/releases/tag/v1.0.0), em 18/11/2026. Na madrugada de **25/11/2026** choveu 50 mm em 12 horas (Cemaden) e o Rio Sorocaba chegou a 1,70 m acima do normal na régua da Praça Lions. A Prefeitura listou os pontos de alagamento e interdição ([boletim da Prefeitura](https://noticias.sorocaba.sp.gov.br/defesa-civil-e-equipes-da-prefeitura-de-sorocaba-estao-mobilizadas-para-ocorrencias-de-chuvas-desta-quarta-feira-25/), [g1](https://g1.globo.com/sp/sorocaba-jundiai/noticia/2026/11/25/chuva-forte-causa-alagamentos-e-deixa-carro-ilhado-em-sorocaba.ghtml)). Conferimos cada via citada **sem mudar nada no mapa**: mesma amostra a cada 10 m da validação, no trecho de até 600 m em volta do ponto citado (a rua inteira quando a notícia não diz o trecho).
+
+| Via citada em 25/11 | Nos relatórios de 2022–2023 (usados na conferência)? | Risco **alto** | Alto + médio |
+|---|---|---|---|
+| Av. Dom Aguirre (3 trechos) | sim | 99–100% | 100% |
+| Av. XV de Agosto (Fernandópolis a Camilo Júlio) | sim | 99% | 100% |
+| Rua Saliba Mota (com Mário Thame) | sim | 100% | 100% |
+| Rua Dr. Álvaro Soares | sim | 15% | 54% |
+| Rua Antônio Osório Lima (Parque Vitória Régia) | não | **100%** | 100% |
+| Rua Dr. Paula Souza (perto da Ponte Dellosso) | não | 34% | 100% |
+| Av. Washington Luiz (até a Juvenal de Campos) | não | 44% | 74% |
+| Rua Laura Maiello Kook (córrego da represa Ipaneminha) | não | 5–10% | 9–17% |
+| Av. Dr. Armando Pannunzio (carro ilhado) | não | 0% | 0% |
+
+- Na cidade toda, **12%** das ruas estão em risco alto e **30%** em alto + médio.
+- **4 das 9 vias** ficam quase inteiras no risco alto, **7 das 9** têm mais da metade em alto + médio e **2 ficam fora**.
+- Das **5 vias que não estão nos relatórios de 2022–2023**, 1 fica inteira no risco alto (Antônio Osório Lima), 2 têm mais da metade em alto + médio (Paula Souza e Washington Luiz) e 2 ficam fora. Quatro delas (todas menos a Paula Souza) já apareciam no segundo ou no quarto teste: esta chuva confirma esses lugares, não revela lugares novos.
+- **As duas que ficam fora** são casos diferentes. Na **Laura Maiello Kook**, o ponto onde o córrego cruza a rua (o mesmo de uma notícia de janeiro de 2026) cai no risco alto, mas a rua tem mais de 3 km no OpenStreetMap e quase toda ela fica em terreno alto; é o limite "ruas, não pontos" (ver [Limitações](#limitações)). A **Armando Pannunzio** fica toda no risco baixo, mesmo perto do ponto das notícias de 2025 e 2026: é um alagamento que o HAND não pega (drenagem em terreno alto).
+- É **um** evento só, com 9 vias. Serve para mostrar o mapa diante de uma chuva nova, não para calcular uma taxa de acerto. O texto das notícias não vai para o repositório.
+
 ## Comparação com a carta oficial
 
 Sorocaba já tem um mapa oficial: a **carta de suscetibilidade a inundações** do IPT e do Serviço Geológico do Brasil (2015, escala 1:25.000, [repositório do SGB](https://rigeo.sgb.gov.br/items/cb9a8ac7-dda7-45e0-9dbe-7e8664b6b665)). Fizemos com ela **exatamente o mesmo teste** (mesmas ruas, mesma divisão dos registros, mesma comparação com todas as ruas). Para refazer: `docker compose run --rm pipeline python -m pipeline carta`. Resultado em `comparacao_carta.json`.
